@@ -1,0 +1,136 @@
+@fontColor: #24375E;
+@boxShow: 0 0 20px rgba(212, 222, 236,0.3);
+@borderColor: #ddd;
+@grayColor: #86929D;
+.container{
+    .content{
+        position: relative;
+        width: 1200px;
+        margin: auto;
+        .group{
+            box-shadow: @boxShow;
+            margin-top: 100px;
+            position: relative;
+            background-color: #fff;
+            z-index: 1;
+            border-radius: 20px;
+            .header{
+                padding: 40px 40px 60px;
+                color: @fontColor;
+                font-size: 22px;
+                .backBox{
+                    font-size: 18px;
+                    color: @grayColor;
+                    margin-right: 32px;
+                    .icon{
+                        font-size: 22px;
+                        vertical-align: text-bottom;
+                    }
+                }
+            }
+
+            .fieldLabel{
+                display: inline-block;
+                width: 160px;
+                margin-right: 46px;
+                line-height: 50px;
+                font-size: 16px;
+                color: #575C62;
+                text-align: right;
+            }
+            .fieldValue{
+                font-size: 16px;
+                color: @fontColor;
+            }
+            .submitBox {
+                border-top: 1px solid @borderColor;
+                padding: 50px 70px;
+                margin-top: 70px;
+                .left{
+                    .totalLabel{
+                        font-size: 18px;
+                        color: #575C62;
+                        margin-right: 12px;
+                    }
+                    .total{
+                        font-size: 34px;
+                        font-weight: bold;
+                        color: #E49C3A;
+                    }
+                }
+                .right{
+
+                }
+                .submitBtn{
+                    width:264px;
+                    height:48px;
+                    background:linear-gradient(90deg,rgba(241,138,45,1) 0%,rgba(252,177,80,1) 100%);
+                    border-radius:24px;
+                    font-size: 18px;
+                    color: #fff;
+                }
+            }
+        }
+    }
+    .bgImg{
+        position: absolute;
+        z-index: 0;
+    }
+    /*确认支付*/
+    .rateStepOrange{
+        background:rgba(248,250,253,1);
+        border:1px solid rgba(221,221,221,1);
+        border-radius:4px;
+    }
+    .rateStepOrangeP1{
+        color: #575C62;
+    }
+    .rateStepOrangeP2{
+        color: @grayColor;
+    }
+    .amountInput{
+        width:224px;
+        height:40px;
+        border:1px solid rgba(221,221,221,1);
+        border-radius:4px;
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
+    .link{
+        font-size: 16px;
+        color: #1255AF;
+        margin-left: 16px;
+    }
+    .grayText{
+        color: @grayColor;
+    }
+    .btnSmall{
+        width:160px;
+        height:48px;
+        border: 1px solid @borderColor;
+        background-color: #fff;
+        border-radius:24px;
+        font-size: 18px;
+        color: @grayColor;
+        &.active{
+            background:linear-gradient(90deg,rgba(241,138,45,1) 0%,rgba(252,177,80,1) 100%);
+            border: none;
+            color: #fff;
+        }
+    }
+
+    .step3{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .icon{
+            width: 150px;
+            margin-top: 80px;
+        }
+        .text{
+            font-size: 16px;
+            color: @grayColor;
+            margin: 24px auto 64px;
+        }
+    }
+}

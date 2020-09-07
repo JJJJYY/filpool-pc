@@ -1,0 +1,142 @@
+@borderColor: #ddd;
+@titleFont: 24px;
+@titleColor: #24375E;
+@contentColor: #575C62;
+@boxShow: 0 0 20px rgba(212, 222, 236,0.3);
+.container{
+    .content{
+        width: 1200px;
+        margin: auto;
+    }
+    .bannerBox{
+        min-height: 230px;
+        position: relative;
+        .bannerImg{
+            width: 100%;
+            vertical-align: bottom;
+        }
+        .bannetText{
+            position: absolute;
+            top: 120px;
+            left: 280px;
+            font-size: 26px;
+            font-weight: bold;
+            color: @titleColor;
+            &:first-letter{
+                font-size: 40px;
+            }
+        }
+    }
+    .tabBox{
+        display: flex;
+        border: 1px solid @borderColor;
+        margin-top: 48px;
+        margin-bottom: 40px;
+        .tabItem{
+            flex: 1;
+            text-align: center;
+            line-height: 48px;
+            font-size: 18px;
+            color: #86929D;
+            cursor: pointer;
+            &:not(:last-child) {
+                border-right: 1px solid @borderColor;
+            }
+            &.active{
+                background-color: #EF8C21;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.checkDetail{
+    text-align: center;
+    margin: 60px auto;
+    .checkBtn{
+        width:160px;
+        height:48px;
+        border:1px solid @borderColor;
+        border-radius:24px;
+        font-size: 18px;
+        color: @contentColor;
+        background-color: transparent;
+    }
+}
+
+.project{
+
+}
+.Help{
+
+}
+.nowrap{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.boxShow{
+    position: relative;
+    box-shadow: @boxShow;
+    padding: 86px 60px 0;
+}
+.list{
+    .li{
+        padding: 56px 0 38px 0;
+        border-bottom: 1px solid @borderColor;
+        cursor: pointer;
+        .title{
+            font-size: @titleFont;
+            color: @titleColor;
+        }
+        .content{
+            font-size: 18px;
+            color: @contentColor;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            line-height: 28px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .date{
+            font-size: 16px;
+            color: #86929D;
+        }
+    }
+}
+
+.detail{
+    .contentBox{
+        width: 1200px;
+        min-height: 60vh;
+        margin: 0 auto 66px;
+        background-color: #fff;
+        position: relative;
+        .head{
+            padding-left: 32px;
+            display: flex;
+            align-items: center;
+            margin-top: 70px;
+            margin-bottom: 24px;
+            font-size: 18px;
+            color: #86929D;
+            .icon{
+                font-size: 22px;
+                margin-right: 16px;
+            }
+        }
+        .title{
+            font-size: 22px;
+            color: @titleColor;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .content{
+            font-size: 18px;
+            line-height: 36px;
+            color: @contentColor;
+            padding-bottom: 80px;
+        }
+    }
+}

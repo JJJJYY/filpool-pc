@@ -1,0 +1,235 @@
+.home{
+    p{
+        margin: 0;
+    }
+    .margin{
+        min-width: @content-min-width;
+        max-width: @content-max-width;
+    }
+    .flex-row{
+        align-items: center;
+    }
+    .grey-bg{
+        background: #FAFBFD;
+    }
+    .content{
+        margin: .23rem .2rem 0 .2rem;
+        position: relative;
+        .cell{
+            .margin;
+            position: relative;
+            margin: 0 auto;
+        }
+        video{
+            outline: none;
+        }
+        .notice{
+            background: #FAFBFD;
+            /*height: .33rem;*/
+            color: #575C62;
+            font-size: .16rem;
+            text-align: center;
+            line-height: .36rem;
+            border-radius: .06rem;
+            margin: 0 auto;
+            padding: 10px 0;
+            .margin;
+            a {
+                color: #959FA9; 
+            }
+            .cell{
+                margin: 0 auto;
+            }
+        }
+        .img{
+            width: .05rem;
+            height: .09rem;
+            margin-left: .08rem;
+        }
+        .img-2{
+            min-width: 2rem;
+            max-width: 2.15rem;
+            min-height: .6rem;
+            margin-right: .14rem;
+            margin-bottom: .2rem;
+            &:hover{
+                box-shadow:0px 3px 10px 0px rgba(107,145,197,0.1);
+            }
+        }
+        .grey-text{
+            color: #C0C9D2;
+            font-size: .14rem;
+        }
+        .title{
+            color: #24375E;
+            font-size: .23rem;
+            font-weight: bold;
+            padding-top: .37rem;
+            text-align: center;
+            margin-bottom: .3rem;
+        }
+        .advertisement{
+            //background: #FAFBFD;
+            position: relative;
+            margin: 0 auto;
+            padding: .44rem 0;
+            .cell{
+                margin: 0 auto .3rem auto;
+            }
+            .picture{
+                max-width: @content-max-width;
+            }
+        }
+    }
+    .banner{
+        position: relative;
+        .bg{
+            width: 100%;
+            min-height: 3.98rem;
+        }
+        .btn{
+            width: 1.5rem;
+            height: .39rem;
+            border-radius: .2rem;
+            text-align: center;
+            line-height: .39rem;
+            color: white;
+            font-size: .17rem;
+            bottom: .8rem;
+            position: absolute;
+        }
+    }
+    .img-info{
+        width: .14rem;
+        height: .14rem;
+        margin-left: .07rem;
+    }
+}
+
+.ant-carousel .slick-dots {
+    position: absolute;
+    bottom: -.06rem;
+    li.slick-active {
+        button {
+            background: #3516B9;
+            width: .27rem;
+            border: 1px solid #3516B9;
+            border-radius: .03rem;
+        }
+    }
+    
+    li button {
+        background: #EBECEE;
+        width: .15rem;
+        height:.06rem;
+        border: 1px solid  #EBECEE;
+        border-radius: .03rem;
+    }
+}
+
+@media screen and (min-width: 1080px ) and (max-width: 1120px){
+    .home .content .img-2{
+        max-width: 2rem;
+    }
+}
+
+@media screen and (min-width: 1220px ) and (max-width: 1440px){
+    .home .banner .btn{
+        left: .2rem;
+    }
+    .home .content .img-2{
+        max-width: 2.4rem;
+    }
+}
+
+@media (min-width: 1440px) {
+    .home .banner .bg{
+        min-height: 3.98rem;
+        min-width: 10rem;
+        max-width: 12rem;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+    .home .banner .btn{
+        left: 0;
+    }
+    .home .content .img-2{
+        max-width: 2.8rem;
+    }
+}
+.img-kefu{
+    //background: url('../../images/home/kefu.png') no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #EF8C21;
+    background-size: 100% 100%;
+    width: .82rem;
+    height: .82rem;
+    position: fixed;
+    top: 5rem;
+    right: .3rem;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius:4px;
+    .wechat-text{
+        color: #FFFFFF;
+        font-size: .14rem;
+        text-align: center;
+        margin-top: .1rem;
+    }
+}
+.img-kefu-h5{
+    background: url('../../images/home/kefu.png') no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    top: 4.8rem;
+    right: 2vw;
+    width: 17vw;
+    height: 17vw;
+    cursor: pointer;
+    z-index: 1000;
+    .wechat-text-h5{
+        color: #959FA9;
+        font-size: 1vw;
+        text-align: center;
+        margin-top: 10vw;
+    }
+}
+.kefu-h5{
+    position: fixed;
+    top: 4rem;
+    right: 2vw;
+    z-index: 1111;
+    .triangle{
+        width: 0; 
+        height: 0;
+        border-width: .08rem;
+        border-style: solid;
+        border-color:white transparent transparent transparent;
+    }
+    .qrcode{
+        width: 20vw;
+        box-shadow: 0px 3px 10px 0px rgba(107,145,197,0.1);
+    }
+}
+.kefu{
+    position: fixed;
+    top: 3.9rem;
+    right: .3rem;
+    z-index: 1111;
+    .triangle{
+        width: 0; 
+        height: 0;
+        border-width: .08rem;
+        border-style: solid;
+        border-color:white transparent transparent transparent;
+    }
+    .qrcode{
+        width: 1rem;
+        box-shadow: 0px 3px 10px 0px rgba(107,145,197,0.1);
+    }
+}
+
+@import '../../styles/index';

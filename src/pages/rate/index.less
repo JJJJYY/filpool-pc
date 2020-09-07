@@ -1,0 +1,372 @@
+.rate{
+    min-height: 100vh;
+    min-width: 1280px;
+    position: relative;
+    overflow: hidden;
+    p{
+        margin: 0;
+    }
+    .bg{
+        background: url('../../images/rate/bg.png') no-repeat ;
+        background-size: 100% 100%;
+        width: 65vw;
+        height: 35vw;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .img-info{
+        width: .14rem;
+        height: .14rem;
+        margin-left: .07rem;
+    }
+    .img-coin{
+        width: .21rem;
+        height: .21rem;
+        margin-right: .13rem;
+    }
+    .content{
+        padding-top: .15rem;
+        padding-bottom: .4rem;
+        margin: 0 .9rem;
+        min-height: 80vh;
+        position: relative;
+    }
+    .margin{
+        min-width: @content-min-width;
+        max-width: 12rem;
+    }
+    .product-detail{
+        .margin;
+        margin: .27rem auto .5rem auto;
+        p {
+            line-height: .3rem;
+        }
+    }
+    .detail-bottom{
+        background: white;
+        border-radius: .18rem;
+        height: 1.1rem;
+        .margin;
+        margin: -.3rem auto 0 auto;
+        padding-top: .2rem;
+        box-shadow:0px 3px 12px 0px rgba(107,145,197,0.1);
+        .p1{
+            color: @primary-color;
+            font-size: .14rem;
+            font-weight: bold;
+        }
+        .p2{
+            color: @primary-color;
+            font-size: .26rem;
+            font-weight: bold;
+        }
+    }
+    &-cell{
+        min-width: @content-min-width;
+        min-height: 2.73rem;
+        max-width: @content-max-width;
+        max-height: 3.63rem;
+        background: white;
+        border-radius: .18rem;
+        box-shadow:0px 3px 12px 0px rgba(107,145,197,0.1);
+        position: relative;
+        margin: 0 auto;
+        &-content{
+            position: relative;
+            .img-sell{
+                width: 1.1rem;
+                height: .86rem;
+                position: absolute;
+                top: .4rem;
+                left: -.5rem;
+            }
+        }
+        
+        .flag{
+            background: #FFCA93;
+            border-radius: .18rem 0 .22rem 0;
+            height: .32rem;
+            padding: 0.08rem 0.25rem;
+            color: white;
+            font-size: .17rem;
+            text-align: center;
+            line-height: .32rem;
+        }
+        .limit{
+            height: .2rem;
+            padding: .03rem .09rem;
+            border: 1px solid @primary-color;
+            border-radius: .1rem;
+            color: @primary-color;
+            font-size: .14rem;
+            text-align: center;
+            margin-left: .14rem;
+            line-height: .12rem;
+        }
+        .line{
+            height: 1.35rem;
+            width: .01rem;
+            background: #EAF2F9;
+            margin: 0 .8rem 0 .3rem;
+        }
+        .progress{
+            background: #F8F6F3;
+            border-radius: .06rem;
+            width: 1.68rem;
+            height: .12rem;
+            position: relative;
+            margin-left: .15rem;
+            &-content{
+                background: #FFDBB6;
+                border-radius: .06rem;
+                height: .12rem;
+                width: .2rem;
+            }
+        }
+        .p1{
+            color: #24375E;
+            font-size: .19rem;
+            font-weight: bold;
+            line-height: .19rem;
+        }
+        .p2{
+            color: @primary-color;
+            font-size: .14rem;
+            line-height: .14rem;
+        }
+        .p3{
+            color: #E49C3A;
+            font-size: .09rem;
+            line-height: .09rem;
+            position: absolute;
+            right: .08rem;
+            top: .02rem;
+        }
+        .p4{
+            color: #959FA9;
+            font-size: .17rem;
+            line-height: .17rem;
+        }
+        .p5{
+            color: @primary-color;
+            font-size: .18rem;
+            line-height: .18rem;
+        }
+        .p6{
+            color: @primary-color;
+            font-size: .26rem;
+            line-height: .26rem;
+            font-weight: bold;
+            margin-right: .15rem;
+        }
+        .p7{
+            color: #959FA9;
+            font-size: .14rem;
+            line-height: .14rem;
+        }
+        .low-line{
+            background: #959FA9;
+            height: 1px;
+            width: 100%;
+            position: absolute;
+            top: 0.06rem;
+            left: 0;
+        }
+        .sp-1{
+            color: #5A5F65;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: .18rem;
+        }
+        .sp-2{
+            font-size: .14rem;
+        }
+        .sp-3{
+            margin-right: .1rem;
+            font-size: 14px;
+        }
+        .sp-4{
+            width: .21rem;
+            height: .21rem;
+            margin-right: .13rem;
+        }
+        .sp-5{
+            background: #EAF2F9;
+            width: 1px;
+            height: .12rem;
+            margin: 0 .4rem;
+        }
+        .sp-6{
+            width: 3rem;
+        }
+        .sp-7{
+            font-size: .14rem;
+        }
+        .sp-8{
+            width: 2.5rem;
+        }
+    }
+}
+
+.ant-popover-inner-content{
+    color: #959FA9 !important;
+    font-size: .011rem;
+    line-height: .018rem;
+}
+
+@media screen and (min-width: 1300px ){
+    .ant-popover-inner-content{
+        color: #959FA9 !important;
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .home{
+        .img-info{
+            width: 21px;
+            height: 21px;
+            margin-left: .07rem;
+        }
+        .content .notice{
+            width: 1200px;
+        }
+        .content .notice .cell {
+            width: 1200px;
+        }
+    }
+    .chooseInput .unit {
+        color: #5A5F65;
+        font-size: 22px;
+        position: absolute;
+        top: 10px;
+        right: -120px;
+    }
+    .chooseInput input {
+        font-size: 18px;
+    }
+    .button.newBig {
+        height: 42px;
+        width: 350px;
+        border-radius: 30px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .rate{
+        &-cell{
+        width: 1200px;
+        height: 324px;
+        background: white;
+        border-radius: 24px;
+        box-shadow:0px 3px 12px 0px rgba(107,145,197,0.1);
+        position: relative;
+        margin: 0 auto;
+        &-content{
+            position: relative;
+            .img-sell{
+                width: 1.1rem;
+                height: .86rem;
+                position: absolute;
+                top: .4rem;
+                left: -.5rem;
+            }
+        }
+        .sp-1{
+            font-size: 24px;
+        }
+        .sp-2{
+            font-size: 18px;
+        }
+        .flag{
+            background: #EF8C21;
+            border-radius: 3px 10px 10px 0;
+            padding: 9px 33px;
+            color: white;
+            font-size: .17rem;
+            text-align: center;
+            line-height: .32rem;
+        }
+        .limit{
+            height: 26px;
+            padding: 4px 12px;
+            border: 1px solid @primary-color;
+            border-radius: 13px;
+            color: @primary-color;
+            font-size: 18px;
+            text-align: center;
+            margin-left: 19px;
+            line-height: 18px;
+        }
+        .line{
+            height: 1.35rem;
+            width: .01rem;
+            background: #EAF2F9;
+            margin: 0 .6rem 0 0rem;
+        }
+        .p1{
+            color: #24375E;
+            font-size: 26px;
+            font-weight: bold;
+            line-height: 26px;
+        }
+        .p2{
+            color: @primary-color;
+            font-size: 18px;
+            line-height: 18px;
+        }
+        .p3{
+            color: #E49C3A;
+            font-size: .09rem;
+            line-height: .09rem;
+            position: absolute;
+            right: .08rem;
+            top: .02rem;
+        }
+        .p4{
+            color: #959FA9;
+            font-size: 20px;
+            line-height: 20px;
+        }
+        .p5{
+            color: @primary-color;
+            font-size: 20px;
+            line-height: 20px;
+        }
+        .p6{
+            color: @primary-color;
+            font-size: 34px;
+            line-height: 34px;
+            font-weight: bold;
+            margin-right: .15rem;
+        }
+        .p7{
+            color: #959FA9;
+            font-size: 18px;
+            line-height: 18px;
+        }
+        .low-line{
+            background: #959FA9;
+            height: 1px;
+            width: 100%;
+            position: absolute;
+            top: 8px;
+            left: 0;
+        }
+        .sp-3{
+            font-size: 18px;
+        }
+        .sp-4{
+            width: 28px;
+            height: 28px;
+            margin-right: 18px;
+        }
+        .sp-7{
+            font-size: 18px;
+        }
+        .sp-8{
+            width: 300px;
+        }
+    }
+    }
+}
+
+@import "../../styles/index";

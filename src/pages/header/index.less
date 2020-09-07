@@ -1,0 +1,104 @@
+@import "../../styles/index";
+
+.header {
+  background-color: #F8FAFD;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  font-size: .14rem;
+  height: .44rem;
+
+  &-content {
+    max-width: @content-max-width;
+    min-width: @content-min-width;
+    margin: 0 auto;
+    .flex-row-between;
+
+    & > div {
+      .flex-row-center;
+    }
+
+    & .logo {
+      width: .94rem;
+      height: .31rem;
+      margin: auto .3rem auto 0;
+      cursor: pointer;
+    }
+
+    color: @primary-font-color;
+  }
+
+  &-circle {
+    height: .2rem;
+    border: 1px solid @primary-font-color;
+    .flex-row-center;
+    border-radius: .1rem;
+    padding: 0 .15rem;
+    font-size: .12rem;
+    margin-left: .08rem;
+    cursor: pointer;
+
+    &.selected {
+      color: @primary-color;
+      border-color: @primary-color;
+    }
+  }
+
+  &-item {
+    margin-left: .2rem;
+    cursor: pointer;
+  }
+  &-lang{
+    color: #24375E;
+    font-size: .14rem;
+    line-height: .14rem;
+    cursor: pointer;
+  }
+  &-line{
+      background: #EAF2F9;
+      height: 1px;
+      width: 80%;
+      margin: .06rem 0;
+  }
+  &-img{
+    height: .06rem;
+    width: .11rem;
+    margin-left: .11rem;
+    cursor: pointer;
+  }
+  &-download{
+    height: 1rem;
+    margin-top: .05rem;
+  }
+  .ant-menu-item, .ant-menu-submenu-title{
+    padding: 0 20px !important;
+    line-height: 38px !important;
+  }
+  .ant-menu-horizontal{
+    line-height: 43px !important;    
+  }
+}
+
+.header-h5 {
+  .flex-row-between();
+  font-size: 4vw;
+  background-color: #BCCEE71A;
+  padding: 3vw 4vw;
+  color: @primary-font-color;
+
+  &-title {
+    color: #24375E;
+    font-size: 4.5vw;
+  }
+
+  &-item {
+    font-size: 4vw;
+  }
+
+  &-icon {
+    width: 2vw;
+    height: 3vw;
+  }
+}

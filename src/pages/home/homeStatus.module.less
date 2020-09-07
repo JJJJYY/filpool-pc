@@ -1,0 +1,324 @@
+@boxShow: 0 0 20px rgba(212, 222, 236,0.3);
+@groupSpace: 50px;
+@titleColor: #24375E;
+.container{
+    width: 1200px;
+    margin: auto;
+    position: relative;
+    .group{
+        position: relative;
+        background-color: #fff;
+    }
+    .group1{
+        display: flex;
+        justify-content: space-between;
+        color: blue;
+        border-radius: 16px;
+        .groupItem1{
+            display: flex;
+            flex-direction: column;
+            padding-left: 50px;
+            padding-top: 50px;
+            width: 30%;
+            height: 456px;
+            background:rgba(255,255,255,1);
+            border-radius:16px;
+            box-shadow: @boxShow;
+            .imgBox{
+                display: flex;
+                align-items: center;
+                height: 100px;
+                margin-bottom: 30px;
+                .img{
+
+                }
+            }
+            .title{
+                font-size: 24px;
+                color: @titleColor;
+                font-weight: bold;
+            }
+            .explain{
+                font-size: 16px;
+                color: #86929D;
+                margin-top: 14px;
+                margin-bottom: 18px;
+            }
+            .border{
+                width:34px;
+                height:4px;
+                background:rgba(242,135,20,1);
+                margin-bottom: 28px;
+            }
+            .list{
+                font-size: 18px;
+                color: #575C62;
+                list-style-type: disc;
+                list-style-position: inside;
+                line-height: 34px;
+            }
+            .listLabel{
+                width: 40px;
+                height: 16px;
+                line-height: 16px;
+                background:rgba(46,18,175,1);
+                border-radius:8px;
+                color: #fff;
+                margin-left: 8px;
+                display: inline-block;
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+    }
+
+    .group2{
+        box-shadow: @boxShow;
+        margin-top: @groupSpace;
+        padding: 60px 0;
+        .list2{
+            padding: 0 120px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            .li{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                .listImg{
+                    margin-bottom: 32px;
+                }
+                .listText{
+                    display: inline-block;
+                    width: 80px;
+                    font-size: 18px;
+                    color: #575C62;
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+
+    .group3{
+        padding: 64px 0;
+        text-align: center;
+        box-shadow: @boxShow;
+        margin-top: @groupSpace;
+        margin-bottom: 48px;
+        .img3{
+            width: 1112px;
+            margin-top: 48px;
+        }
+    }
+
+    .group4{
+        display: flex;
+        justify-content: space-between;
+        .groupItem{
+            width: 30%;
+            min-height: 320px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            .img4{
+                width: 100%;
+                vertical-align: bottom;
+            }
+            .modalBox{
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding-left: 42px;
+                height: 265px;
+                background:rgba(0,0,0,0.8);
+                .textItem{
+                    .normalText{
+                        font-size: 16px;
+                        color: #86929D;
+                    }
+                    .boldText{
+                        font-size: 20px;
+                        color: #fff;
+                        font-weight: bold;
+                        margin-top: 10px;
+                    }
+                    &:not(:last-child){
+                        margin-bottom: 24px;
+                    }
+                }
+            }
+        }
+    }
+
+    .group5{
+        box-shadow: @boxShow;
+        margin-top: @groupSpace;
+        padding: 64px 70px;
+        .list5{
+            display: flex;
+            justify-content: space-between;
+        }
+        .groupItem5{
+            width: 22.4%;
+        }
+        .imgBox5{
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 46px;
+            .img5{
+                width: 100%;
+            }
+        }
+        .border{
+            width:34px;
+            height:4px;
+            background-color: #F28714;
+            margin-bottom: 30px;
+        }
+        .title5{
+            font-size: 20px;
+            color: @titleColor;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+        .content5{
+            font-size: 16px;
+            color: #575C62;
+            line-height: 26px;
+        }
+    }
+
+    .group6{
+        box-shadow: @boxShow;
+        margin-top: @groupSpace;
+        min-height: 650px;
+        .img6{
+            width: 71.5%;
+            vertical-align: bottom;
+        }
+        .imgMiddle6{
+            width: 51%;
+            position: absolute;
+            left: 0;
+            top: 15.75%;
+        }
+        .rightBox{
+            width: 52%;
+            position: absolute;
+            right: 0;
+            top: 20%;
+            color: @titleColor;
+            .rightBoxTop{
+                text-align: right;
+                padding-right: 138px;
+                padding-left: 90px;
+            }
+            .title{
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .title2{
+                font-size: 18px;
+                margin: 16px auto;
+            }
+            .title3{
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .list6{
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 78px;
+                .li6{
+                    width: 100%;
+                    padding-right: 72px;
+                    box-sizing: border-box;
+                    display: grid;
+                    align-self: stretch;
+                    grid-template-columns: repeat(3, 2fr);
+                    margin-bottom: 60px;
+                    .contentBox{
+                        text-align: center;
+                    }
+                    .listImgBox{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        min-height: 60px;
+                        margin-bottom: 28px;
+                    }
+                    .listImg{
+                        vertical-align: bottom;
+                        margin-bottom: 28px;
+                    }
+                    .listText{
+                        font-size: 18px;
+                        color: #575C62;
+                        line-height: 24px;
+                    }
+                }
+            }
+        }
+    }
+    
+    .group7{
+        box-shadow: @boxShow;
+        margin-top: @groupSpace;
+        .title{
+            font-size: 24px;
+            font-weight: bold;
+            color: @titleColor;
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .list{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            .li{
+                width: 23%;
+                margin-bottom: 40px;
+            }
+            .listImg{
+                width: 100%;
+            }
+        }
+    }
+}
+.bgImg{
+    position: absolute;
+    z-index: -10;
+}
+.titleBox{
+    position: relative;
+    padding-bottom: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: @titleColor;
+    .explain{
+        font-size: 20px;
+        color: #86929D;
+        font-weight: normal;
+        margin-top: 10px;
+    }
+    &:after{
+        content: "";
+        display: inline-block;
+        width: 80px;
+        height: 4px;
+        background-color: #F28714;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+.content4{
+    font-size: 16px;
+    color: #575C62;
+}

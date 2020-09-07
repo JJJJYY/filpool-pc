@@ -1,0 +1,59 @@
+@import "../../../styles/index";
+
+.auth-wrap {
+    min-height: 100vh;
+    .flex-column;
+}
+@media screen and (max-width: 1080px) {
+  .auth{
+    min-height: calc(100vh - 44px);
+  }
+}
+.auth {
+  padding: 0 .9rem;
+  flex: 1;
+  display: flex;
+  &-content {
+    .flex-row;
+    padding-top: .44rem;
+    margin: 48px auto;
+    flex: 1;
+    max-width: @content-max-width;
+    min-width: @content-min-width;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #d4deec;
+    background-color: #fff;
+    height: 840px;
+    position: relative;
+     &.login-back {
+        background: url("../../../images/auth/loginbackground.png") no-repeat left center;
+        background-size: 642px auto;
+       }
+
+      &.register-back {
+        background: url("../../../images/auth/registerbackground.png") no-repeat left center;
+        background-size: 6.74rem auto;
+      }
+  }
+
+  .form {
+   /* @media (max-width:1080px){width: 3rem}*/
+    @media (min-width:1081px) and (max-width:1440px){width: 5.61rem}
+    @media (min-width:1441px){width: 5.61rem}
+    /*width: 300px;*/
+    padding: .5rem 1rem 0.5rem 0.75rem;
+    background-color: #FFFFFF;
+    border-radius: .1rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    .title {
+      font-size: 0.26rem;
+      color : @primary-font-color;
+      font-weight: bold;
+      margin-bottom: 0.28rem;
+    }
+  }
+}
+

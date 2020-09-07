@@ -1,0 +1,34 @@
+.registTab{
+    display: flex;
+    align-items: center;
+    height: 0.4rem;
+    margin-bottom: 0.19rem;
+}
+.typeLabel {
+    font-size: 0.18rem;
+    color: #86929D;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    &.active{
+        font-size: 0.24rem;
+        color: #24375E;
+        transition: all 0.2s ease-out;
+    }
+    &:not(:last-child) {
+        margin-right: 0.24rem;
+    }
+}
+.authContent{
+    padding-bottom: 0.6rem;
+    justify-content: flex-end;
+}
+.paddingBox{
+    padding: 0 0.14rem;
+}
+.hoverText{
+    color: #86929D;
+    &:hover{
+        cursor: pointer;
+        color: #E49C3A;
+    }
+}

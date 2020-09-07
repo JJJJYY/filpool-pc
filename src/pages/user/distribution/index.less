@@ -1,0 +1,51 @@
+@import "../../../styles/index";
+
+.level {
+  width: 2rem;
+  border-radius: .06rem;
+  height: 2.2rem;
+  background-color: #FDFCF8;
+  .flex-column-center;
+  padding: .1rem;
+  color: @primary-font-color;
+  font-size: .12rem;
+  position: relative;
+
+  .right-top {
+    position: absolute;
+    right: .1rem;
+    top: .1rem;
+    color: @sub-font-color;
+    font-size: .09rem;
+
+    &.active {
+      width: .12rem;
+      height: .12rem;
+      background-color: @primary-color;
+      border: #FCCE96 .02rem solid;
+      border-radius: .06rem;
+      color: transparent;
+    }
+  }
+
+  & div > img {
+    width: .33rem;
+    height: .47rem;
+  }
+
+  &.back0 {
+    background-color: #FEFDFB;
+  }
+  &.back1 {
+    background-color: #FBFDFE;
+  }
+  &.back2 {
+    background-color: #FDFCF8;
+  }
+  &.back3 {
+    background-color: #FBFDFE;
+  }
+  &.back4 {
+    background-color: #FDFCF8;
+  }
+}

@@ -1,0 +1,130 @@
+@import "../../../styles/index";
+
+.account-h5 {
+  padding-top: 11.73vw;
+
+  .item {
+    color: @primary-font-color;
+    .flex-row-between;
+    align-items: flex-start;
+    font-size: 4vw;
+    padding: 4.07vw 5.33vw;
+
+    & > div:last-child {
+      color: @light-font-color;
+      .flex-row-center;
+      font-size: 3.73vw;
+    }
+
+    img {
+      width: 1.6vw;
+      height: 2.7vw;
+    }
+  }
+
+  .form {
+    flex: 1;
+    margin: 4vw;
+    border-radius: 2.13vw;
+    background-color: #ffffff;
+    padding: 9.6vw 4vw;
+    box-shadow: fade(#6B91C5, 10) .53vw .53vw 2.4vw;
+    font-size: 3.73vw;
+    color: @sub-font-color;
+
+    .bottom {
+      color: @sub-font-color;
+      font-size: 3.73vw;
+      margin-top: 4vw;
+      margin-left: 2.67vw;
+    }
+
+    .title {
+      color: @primary-color;
+      position: relative;
+      padding: 1.33vw;
+      width: 47vw;
+      text-align: center;
+      margin-top: 9.33vw;
+      margin-bottom: 5.33vw;
+
+      &:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        content: '';
+        background: linear-gradient(to left, transparent, @primary-color, transparent);
+      }
+    }
+
+    & span > span {
+        color: @primary-color;
+        font-weight: bold;
+    }
+  }
+
+  .step {
+    color: @sub-font-color;
+    font-size: 3.46vw;
+    padding: 4vw;
+
+    .info {
+      border: #DBE2E9 1px solid;
+      border-radius: .11rem;
+      background-color: #FAFBFC;
+      padding: 4vw;
+      font-size: 3.46vw;
+      line-height: 4.8vw;
+    }
+
+    .reset-ant;
+  }
+
+  .row-list {
+    &:not(:first-child) {
+      padding-top: 14.4vw;
+    }
+    & > div {
+      .flex-row-between;
+      &:not(:first-child) {
+        margin-top: 6.93vw;
+      }
+
+      & > span {
+        font-size: 3.47vw;
+        &:first-child {
+          color: @light-font-color;
+        }
+      }
+    }
+  }
+}
+
+.reset-ant {
+  .ant-radio-wrapper {
+    color: @sub-font-color;
+    font-size: .12rem;
+  }
+
+  .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    color: @primary-color;
+    font-weight: normal;
+  }
+
+  .ant-steps-item-title {
+    font-size: .12rem;
+    color: @sub-font-color;
+  }
+
+  .am-steps-small .am-steps-item-title {
+    color: @primary-color;
+    font-size: 3.2vw;
+    font-weight: normal;
+  }
+
+  .am-steps-label-vertical .am-steps-item-content {
+    width: auto;
+  }
+}

@@ -1,0 +1,172 @@
+@import "../../styles/index";
+
+.input {
+  color: @primary-font-color;
+  flex: 1;
+  height: 100%;
+  &-label {
+    font-size: .14rem;
+    margin-bottom: .1rem;
+  }
+
+  &-box {
+    background-color: #ffffff;
+    border: @input-line 1px solid;
+    border-radius: .06rem;
+    overflow: hidden;
+    padding: 0 .15rem;
+    font-size: .14rem;
+    //height: .29rem;
+    height: 0.4rem;
+    flex: 1;
+    .flex-row-between;
+
+    .phone {
+      border-right: @input-line 1px solid;
+      padding-right: .15rem;
+      height: inherit;
+      .flex-row-center;
+      margin-right: .15rem;
+      cursor: pointer;
+
+      .icon {
+        margin-left: .1rem;
+        font-size: .14rem;
+      }
+    }
+  }
+
+  &-error {
+    color: #F75A14;
+    font-size: .11rem;
+    line-height: .11rem;
+    min-height: .3rem;
+    padding: .06rem 0.16rem;
+  }
+
+  &-info {
+    color: @sub-font-color;
+    font-size: .11rem;
+    line-height: .11rem;
+    min-height: .3rem;
+    padding: .06rem 0.16rem;
+    .flex-row-start;
+
+    & > div {
+      margin-right: .2rem;
+    }
+
+    .active {
+      color: @primary-color;
+    }
+  }
+  input {
+    border: none;
+    outline: none;
+    flex: 1;
+
+    &::-webkit-input-placeholder {
+      color: @input-placeholder;
+    }
+  }
+}
+
+.input-h5 {
+  color: @primary-font-color;
+  flex: 1;
+
+  &-label {
+    font-size: 3.73vw;
+    margin-bottom: 2.67vw;
+  }
+
+  &-box {
+    background-color: #ffffff;
+    border: @input-line 1px solid;
+    border-radius: 2.13vw;
+    overflow: hidden;
+    padding: 0 2.93vw;
+    font-size: 4vw;
+    height: 9.6vw;
+    .flex-row-between;
+
+    .phone {
+      border-right: @input-line 1px solid;
+      padding-right: 1.47vw;
+      height: inherit;
+      .flex-row-center;
+      margin-right: 1.47vw;
+      cursor: pointer;
+
+      .icon {
+        margin-left: 1vw;
+        font-size: 3.73vw;
+      }
+    }
+  }
+
+  &-error {
+    color: #F75A14;
+    font-size: 3.46vw;
+    line-height: 3.46vw;
+    min-height: 7vw;
+    padding: 2.67vw 2.93vw;
+  }
+
+  &-info {
+    color: @sub-font-color;
+    font-size: 3.46vw;
+    line-height: 3.46vw;
+    min-height: 7vw;
+    padding: 2.67vw 2.93vw;
+    .flex-row-start;
+
+    & > div {
+      margin-right: 3.73vw;
+    }
+
+    .active {
+      color: @primary-color;
+    }
+  }
+  input {
+    border: none;
+    outline: none;
+    flex: 1;
+
+    &::-webkit-input-placeholder {
+      color: @input-placeholder;
+    }
+  }
+}
+
+.input-country {
+  padding-top: 11.73vw;
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  background-color: #FFFFFF;
+
+  &-search {
+    background-color: #F6F9FD;
+    padding: 4vw;
+  }
+
+  &-item {
+    .flex-row-between();
+    color: @primary-font-color;
+    padding: 4.8vw 4.4vw;
+    border-bottom: 1px solid #EAF2F9;
+  }
+
+  &-select {
+    .flex-row-between();
+    background-color: #F6F9FD;
+    padding: 4.8vw 4.4vw;
+    color: @sub-font-color;
+  }
+}

@@ -1,0 +1,100 @@
+.footer{
+    background: linear-gradient(9deg,rgba(37,9,157,1),rgba(53,22,185,1));;
+    width: 100%;
+    padding: 0 .9rem;
+    min-height: 20vh;
+    position: relative;
+    //bottom: 0;
+    overflow : hidden;
+    //z-index: 999;
+    &-content{
+        padding-top: .44rem;
+        min-height: 1.46rem;
+        max-height: 1.95rem;
+        min-width: @content-min-width;
+        max-width: @content-max-width;
+        .flex-row-between;
+        align-items: center;
+        margin: 0 auto;
+        .logo{
+            width: 1.51rem;
+            height: .51rem;
+            margin-right: .55rem;
+        }
+        .white-text{
+            color: white;
+            font-size: .17rem;
+            font-weight: bold;
+        }
+        &-line{
+            background: #A471F9;
+            height: 1px;
+            width: 100%;
+            margin-top: .20rem;
+            margin-bottom: .15rem;
+        }
+        .text{
+            color: #FFFFFF80;
+            font-size: .12rem;
+        }
+        .qrcode{
+            width: .6rem;
+            height: .6rem;
+            margin-top: .07rem;
+        }
+        .mr-30{
+            margin-right: .3rem;
+        }
+    }
+    &-links{
+        min-width: @content-min-width;
+        max-width: @content-max-width;
+        .flex-row;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .small-text{
+        color: #FFFFFF80;
+        font-size: .14rem;
+        margin: .15rem 0;
+    }
+    .links{
+        color: white;
+        font-size: .14rem;
+        margin-left: .22rem;
+    }
+    .mr{
+        margin-right: .53rem;
+    }
+}
+
+.footer-h5{
+    background: #3516B9;
+    padding: 8vw 4vw;
+    position: relative;
+    .logo{
+        height: 9vw;
+        width: 27vw;
+        margin-bottom: 8vw;
+    }
+    .white-text{
+        color: white;
+        font-size: 4vw;
+        font-weight: bold;
+    }
+    .mr{
+        margin-right: 8vw;
+    }
+    .footer-content-line{
+        background: #A471F9;
+        height: 1px;
+        width: 100%;
+        margin: 4vw 0;
+    }
+    .small-text{
+        color : #FFFFFF80;
+        font-size: 3vw;
+    }
+}
+
+@import "../../styles/index";

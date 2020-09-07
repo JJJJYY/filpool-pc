@@ -1,0 +1,121 @@
+{
+  "id": "1742303",
+  "name": "filpool",
+  "font_family": "font_family",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13966087",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e6c5",
+      "unicode_decimal": 59077
+    },
+    {
+      "icon_id": "13966088",
+      "name": "成功_1",
+      "font_class": "chenggong_",
+      "unicode": "e6c6",
+      "unicode_decimal": 59078
+    },
+    {
+      "icon_id": "13966089",
+      "name": "回到顶部",
+      "font_class": "huidaodingbu",
+      "unicode": "e6c7",
+      "unicode_decimal": 59079
+    },
+    {
+      "icon_id": "13966090",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "e6c8",
+      "unicode_decimal": 59080
+    },
+    {
+      "icon_id": "13966091",
+      "name": "购买",
+      "font_class": "goumai",
+      "unicode": "e6c9",
+      "unicode_decimal": 59081
+    },
+    {
+      "icon_id": "13966092",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
+    },
+    {
+      "icon_id": "13966093",
+      "name": "订单管理",
+      "font_class": "dingdanguanli",
+      "unicode": "e6cb",
+      "unicode_decimal": 59083
+    },
+    {
+      "icon_id": "13966094",
+      "name": "账户",
+      "font_class": "zhanghu",
+      "unicode": "e6cc",
+      "unicode_decimal": 59084
+    },
+    {
+      "icon_id": "13966095",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "13966096",
+      "name": "资产管理",
+      "font_class": "zichanguanli",
+      "unicode": "e6ce",
+      "unicode_decimal": 59086
+    },
+    {
+      "icon_id": "13966097",
+      "name": "算力管理",
+      "font_class": "suanliguanli",
+      "unicode": "e6cf",
+      "unicode_decimal": 59087
+    },
+    {
+      "icon_id": "13966098",
+      "name": "账户管理",
+      "font_class": "zhanghuguanli",
+      "unicode": "e6d0",
+      "unicode_decimal": 59088
+    },
+    {
+      "icon_id": "13966099",
+      "name": "提示",
+      "font_class": "tishi",
+      "unicode": "e6d1",
+      "unicode_decimal": 59089
+    },
+    {
+      "icon_id": "13966100",
+      "name": "通知",
+      "font_class": "tongzhi",
+      "unicode": "e6d2",
+      "unicode_decimal": 59090
+    },
+    {
+      "icon_id": "13966101",
+      "name": "资源 14",
+      "font_class": "ziyuan",
+      "unicode": "e6d3",
+      "unicode_decimal": 59091
+    },
+    {
+      "icon_id": "13966102",
+      "name": "云算力",
+      "font_class": "yunsuanli",
+      "unicode": "e6d4",
+      "unicode_decimal": 59092
+    }
+  ]
+}

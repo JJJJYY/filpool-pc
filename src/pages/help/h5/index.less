@@ -1,0 +1,134 @@
+*,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.help-h5 {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 15vw;
+    .help-show {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 4vw;
+        padding: 4vw 0;
+
+        li {
+            border-radius: 2vw;
+            box-shadow: 0 .5vw 8.3vw 0 rgba(107, 145, 197, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 28vw;
+            height: 24.5vw;
+
+            img {
+                width: 9vw;
+                height: 9vw;
+            }
+
+            span {
+                margin-top: 3.7vw;
+                color: #959FA9;
+                font-size: 3.2vw;
+            }
+        }
+    }
+
+    .help-content {
+        flex: 1;
+        padding: 6.5vw 4vw;
+
+        h5 {
+            color: #24375E;
+            font-size: 4vw;
+            padding-bottom: 6.5vw;
+            border-bottom: 1px solid #EAF2F9;
+            span {
+                margin-left: 4vw;
+                color: #959FA9;
+                font-size: 2.4vw;
+            }
+        }
+
+        .help-list {
+
+            li {
+                padding: 4vw 0;
+                color: #959FA9;
+                font-size: 3.5vw;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid #EAF2F9;
+
+                >img {
+                    width: 1.6vw;
+                    height: 2.7vw;
+                }
+
+                h6 {
+                    color: #5A5F65;
+                    font-size: 3.5vw;
+                    flex-basis: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                small {
+                    margin-top: 4vw;
+                    font-size: 3.2vw;
+                }
+            }
+        }
+
+        .h66 {
+            padding: 0;
+            li {
+                border-bottom: 1px solid #EAF2F9;
+                h6 {
+                    img {
+                        width: 3.5vw;
+                        height: 3.5vw;
+                    }
+                }
+            }
+        }
+
+        .help-extra {
+            text-align: right;
+            color: #C0C9D2;
+            font-size: 3.2vw;
+            margin-top: 0.1rem;
+
+            span {
+                display: inline-flex;
+                align-items: center;
+                cursor: pointer;
+
+                img {
+                    width: 1.6vw;
+                    height: 2.7vw;
+                    margin-left: 2.3vw;
+                }
+            }
+        }
+    }
+
+    .deep {
+        background: #FAFBFD;
+    }
+}

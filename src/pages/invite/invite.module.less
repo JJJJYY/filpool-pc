@@ -1,0 +1,233 @@
+@titleColor: #24375E;
+@grayColor: #86929D;
+@boxShow: 0 0 20px rgba(212, 222, 236,0.3);
+@borderColor: #E5E5E5;
+.inviteContainer {
+
+    .bannerBox{
+        position: relative;
+        min-height: 380px;
+        .bannerBgImg{
+            width: 100%;
+        }
+        .textBox{
+            position: absolute;
+            left: 18%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            font-weight: bold;
+            color: #fff;
+            .large{
+                font-size: 63px;
+                color: #FFD964;
+                margin-left: 50px;
+            }
+        }
+        .stepBox{
+            position: absolute;
+            bottom: 7%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1200px;
+            display: flex;
+            align-self: stretch;
+            grid-template-columns: repeat(3, 3fr);
+            padding-left: 24px;
+            @media screen and (max-width: 1500px) {
+                &{
+                    bottom: 6%;
+                }
+            }
+            .stepGroup{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 38%;
+                &:last-child{
+                    width: auto;
+                }
+                .left{
+                    display: flex;
+                    align-items: center;
+                    font-size: 16px;
+                    color: #fff;
+                }
+            }
+            .stepIcon{
+                width: 54px;
+                margin-right: 16px;
+            }
+        }
+    }
+    .inviteContent {
+        width: 1200px;
+        /*min-width: 1200px;*/
+        margin: 0.4rem auto 0.65rem;
+        position: relative;
+        .main{
+            padding: 32px;
+            border:2px solid rgba(229,229,229,1);
+            .label{
+                font-size: 20px;
+                color: #24375E;
+                margin-bottom: 32px;
+            }
+            .button{
+                width:72px;
+                height:40px;
+                background:linear-gradient(90deg,rgba(241,138,45,1) 0%,rgba(252,177,80,1) 100%);
+                border-radius:4px;
+                color: #fff;
+            }
+            .input{
+                height:40px;
+                border:2px solid rgba(238,238,238,1);
+                border-right: none;
+                padding-left: 20px;
+                box-sizing: border-box;
+            }
+            .inputLabel{
+                font-size: 14px;
+                color: #575C62;
+                margin-bottom: 14px;
+            }
+            .searchBox{
+                display: flex;
+                align-items: center;
+            }
+            .leftBox{
+                padding-right: 40px;
+                flex: 1;
+            }
+            .rightBox{
+                border-left: 1px solid #E5E5E5;
+                padding: 40px 0;
+            }
+            .rewordRow{
+                display: flex;
+                align-self: stretch;
+                grid-template-columns: repeat(2, 2fr);
+                width: 380px;
+                padding-left: 40px;
+                .rewordItem{
+                    flex: 1;
+                    .rewordLabel{
+                        font-size: 14px;
+                        color: #575C62;
+                        margin-bottom: 26px;
+                    }
+                    .rewordVal{
+                        font-size: 16px;
+                        color: #003899;
+                    }
+                }
+            }
+        }
+    }
+    .recordBox{
+        border:2px solid @borderColor;
+        margin-top: 30px;
+    }
+    .areaBox{
+        min-height: 0.56rem;
+        display: inline-block;
+        align-items: center;
+        border-bottom: 1px solid @borderColor;
+        border-radius: 4px;
+        overflow: hidden;
+        width: 100%;
+        .areaItem{
+            display: inline-block;
+            height: 100%;
+            font-size: 0.16rem;
+            font-weight: bold;
+            color: #86929D;
+            min-width: 1rem;
+            text-align: center;
+            line-height: 0.56rem;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+            &:first-child{
+                /*border-right: 1px solid #ddd;*/
+            }
+
+            .areaLabel{
+                display: inline-block;
+                color: @grayColor;
+                font-size: 0.16rem;
+                font-weight: normal;
+                position: relative;
+                padding: 0 20px;
+                box-sizing: border-box;
+                &.active{
+                    color: #E49C3A;
+                    &:after{
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        left: 50%;
+                        bottom: 0;
+                        width: 50%;
+                        height: 2px;
+                        transform: translateX(-50%);
+                        background-color: #E49C3A;
+                    }
+                }
+            }
+        }
+    }
+    .inviteTable{
+        .table{
+            width: 100%;
+            //border: 1px solid #ddd;
+            table-layout: fixed;
+            .tbody{
+                display:block;
+                height:195px;
+                overflow-y:scroll;
+                width: 1196px;
+                &::-webkit-scrollbar-thumb{
+                    border-radius: 4px;
+                    background-color: @borderColor;
+                }
+                &::-webkit-scrollbar{
+                    width: 6px;
+                    height: 0;
+                }
+            }
+            .tr{
+                display:table;
+                width:100%;
+                table-layout:fixed;
+            }
+            .th{
+                line-height: 0.54rem;
+                font-size: 0.16rem;
+                font-weight: normal;
+                color: #86929D;
+                //border-bottom: 1px solid #ddd;
+                text-align: center;
+                &:first-child{
+                    padding-left: 24px;
+                    text-align: left;
+                }
+            }
+            .td{
+                color: #575C62;
+                line-height: 0.46rem;
+                //border-bottom: 1px solid #ddd;
+                text-align: center;
+                &:first-child{
+                    padding-left: 24px;
+                    text-align: left;
+                }
+            }
+        }
+        .paginationBox{
+            text-align: center;
+            margin-top: 0.12rem;
+        }
+    }
+}

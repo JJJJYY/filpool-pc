@@ -1,0 +1,56 @@
+@import "../../../styles/index";
+
+.level-h5 {
+  height: 35vw;
+  border-radius: 1.07vw;
+  background-color: #FDFCF8;
+  .flex-row-between;
+  padding: 8vw 2.67vw 4vw;
+  color: @primary-font-color;
+  font-size: .12rem;
+  position: relative;
+  margin-bottom: 2.67vw;
+
+  .right-top {
+    position: absolute;
+    right: .1rem;
+    top: .1rem;
+    color: @sub-font-color;
+    font-size: .09rem;
+
+    &.active {
+      width: .12rem;
+      height: .12rem;
+      background-color: @primary-color;
+      border: #FCCE96 .02rem solid;
+      border-radius: .06rem;
+      color: transparent;
+    }
+  }
+
+  & > div > img {
+    width: 8.53vw;
+    height: 12.27vw;
+  }
+
+  .ft6 {
+    font-size: 2.93vw;
+    line-height: 5vw;
+  }
+
+  &.back0 {
+    background-color: #FEFDFB;
+  }
+  &.back1 {
+    background-color: #FBFDFE;
+  }
+  &.back2 {
+    background-color: #FDFCF8;
+  }
+  &.back3 {
+    background-color: #FEFBF7;
+  }
+  &.back4 {
+    background-color: #F9FCFE;
+  }
+}
