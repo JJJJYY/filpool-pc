@@ -7,21 +7,11 @@ const devServerConfig = () => config => {
     return {
         ...config,
         proxy: {
-            // '/api/v1': {
-            //     target:'http://47.57.10.160/',
-            //     changeOrigin: true
-            // },
-            // '/': {
-            //     target:'http://192.168.1.22:9008/',
-            //     changeOrigin: true
-            // }
-
             '/public': {
-                target: 'http://localhost:8080/filpool',
-                // target: 'http://ipfs123.zwb.pub',
+                // target: 'http://localhost:8080/filpool',
+                target: 'http://api.filpool.c28e9d7b637474c3a98b2ed559c29434c.cn-hongkong.alicontainer.com/',
                 changeOrigin: true,
             },
-
         }
     };
 };
