@@ -29,10 +29,12 @@ class Step2 extends Component{
     componentDidMount() {
         /*获取订单详情*/
         net.getOrderDetail(this.props.orderId).then((res) => {
-            this.setState({
-                detailInfo: res.data
-            });
-            this.caluTime();
+            if (res.ret == 200) {
+                this.setState({
+                    detailInfo: res.data
+                });
+                this.caluTime();
+            }
         });
         /*获取可用余额*/
         net.getAssetMy().then((res) => {
@@ -109,7 +111,7 @@ class Step2 extends Component{
         }
 
         net.postConfirmOrder(data).then(res => {
-            if(res.responseCode === '00'){
+            if(res.ret === 200){
                 if(index === 1){
                     /*message.info(intl.get('RATE_24'), 1, () => {});
                     this.setState({ payVisible: false, status: 1, step: [1,1,1,1]});*/
@@ -119,11 +121,6 @@ class Step2 extends Component{
                     this.setState({ cacelVisible: false, status: 2, step: [1,1,0,0] });
                     this.props.history.push({pathname: '/rate'});
                 }
-            } else if(res.responseCode === 'b000013' || res.responseCode === 'p400004') {
-                message.info(intl.get(res.responseCode), 2, () => {});
-            } else {
-                message.info(intl.get(res.responseCode), 1, () => {});
-                // console.log(`%c ${intl.get(res.responseCode)}`,'color: red');
             }
         })
     }
@@ -148,19 +145,19 @@ class Step2 extends Component{
                 </div>
                 <div style={{marginTop: "50px"}}>
                     <span className={styles.fieldLabel}>{intl.get('RATE_98')}:</span>
-                    <span className={styles.fieldValue}>{detailInfo.name}</span>
+                    <span className={styles.fieldValue}>{detailInfo.relatedName}</span>
                 </div>
                 <div>
                     <span className={styles.fieldLabel}>{intl.get('RATE_15')}:</span>
-                    <span className={styles.fieldValue}>{detailInfo.price}/USDT</span>
+                    <span className={styles.fieldValue}>{parseFloat(detailInfo.price)}/USDT</span>
                 </div>
                 <div>
                     <span className={styles.fieldLabel}>{intl.get('RATE_12')}:</span>
-                    <span className={styles.fieldValue}>{detailInfo.quantity} TB</span>
+                    <span className={styles.fieldValue}>{parseFloat(detailInfo.quantity)} TB</span>
                 </div>
                 <div>
                     <span className={styles.fieldLabel}>{intl.get('RATE_17')}:</span>
-                    <span className={styles.fieldValue}>{detailInfo.price*detailInfo.quantity} USDT</span>
+                    <span className={styles.fieldValue}>{parseFloat(detailInfo.paymentQuantity)} USDT</span>
                 </div>
                 <div className={`flex-row-start`} style={{margin: "12px 0 16px 90px"}}>
                     <input type="password" className={styles.amountInput} value={this.state.password} onChange={(event) => {this.chnageState("password", event.target.value)}} placeholder={intl.get("ACCOUNT_78")} />
@@ -169,7 +166,7 @@ class Step2 extends Component{
                     </Link>
                 </div>
                 <div className={`flex-row-start`} style={{marginLeft: "90px"}}>
-                    <span className={`${styles.grayText}`}>{intl.get("USER_54")}：{this.state.available} USDT</span>
+                    <span className={`${styles.grayText}`}>{intl.get("USER_54")}：{parseFloat(this.state.available)} USDT</span>
                     <Link to={{pathname: '/user/asset/ope?type=in&coin=USDT'}} className={styles.link}>
                         {intl.get("RATE_100")}
                     </Link>

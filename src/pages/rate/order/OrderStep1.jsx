@@ -124,11 +124,9 @@ class Index extends Component {
         }
         
         net.postOrder(data).then(res =>{
-            if(res.responseCode === '00'){
-                let id = res.content.id;
+            if(res.ret === 200){
+                let id = res.data;
                 this.props.history.push(`/rate_second_step/${id}`);
-            } else {
-                message.info(intl.get(res.responseCode), 1, () => {});
             }
         })
     }

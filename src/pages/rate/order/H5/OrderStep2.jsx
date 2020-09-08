@@ -54,10 +54,8 @@ class Index extends Component {
 
     getOrderDetail(id){
         net.getOrderDetail(id).then(res => {
-            if(res.responseCode === '00'){
+            if(res.ret === 200){
                 this.setState(res.data, () => this.checkCountDown(res.data.status,res.data.createTime))
-            } else {
-                console.log(`%c ${intl.get(res.responseMsg)}`,'color: red');
             }
         })
     }
@@ -91,7 +89,7 @@ class Index extends Component {
         if(index === 1) { data.payPwd = md5(this.state.payPwd); }
 
         net.postConfirmOrder(data).then(res => {
-            if(res.responseCode === '00'){
+            if(res.ret === 200){
                 if(index === 1){
                     Toast.success(intl.get('RATE_24'), 2, ()=>{}, false);
                     this.setState({ payVisible: false, status: 1, step: [1,1,1,1]})
@@ -99,12 +97,6 @@ class Index extends Component {
                     Toast.fail(intl.get('RATE_25'), 2, ()=>{}, false);
                     this.setState({ cacelVisible: false, status: 2, step: [1,1,0,0] })
                 }
-            } else if(res.responseCode === 'b000013' || res.responseCode === 'p400004') {
-                Toast.fail(intl.get(res.responseCode), 1, () => { }, false);
-            } else {
-                Toast.fail(intl.get(res.responseCode), 2, ()=>{}, false);
-                // message.info(intl.get(res.responseCode), 1, () => {});
-                // console.log(`%c ${intl.get(res.responseCode)}`,'color: red');
             }
         })
     }
@@ -202,9 +194,9 @@ class Index extends Component {
                         { this.state.status === 0 ? this.renderCount() : this.renderItem(this.state.status, status_text[this.state.status]) }
                     </div>
                     <div className={'p1'}>{intl.get('RATE_10')}</div>
-                    {this.renderText(intl.get('RATE_11'),this.state.name)}
+                    {this.renderText(intl.get('RATE_11'),this.state.relatedName)}
                     {this.renderText(intl.get('RATE_31'),moment(this.state.createTime).format('YYYY-MM-DD HH:mm:ss'))}
-                    {this.renderText(intl.get('RATE_12'),this.state.quantity + this.state.unit)}
+                    {this.renderText(intl.get('RATE_12'),parseFloat(this.state.quantity) + this.state.unit)}
                     {this.renderText(intl.get('RATE_18'),this.state.asset)}
                     {this.renderText(intl.get('RATE_19'),'$' + (this.state.quantity * this.state.price).toFixed(4))}
                     {this.renderText(intl.get('RATE_16'),this.state.initDays + intl.get('RATE_23'))}

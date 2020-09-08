@@ -64,7 +64,9 @@ export default class Step1 extends Component{
             id: this.state.detailInfo.id,
             quantity: this.state.amount
         }).then((res) => {
-            this.props.onChange(res.content.id);
+            if (res.ret == 200) {
+                this.props.onChange(res.data);
+            }
         });
 
     }
@@ -92,7 +94,7 @@ export default class Step1 extends Component{
                     </div>
                     <div>
                         <span className={styles.fieldLabel}>{intl.get('RATE_15')}:</span>
-                        <span className={styles.fieldValue}>{detailInfo.price} USDT</span>
+                        <span className={styles.fieldValue}>{parseFloat(detailInfo.price)} USDT</span>
                     </div>
                     <div className={`flex-row-start`}>
                         <span className={styles.fieldLabel}>{intl.get('RATE_12')}:</span>

@@ -51,10 +51,8 @@ class Index extends Component {
 
     getOrderDetail(id){
         net.getOrderDetail(id).then(res => {
-            if(res.responseCode === '00'){
+            if(res.ret === 200){
                 this.setState(res.data, () => this.checkCountDown(res.data.status,res.data.createTime))
-            } else {
-                console.log(`%c ${intl.get(res.responseMsg)}`,'color: red');
             }
         })
     }
@@ -88,7 +86,7 @@ class Index extends Component {
         if(index === 1) { data.payPwd = md5(this.state.payPwd); }
 
         net.postConfirmOrder(data).then(res => {
-            if(res.responseCode === '00'){
+            if(res.ret === 200){
                 if(index === 1){
                     message.info(intl.get('RATE_24'), 1, () => {});
                     this.setState({ payVisible: false, status: 1, step: [1,1,1,1]})
@@ -96,11 +94,6 @@ class Index extends Component {
                     message.info(intl.get('RATE_25'), 1, () => {});
                     this.setState({ cacelVisible: false, status: 2, step: [1,1,0,0] })
                 }
-            } else if(res.responseCode === 'b000013' || res.responseCode === 'p400004') {
-                message.info(intl.get(res.responseCode), 2, () => {});
-            } else {
-                message.info(intl.get(res.responseCode), 1, () => {});
-                // console.log(`%c ${intl.get(res.responseCode)}`,'color: red');
             }
         })
     }

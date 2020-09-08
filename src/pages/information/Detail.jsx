@@ -33,6 +33,7 @@ class Detail extends Component{
             fetchGet(`${url}/${this.props.match.params.id}`).then((res) => {
                 this.setState({title: res.content.title, content: res.content.pcContent});
             });*/
+
             if (tabIndex === "0" || tabIndex === "1") {
                 net.getInforDetail(id).then((res) => {
                     this.setState({title: res.content.title, content: res.content.pcContent});
@@ -43,7 +44,9 @@ class Detail extends Component{
                 })
             } else {
                 net.getNoticeDetail({id: id}).then((res) => {
-                    this.setState({title: res.content.title, content: res.content.content});
+                    if (res.ret == 200) {
+                        this.setState({title: res.data.title, content: res.data.content});
+                    }
                 })
             }
         }

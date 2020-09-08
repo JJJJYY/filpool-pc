@@ -11,10 +11,7 @@ const distribution = '/distribution';
 export default {
 
     // 图片 base64 验证码
-    getBase64Captcha: () => get(`${auth}/access/base64/captcha?r=${Math.random()}`),
-
-    // 图片验证码
-    getCaptcha: () => get(`${auth}/access/captcha`),
+    // getBase64Captcha: () => get(`${auth}/access/base64/captcha?r=${Math.random()}`),
 
     // 登录
     postLogin: data => post(`AuthUser.Login`, data),
@@ -46,10 +43,10 @@ export default {
     postSettingKyc1Phone: data => post(`AuthUser.ModifyPhone`, data),
 
     // kyc2
-    postSettingKyc2: data => post(`${setting}/kyc2/auth_name`, data),
+    // postSettingKyc2: data => post(`${setting}/kyc2/auth_name`, data),
 
     // kyc3
-    postSettingKyc3: data => post(`${setting}/kyc3/upload`, data),
+    // postSettingKyc3: data => post(`${setting}/kyc3/upload`, data),
 
     // 设置语言
     postSettingLanguage: data => post(`${setting}/modify/language`, data),
@@ -61,13 +58,13 @@ export default {
     postSettingPayPwd: data => post(`AuthUser.ModifyPayPwd`, data),
 
     // 支付方式
-    postSettingPayType: data => post(`${setting}/modify/pay_type`, data),
+    // postSettingPayType: data => post(`${setting}/modify/pay_type`, data),
 
     // 支付方式首页
-    postSettingPayTypeInfo: data => post(`${setting}/pay_type/info`, data),
+    // postSettingPayTypeInfo: data => post(`${setting}/pay_type/info`, data),
 
     // 获取图片
-    getPic: (uuid, type) => get(`${setting}/access/get_pic?uuid=${uuid}&type=${type}`),
+    // getPic: (uuid, type) => get(`${setting}/access/get_pic?uuid=${uuid}&type=${type}`),
 
     // 获取七牛Token
     getToken: () => get(`Qiniu.Token`),
@@ -84,11 +81,12 @@ export default {
     // 获取公告列表
     getNotice: (data) => post(`${message}/access/public/notice`, data),
     //获取公告详情
-    getNoticeDetail: (data) => get(`/message/access/get_notice`, data),
+    getNoticeDetail: (data) => get(`Announcement.Detail`, data),
     //帮助中心
     getHelpList: (data) => post(`${message}/display/config/modify/help/index`, data),
     getHelpDetail: (id) => get(`/general/access/helpDetail/${id}`),
     getHelpLists: (data) => post(`${message}/getHelpList`, data),
+
     // 未登录验证码
     postAccessSend: data => post('SMS.Send', data),
 

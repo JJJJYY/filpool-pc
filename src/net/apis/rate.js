@@ -9,13 +9,13 @@ export default {
     getGoodDetail: (id) => get('Goods.Get', { id: id }),
 
     //确认订单
-    postConfirmOrder: (data) => post('/purchase/confirmOrder', data),
+    postConfirmOrder: (data) => post('Weight.ConfirmOrder', data),
 
     //订单详情
-    getOrderDetail: (id) => get(`/purchase/orderDetails?id=${id}`),
+    getOrderDetail: (id) => get('Weight.OrderDetails', { id: id }),
 
     //下单
-    postOrder: (data) => post('/purchase/order', data),
+    postOrder: (data) => post('Weight.Order', data),
 
     //我的订单列表
     getMyOrderList: (data) => get(`Weight.OrderList`, data),
