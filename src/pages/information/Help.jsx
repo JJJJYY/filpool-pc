@@ -24,13 +24,15 @@ class Help extends Component{
 
     getDataList () {
         net.getHelpLists({
-            pageNo: this.state.pageNo,
-            pageSize: this.state.pageSize
+            page: this.state.pageNo,
+            count: this.state.pageSize
         }).then((res) => {
-            this.setState({
-                listData: this.state.listData.concat(res.data),
-                pageNo: this.state.pageNo + 1
-            });
+            if (res.ret == 200 && res.data.length) {
+                this.setState({
+                    listData: this.state.listData.concat(res.data),
+                    pageNo: this.state.pageNo + 1
+                });
+            }
         })
     }
 

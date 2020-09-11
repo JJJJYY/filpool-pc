@@ -25,25 +25,25 @@ class Article extends Component {
     }
 
     getGeneralBottom(key){
-        if(Number(key)){
-            net.getGeneralNotice().then(res => {
-                if(res.responseCode === '00'){
-                    let data = res.content;
-                    let notice = {};
-                    let title = {};
-                    for(let item of data){
-                        notice[item.id] = item.content;
-                        title[item.id] = item.title;
-                    }
-                    this.setState({ notice: notice, header: title })
-                } else {
-                }
-            })
-            return;
-        } 
+        // if(Number(key)){
+        //     net.getGeneralNotice().then(res => {
+        //         if(res.responseCode === '00'){
+        //             let data = res.content;
+        //             let notice = {};
+        //             let title = {};
+        //             for(let item of data){
+        //                 notice[item.id] = item.content;
+        //                 title[item.id] = item.title;
+        //             }
+        //             this.setState({ notice: notice, header: title })
+        //         } else {
+        //         }
+        //     })
+        //     return;
+        // } 
         net.getGeneralBottom(key).then(res => {
-            if(res.responseCode === '00'){
-                this.setState({ content: res.content })
+            if(res.ret === 200){
+                this.setState(res.data)
             } else {
             }
         })

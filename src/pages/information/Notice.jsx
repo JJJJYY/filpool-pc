@@ -10,7 +10,7 @@ class Notice extends Component{
         super(props);
         this.state = {
             pageNo: 1,
-            pageSize: 2,
+            pageSize: 10,
             listData: []
         }
     }
@@ -20,21 +20,25 @@ class Notice extends Component{
     }
 
     getDataList () {
-        net.getNotice({
-            pageNo: this.state.pageNo,
-            pageSize: this.state.pageSize
+        net.getGeneralNotice({
+            page: this.state.pageNo,
+            count: this.state.pageSize
         }).then((res) => {
-            let dv = document.createElement("div");
-            let list = res.content.map((item) => {
-                dv.innerHTML = item.content;
-                item.simpleContent = dv.firstChild && dv.firstChild.innerText || item.content;
-                return item;
-            });
+            if (res.ret == 200) {
+                // let dv = document.createElement("div");
+                // let list = res.data.map((item) => {
+                //     dv.innerHTML = item.content;
+                //     item.simpleContent = dv.firstChild && dv.firstChild.innerText || item.content;
+                //     return item;
+                // });
 
-            this.setState({
-                listData: this.state.listData.concat(list),
-                pageNo: this.state.pageNo + 1
-            });
+                if (res.data.length) {
+                    this.setState({
+                        listData: this.state.listData.concat(res.data),
+                        pageNo: this.state.pageNo + 1
+                    });
+                }
+            }
         })
     }
 
@@ -52,8 +56,7 @@ class Notice extends Component{
                                 <li className={styles.li} key={item.id} onClick={() => {this.showDetail(item)}}>
                                     <h3 className={styles.title}>{item.title}</h3>
                                     <div style={{display: "flex", justifyContent: "space-between",alignItems: "baseline"}}>
-                                        <div className={`${styles.content}, ${styles.nowrap}`} style={{flex: 1}} dangerouslySetInnerHTML={{__html: item.simpleContent}}></div>
-                                        <p className={styles.date} style={{width: "200px", marginTop: "34px", marginLeft: "200px"}}>{formatDate(item.createTime, 'yyyy-MM-dd mm:hh:ss')}</p>
+                                        <p className={styles.date} style={{width: "200px", marginTop: "34px"}}>{formatDate(item.createTime, 'yyyy-MM-dd mm:hh:ss')}</p>
                                     </div>
                                 </li>
                             )

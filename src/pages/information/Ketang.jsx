@@ -20,14 +20,16 @@ class Ketang extends Component{
 
     getDataList () {
         net.getInfoList({
-            type: 3,
-            pageNo: this.state.pageNo,
-            pageSize: this.state.pageSize
+            type: 1,
+            page: this.state.pageNo,
+            count: this.state.pageSize
         }).then((res) => {
-            this.setState({
-                listData: this.state.listData.concat(res.data),
-                pageNo: this.state.pageNo + 1
-            });
+            if (res.ret == 200 && res.data.length) {
+                this.setState({
+                    listData: this.state.listData.concat(res.data),
+                    pageNo: this.state.pageNo + 1
+                });
+            }
         })
     }
 

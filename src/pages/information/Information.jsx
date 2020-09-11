@@ -15,9 +15,6 @@ class Information extends Component{
     constructor(props) {
         super(props);
 
-        if (!props.redux.userInfo.account) {
-            window.location.href = `/#/login`;
-        }
         let tab = Number(props.match && props.match.params.tab);
         this.state = {
             tabIndex: (props.location.query && props.location.query.tabIndex) || tab || 0,

@@ -75,17 +75,13 @@ export default {
     //获取实名认证信息
     getActualInfo: () => get('UserIdInfo.Get'),
     //项目动态和进阶小课堂
-    getInfoList: (data) => post(`${message}/getInfoList`, data),
+    getInfoList: (data) => post(`AdvertisementInfo.List`, data),
     //获取项目动态和进阶小课堂
-    getInforDetail: (id) => get(`${message}/detail/${id}`),
-    // 获取公告列表
-    getNotice: (data) => post(`${message}/access/public/notice`, data),
-    //获取公告详情
-    getNoticeDetail: (data) => get(`Announcement.Detail`, data),
+    getInforDetail: (id) => get(`AdvertisementInfo.Detail`, { id, id }),
+    
     //帮助中心
-    getHelpList: (data) => post(`${message}/display/config/modify/help/index`, data),
-    getHelpDetail: (id) => get(`/general/access/helpDetail/${id}`),
-    getHelpLists: (data) => post(`${message}/getHelpList`, data),
+    getHelpDetail: (id) => get(`HelpInfo.Detail`, { id, id }),
+    getHelpLists: (data) => post(`HelpInfo.List`, data),
 
     // 未登录验证码
     postAccessSend: data => post('SMS.Send', data),
@@ -116,7 +112,7 @@ export default {
     getWeightInviteDetail: () => get(`${distribution}/inviteDetail`),
 
     // 查看分销详情
-    getWeightOrderRecord: () => get(`${distribution}/orderRecord`),
+    getWeightOrderRecord: () => get(`BalanceModify.RewardRecord`),
 
     // 等级规则
     getLevelRule: () => get('/general/access/levelRule'),

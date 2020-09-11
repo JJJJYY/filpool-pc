@@ -32,5 +32,4 @@ export default {
 
     ///general/access/download
     // postDownload: (data) => post(`/general/access/download`, data),
-
 };

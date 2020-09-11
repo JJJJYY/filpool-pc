@@ -16,7 +16,7 @@ class OrderPay extends Component{
     constructor(props) {
         super(props);
         let routeData = getSearchParams(props.location.search);
-        if (!props.redux.userInfo.account) {
+        if (!props.redux.login) {
             window.location.href = `/#/login`;
         }
         this.state = {

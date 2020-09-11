@@ -11,8 +11,7 @@ import connect from '@/store/connect';
 class Invite extends Component {
     constructor(props) {
         super(props);
-
-        if (!props.redux.userInfo.account) {
+        if (!props.redux.login) {
             window.location.href = `/#/login`;
         }
 
@@ -58,9 +57,9 @@ class Invite extends Component {
         });
         /*推广奖励*/
         net.getWeightOrderRecord().then((res) => {
-            if (res.responseCode === '00') {
+            if (res.ret === 200) {
                 this.setState({
-                    awardList: res.content.content
+                    awardList: res.data instanceof Array ? res.data : []
                 });
             }
         });
@@ -244,8 +243,8 @@ class Invite extends Component {
                                                         <td className={styles.td} style={{width: "120px"}}>{item.round}</td>
                                                         <td className={styles.td}>{item.nickname}</td>
                                                         <td className={styles.td}>{item.createTime}</td>
-                                                        <td className={styles.td}>{item.orderQuantity}</td>
-                                                        <td className={styles.td}>{item.rewardQuantity}</td>
+                                                        <td className={styles.td}>{parseFloat(item.orderQuantity)}</td>
+                                                        <td className={styles.td}>{parseFloat(item.rewardQuantity)}</td>
                                                     </tr>
                                                 )
                                             })

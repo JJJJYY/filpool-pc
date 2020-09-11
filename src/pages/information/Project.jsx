@@ -20,22 +20,16 @@ class Project extends Component{
 
     getDataList () {
         net.getInfoList({
-            type: 2,
-            pageNo: this.state.pageNo,
-            pageSize: this.state.pageSize
+            type: 0,
+            page: this.state.pageNo,
+            count: this.state.pageSize
         }).then((res) => {
-            let resArr = res.data || [];
-            let dv = document.createElement("div");
-            let newList = resArr.map((item) => {
-                dv.innerHTML = item.content;
-                item.simpleContent = dv.firstChild && dv.firstChild.innerText || item.content;
-                return item;
-            });
-
-            this.setState({
-                listData: this.state.listData.concat(newList),
-                pageNo: this.state.pageNo + 1
-            });
+            if (res.ret == 200 && res.data.length) {
+                this.setState({
+                    listData: this.state.listData.concat(res.data),
+                    pageNo: this.state.pageNo + 1
+                });
+            }
         })
     }
 
@@ -50,10 +44,14 @@ class Project extends Component{
                     {
                         this.state.listData.map((item) => {
                             return (
-                                <li className={styles.li} key={item.id} onClick={() => {this.showDetail(item)}}>
-                                    <h3 className={styles.title}>{item.title}</h3>
-                                    <div className={styles.content} dangerouslySetInnerHTML={{__html: item.simpleContent}}></div>
-                                    <p className={styles.date}>{item.createTime}</p>
+                                <li className={styles.li} style={{display: "flex",alignItems: "center"}} key={item.id}  onClick={() => {this.showDetail(item)}}>
+                                    <div>
+                                        <img src={item.image} style={{width: "160px"}} alt="" />
+                                    </div>
+                                    <div style={{display: "flex",flexDirection: "column", marginLeft: "40px"}}>
+                                        <h3 className={styles.title} style={{marginTop: "0px"}}>{item.title}</h3>
+                                        <p className={styles.date} style={{marginTop: "20px"}}>{item.createTime}</p>
+                                    </div>
                                 </li>
                             )
                         })

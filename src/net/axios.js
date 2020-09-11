@@ -7,7 +7,14 @@ const fetchData = (response, resolve, reject) => {
     let json = response.data;
     if (json.ret != 200) {
         const errortext = json.msg;
-        message.error(errortext);
+        if (json.ret == 401) {
+            if (response.config.url != '/public/?s=AuthUser.Info') {
+                window.location.href = `/#/login`;
+            }
+            
+        } else {
+            message.error(errortext);
+        }
         const error = new Error(errortext);
         error.name = json.ret;
         error.response = response;

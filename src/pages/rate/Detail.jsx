@@ -126,8 +126,8 @@ class RateDetail extends Component {
             this.setState({ loading: false });
             if (res.ret === 200) {
                 this.setState({ loginVisible: false });
-                this.props.getUserInfo();
                 this.props.setLogin(true);
+                this.props.getUserInfo();
             }
         });
     }

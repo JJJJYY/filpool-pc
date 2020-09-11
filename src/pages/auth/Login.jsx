@@ -41,8 +41,8 @@ class Login extends Component {
             this.setState({ loading: false });
             if (res.ret === 200) {
                 this.props.history.replace('/home');
-                this.props.getUserInfo();
                 this.props.setLogin(true);
+                this.props.getUserInfo();
             }
         });
     }

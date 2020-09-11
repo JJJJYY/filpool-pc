@@ -15,8 +15,8 @@ class InviteRecords extends Component {
 
     componentDidMount() {
         net.getWeightOrderRecord().then((res) => {
-            if (res.responseCode === '00') {
-                this.setState(res.content);
+            if (res.ret === 200) {
+                this.setState({ content: res.data instanceof Array ? res.data : [] });
             }
         });
     }
@@ -39,12 +39,12 @@ class InviteRecords extends Component {
             {
                 th: intl.get('ACCOUNT_128'),
                 td: 'orderQuantity',
-                render: text => `${text} GB`,
+                render: (text, obj) => `${parseFloat(text) + obj.unit}`,
             },
             {
                 th: intl.get('ACCOUNT_130'),
                 td: 'rewardQuantity',
-                render: text => `${text} USDT`,
+                render: text => `${parseFloat(text)} USDT`,
             },
         ];
 

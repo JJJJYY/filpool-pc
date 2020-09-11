@@ -273,7 +273,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                    {/* <Popover trigger="hover" placement="leftTop" content={<img src={require('../../images/home/qrcode.png')} alt="" style={{width: '1rem'}}/>}> */}
+                    {/* <Popover trigger="hover" placement="leftTop" content={<img src={require('../../images/home/qrcode.jpeg')} alt="" style={{width: '1rem'}}/>}> */}
                         
                     {/* </Popover> */}
                     <Footer />

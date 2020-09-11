@@ -27,7 +27,7 @@ export default {
     getRateProblem: () => get('/general/access/problem'),
 
     //关于我们 
-    getGeneralBottom: (data) => get(`/general/access/bottom?key=${data}`),
+    getGeneralBottom: (key) => get(`TextInfo.Get`, { key: key }),
 
     getGeneralBottomCode: () => get(`LinksInfo.Bottom`),
 
@@ -39,6 +39,8 @@ export default {
 
     //notice
     getGeneralNotice: (data) => get('Announcement.List', data),
+    //获取公告详情
+    getNoticeDetail: (data) => get(`Announcement.Detail`, data),
 
     //合作伙伴
     getGeneralPartner: () => get('PartnerInfo.List'),

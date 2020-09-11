@@ -2,7 +2,8 @@ export const appStore = 'https://itunes.apple.com/us/app/google-authenticator/id
 
 export const googlePlay = 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2';
 
-export const domin = 'https://www.filpool.io/';
+// export const domin = 'https://www.filpool.io/';
+export const domin = 'http://filpool.c28e9d7b637474c3a98b2ed559c29434c.cn-hongkong.alicontainer.com/';
 
 export const ios = 'https://testflight.apple.com/join/4ooaLADg';
 

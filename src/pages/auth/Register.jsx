@@ -142,8 +142,8 @@ class Register extends Component {
                 }).then((res2) => {
                     if (res2.ret === 200) {
                         this.props.history.replace('/');
-                        this.props.getUserInfo();
                         this.props.setLogin(true);
+                        this.props.getUserInfo();
                     }
                 });
             }

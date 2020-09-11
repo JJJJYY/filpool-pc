@@ -13,6 +13,7 @@ class Footer extends Component {
             qq: '',
             wechat: '',
             public: '',
+            business: '',
             link: [],
         };
     }
@@ -76,6 +77,10 @@ class Footer extends Component {
                         <div className={'flex-column-center mr-30'}>
                             <div className={'text'}>{intl.get('RATE_78')}</div>
                             <img src={this.state.wechat} alt="" className={'qrcode'}/>
+                        </div> 
+                        <div className={'flex-column-center mr-30'}>
+                            <div className={'text'}>{intl.get('RATE_781')}</div>
+                            <img src={this.state.business} alt="" className={'qrcode'}/>
                         </div> 
                         <div className={'flex-column-center mr-30'}>
                             <div className={'text'}>{intl.get('RATE_79')}</div>

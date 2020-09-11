@@ -112,7 +112,7 @@ class App extends Component {
                     this.state.visible
                         ? (
                             <div className={this.state.mobile ? 'flex-column-center kefu-h5' : 'flex-column-center kefu'}>
-                                <img src={require('../images/home/qrcode.png')} alt="" className="qrcode" />
+                                <img src={require('../images/home/qrcode.jpeg')} alt="" className="qrcode" />
                                 <div className="triangle" />
                             </div>
                         )

@@ -36,11 +36,15 @@ class Detail extends Component{
 
             if (tabIndex === "0" || tabIndex === "1") {
                 net.getInforDetail(id).then((res) => {
-                    this.setState({title: res.content.title, content: res.content.pcContent});
+                    if (res.ret == 200) {
+                        this.setState({title: res.data.title, content: res.data.content});
+                    }
                 })
             } else if (tabIndex === "2") {
                 net.getHelpDetail(id).then((res) => {
-                    this.setState({title: res.content.title, content: res.content.content});
+                    if (res.ret == 200) {
+                        this.setState({title: res.data.title, content: res.data.content});
+                    }
                 })
             } else {
                 net.getNoticeDetail({id: id}).then((res) => {

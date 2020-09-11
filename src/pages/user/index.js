@@ -63,7 +63,7 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        if (!props.redux.userInfo.account) {
+        if (!props.redux.login) {
             window.location.href = `/#/login`;
         }
 
@@ -169,7 +169,7 @@ class App extends Component {
                                     {this.renderItem('/user/asset/index2', intl.get('USER_5'), 'tab5')}
                                     {this.renderItem('/user/order', intl.get('USER_2'), 'tab2')}
                                     {this.renderItem('/user/rate', intl.get('USER_3'), 'tab3')}
-                                    {/*{this.renderItem('/user/distribution', intl.get('USER_4'), 'tab4')}*/}
+                                    {/* {this.renderItem('/user/distribution', intl.get('USER_4'), 'tab4')} */}
                                     {this.renderItem('/user/account', intl.get('USER_1'), 'tab1')}
                                     {this.renderItem('/user/actual', intl.get('USER_124'), 'tab6')}
                                 </ul>
