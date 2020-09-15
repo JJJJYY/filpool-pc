@@ -6,7 +6,6 @@ import moment from 'moment';
 import net from '../../../net';
 import Table from '../table';
 import connect from '@/store/connect';
-import { formatDate } from '@/util/utilTools';
 
 class Rate extends Component {
     constructor(props) {
@@ -95,7 +94,7 @@ class Rate extends Component {
                 style:{
                     width: '188px'
                 },
-                render: text => `${formatDate(text, 'yyyy-MM-dd hh:mm:ss')}`,
+                render: text => text,
             },
             {
                 th: intl.get('USER_32'),
@@ -122,7 +121,7 @@ class Rate extends Component {
             {
                 th: intl.get('RATE_110'),
                 td: 'createTime',
-                render: text => `${formatDate(text, 'yyyy-MM-dd hh:mm:ss')}`,
+                render: text => text,
             },
             {
                 th: intl.get('USER_32'),
@@ -166,7 +165,7 @@ class Rate extends Component {
                 style: {
                     width: "220px"
                 },
-                render: text => `${formatDate(text, 'yyyy-MM-dd hh:mm:ss')}`,
+                render: text => text,
             },
             {
                 th: intl.get('USER_32'),

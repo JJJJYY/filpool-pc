@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import styles from './information.module.less';
 import intl from 'react-intl-universal';
 import net from "@/net";
-import { formatDate } from '@/util/utilTools';
 
 class Notice extends Component{
     constructor(props) {
@@ -56,7 +55,7 @@ class Notice extends Component{
                                 <li className={styles.li} key={item.id} onClick={() => {this.showDetail(item)}}>
                                     <h3 className={styles.title}>{item.title}</h3>
                                     <div style={{display: "flex", justifyContent: "space-between",alignItems: "baseline"}}>
-                                        <p className={styles.date} style={{width: "200px", marginTop: "34px"}}>{formatDate(item.createTime, 'yyyy-MM-dd mm:hh:ss')}</p>
+                                        <p className={styles.date} style={{width: "200px", marginTop: "34px"}}>{item.createTime}</p>
                                     </div>
                                 </li>
                             )

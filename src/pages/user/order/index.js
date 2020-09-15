@@ -5,7 +5,6 @@ import styles from '../table.module.less';
 import intl from 'react-intl-universal';
 
 import net from '../../../net';
-import { formatDate } from '@/util/utilTools';
 
 export default class Index extends Component {
 
@@ -75,8 +74,7 @@ export default class Index extends Component {
                 th: intl.get('USER_13'),
                 style: {width: "180px"},
                 td: 'createTime',
-                /*render: (v) => moment(v).format('YYYY-MM-DD hh:mm:ss')*/
-                render: (v) => formatDate(v, 'yyyy-MM-dd hh:mm:ss')
+                render: (v) => v
             },
             {
                 th: intl.get('USER_14'),

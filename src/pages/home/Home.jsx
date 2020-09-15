@@ -7,12 +7,11 @@ import Footer from '../footer';
 import net from '../../net';
 import './index.less';
 import styles from './home.module.less';
-import { Carousel, message, Popover } from 'antd';
+import { Carousel, message } from 'antd';
 import Cell from '../rate/component/shopCell';
 import intl from 'react-intl-universal';
 import HomeStatic from './HomeStatic';
 import LazyLoad from 'react-lazyload';
-import moment from 'moment';
 
 const pre = 'home';
 
@@ -100,12 +99,6 @@ class Home extends Component {
         })
     }
 
-    formatDate (date) {
-        // let c_date = new Date(date);
-        // return `${c_date.getMonth()}-${c_date.getDate()}`;
-        return moment(date, 'YYYY-MM-DDTHH:mm:ss').format('MM-DD');
-    }
-
     render() {
         //const isMobile = window.innerWidth <= 1080;
         const isMobile = false;
@@ -159,7 +152,7 @@ class Home extends Component {
                                                         <div className={'notice'} style={{display: 'block'}}>
                                                             <span className={'cell'}>{item.title}</span>
                                                             <span style={{marginLeft: '40px',paddingRight: "16px",borderRight: "1px solid #86929D"}}>
-                                                            {this.formatDate(item.createTime)}
+                                                            {item.createTime}
                                                         </span>
                                                         </div>
                                                     </Link>
