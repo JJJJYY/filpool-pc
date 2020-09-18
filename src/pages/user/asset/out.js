@@ -5,10 +5,10 @@ import md5 from 'md5';
 import intl from 'react-intl-universal';
 import connect from '@/store/connect';
 import net from '../../../net';
-import {reg} from "../../../util";
+import { reg } from "../../../util";
 import inputUtil from "../../../components/input/inputUtil";
 import Title from "../account/components/Title";
-import {LOGIN} from "@/store/actionsTypes";
+import { LOGIN } from "@/store/actionsTypes";
 
 const { Option } = Select;
 
@@ -37,7 +37,7 @@ class Index extends Component {
 
         delete coins.FIL;
 
-        this.setState({coins});
+        this.setState({ coins });
     }
 
     componentWillUnmount() {
@@ -54,7 +54,7 @@ class Index extends Component {
         return (
             <div className="form">
                 <label>{intl.get('USER_76')}</label>
-                <Select value={this.state.type} onChange={(type) => this.setState({ type })} style={{ flex: 1,height: "40px" }} size="large">
+                <Select value={this.state.type} onChange={(type) => this.setState({ type })} style={{ flex: 1, height: "40px" }} size="large">
                     <Option value="withdraw">{intl.get('USER_30')}</Option>
                     <Option value="trans">{intl.get('USER_33')}</Option>
                 </Select>
@@ -66,16 +66,16 @@ class Index extends Component {
         const { coins, coin } = this.state;
         let keys = [];
         for (let variable in coins) {
-          if (coins[variable].withdraw === 1) {
-              keys.push(variable);
-          }
+            if (coins[variable].withdraw === 1) {
+                keys.push(coins[variable]);
+            }
         }
         return (
             <div className="form">
                 <label>{intl.get('USER_31')}</label>
-                <Select value={coin} onChange={(coin) => this.setState({ coin })} style={{ flex: 1 }}  size="large">
+                <Select value={coin} onChange={(coin) => this.setState({ coin })} style={{ flex: 1 }} size="large">
                     {keys.map((item) => (
-                        <Option value={item} key={item}>{item}</Option>
+                        <Option value={item.asset} key={item.asset}>{item.asset + (item.type ? '（' + item.type + '）' : '')}</Option>
                     ))}
                 </Select>
             </div>
@@ -87,7 +87,7 @@ class Index extends Component {
         // 转账 -> /asset/internal_transfer
         // 提币 -> /asset/withdrawal
         net.postSend({
-            type: this.state.validByPhone?'phone':'email',
+            type: this.state.validByPhone ? 'phone' : 'email',
             imageCaptcha: this.state.imageCaptcha,
         }).then(res => {
             if (res.ret === 200) {
@@ -109,33 +109,27 @@ class Index extends Component {
 
         const base = { ...this.props.coins[coin] };
 
-        if(!amount || amount < 0)
-        {
+        if (!amount || amount < 0) {
             return message.error("提币数量需要大于0");
         }
 
-        if(amount > (base.available))
-        {
+        if (amount > (base.available)) {
             return message.error("余额不足");
         }
 
-        if(amount < parseFloat(base.minWithdraw))
-        {
+        if (amount < parseFloat(base.minWithdraw)) {
             return message.error("不能小于最小提币数量");
         }
 
-        if(!phoneCaptcha)
-        {
+        if (!phoneCaptcha) {
             return message.error("验证码不能为空");
         }
 
-        if(!payPwd)
-        {
+        if (!payPwd) {
             return message.error("支付密码不能为空");
         }
 
-        if(!address)
-        {
+        if (!address) {
             return message.error("支付密码不能为空");
         }
 
@@ -151,7 +145,7 @@ class Index extends Component {
             payPwd: md5(payPwd),
             captcha: phoneCaptcha,
             gaCaptcha,
-            type: validByPhone?'phone':'email',
+            type: validByPhone ? 'phone' : 'email',
         }).then(res => {
             if (res.ret === 200) {
                 message.success(intl.get('USER_77'));
@@ -166,18 +160,15 @@ class Index extends Component {
 
         const base2 = { ...this.props.coins[coin] };
 
-        if(!amount|| amount < 0)
-        {
+        if (!amount || amount < 0) {
             return message.error("提币数量需要大于0");
         }
 
-        if(amount < parseFloat(base2.minWithdraw))
-        {
+        if (amount < parseFloat(base2.minWithdraw)) {
             return message.error("不能小于最小提币数量");
         }
 
-        if(amount > (base2.available))
-        {
+        if (amount > (base2.available)) {
             return message.error("余额不足");
         }
 
@@ -186,18 +177,15 @@ class Index extends Component {
             return message.error("手机号码格式错误");
         }*/
 
-        if(!phone)
-        {
+        if (!phone) {
             return message.error("请输入收账人手机号或邮箱");
         }
 
-        if(!phoneCaptcha)
-        {
+        if (!phoneCaptcha) {
             return message.error("验证码不能为空");
         }
 
-        if(!payPwd)
-        {
+        if (!payPwd) {
             return message.error("支付密码不能为空");
         }
 
@@ -205,12 +193,12 @@ class Index extends Component {
             return message.error(intl.get('USER_114'));
         }
         net.postAssetTransfer({
-            account:phone,
+            account: phone,
             assetId: base2.id,
             amount,
             payPwd: md5(payPwd),
             captcha: phoneCaptcha,
-            type: validByPhone?'phone':'email',
+            type: validByPhone ? 'phone' : 'email',
         }).then(res => {
             if (res.ret === 200) {
                 message.success(intl.get('USER_78'));
@@ -227,7 +215,7 @@ class Index extends Component {
         });
     }
 
-    changeCode () {
+    changeCode() {
         this.setState({
             imgURL: `${this.state.imgURL}?v=${Math.random()}`
         })
@@ -242,17 +230,17 @@ class Index extends Component {
                         <Input
                             value={this.state.imageCaptcha}
                             type="text"
-                            onChange = {(e) => {this.setState({ imageCaptcha : e.target.value })}}
+                            onChange={(e) => { this.setState({ imageCaptcha: e.target.value }) }}
                             maxLength={6}
                         />
-                        <img src={this.state.imgURL} style={{height: "40px",marginLeft: "10px", cursor: "pointer"}} onClick={() => {this.changeCode()}} alt="" />
+                        <img src={this.state.imgURL} style={{ height: "40px", marginLeft: "10px", cursor: "pointer" }} onClick={() => { this.changeCode() }} alt="" />
                     </div>
                 </div>
                 <div className="form input-group">
-                    <label>{this.state.validByPhone?intl.get('USER_79'):intl.get("ACCOUNT_39")}</label>
+                    <label>{this.state.validByPhone ? intl.get('USER_79') : intl.get("ACCOUNT_39")}</label>
                     <div style={{ flex: 1 }}>
                         <Input value={this.state.phoneCaptcha}
-                            pathType={this.state.validByPhone?"phone":"email"}
+                            pathType={this.state.validByPhone ? "phone" : "email"}
                             onChange={(e) => this.setState({ phoneCaptcha: e.target.value })} />
                         {this.state.num === 60 ? (
                             <a onClick={() => this.sendCap()}>{intl.get('USER_80')}</a>
@@ -272,7 +260,7 @@ class Index extends Component {
             <div className="ope">
                 {this.renderHeader}
                 <Row gutter={30}>
-                    <div style={{width: "50%"}}>
+                    <div style={{ width: "50%" }}>
                         {this.renderType}
                         {this.renderCoin}
                         <div className="form">
@@ -284,9 +272,9 @@ class Index extends Component {
                             <div style={{ flex: 1 }}>
                                 <Input style={{ flex: 1 }} value={this.state.amount} onChange={(e) => {
                                     let val = e.target.value;
-                                    if(reg.regFloat(Number(val))){
-                                    this.setState({ amount: e.target.value })
-                                }
+                                    if (reg.regFloat(Number(val))) {
+                                        this.setState({ amount: e.target.value })
+                                    }
                                 }} autoComplete="new-password" />
                                 <p style={{ margin: 0, paddingTop: '.06rem', display: 'flex', justifyContent: 'space-between', color: '#959FA9', fontSize: '.11rem' }}>
                                     <span>{intl.get('USER_83')}：{base.available || 0} {coin}</span>
@@ -296,11 +284,11 @@ class Index extends Component {
                         </div>
                         <div className="form">
                             <label>{intl.get('USER_85')}</label>
-                            <Input style={{ flex: 1 }} type="password"  autoComplete="new-password" value={this.state.payPwd} onChange={(e) => this.setState({ payPwd: e.target.value })} />
+                            <Input style={{ flex: 1 }} type="password" autoComplete="new-password" value={this.state.payPwd} onChange={(e) => this.setState({ payPwd: e.target.value })} />
                         </div>
                         {this.getCap}
                     </div>
-                    <div style={{width: "50%"}}>
+                    <div style={{ width: "50%" }}>
                         <div className="form">
                             <label>{intl.get('ACCOUNT_59')}</label>
                             <Input style={{ flex: 1 }} value={this.state.gaCaptcha} onChange={(e) => this.setState({ gaCaptcha: e.target.value })} />
@@ -309,18 +297,18 @@ class Index extends Component {
                             <label>{intl.get('USER_86')}</label>
                             <Input disabled value={`${parseFloat(base.minFee)} ${coin}`} style={{ flex: 1, textAlign: 'right' }} />
                         </div>
-                        <div style={{textAlign: "center",color: "#E49C3A", marginTop: "20px"}}>
-                            <button style={{backgroundColor: "transparent"}} onClick={() => this.toggleValidType()}>{this.state.validByPhone?intl.get("USER_140"):intl.get("USER_141")}</button>
+                        <div style={{ textAlign: "center", color: "#E49C3A", marginTop: "20px" }}>
+                            <button style={{ backgroundColor: "transparent" }} onClick={() => this.toggleValidType()}>{this.state.validByPhone ? intl.get("USER_140") : intl.get("USER_141")}</button>
                         </div>
                         <Col span={24}>
                             <p className="submit"><a onClick={() => this.withdraw()}>{intl.get('USER_30')}</a></p>
                         </Col>
-                        <div className="warning" style={{marginLeft: '18px'}}>
-                            <p style={{color: "#575C62"}}>{intl.get('USER_64')}：</p>
+                        <div className="warning" style={{ marginLeft: '18px' }}>
+                            <p style={{ color: "#575C62" }}>{intl.get('USER_64')}：</p>
                             <p>
                                 <span>{intl.get('USER_87')}</span>
-                                <span style={{marginTop: "30px"}}>{intl.get('USER_88')}</span>
-                                <span style={{marginTop: "30px"}}>{intl.get('USER_89')}：{parseFloat(base.minWithdraw) || 0} {coin}</span>
+                                <span style={{ marginTop: "30px" }}>{intl.get('USER_88')}</span>
+                                <span style={{ marginTop: "30px" }}>{intl.get('USER_89')}：{parseFloat(base.minWithdraw) || 0} {coin}</span>
                                 <span>{intl.get('USER_48')}：{parseFloat(base.minFee) || 0} {coin}</span>
                                 <span>{intl.get('USER_90')}</span>
                                 <span>{intl.get('USER_91')}</span>
@@ -339,7 +327,7 @@ class Index extends Component {
             <div className="ope">
                 {this.renderHeader}
                 <Row gutter={30}>
-                    <div style={{width: "50%"}}>
+                    <div style={{ width: "50%" }}>
                         {this.renderType}
                         {this.renderCoin}
                         <div className="form">
@@ -349,9 +337,12 @@ class Index extends Component {
                         <div className="form" style={{ alignItems: 'flex-start' }}>
                             <label style={{ lineHeight: '32px' }}>{intl.get('USER_93')}</label>
                             <div style={{ flex: 1 }}>
-                                <Input style={{ flex: 1 }} value={this.state.amount} placeholder={"请输入转账数量"} onChange={(e) => {let val = e.target.value;
-                                    if(reg.regFloat(Number(val))){
-                                        this.setState({ amount: e.target.value })}}} />
+                                <Input style={{ flex: 1 }} value={this.state.amount} placeholder={"请输入转账数量"} onChange={(e) => {
+                                    let val = e.target.value;
+                                    if (reg.regFloat(Number(val))) {
+                                        this.setState({ amount: e.target.value })
+                                    }
+                                }} />
                                 <p style={{ margin: 0, paddingTop: '.06rem', display: 'flex', justifyContent: 'space-between', color: '#959FA9', fontSize: '.11rem' }}>
                                     <span>{intl.get('USER_121')}：{base.available || 0} {coin}</span>
                                     <a onClick={() => this.setState({ amount: String(base.available || 0) })}>{intl.get('USER_120')}</a>
@@ -364,14 +355,14 @@ class Index extends Component {
                         </div>
                         {this.getCap}
                     </div>
-                    <div style={{width: "50%", textAlign: "center",color: "#E49C3A", marginTop: "20px"}}>
-                        <button style={{backgroundColor: "transparent"}} onClick={() => this.toggleValidType()}>{this.state.validByPhone?"切换邮箱验证":"切换手机验证"}</button>
+                    <div style={{ width: "50%", textAlign: "center", color: "#E49C3A", marginTop: "20px" }}>
+                        <button style={{ backgroundColor: "transparent" }} onClick={() => this.toggleValidType()}>{this.state.validByPhone ? "切换邮箱验证" : "切换手机验证"}</button>
                     </div>
                     <Col span={24}>
-                        <p className="submit" style={{width: "50%"}}><a onClick={() => this.trans()}>{intl.get('USER_100')}</a></p>
+                        <p className="submit" style={{ width: "50%" }}><a onClick={() => this.trans()}>{intl.get('USER_100')}</a></p>
                     </Col>
-                    <div style={{width: "50%"}}>
-                        <div className="warning" style={{marginLeft: '18px'}}>
+                    <div style={{ width: "50%" }}>
+                        <div className="warning" style={{ marginLeft: '18px' }}>
                             <p className="title">{intl.get('USER_64')}：</p>
                             <p>
                                 <span>{intl.get('USER_97')}</span>

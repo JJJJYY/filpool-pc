@@ -12,7 +12,7 @@ const pre = 'rate';
 
 class Rate extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             data: [],
@@ -20,19 +20,19 @@ class Rate extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getGoodList();
         this.setRefresh();
         // this.getRatePrice();
     }
 
-    componentWillUnmount(){
-        if(this.refreshData){
+    componentWillUnmount() {
+        if (this.refreshData) {
             clearInterval(this.refreshData);
             this.refreshData = null;
         }
     }
-    
+
     // getRatePrice(){
     //     net.getRatePrice().then(res => {
     //         if(res.responseCode === '00'){
@@ -50,19 +50,19 @@ class Rate extends Component {
     //     })
     // }
 
-    getGoodList(){
+    getGoodList() {
         net.getGoodList().then(res => {
-            if(res.ret === 200){
-                if(res.data.length === 1){
+            if (res.ret === 200) {
+                if (res.data.length === 1) {
                     this.props.history.push(`/rate_detail/${res.data[0].id}/${res.data[0].minLimit}`)
                 }
-                this.setState({data: res.data})
+                this.setState({ data: res.data })
             }
         })
     }
 
-    setRefresh(){
-        if(this.refreshData) return;
+    setRefresh() {
+        if (this.refreshData) return;
         /*this.refreshData = setInterval(() => this.getGoodList(), 15000);*/
     }
 
@@ -73,39 +73,39 @@ class Rate extends Component {
             <div className={`${pre}`}>
                 {/*<div className={'bg'}></div>*/}
                 <div className={'content'}>
-                    <div style={{width: "1200px", position: "relative", margin: "auto"}}>
+                    <div style={{ width: "1200px", position: "relative", margin: "auto" }}>
                         <LazyLoad height={75}>
-                            <img src={require('@/images/home/count_picture_1.png')} style={{position: "absolute",right: "-150px", top: "100px"}} alt="" />
+                            <img src={require('@/images/home/count_picture_1.png')} style={{ position: "absolute", right: "-150px", top: "100px" }} alt="" />
                         </LazyLoad>
                         <LazyLoad height={75}>
-                            <img src={require('@/images/home/count_picture_2.png')} style={{position: "absolute",left: "-156px", top: "540px"}} alt="" />
+                            <img src={require('@/images/home/count_picture_2.png')} style={{ position: "absolute", left: "-156px", top: "540px" }} alt="" />
                         </LazyLoad>
                     </div>
                     {
-                        this.state.data.map((item,index) => {
-                            return (<Cell 
-                            key={index} 
-                            type={0}
-                            weightAsset={item.weightAsset}
-                            serviceChargeRate={item.serviceChargeRate} 
-                            contractDuration={item.contractDuration}
-                            contractName={item.contractName}
-                            highlight={currentLocale === 'en' ? item.enHighlight :item.highlight}
-                            name={currentLocale === 'en' ? item.enName : item.name}
-                            price={item.price}
-                            quantity={item.quantity ? item.quantity : 1}
-                            remainingQuantity={item.remainingQuantity}
-                            slogan={currentLocale === 'en' ? item.enSlogan :item.slogan}
-                            tag={currentLocale === 'en' ? item.enTag : item.tag}
-                            status={item.status}
-                            originalPrice={item.originalPrice}
-                            settlementPeriod={item.settlementPeriod}
-                            support={this.state.support}
-                            amount={item.minLimit}
-                            unit={item.unit}
-                            locale={currentLocale}
-                            checkDetail={(amount)=>{if(item.startTime > (new Date().getTime())) { message.info(intl.get('RATE_0'), 1, ()=>{}) } else { this.props.history.push(`/rate_detail/${item.id}/${amount}`) }}}
-                            onClick={(amount)=>{if(item.startTime > (new Date().getTime())) { message.info(intl.get('RATE_0'), 1, ()=>{}) } else { this.props.history.push(`/orderPay?id=${item.id}&amount=${amount}`) }}}
+                        this.state.data.map((item, index) => {
+                            return (<Cell
+                                key={index}
+                                type={0}
+                                weightAsset={item.weightAsset}
+                                serviceChargeRate={item.serviceChargeRate}
+                                contractDuration={item.contractDuration}
+                                contractName={item.contractName}
+                                highlight={currentLocale === 'en' ? item.enHighlight : item.highlight}
+                                name={currentLocale === 'en' ? item.enName : item.name}
+                                price={item.price}
+                                quantity={item.quantity}
+                                remainingQuantity={item.remainingQuantity}
+                                slogan={currentLocale === 'en' ? item.enSlogan : item.slogan}
+                                tag={currentLocale === 'en' ? item.enTag : item.tag}
+                                status={item.status}
+                                originalPrice={item.originalPrice}
+                                settlementPeriod={item.settlementPeriod}
+                                support={this.state.support}
+                                amount={item.minLimit}
+                                unit={item.unit}
+                                locale={currentLocale}
+                                checkDetail={(amount) => { if (item.startTime > (new Date().getTime())) { message.info(intl.get('RATE_0'), 1, () => { }) } else { this.props.history.push(`/rate_detail/${item.id}/${amount}`) } }}
+                                onClick={(amount) => { if (item.startTime > (new Date().getTime())) { message.info(intl.get('RATE_0'), 1, () => { }) } else { this.props.history.push(`/orderPay?id=${item.id}&amount=${amount}`) } }}
                             />)
                         })
                     }

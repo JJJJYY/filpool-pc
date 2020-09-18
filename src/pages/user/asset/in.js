@@ -29,13 +29,13 @@ export default class Index extends Component {
 
         delete coins.FIL;
 
-        this.setState({coins:coins});
+        this.setState({ coins: coins });
     }
 
     getAddress() {
         const { base } = this.state;
         net.getAssetAddress({
-            asset: base.asset, 
+            asset: base.asset,
             blockChain: base.blockChain,
         }).then(res => {
             if (res.ret == 200) {
@@ -49,7 +49,7 @@ export default class Index extends Component {
         let keys = [];
         for (let variable in coins) {
             if (coins[variable].deposit === 1) {
-                keys.push(variable);
+                keys.push(coins[variable]);
             }
         }
 
@@ -57,12 +57,12 @@ export default class Index extends Component {
             <div className="ope">
                 <Title onClick={this.props.history.goBack}>{intl.get('USER_29')}</Title>
                 <Row gutter={30}>
-                    <div style={{width: "50%"}}>
+                    <div style={{ width: "50%" }}>
                         <div className="form">
                             <label>{intl.get('USER_31')}</label>
                             <Select value={coin} onChange={(coin) => this.setState({ coin, base: coins[coin] }, () => this.getAddress())} style={{ flex: 1 }}>
                                 {keys.map((item) => (
-                                    <Option value={item} key={item}>{item}</Option>
+                                    <Option value={item.asset} key={item.asset}>{item.asset + (item.type ? '（' + item.type + '）' : '')}</Option>
                                 ))}
                             </Select>
                         </div>
@@ -84,14 +84,14 @@ export default class Index extends Component {
                             <QrCode value={this.state.address || 'loading'} />
                         </div>
                     </div>
-                    <div style={{width: "50%"}}>
+                    <div style={{ width: "50%" }}>
                         <div className="warning">
                             <p>{intl.get('USER_64')}：</p>
                             <p>
                                 <span>{intl.get('USER_72', { key1: coin })}</span>
                                 <span>{intl.get('USER_73', { key1: parseFloat(base.minDeposit), key2: coin })}</span>
                                 {/* <span>{intl.get('USER_74')}：{base.minFee} {coin}</span> */}
-                                <span style={{marginTop: "20px"}}>{intl.get('USER_75')}</span>
+                                <span style={{ marginTop: "20px" }}>{intl.get('USER_75')}</span>
                             </p>
                         </div>
                     </div>

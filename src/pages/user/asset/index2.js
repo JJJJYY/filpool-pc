@@ -5,7 +5,7 @@ import Detail from './detail';
 import intl from 'react-intl-universal';
 
 import net from '../../../net';
-import {Modal} from "antd";
+import { Modal } from "antd";
 import connect from "../../../store/connect";
 
 const images = {
@@ -35,10 +35,11 @@ class App extends Component {
 
                 let assetList = coins.map((item) => {
                     res0.data.forEach((item1) => {
-                      if (item.asset === item1.asset) {
-                          item.withdraw = item1.withdraw;
-                          item.deposit = item1.deposit;
-                      }
+                        if (item.asset === item1.asset) {
+                            item.withdraw = item1.withdraw;
+                            item.deposit = item1.deposit;
+                            item.type = item1.type;
+                        }
                     });
                     return item;
                 });
@@ -55,7 +56,7 @@ class App extends Component {
         Modal.warning({
             title: "请先绑定资金密码",
             okText: "去设置",
-            cancelText:"取消",
+            cancelText: "取消",
             onOk() {
                 history.push('/user/account');
             },
@@ -70,21 +71,23 @@ class App extends Component {
             <ul className="assets">
                 {this.state.coins.map(item => (
                     <li key={String(item.asset)}>
-                        <img src={images[item.asset]} alt="" style={{width: "40px", height: "40px"}} />
+                        <img src={images[item.asset]} alt="" style={{ width: "40px", height: "40px" }} />
                         <div className="asset-detail">
-                            <h5>{item.asset}</h5>
+                            <h5>{item.asset}{item.type ? '（' + item.type + '）' : ''}</h5>
                             {/*<span>{intl.get('USER_27')}：</span><span style={{color: "#E49C3A"}}>{item.available}  {item.asset}</span>*/}
                             <span>{intl.get('USER_27')}：</span><span>{parseFloat(item.available)}  {item.asset}</span>
                         </div>
                         <span className="asset-ope">
                             {/*{item.asset === 'FILP' && (<span onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=exchange&coin=${item.asset}`) : this.bindPwd()
                             }}>{intl.get('USER_28')}</span>)}*/}
-                            {<button disabled={item.deposit !==1} onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=in&coin=${item.asset}`)
-                                : this.bindPwd()
+                            {<button disabled={item.deposit !== 1} onClick={() => {
+                                userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=in&coin=${item.asset}`)
+                                    : this.bindPwd()
                             }}>{intl.get('USER_29')}</button>}
-                            {<button disabled={item.withdraw !==1} onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=out&coin=${item.asset}`)
-                                : this.bindPwd()
-                            } }>{intl.get('USER_30')}</button>}
+                            {<button disabled={item.withdraw !== 1} onClick={() => {
+                                userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=out&coin=${item.asset}`)
+                                    : this.bindPwd()
+                            }}>{intl.get('USER_30')}</button>}
                             {/*{item.asset === "FIL" ? <span>{intl.get('USER_29')}</span> : <span onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=in&coin=${item.asset}`)
                                 : this.bindPwd()
                             }}>{intl.get('USER_29')}</span>}

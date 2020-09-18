@@ -17,7 +17,7 @@ class Rate extends Component {
             details: [],
             tab: 0,
         };
-        this.typeAry = [1,2,3,4,5,6,7,8,9];
+        this.typeAry = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     }
 
     componentDidMount() {
@@ -61,11 +61,11 @@ class Rate extends Component {
         return (<Table columns={columns} data={this.state.details} />);
     }
 
-    getTable1 () {
+    getTable1() {
         return [
             {
                 th: intl.get('ACCOUNT_90'),
-                style:{
+                style: {
                     width: '208px'
                 },
                 td: 'relatedName',
@@ -73,7 +73,7 @@ class Rate extends Component {
             {
                 th: intl.get('RATE_15'),
                 td: 'price',
-                render: (text, obj) => text?`${parseFloat(text)} ${obj.asset}/${obj.unit}`:'',
+                render: (text, obj) => text ? `${parseFloat(text)} ${obj.asset}/${obj.unit}` : '',
             },
             {
                 th: intl.get('RATE_109'),
@@ -81,17 +81,17 @@ class Rate extends Component {
                 style: {
                     width: "120px"
                 },
-                render: (text, obj) => text?`${parseFloat(text)} ${obj.unit}`:'',
+                render: (text, obj) => text ? `${parseFloat(text)} ${obj.unit}` : '',
             },
             {
                 th: intl.get('USER_16'),
                 td: 'paymentQuantity',
-                render: (text, obj) => text?`${parseFloat(text)} ${obj.asset}`:'',
+                render: (text, obj) => text ? `${parseFloat(text)} ${obj.asset}` : '',
             },
             {
                 th: intl.get('RATE_110'),
                 td: 'createTime',
-                style:{
+                style: {
                     width: '188px'
                 },
                 render: text => text,
@@ -111,12 +111,12 @@ class Rate extends Component {
             // }
         ];
     }
-    getTable3 () {
+    getTable3() {
         return [
             {
                 th: intl.get('RATE_109'),
                 td: 'quantity',
-                render: (text, obj) => text?`${parseFloat(text)} ${obj.unit}`:'',
+                render: (text, obj) => text ? `${parseFloat(text)} ${obj.unit}` : '',
             },
             {
                 th: intl.get('RATE_110'),
@@ -138,7 +138,7 @@ class Rate extends Component {
             // }
         ];
     }
-    getTable4 () {
+    getTable4() {
         return [
             {
                 th: intl.get('ACCOUNT_90'),
@@ -157,7 +157,7 @@ class Rate extends Component {
                 style: {
                     width: "120px"
                 },
-                render: (text, obj) => text?`${parseFloat(text)} ${obj.unit}`:'',
+                render: (text, obj) => text ? `${parseFloat(text)} ${obj.unit}` : '',
             },
             {
                 th: intl.get('RATE_110'),
@@ -173,7 +173,7 @@ class Rate extends Component {
                 style: {
                     width: "140px"
                 },
-                render: text => `${this.typeAry.includes(text)?intl.get("ACCOUNT_RATE_" + text):intl.get("ACCOUNT_RATE_9")}`,
+                render: text => `${this.typeAry.includes(text) ? intl.get("ACCOUNT_RATE_" + text) : intl.get("ACCOUNT_RATE_9")}`,
             },
             // {
             //     th: intl.get('RATE_111'),
@@ -186,7 +186,7 @@ class Rate extends Component {
         ];
     }
     /*获取详情*/
-    getDetailList (item) {
+    getDetailList(item) {
         net.getMyWeight({
             type: item.type,
         }).then((res) => {
@@ -237,10 +237,10 @@ class Rate extends Component {
                                     weights.map((item, index) => {
                                         return (
                                             <tr className={styles.tr}>
-                                                <td className={styles.td}>{this.typeAry.includes(item.type)?intl.get(`ACCOUNT_RATE_${item.type}`):intl.get("ACCOUNT_RATE_9")}</td>
-                                                <td className={styles.td}>{parseFloat(item.quantity)} TB</td>
+                                                <td className={styles.td}>{this.typeAry.includes(item.type) ? intl.get(`ACCOUNT_RATE_${item.type}`) : intl.get("ACCOUNT_RATE_9")}</td>
+                                                <td className={styles.td}>{parseFloat(item.quantity)} {item.unit}</td>
                                                 <td className={styles.td}>
-                                                    <button className={styles.handleBtn} onClick={() => {this.getDetailList(item)}}>{intl.get("RATE_108")}</button>
+                                                    <button className={styles.handleBtn} onClick={() => { this.getDetailList(item) }}>{intl.get("RATE_108")}</button>
                                                 </td>
                                             </tr>
                                         )
@@ -251,7 +251,7 @@ class Rate extends Component {
                     )}
                     {tab === 1 && (
                         <div className="sub-font-color ft-16 ft-c mt-50" style={{ lineHeight: '0.2rem' }}>
-                            <div style={{display: 'inline-block', textAlign: 'left'}}>
+                            <div style={{ display: 'inline-block', textAlign: 'left' }}>
                                 {intl.get('ACCOUNT_101')}
                                 <br />
                                 {intl.get('ACCOUNT_102')}

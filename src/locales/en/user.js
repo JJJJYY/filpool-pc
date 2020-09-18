@@ -132,6 +132,7 @@ export default {
     USER_129: "Real-name authentication has been submitted",
     USER_130: "Real Name Authentication",
     USER_131: "Please upload a clear ID photo, you must be able to see the ID number and name; only supports PNG, JPG, JPEG format, each size is limited to 2M",
+    USER_1311: "Real Name Pass",
     USER_132: "Country and Region",
     USER_133: "Name",
     USER_134: "Please enter your name",
