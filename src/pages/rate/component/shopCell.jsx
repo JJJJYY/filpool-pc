@@ -121,7 +121,7 @@ export default class Cell extends Component {
                                 {this.renderText(intl.get('RATE_51'), (this.props.serviceChargeRate * 100).toFixed(2) + '%', true, intl.get('RATE_53'), true, { width: "4rem" })}
                             </div>
                             <div className={'flex-row mt-30'}>
-                                {this.renderText(intl.get('RATE_511'), <Progress strokeColor='#E49C3A' percent={(this.props.quantity - this.props.remainingQuantity) / this.props.quantity * 100} status="active" />, false, false, true, { width: "3.2rem" })}
+                                {this.renderText(intl.get('RATE_511'), <Progress strokeColor='#E49C3A' percent={((this.props.quantity - this.props.remainingQuantity) / this.props.quantity * 100).toFixed(2)} status="active" />, false, false, true, { width: "3.2rem" })}
                             </div>
                             {
                                 /*this.props.status === 3 ?

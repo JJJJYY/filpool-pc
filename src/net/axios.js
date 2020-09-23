@@ -10,8 +10,9 @@ const fetchData = (response, resolve, reject) => {
         if (json.ret == 401) {
             if (response.config.url != '/public/?s=AuthUser.Info') {
                 window.location.href = `/#/login`;
+                localStorage.removeItem('token')
             }
-            
+
         } else {
             message.error(errortext);
         }
@@ -19,6 +20,9 @@ const fetchData = (response, resolve, reject) => {
         error.name = json.ret;
         error.response = response;
         reject(error);
+    }
+    if (response.headers.token) {
+        localStorage.setItem('token', response.headers.token);
     }
     resolve(json);
 }
@@ -30,6 +34,7 @@ const doGetFetch = url => new Promise((resolve, reject) => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             language: 0,
+            'token': localStorage.getItem('token'),
         },
     })
         .then(response => {
@@ -46,13 +51,13 @@ const doPostFetch = (url, jsondata) => new Promise((resolve, reject) => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             language: 0,
-            token: "123456"
+            'token': localStorage.getItem('token'),
         },
         data: jsondata,
     })
-    .then(response => {
-        fetchData(response, resolve, reject)
-    })
+        .then(response => {
+            fetchData(response, resolve, reject)
+        })
         // .then(res => resolve(res))
         .catch(err => reject(err));
 });
