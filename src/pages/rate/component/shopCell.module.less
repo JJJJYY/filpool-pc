@@ -1,40 +1,54 @@
-.rateCell{
+:global {
+    .ant-progress-inner {
+        .ant-progress-bg {
+            height: 15px !important;
+            background-color: transparent;
+            background-image: url(../../../images/progress/Progress.png);
+        }
+    }
+}
+
+.rateCell {
     padding-top: 24px;
     box-sizing: border-box;
     position: relative;
-    &.notAllow{
+
+    &.notAllow {
         filter: grayscale(1);
     }
 }
-.numberBox{
+
+.numberBox {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     margin-top: 34px;
     margin-bottom: 56px;
     padding-left: 46px;
-    .unit{
+
+    .unit {
         font-size: 22px;
         color: #86929D;
         margin-left: 16px;
     }
 }
-.flexRowCenter{
 
-}
-.rateCellContent{
+.flexRowCenter {}
+
+.rateCellContent {
     border-right: 1px solid #ddd;
     padding-top: 46px;
     padding-bottom: 30px;
 }
-.contentItemImg{
+
+.contentItemImg {
     width: 186px;
     position: absolute;
     bottom: -60px;
     right: 0;
 }
 
-.maxTitle{
+.maxTitle {
     max-width: 280px;
     white-space: nowrap;
     overflow: hidden;

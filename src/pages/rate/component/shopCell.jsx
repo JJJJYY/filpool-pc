@@ -200,7 +200,6 @@ export default class Cell extends Component {
                 {this.renderText(
                   intl.get("RATE_511"),
                   <Progress
-                    strokeColor="#E49C3A"
                     percent={Number(
                       (
                         ((this.props.quantity - this.props.remainingQuantity) /
