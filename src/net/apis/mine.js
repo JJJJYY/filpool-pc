@@ -78,7 +78,7 @@ export default {
     getInfoList: (data) => post(`AdvertisementInfo.List`, data),
     //获取项目动态和进阶小课堂
     getInforDetail: (id) => get(`AdvertisementInfo.Detail`, { id, id }),
-    
+
     //帮助中心
     getHelpDetail: (id) => get(`HelpInfo.Detail`, { id, id }),
     getHelpLists: (data) => post(`HelpInfo.List`, data),
@@ -101,6 +101,9 @@ export default {
     // 算力明细
     getMyWeight: (data) => get('Weight.MyWeight', data),
     getMyWeightApp: (data) => get('Weight.MyWeightGroup', data),
+
+    // 收益
+    getMyIncome: (data) => get('Income.UserIncome', data),
 
     // 查看分销详情
     getWeightDetail: () => get('AuthUser.DistributionDetail'),

@@ -15,9 +15,11 @@ class Rate extends Component {
             myWeight: {},
             weights: [],
             details: [],
+            incomes: [],
             tab: 0,
         };
         this.typeAry = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        this.incomeTypeAry = [1, 2];
     }
 
     componentDidMount() {
@@ -35,6 +37,17 @@ class Rate extends Component {
             if (res.ret === 200) {
                 this.setState({
                     weights: res.data
+                });
+            }
+        });
+
+        net.getMyIncome({
+            page: 1,
+            count: 100,
+        }).then((res) => {
+            if (res.ret === 200) {
+                this.setState({
+                    incomes: res.data
                 });
             }
         });
@@ -200,7 +213,7 @@ class Rate extends Component {
     }
 
     render() {
-        const { tab, myWeight, details, weights } = this.state;
+        const { tab, myWeight, details, weights, incomes } = this.state;
         return (
             <div className="account">
                 <div className="item" style={{ marginBottom: '.1rem' }}>
@@ -250,15 +263,23 @@ class Rate extends Component {
                         </table>
                     )}
                     {tab === 1 && (
-                        <div className="sub-font-color ft-16 ft-c mt-50" style={{ lineHeight: '0.2rem' }}>
-                            <div style={{ display: 'inline-block', textAlign: 'left' }}>
-                                {intl.get('ACCOUNT_101')}
-                                <br />
-                                {intl.get('ACCOUNT_102')}
-                                <br />
-                                {intl.get('ACCOUNT_103')}
-                            </div>
-                        </div>
+                        <table className={styles.mTable}>
+                            <tbody>
+                                {
+                                    incomes.map((item, index) => {
+                                        return (
+                                            <tr className={styles.tr}>
+                                                <td className={styles.td}>{this.incomeTypeAry.includes(item.type) ? intl.get(`ACCOUNT_INCOME_${item.type}`) : intl.get("ACCOUNT_RATE_9")}</td>
+                                                <td className={styles.td}>{parseFloat(item.quantity)} {item.asset}</td>
+                                                <td className={styles.td}>
+                                                    {item.createTime}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
                     )}
                     {tab === 2 && (
                         this.renderDetail()

@@ -75,7 +75,7 @@ class App extends Component {
                         <div className="asset-detail">
                             <h5>{item.asset}{item.type ? '（' + item.type + '）' : ''}</h5>
                             {/*<span>{intl.get('USER_27')}：</span><span style={{color: "#E49C3A"}}>{item.available}  {item.asset}</span>*/}
-                            <span>{intl.get('USER_27')}：</span><span>{parseFloat(item.available)}  {item.asset}</span>
+                            <span>{intl.get('USER_27')}：</span><span>{parseFloat(item.available) + parseFloat(item.frozen)}  {item.asset}</span>
                         </div>
                         <span className="asset-ope">
                             {/*{item.asset === 'FILP' && (<span onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=exchange&coin=${item.asset}`) : this.bindPwd()
