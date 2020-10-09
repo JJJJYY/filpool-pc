@@ -173,6 +173,6 @@
     ACCOUNT_162: 'Information Center',
     ACCOUNT_163: 'Buyer',
     ACCOUNT_164: 'No',
-    ACCOUNT_INCOME_1: 'Reward',
+    ACCOUNT_INCOME_1: 'SR1Reward',
     ACCOUNT_INCOME_2: 'Income',
 };

@@ -174,6 +174,6 @@
     ACCOUNT_162: '資訊中心',
     ACCOUNT_163: '購買人',
     ACCOUNT_164: '暫無',
-    ACCOUNT_INCOME_1: '獎勵',
+    ACCOUNT_INCOME_1: 'SR1獎勵',
     ACCOUNT_INCOME_2: '挖礦收益',
 };

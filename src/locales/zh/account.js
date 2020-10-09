@@ -174,6 +174,6 @@ export default {
     ACCOUNT_162: '资讯中心',
     ACCOUNT_163: '购买人',
     ACCOUNT_164: '暂无',
-    ACCOUNT_INCOME_1: '奖励',
+    ACCOUNT_INCOME_1: 'SR1奖励',
     ACCOUNT_INCOME_2: '挖矿收益',
 };
