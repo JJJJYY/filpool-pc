@@ -72,53 +72,6 @@ class RateDetail extends Component {
         }
     }
 
-    buildPreviewHtml(body) {
-        return `
-        <!Doctype html>
-        <html>
-          <head>
-            <title>Preview Content</title>
-            <style>
-              html,body{
-                height: 100%;
-                margin: 0;
-                padding: 0;
-                overflow: auto;
-              }
-              .container{
-                box-sizing: border-box;
-                width: 1000px;
-                max-width: 100%;
-                min-height: 100%;
-                padding: 30px 20px;
-                overflow: hidden;
-                background-color: #fff;
-                line-height: .2rem;
-              }
-              .container img,
-              .container audio,
-              .container video{
-                max-width: 100%;
-                height: auto;
-              }
-              .container p{
-                white-space: pre-wrap;
-                min-height: 1em;
-              }
-              .container pre{
-                padding: 15px;
-                background-color: #f1f1f1;
-                border-radius: 5px;
-              }
-            </style>
-          </head>
-          <body>
-            <div class="container">${body}</div>
-          </body>
-        </html>
-      `
-    }
-
     getGoodDetail(id) {
         net.getGoodDetail(id).then(res => {
             if (res.ret === 200) {
@@ -292,7 +245,7 @@ class RateDetail extends Component {
                                 <MenuItem content={intl.get('RATE_5')} selected={this.state.tab === 2 ? true : false} onClick={() => {this.selectTab(2)}}/>
                             </div>*/}
                         <div className={styles.detailLabel}>{intl.get('RATE_4')}</div>
-                        <div dangerouslySetInnerHTML={{ __html: this.buildPreviewHtml(this.state.contractDetails) }}></div>
+                        <div className={styles.container} dangerouslySetInnerHTML={{ __html: this.state.contractDetails }}></div>
                         {/*{
                             this.state.tab === 0 ?
                             <div className={'product-detail'} dangerouslySetInnerHTML={{__html: this.state.features}}></div>
