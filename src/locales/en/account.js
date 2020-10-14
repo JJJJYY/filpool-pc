@@ -156,6 +156,7 @@
     ACCOUNT_154: '1. Go to the Google Authenticator app on your phone, please scan the QR code below with your phone to download Google Authenticator',
     ACCOUNT_155: '2. If you are unable to scan the QR code, please search Google Verifier in the major app stores or use your mobile browser to search for "Google Verifier" to download the app',
     ACCOUNT_156: 'Total computing power',
+    ACCOUNT_200: 'Effective computing power',
     ACCOUNT_157: 'Direct',
     ACCOUNT_158: 'Indirect',
     ACCOUNT_RATE_1: 'Mining Machine Rental',

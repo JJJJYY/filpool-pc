@@ -156,6 +156,7 @@ export default {
     ACCOUNT_154: '1、在手机上下谷款验证器（Google Authenticator) APP，请用手机直接扫描下方二维码下载谷歌验证器',
     ACCOUNT_155: '2、如果您无法扫描二维码，请直接在各大应用商店或使用手机浏览器搜索谷歌验证器搜索“谷歌验证器”下载 App',
     ACCOUNT_156: '总算力',
+    ACCOUNT_200: '有效算力',
     ACCOUNT_157: '直接',
     ACCOUNT_158: '间接',
     ACCOUNT_RATE_1: '矿机租赁',

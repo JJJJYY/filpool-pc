@@ -156,6 +156,7 @@
     ACCOUNT_154: '1、在手機上下谷款驗證器（Google Authenticator) APP，請用手機直接掃描下方二維碼下載谷歌驗證器',
     ACCOUNT_155: '2、如果您無法掃描二維碼，請直接在各大應用商店或使用手機瀏覽器搜索谷歌驗證器搜索“谷歌驗證器”下載 App',
     ACCOUNT_156: '總算力',
+    ACCOUNT_200: '有效算力',
     ACCOUNT_157: '直接',
     ACCOUNT_158: '間接',
     ACCOUNT_RATE_1: '礦機租賃',

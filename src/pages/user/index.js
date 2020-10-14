@@ -6,7 +6,7 @@ import intl from 'react-intl-universal';
 import Foot from '@/pages/footer/index';
 import net from "@/net/index";
 import './index.less';
-import  styles from './index.module.less';
+import styles from './index.module.less';
 
 //import Animate from './animate';
 
@@ -122,7 +122,7 @@ class App extends Component {
                 <a
                     onClick={() => this.props.history.push(path)}
                     className={active ? 'active' : ''}>
-                    <img src={active ? imgs[`${tab}s`] : imgs[tab]} alt="" style={{height: "auto"}} />
+                    <img src={active ? imgs[`${tab}s`] : imgs[tab]} alt="" style={{ height: "auto" }} />
                     <span>{text}</span>
                 </a>
             </li>
@@ -134,13 +134,13 @@ class App extends Component {
         return (
             <div className="user">
                 <div>
-                    <div className="user-content" style={{minHeight: "auto", paddingBottom: "0"}}>
+                    <div className="user-content" style={{ minHeight: "auto", paddingBottom: "0" }}>
                         <div className={styles.bannerBox}>
                             <div className={styles.middleBox}>
                                 {/*<span className={`iconfont ${styles.icon}`}>&#xe62c;</span>*/}
-                                <img src={require("@/images/common/logo.png")} style={{width: "56px",marginRight: "22px"}} alt="" />
+                                <img src={require("@/images/common/logo.png")} style={{ width: "56px", marginRight: "22px" }} alt="" />
                                 <div>
-                                    <div style={{marginBottom: "8px"}}>
+                                    <div style={{ marginBottom: "8px" }}>
                                         <span className={styles.bold}>{this.props.redux.userInfo.nickname}</span>
                                         <span className={styles.label}>{this.renderLevelItem(this.props.redux.userInfo.level)}</span>
                                     </div>
@@ -157,13 +157,14 @@ class App extends Component {
                     </div>*/}
                         <div className={`${styles.userHeader}`}>
                             <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight.totalWeight} TB</span>
-                            <Link className={styles.label} to={{pathname: '/rate'}}>
+                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{myWeight.validWeight} TB</span>
+                            <Link className={styles.label} to={{ pathname: '/rate' }}>
                                 <span className={styles.label}>{intl.get("USER_122")}</span>
                             </Link>
                         </div>
                     </div>
-                    <div style={{width: "1200px", margin: '0 auto 60px'}}>
-                        <div className="user-main" style={{width: "calc(100% + 158px)", transform: "translateX(-158px)"}}>
+                    <div style={{ width: "1200px", margin: '0 auto 60px' }}>
+                        <div className="user-main" style={{ width: "calc(100% + 158px)", transform: "translateX(-158px)" }}>
                             <div className="user-side-tab">
                                 <ul>
                                     {this.renderItem('/user/asset/index2', intl.get('USER_5'), 'tab5')}
