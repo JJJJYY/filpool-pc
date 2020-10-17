@@ -35,7 +35,7 @@ class Index extends Component {
 
         let coins = this.props.coins;
 
-        delete coins.FIL;
+        // delete coins.FIL;
 
         this.setState({ coins });
     }
@@ -256,6 +256,7 @@ class Index extends Component {
     get renderWithdraw() {
         const { coin } = this.state;
         const base = { ...this.props.coins[coin] };
+
         return (
             <div className="ope">
                 {this.renderHeader}
