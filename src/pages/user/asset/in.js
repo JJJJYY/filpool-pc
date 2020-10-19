@@ -27,7 +27,7 @@ export default class Index extends Component {
 
         let coins = this.props.coins;
 
-        delete coins.FIL;
+        // delete coins.FIL;
 
         this.setState({ coins: coins });
     }
@@ -69,7 +69,7 @@ export default class Index extends Component {
                         <div className="form">
                             <label>{intl.get('USER_68')}</label>
                             <p style={{ margin: 0, color: '#24375E', fontSize: '.14rem', display: 'flex', alignItems: 'center' }}>
-                                {this.state.address}
+                                <span style={{ maxWidth: '438px', overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{this.state.address}</span>
                                 <CopyToClipboard text={this.state.address} onCopy={() => message.info(intl.get('USER_69'))}>
                                     <Icon type="copy" style={{ marginLeft: '.1rem', color: '#959FA9', fontSize: '.14rem' }} />
                                 </CopyToClipboard>
