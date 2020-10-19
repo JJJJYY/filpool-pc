@@ -176,4 +176,5 @@
     ACCOUNT_164: 'No',
     ACCOUNT_INCOME_1: 'SR1Reward',
     ACCOUNT_INCOME_2: 'Income',
+    ACCOUNT_INCOME_3: 'Gift income',
 };

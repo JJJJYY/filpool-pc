@@ -144,8 +144,7 @@ class Rate extends Component {
         th: intl.get("USER_32"),
         td: "type",
         render: (text, obj) =>
-          `${intl.get("ACCOUNT_RATE_" + text)} ${
-            obj.serviceChargeRate == 0.2 ? "N" : "B"
+          `${intl.get("ACCOUNT_RATE_" + text)} ${obj.serviceChargeRate == 0.2 ? "N" : "B"
           }`,
       },
       // {
@@ -221,10 +220,9 @@ class Rate extends Component {
           width: "140px",
         },
         render: (text) =>
-          `${
-            this.typeAry.includes(text)
-              ? intl.get("ACCOUNT_RATE_" + text)
-              : intl.get("ACCOUNT_RATE_9")
+          `${this.typeAry.includes(text)
+            ? intl.get("ACCOUNT_RATE_" + text)
+            : intl.get("ACCOUNT_RATE_9")
           }`,
       },
       // {
