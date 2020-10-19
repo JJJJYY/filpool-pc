@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
-import { Row, Col, Select, Icon, Input, message } from 'antd';
+import { Row, Col, Select, Icon, Input, message, Modal } from 'antd';
 import md5 from 'md5';
 import intl from 'react-intl-universal';
 import connect from '@/store/connect';
@@ -137,21 +137,46 @@ class Index extends Component {
         if (!address || !amount || !phoneCaptcha || !gaCaptcha || !payPwd) {
             return message.error(intl.get('USER_114'));
         }
-
-        net.postAssetWithdrawal({
-            assetId: base.id,
-            address,
-            amount,
-            payPwd: md5(payPwd),
-            captcha: phoneCaptcha,
-            gaCaptcha,
-            type: validByPhone ? 'phone' : 'email',
-        }).then(res => {
-            if (res.ret === 200) {
-                message.success(intl.get('USER_77'));
-                this.props.history.go(-1);
-            }
-        })
+        if (parseInt(amount) >= parseInt(base.maxWithdraw)) {
+            const that = this.props;
+            Modal.confirm({
+                content: '为确保资金安全，请联系客服核查！',
+                onOk() {
+                    net.postAssetWithdrawal({
+                        assetId: base.id,
+                        address,
+                        amount,
+                        payPwd: md5(payPwd),
+                        captcha: phoneCaptcha,
+                        gaCaptcha,
+                        type: validByPhone ? 'phone' : 'email',
+                    }).then(res => {
+                        if (res.ret === 200) {
+                            message.success(intl.get('USER_77'));
+                            that.history.go(-1);
+                        }
+                    })
+                },
+                onCancel() {
+                    console.log('Cancel');
+                },
+            });
+        } else {
+            net.postAssetWithdrawal({
+                assetId: base.id,
+                address,
+                amount,
+                payPwd: md5(payPwd),
+                captcha: phoneCaptcha,
+                gaCaptcha,
+                type: validByPhone ? 'phone' : 'email',
+            }).then(res => {
+                if (res.ret === 200) {
+                    message.success(intl.get('USER_77'));
+                    this.props.history.go(-1);
+                }
+            })
+        }
     }
 
     // 转账
