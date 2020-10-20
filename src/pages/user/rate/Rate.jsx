@@ -25,7 +25,6 @@ class Rate extends Component {
 
   componentDidMount() {
 
-    console.log(parseFloatData)
     net
       .getMyWeight({
         type: 0,
@@ -294,7 +293,7 @@ class Rate extends Component {
                             : intl.get("ACCOUNT_RATE_9")}
                         </td>
                         <td className={styles.td}>
-                          {parseFloatData(item.quantity)} {item.unit}
+                          {parseFloatData(item.quantity)}
                         </td>
                         <td className={styles.td}>
                           <button
@@ -325,7 +324,7 @@ class Rate extends Component {
                             : intl.get("ACCOUNT_RATE_9")}
                         </td>
                         <td className={styles.td}>
-                          {parseFloatData(item.quantity)} {item.asset}
+                          {parseFloatData(item.quantity)} {item.asset} <span style={{ color: '#e17055', fontSize: '12px' }}>(已扣除服务费)</span>
                         </td>
                         <td className={styles.td}>
                           {this.dateFtt(
