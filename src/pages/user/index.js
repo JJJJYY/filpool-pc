@@ -157,7 +157,7 @@ class App extends Component {
                     </div>*/}
                         <div className={`${styles.userHeader}`}>
                             <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight.totalWeight} TB</span>
-                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{myWeight.validWeight} TB</span>
+                            {/* <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{myWeight.validWeight} TB</span> */}
                             <Link className={styles.label} to={{ pathname: '/rate' }}>
                                 <span className={styles.label}>{intl.get("USER_122")}</span>
                             </Link>
