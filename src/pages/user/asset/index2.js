@@ -7,6 +7,7 @@ import parseFloatData from '@/util/parseFloatData'
 import net from '../../../net';
 import { Modal } from "antd";
 import connect from "../../../store/connect";
+import { Decimal } from "decimal.js";
 
 const images = {
     FILP: require('../images/coin-filp.png'),
@@ -48,7 +49,9 @@ class App extends Component {
             }
         });
     }
-
+    DecimalData(a, b) {
+        return parseFloatData(Decimal.add(a, b));
+    }
     bindPwd() {
 
         const { history } = this.props;
@@ -75,7 +78,9 @@ class App extends Component {
                         <div className="asset-detail">
                             <h5>{item.asset}{item.type ? '（' + item.type + '）' : ''}</h5>
                             {/*<span>{intl.get('USER_27')}：</span><span style={{color: "#E49C3A"}}>{item.available}  {item.asset}</span>*/}
-                            <span>{intl.get('USER_27')}：</span><span>{parseFloatData(item.available) + parseFloatData(item.frozen)}  {item.asset}</span>
+                            <span>{intl.get('USER_27')}：</span><span>{this.DecimalData(item.available, item.frozen)}  {item.asset}</span>
+                            <span style={{ marginLeft: 40, }}>{intl.get('USER_1027')}：</span><span>{parseFloatData(item.available)}  {item.asset}</span>
+                            <span style={{ marginLeft: 40, }}>{intl.get('USER_1028')}：</span><span>{parseFloatData(item.frozen)}  {item.asset}</span>
                         </div>
                         <span className="asset-ope">
                             {/*{item.asset === 'FILP' && (<span onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=exchange&coin=${item.asset}`) : this.bindPwd()

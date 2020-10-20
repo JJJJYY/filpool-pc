@@ -26,6 +26,8 @@ export default {
     USER_25: "已取消",
     USER_26: "已超時",
     USER_27: "餘額",
+    USER_1027: "可用",
+    USER_1028: "凍結餘額",
     USER_28: "兌換",
     USER_29: "充值",
     USER_30: "提現",

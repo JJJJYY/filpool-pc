@@ -26,6 +26,8 @@ export default {
     USER_25: "Cancelled",
     USER_26: "Timed out",
     USER_27: "Balance",
+    USER_1027: "Available",
+    USER_1028: "Frozen balance",
     USER_28: "Exchange",
     USER_29: "Recharge",
     USER_30: "Withdrawal",
