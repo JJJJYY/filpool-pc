@@ -3,7 +3,7 @@ import moment from 'moment';
 import Table from '../table';
 import styles from '../table.module.less';
 import intl from 'react-intl-universal';
-
+import parseFloatData from '@/util/parseFloatData'
 import net from '../../../net';
 
 export default class Index extends Component {
@@ -62,36 +62,36 @@ export default class Index extends Component {
         const columns = [
             {
                 th: intl.get('USER_11'),
-                style: {width: "210px"},
+                style: { width: "210px" },
                 td: 'relatedName',
             },
             {
                 th: intl.get('USER_12'),
-                style: {width: "230px"},
+                style: { width: "230px" },
                 td: 'pid',
             },
             {
                 th: intl.get('USER_13'),
-                style: {width: "180px"},
+                style: { width: "180px" },
                 td: 'createTime',
                 render: (v) => v
             },
             {
                 th: intl.get('USER_14'),
                 td: 'price',
-                render: (v, row) => `${v} ${row.asset === 'UNKNOWN' ? 'USDT' : row.asset}/${row.unit}`,
+                render: (v, row) => `${parseFloatData(v)} ${row.asset === 'UNKNOWN' ? 'USDT' : row.asset}/${row.unit}`,
             },
             {
                 th: intl.get('USER_15'),
                 textAlign: "center",
                 td: 'quantity',
-                render: (v,row) => `${parseFloat(v)} ${row.unit}`,
+                render: (v, row) => `${parseFloatData(v)} ${row.unit}`,
             },
             {
                 th: intl.get('USER_16'),
                 textAlign: "center",
                 td: 'paymentQuantity',
-                render: (v, row) => `${parseFloat(v)} ${row.asset === 'UNKNOWN' ? 'USDT' : row.asset}`,
+                render: (v, row) => `${parseFloatData(v)} ${row.asset === 'UNKNOWN' ? 'USDT' : row.asset}`,
             },
             {
                 th: intl.get('USER_17'),
@@ -113,7 +113,7 @@ export default class Index extends Component {
             },
             {
                 th: intl.get('USER_19'),
-                style: {width: "90px"},
+                style: { width: "90px" },
                 textAlign: "center",
                 render: (key, row) => {
                     if (String(row.status) === '0') {

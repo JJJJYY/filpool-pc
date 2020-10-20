@@ -6,6 +6,7 @@ import moment from "moment";
 import net from "../../../net";
 import Table from "../table";
 import connect from "@/store/connect";
+import parseFloatData from '@/util/parseFloatData'
 
 class Rate extends Component {
   constructor(props) {
@@ -23,6 +24,8 @@ class Rate extends Component {
   }
 
   componentDidMount() {
+
+    console.log(parseFloatData)
     net
       .getMyWeight({
         type: 0,
@@ -117,7 +120,7 @@ class Rate extends Component {
         th: intl.get("RATE_15"),
         td: "price",
         render: (text, obj) =>
-          text ? `${parseFloat(text)} ${obj.asset}/${obj.unit}` : "",
+          text ? `${parseFloatData(text)} ${obj.asset}/${obj.unit}` : "",
       },
       {
         th: intl.get("RATE_109"),
@@ -125,12 +128,12 @@ class Rate extends Component {
         style: {
           width: "120px",
         },
-        render: (text, obj) => (text ? `${parseFloat(text)} ${obj.unit}` : ""),
+        render: (text, obj) => (text ? `${parseFloatData(text)} ${obj.unit}` : ""),
       },
       {
         th: intl.get("USER_16"),
         td: "paymentQuantity",
-        render: (text, obj) => (text ? `${parseFloat(text)} ${obj.asset}` : ""),
+        render: (text, obj) => (text ? `${parseFloatData(text)} ${obj.asset}` : ""),
       },
       {
         th: intl.get("RATE_110"),
@@ -162,7 +165,7 @@ class Rate extends Component {
       {
         th: intl.get("RATE_109"),
         td: "quantity",
-        render: (text, obj) => (text ? `${parseFloat(text)} ${obj.unit}` : ""),
+        render: (text, obj) => (text ? `${parseFloatData(text)} ${obj.unit}` : ""),
       },
       {
         th: intl.get("RATE_110"),
@@ -203,7 +206,7 @@ class Rate extends Component {
         style: {
           width: "120px",
         },
-        render: (text, obj) => (text ? `${parseFloat(text)} ${obj.unit}` : ""),
+        render: (text, obj) => (text ? `${parseFloatData(text)} ${obj.unit}` : ""),
       },
       {
         th: intl.get("RATE_110"),
@@ -291,7 +294,7 @@ class Rate extends Component {
                             : intl.get("ACCOUNT_RATE_9")}
                         </td>
                         <td className={styles.td}>
-                          {parseFloat(item.quantity)} {item.unit}
+                          {parseFloatData(item.quantity)} {item.unit}
                         </td>
                         <td className={styles.td}>
                           <button
@@ -322,7 +325,7 @@ class Rate extends Component {
                             : intl.get("ACCOUNT_RATE_9")}
                         </td>
                         <td className={styles.td}>
-                          {parseFloat(item.quantity)} {item.asset}
+                          {parseFloatData(item.quantity)} {item.asset}
                         </td>
                         <td className={styles.td}>
                           {this.dateFtt(

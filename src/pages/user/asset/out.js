@@ -9,7 +9,7 @@ import { reg } from "../../../util";
 import inputUtil from "../../../components/input/inputUtil";
 import Title from "../account/components/Title";
 import { LOGIN } from "@/store/actionsTypes";
-
+import parseFloatData from '@/util/parseFloatData'
 const { Option } = Select;
 
 class Index extends Component {
@@ -303,7 +303,7 @@ class Index extends Component {
                                     }
                                 }} autoComplete="new-password" />
                                 <p style={{ margin: 0, paddingTop: '.06rem', display: 'flex', justifyContent: 'space-between', color: '#959FA9', fontSize: '.11rem' }}>
-                                    <span>{intl.get('USER_83')}：{base.available || 0} {coin}</span>
+                                    <span>{intl.get('USER_83')}：{parseFloatData(base.available) || 0} {coin}</span>
                                     <a onClick={() => this.setState({ amount: String(base.available || 0) })}>{intl.get('USER_84')}</a>
                                 </p>
                             </div>
@@ -370,7 +370,7 @@ class Index extends Component {
                                     }
                                 }} />
                                 <p style={{ margin: 0, paddingTop: '.06rem', display: 'flex', justifyContent: 'space-between', color: '#959FA9', fontSize: '.11rem' }}>
-                                    <span>{intl.get('USER_121')}：{base.available || 0} {coin}</span>
+                                    <span>{intl.get('USER_121')}：{parseFloatData(base.available) || 0} {coin}</span>
                                     <a onClick={() => this.setState({ amount: String(base.available || 0) })}>{intl.get('USER_120')}</a>
                                 </p>
                             </div>
