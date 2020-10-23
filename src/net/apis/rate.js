@@ -1,4 +1,7 @@
-import { get, post } from '../axios';
+import {
+    get,
+    post
+} from '../axios';
 
 export default {
 
@@ -6,13 +9,17 @@ export default {
     getGoodList: () => get('Goods.List'),
 
     //商品详情
-    getGoodDetail: (id) => get('Goods.Get', { id: id }),
+    getGoodDetail: (id) => get('Goods.Get', {
+        id: id
+    }),
 
     //确认订单
     postConfirmOrder: (data) => post('Weight.ConfirmOrder', data),
 
     //订单详情
-    getOrderDetail: (id) => get('Weight.OrderDetails', { id: id }),
+    getOrderDetail: (id) => get('Weight.OrderDetails', {
+        id: id
+    }),
 
     //下单
     postOrder: (data) => post('Weight.Order', data),
@@ -27,7 +34,9 @@ export default {
     getRateProblem: () => get('/general/access/problem'),
 
     //关于我们 
-    getGeneralBottom: (key) => get(`TextInfo.Get`, { key: key }),
+    getGeneralBottom: (key) => get(`TextInfo.Get`, {
+        key: key
+    }),
 
     getGeneralBottomCode: () => get(`LinksInfo.Bottom`),
 
@@ -56,9 +65,13 @@ export default {
     //获取区块信息
     getBlockInfo: () => get('/api/v1/info/base'),
     //获取矿工算力
-    getPowerByMiner: (address) => get('/api/v1/account/info', {address: address}),
+    getPowerByMiner: (address) => get('/api/v1/account/info', {
+        address: address
+    }),
     //获取图表数据
     getBlockWon: (data) => get('/api/v1/info/block_won', data),
     //获取矿工排行
-    getMinerTop: () =>  get('/api/v1/miner/top'),
+    getMinerTop: () => get('/api/v1/miner/top'),
+    //获取矿工排行
+    getPoolInfo: () => get('PoolInfo.Info'),
 };
