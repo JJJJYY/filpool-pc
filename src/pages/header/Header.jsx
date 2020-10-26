@@ -8,7 +8,7 @@ import setLanguage from '../../locales/setLanguage';
 import intl from 'react-intl-universal';
 import net from '../../net';
 
-const keys = ['home', 'rate', 'help', 'user', 'login', 'register','information', 'invite'];
+const keys = ['home', 'rate', 'help', 'user', 'login', 'register', 'information', 'invite'];
 
 const lang = {
     zh: '中文',
@@ -73,8 +73,9 @@ class Header extends Component {
             if (res.ret === 200) {
                 this.props.setUserInfo({});
                 this.props.setLogin(false);
+                sessionStorage.removeItem('login')
                 sessionStorage.removeItem("userInfo");
-                message.info(intl.get('RATE_72'), 1, () => {});
+                message.info(intl.get('RATE_72'), 1, () => { });
                 window.location.href = '/#/login';
             }
         });
@@ -109,10 +110,10 @@ class Header extends Component {
                                 {this.props.rightText || ''}
                             </div>
                         ) : (
-                            <Link to="/download" className="header-h5-item primary-font-color" style={{ textAlign: 'right' }}>
-                                下载APP
-                            </Link>
-                        )
+                                <Link to="/download" className="header-h5-item primary-font-color" style={{ textAlign: 'right' }}>
+                                    下载APP
+                                </Link>
+                            )
                     }
                 </div>
             );
@@ -123,8 +124,8 @@ class Header extends Component {
                     <div className="header-content">
                         <div>
                             <div className='flex-row-center'>
-                                <img className="logo" src={logo} alt="" style={{width: 'auto', marginRight: "5px"}} onClick={() => { window.location.href = '/#/'; }} />
-                                <span style={{marginRight: '0.3rem', fontWeight: "bold"}}>FILPool.io</span>
+                                <img className="logo" src={logo} alt="" style={{ width: 'auto', marginRight: "5px" }} onClick={() => { window.location.href = '/#/'; }} />
+                                <span style={{ marginRight: '0.3rem', fontWeight: "bold" }}>FILPool.io</span>
                             </div>
                             <Menu
                                 onClick={this.onChange}

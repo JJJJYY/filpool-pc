@@ -30,13 +30,13 @@ class Account extends Component {
     bindGa() {
         const { history } = this.props;
         Modal.alert(intl.get('ACCOUNT_135'), '', [
-            { text: intl.get('ACCOUNT_136'), onPress: () => {} },
+            { text: intl.get('ACCOUNT_136'), onPress: () => { } },
             { text: intl.get('ACCOUNT_137'), onPress: () => history.push('/user/account/ga') },
         ]);
     }
 
     goPath(path) {
-        if (!this.props.redux.login) {
+        if (!sessionStorage.getItem("login")) {
             this.props.history.push('/login');
             return;
         }
@@ -109,22 +109,22 @@ class Account extends Component {
                                 />
                             </div>
                         ) : (
-                            <div onClick={userInfo.ga ? () => this.goPath('set_pay') : this.bindGa}>
-                                {intl.get('ACCOUNT_13')}
-                                <img
-                                    src={right}
-                                    alt=""
-                                    className="ml-10"
-                                />
-                            </div>
-                        )
+                                <div onClick={userInfo.ga ? () => this.goPath('set_pay') : this.bindGa}>
+                                    {intl.get('ACCOUNT_13')}
+                                    <img
+                                        src={right}
+                                        alt=""
+                                        className="ml-10"
+                                    />
+                                </div>
+                            )
                     }
                 </div>
 
                 <div className="item">
                     <div>{intl.get('ACCOUNT_14')}</div>
 
-                    <div onClick={() => this.goPath(userInfo.ga ? 'modify_ga' :'ga')}>
+                    <div onClick={() => this.goPath(userInfo.ga ? 'modify_ga' : 'ga')}>
                         {userInfo.ga ? intl.get('ACCOUNT_142') : intl.get('ACCOUNT_15')}
                         <img
                             src={right}

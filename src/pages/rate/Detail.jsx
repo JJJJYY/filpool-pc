@@ -127,6 +127,7 @@ class RateDetail extends Component {
             if (res.ret === 200) {
                 this.setState({ loginVisible: false });
                 this.props.setLogin(true);
+                sessionStorage.setItem("login", true);
                 this.props.getUserInfo();
             }
         });

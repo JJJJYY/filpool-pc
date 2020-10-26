@@ -38,12 +38,12 @@ class Account extends Component {
             onOk() {
                 history.push('/user/account/ga');
             },
-            onCancel() {},
+            onCancel() { },
         });
     }
 
     goPath(path) {
-        if (!this.props.redux.login) {
+        if (!sessionStorage.getItem("login")) {
             this.props.history.push('/login');
             return;
         }
@@ -124,12 +124,12 @@ class Account extends Component {
                                     {intl.get('ACCOUNT_10')}
                                 </button>
                             ) : (
-                                <button className={styles.handleBtn}
-                                    onClick={userInfo.ga ? () => this.goPath('set_pay') : this.bindGa}
-                                >
-                                    {intl.get('ACCOUNT_13')}
-                                </button>
-                            )
+                                    <button className={styles.handleBtn}
+                                        onClick={userInfo.ga ? () => this.goPath('set_pay') : this.bindGa}
+                                    >
+                                        {intl.get('ACCOUNT_13')}
+                                    </button>
+                                )
                         }
                     </div>
                 </div>

@@ -1,4 +1,6 @@
-import { connect } from 'react-redux';
+import {
+    connect
+} from 'react-redux';
 import * as actions from './actions';
 import net from '../net';
 
@@ -27,6 +29,7 @@ const mapDispatchToProps = dispatch => ({
                 dispatch(actions.setLogin(true));
                 dispatch(actions.setUserInfo(res.data));
                 sessionStorage.setItem("userInfo", JSON.stringify(res.data));
+                sessionStorage.setItem("login", true);
                 // net.postSettingInfo().then((kyc) => {
                 //     if (kyc.responseCode === '00') {
                 //         dispatch(actions.setUserInfo(kyc.content));

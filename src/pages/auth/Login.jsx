@@ -42,6 +42,7 @@ class Login extends Component {
             if (res.ret === 200) {
                 this.props.history.replace('/home');
                 this.props.setLogin(true);
+                sessionStorage.setItem("login", true);
                 this.props.getUserInfo();
             }
         });
@@ -71,13 +72,13 @@ class Login extends Component {
                 history={this.props.history}
             />
         ) : (
-            <LoginWeb
-                login={this.login}
-                changeState={this.changeState}
-                checkError={this.checkError}
-                {...this.state}
-            />
-        );
+                <LoginWeb
+                    login={this.login}
+                    changeState={this.changeState}
+                    checkError={this.checkError}
+                    {...this.state}
+                />
+            );
     }
 }
 

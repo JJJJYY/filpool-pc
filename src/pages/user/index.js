@@ -62,8 +62,7 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-
-        if (!props.redux.login) {
+        if (!sessionStorage.getItem("login")) {
             window.location.href = `/#/login`;
         }
 

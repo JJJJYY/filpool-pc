@@ -46,15 +46,14 @@ function int16_to_hex(i) {
     return result;
 }
 
-function getQueryVariable(variable)
-{
+function getQueryVariable(variable) {
     let query = window.location.href;
     let vars = query.split("?");
-    for (let i=0;i<vars.length;i++) {
+    for (let i = 0; i < vars.length; i++) {
         let pair = vars[i].split("=");
-        if(pair[0] === variable){return pair[1];}
+        if (pair[0] === variable) { return pair[1]; }
     }
-    return("");
+    return ("");
 }
 
 class Register extends Component {
@@ -114,16 +113,16 @@ class Register extends Component {
         const obj = JSON.parse(localStorage.getItem('param') || '{}');
 
         const {
-            password, areaCode, code, inviteCode, phone,payPwd,email,registType
+            password, areaCode, code, inviteCode, phone, payPwd, email, registType
         } = this.state;
 
         this.setState({ loading: true });
 
         let reqObj = {};
         if (registType === 0) {
-            reqObj = {areaCode: areaCode, account: phone, type: "phone"};
+            reqObj = { areaCode: areaCode, account: phone, type: "phone" };
         } else {
-            reqObj = {account: email, type: "email"};
+            reqObj = { account: email, type: "email" };
         }
         net.postRegisterStep2({
             ...reqObj,
@@ -143,6 +142,7 @@ class Register extends Component {
                     if (res2.ret === 200) {
                         this.props.history.replace('/');
                         this.props.setLogin(true);
+                        sessionStorage.setItem("login", true);
                         this.props.getUserInfo();
                     }
                 });
@@ -154,7 +154,7 @@ class Register extends Component {
         const {
             phone, phoneError, code, codeError,
             password, passwordError, confirmPwd, confirmPwdError,
-            isAgree,email,registType,inviteCode
+            isAgree, email, registType, inviteCode
         } = this.state;
 
         let amount = "";
@@ -171,7 +171,7 @@ class Register extends Component {
         return !isAgree;
     }
 
-    changeRegistType (type) {
+    changeRegistType(type) {
         this.setState({
             registType: type
         });
@@ -187,15 +187,15 @@ class Register extends Component {
                 inviteCode={this.props.match.params.code}
             />
         ) : (
-            <RegisterWeb
-                register={this.register}
-                changeRegistType={(v) => {this.changeRegistType(v)}}
-                changeState={this.changeState}
-                checkError={this.checkError}
-                history={this.props.history}
-                {...this.state}
-            />
-        );
+                <RegisterWeb
+                    register={this.register}
+                    changeRegistType={(v) => { this.changeRegistType(v) }}
+                    changeState={this.changeState}
+                    checkError={this.checkError}
+                    history={this.props.history}
+                    {...this.state}
+                />
+            );
     }
 }
 

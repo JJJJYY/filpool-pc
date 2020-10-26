@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import intl from 'react-intl-universal';
 import styles from './invite.module.less';
 import Clipboard from 'clipboard';
 import { message } from 'antd';
 import Foot from '@/pages/footer/index';
 import net from '@/net/index';
-import {domin} from "@/config";
+import { domin } from "@/config";
 import connect from '@/store/connect';
 
 class Invite extends Component {
     constructor(props) {
         super(props);
-        if (!props.redux.login) {
+        if (!sessionStorage.getItem("login")) {
             window.location.href = `/#/login`;
         }
 
@@ -51,7 +51,7 @@ class Invite extends Component {
         net.getWeightInviteRecord().then((res) => {
             if (res.ret === 200) {
                 this.setState({
-                    inviteRecord: res.data instanceof Array ? res.data  : []
+                    inviteRecord: res.data instanceof Array ? res.data : []
                 });
             }
         });
@@ -77,7 +77,7 @@ class Invite extends Component {
         });
         document.body.style.overflow = "initial";
     }
-    
+
     toggleRecord(index) {
         this.setState({
             recordIndex: index
@@ -85,7 +85,7 @@ class Invite extends Component {
     }
 
     getContractText(round) {
-        return round === 1?intl.get("ACCOUNT_157"):intl.get("ACCOUNT_158");
+        return round === 1 ? intl.get("ACCOUNT_157") : intl.get("ACCOUNT_158");
     }
 
     setInviteLink(event) {
@@ -100,13 +100,13 @@ class Invite extends Component {
         })
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         this.clipboard.destroy();
         this.clipboard2.destroy();
     }
 
     render() {
-        let {inviteInfo, rewardInfo, totalSize, recordIndex, inviteRecord, awardList, inviteLink, inviteCode} = this.state;
+        let { inviteInfo, rewardInfo, totalSize, recordIndex, inviteRecord, awardList, inviteLink, inviteCode } = this.state;
         return (
             <div className={styles.inviteContainer}>
                 {/*banner*/}
@@ -122,14 +122,14 @@ class Invite extends Component {
                                 <img src={require("@/images/invite/invitation_icon_send@2x.png")} className={styles.stepIcon} alt="" />
                                 <p>{intl.get("invite_33")}</p>
                             </div>
-                            <img src={require("@/images/invite/invitation_icon_arrow@2x.png")} style={{marginRight: "100px"}}  alt="" />
+                            <img src={require("@/images/invite/invitation_icon_arrow@2x.png")} style={{ marginRight: "100px" }} alt="" />
                         </div>
                         <div className={styles.stepGroup}>
                             <div className={styles.left}>
                                 <img src={require("@/images/invite/invitation_icon_buy@2x.png")} className={styles.stepIcon} alt="" />
                                 <p>{intl.get("invite_34")}</p>
                             </div>
-                            <img src={require("@/images/invite/invitation_icon_arrow@2x.png")} style={{marginRight: "100px"}}  alt="" />
+                            <img src={require("@/images/invite/invitation_icon_arrow@2x.png")} style={{ marginRight: "100px" }} alt="" />
                         </div>
                         <div className={styles.stepGroup}>
                             <div className={styles.left}>
@@ -141,27 +141,27 @@ class Invite extends Component {
                 </div>
                 {/*邀请信息*/}
                 <div className={styles.inviteContent}>
-                    <div className={styles.main} style={{paddingRight: 0}}>
+                    <div className={styles.main} style={{ paddingRight: 0 }}>
                         <p className={styles.label}>{intl.get("invite_36")}</p>
                         <div className={`flex-row-start`}>
                             <div className={`flex-row-start ${styles.leftBox}`}>
-                                <div style={{flex: 1}}>
+                                <div style={{ flex: 1 }}>
                                     <p className={styles.inputLabel}>{intl.get("invite_37")}</p>
                                     <div className={`flex-row-start`}>
-                                        <input type="text" className={styles.input} value={inviteLink} onChange={(event) => {this.setInviteLink(event)}} style={{flex: 1}} />
+                                        <input type="text" className={styles.input} value={inviteLink} onChange={(event) => { this.setInviteLink(event) }} style={{ flex: 1 }} />
                                         <button className={`${styles.button} copy`} data-clipboard-text={inviteLink}>{intl.get("invite_38")}</button>
                                     </div>
                                 </div>
-                                <div style={{marginLeft: "32px"}}>
+                                <div style={{ marginLeft: "32px" }}>
                                     <p className={styles.inputLabel}>{intl.get("invite_39")}</p>
                                     <div className={`flex-row-start`}>
-                                        <input type="text" className={styles.input} value={inviteCode} onChange={(event) => {this.setInviteCode(event)}} style={{width: "150px"}} />
+                                        <input type="text" className={styles.input} value={inviteCode} onChange={(event) => { this.setInviteCode(event) }} style={{ width: "150px" }} />
                                         <button className={`${styles.button} copy2`} data-clipboard-text={inviteCode}>{intl.get("invite_38")}</button>
                                     </div>
                                 </div>
                             </div>
                             <div className={styles.rightBox}>
-                                <div className={styles.rewordRow} style={{marginBottom: "50px"}}>
+                                <div className={styles.rewordRow} style={{ marginBottom: "50px" }}>
                                     <div className={styles.rewordItem}>
                                         <p className={styles.rewordLabel}>{intl.get("invite_27")}</p>
                                         <p className={styles.rewordVal}>{inviteInfo.inviteCount}</p>
@@ -188,11 +188,11 @@ class Invite extends Component {
                     <div className={styles.recordBox}>
                         {/*邀请记录tab*/}
                         <div className={styles.areaBox}>
-                            <div className={`${styles.areaItem}`} onClick={() => {this.toggleRecord(0)}}>
+                            <div className={`${styles.areaItem}`} onClick={() => { this.toggleRecord(0) }}>
                                 {/*<p className={`${styles.area} areaValue`}>{totalSize} {intl.get("invite_20")}</p>*/}
                                 <p className={`${styles.areaLabel} areaValue ${recordIndex === 0 ? styles.active : null}`}>{intl.get('invite_19')}</p>
                             </div>
-                            <div className={`${styles.areaItem}`} onClick={() => {this.toggleRecord(1)}}>
+                            <div className={`${styles.areaItem}`} onClick={() => { this.toggleRecord(1) }}>
                                 {/*<p className={`${styles.area} areaValue`}>{rewardInfo.totalRevenue} USDT</p>*/}
                                 <p className={`${styles.areaLabel} areaValue ${recordIndex === 1 ? styles.active : null}`}>{intl.get('invite_15')}</p>
                             </div>
@@ -204,55 +204,55 @@ class Invite extends Component {
                                     <table className={styles.table}>
                                         <thead>
                                             <tr>
-                                                <th className={styles.th} style={{width: "25%",textAlign: "left"}}>{intl.get('invite_21')}</th>
-                                                <th className={styles.th} style={{width: "75%",textAlign: "left"}}>{intl.get('invite_22')}</th>
+                                                <th className={styles.th} style={{ width: "25%", textAlign: "left" }}>{intl.get('invite_21')}</th>
+                                                <th className={styles.th} style={{ width: "75%", textAlign: "left" }}>{intl.get('invite_22')}</th>
                                             </tr>
                                         </thead>
                                         <tbody className={styles.tbody}>
-                                        {
-                                            inviteRecord.map((item, index) => {
-                                                return (
-                                                    <tr key={index} className={styles.tr}>
-                                                        <td className={styles.td} style={{width: "25%",textAlign: "left"}}>{item.nickname}</td>
-                                                        <td className={styles.td} style={{textAlign: "left"}}>{item.createTime}</td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
+                                            {
+                                                inviteRecord.map((item, index) => {
+                                                    return (
+                                                        <tr key={index} className={styles.tr}>
+                                                            <td className={styles.td} style={{ width: "25%", textAlign: "left" }}>{item.nickname}</td>
+                                                            <td className={styles.td} style={{ textAlign: "left" }}>{item.createTime}</td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
                             ) : (
-                                /*推广记录*/
-                                <div className={`${styles.inviteTable}`}>
-                                    <table className={styles.table}>
-                                        <thead>
-                                            <tr>
-                                                <th className={styles.th} style={{width: "120px"}}>{intl.get('invite_23')}</th>
-                                                <th className={styles.th}>{intl.get('invite_21')}</th>
-                                                <th className={styles.th}>{intl.get('invite_24')}</th>
-                                                <th className={styles.th}>{intl.get('invite_25')} (TB)</th>
-                                                <th className={styles.th}>{intl.get('invite_26')} (USDT)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className={styles.tbody}>
-                                        {
-                                            awardList.map((item, index) => {
-                                                return (
-                                                    <tr key={index} className={styles.tr}>
-                                                        <td className={styles.td} style={{width: "120px"}}>{item.round}</td>
-                                                        <td className={styles.td}>{item.nickname}</td>
-                                                        <td className={styles.td}>{item.createTime}</td>
-                                                        <td className={styles.td}>{parseFloat(item.orderQuantity)}</td>
-                                                        <td className={styles.td}>{parseFloat(item.rewardQuantity)}</td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            )
+                                    /*推广记录*/
+                                    <div className={`${styles.inviteTable}`}>
+                                        <table className={styles.table}>
+                                            <thead>
+                                                <tr>
+                                                    <th className={styles.th} style={{ width: "120px" }}>{intl.get('invite_23')}</th>
+                                                    <th className={styles.th}>{intl.get('invite_21')}</th>
+                                                    <th className={styles.th}>{intl.get('invite_24')}</th>
+                                                    <th className={styles.th}>{intl.get('invite_25')} (TB)</th>
+                                                    <th className={styles.th}>{intl.get('invite_26')} (USDT)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className={styles.tbody}>
+                                                {
+                                                    awardList.map((item, index) => {
+                                                        return (
+                                                            <tr key={index} className={styles.tr}>
+                                                                <td className={styles.td} style={{ width: "120px" }}>{item.round}</td>
+                                                                <td className={styles.td}>{item.nickname}</td>
+                                                                <td className={styles.td}>{item.createTime}</td>
+                                                                <td className={styles.td}>{parseFloat(item.orderQuantity)}</td>
+                                                                <td className={styles.td}>{parseFloat(item.rewardQuantity)}</td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )
                         }
                     </div>
                 </div>

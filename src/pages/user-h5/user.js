@@ -64,10 +64,12 @@ class App extends Component {
             if (res.ret === 200) {
                 this.props.setUserInfo({});
                 this.props.setLogin(false);
+                sessionStorage.removeItem('login')
                 Toast.success(intl.get('RATE_72'), 1, () => { }, false);
             } else {
                 this.props.setUserInfo({});
                 this.props.setLogin(false);
+                sessionStorage.removeItem('login')
                 Toast.fail(intl.get(res.responseCode));
             }
         });
