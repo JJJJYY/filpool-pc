@@ -20,7 +20,11 @@ class InviteRecords extends Component {
             }
         });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render() {
         const columns = [
             {

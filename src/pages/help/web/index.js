@@ -34,18 +34,22 @@ export default class App extends PureComponent {
             }
         }).catch(console.log);
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render() {
         return (
             <div className="help">
                 <div style={{ margin: '0px 0.9rem' }}>
                     <div className="help-main">
                         <ul className="help-show">
-                            <li style={{cursor: "pointer"}} onClick={() => this.props.history.push('/help_detail?type=green')}>
+                            <li style={{ cursor: "pointer" }} onClick={() => this.props.history.push('/help_detail?type=green')}>
                                 <img src={img.icon1} alt="" />
                                 <span>{intl.get('USER_110')}</span>
                             </li>
-                            <li style={{cursor: "pointer"}} onClick={() => this.props.history.push('/help_detail?type=mining')}>
+                            <li style={{ cursor: "pointer" }} onClick={() => this.props.history.push('/help_detail?type=mining')}>
                                 <img src={img.icon2} alt="" />
                                 <span>{intl.get('USER_111')}</span>
                             </li>

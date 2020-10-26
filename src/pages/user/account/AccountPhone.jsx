@@ -28,7 +28,11 @@ class AccountPhone extends Component {
     changeState(key, v) {
         this.setState({ [key]: v });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     modify() {
         const {
             phone, phoneError,
@@ -72,18 +76,18 @@ class AccountPhone extends Component {
                         value={imageCaptcha}
                         placeholder={intl.get('AUTH_IMG_CODE_PLACEHOLDER')}
                         imgURL='/public/ImageCode.php'
-                        onChange = {(val) => {this.changeState('imageCaptcha', val)}}
+                        onChange={(val) => { this.changeState('imageCaptcha', val) }}
                     />
 
                     <Input.Captcha
                         value={oldPhoneCaptcha}
                         /*label={intl.get('ACCOUNT_21', { phone: userInfo.phone })}
                         placeholder={intl.get('ACCOUNT_22')}*/
-                        label={userInfo.defaultAccount === 0?intl.get('ACCOUNT_159', {phone: userInfo.phone}):intl.get('ACCOUNT_160', {email: userInfo.email})}
-                        placeholder={userInfo.defaultAccount === 0?intl.get('AUTH_DO_PHONE_CAPTCHA'):intl.get('AUTH_EMAIL_CODE_PLACEHOLDER')}
+                        label={userInfo.defaultAccount === 0 ? intl.get('ACCOUNT_159', { phone: userInfo.phone }) : intl.get('ACCOUNT_160', { email: userInfo.email })}
+                        placeholder={userInfo.defaultAccount === 0 ? intl.get('AUTH_DO_PHONE_CAPTCHA') : intl.get('AUTH_EMAIL_CODE_PLACEHOLDER')}
                         purpose={2}
                         imageCaptcha={imageCaptcha}
-                        pathType={userInfo.defaultAccount === 0?"phone":"email"}
+                        pathType={userInfo.defaultAccount === 0 ? "phone" : "email"}
                         onChange={v => this.changeState('oldPhoneCaptcha', v)}
                         onError={v => this.changeState('oldError', v)}
                         error={this.state.oldError}

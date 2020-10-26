@@ -36,7 +36,11 @@ export default class Index extends Component {
             }
         });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render() {
         if (Object.keys(this.state.coins).length > 0) {
             const search = this.props.location.search;

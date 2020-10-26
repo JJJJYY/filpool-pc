@@ -70,6 +70,9 @@ class RateDetail extends Component {
             clearInterval(this.refreshData);
             this.refreshData = null;
         }
+        this.setState = (state, callback) => {
+            return;
+        };
     }
 
     getGoodDetail(id) {

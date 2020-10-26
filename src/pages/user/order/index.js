@@ -19,7 +19,11 @@ export default class Index extends Component {
     componentDidMount() {
         this.getMyOrderList();
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     getMyOrderList() {
         net.getMyOrderList().then(res => {
             if (res.ret == 200) {

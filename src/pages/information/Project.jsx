@@ -4,7 +4,7 @@ import styles from './information.module.less';
 import intl from 'react-intl-universal';
 import net from '@/net/index';
 
-class Project extends Component{
+class Project extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,11 +14,15 @@ class Project extends Component{
         }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.getDataList();
     }
-
-    getDataList () {
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
+    getDataList() {
         net.getInfoList({
             type: 0,
             page: this.state.pageNo,
@@ -33,24 +37,24 @@ class Project extends Component{
         })
     }
 
-    showDetail (item) {
-        this.props.history.push({pathname: `/information_detail/${this.props.tabIndex}/${item.id}`, query: {title: item.title, content: item.pcContent}});
+    showDetail(item) {
+        this.props.history.push({ pathname: `/information_detail/${this.props.tabIndex}/${item.id}`, query: { title: item.title, content: item.pcContent } });
     }
 
-    render () {
+    render() {
         return (
             <div className={styles.project}>
                 <ul className={styles.list}>
                     {
                         this.state.listData.map((item) => {
                             return (
-                                <li className={styles.li} style={{display: "flex",alignItems: "center"}} key={item.id}  onClick={() => {this.showDetail(item)}}>
+                                <li className={styles.li} style={{ display: "flex", alignItems: "center" }} key={item.id} onClick={() => { this.showDetail(item) }}>
                                     <div>
-                                        <img src={item.image} style={{width: "160px"}} alt="" />
+                                        <img src={item.image} style={{ width: "160px" }} alt="" />
                                     </div>
-                                    <div style={{display: "flex",flexDirection: "column", marginLeft: "40px"}}>
-                                        <h3 className={styles.title} style={{marginTop: "0px"}}>{item.title}</h3>
-                                        <p className={styles.date} style={{marginTop: "20px"}}>{item.createTime}</p>
+                                    <div style={{ display: "flex", flexDirection: "column", marginLeft: "40px" }}>
+                                        <h3 className={styles.title} style={{ marginTop: "0px" }}>{item.title}</h3>
+                                        <p className={styles.date} style={{ marginTop: "20px" }}>{item.createTime}</p>
                                     </div>
                                 </li>
                             )
@@ -58,7 +62,7 @@ class Project extends Component{
                     }
                 </ul>
                 <div className={styles.checkDetail}>
-                    <button className={styles.checkBtn} onClick={() => {this.getDataList()}}>{intl.get("RATE_91")}</button>
+                    <button className={styles.checkBtn} onClick={() => { this.getDataList() }}>{intl.get("RATE_91")}</button>
                 </div>
             </div>
         )

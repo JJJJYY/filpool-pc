@@ -38,7 +38,11 @@ class App extends Component {
             }
         });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     renderItem(path, text, img) {
         return (
             <li>

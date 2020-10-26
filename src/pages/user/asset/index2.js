@@ -52,6 +52,11 @@ class App extends Component {
     DecimalData(a, b) {
         return parseFloatData(Decimal.add(a, b));
     }
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     bindPwd() {
 
         const { history } = this.props;

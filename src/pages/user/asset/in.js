@@ -31,7 +31,11 @@ export default class Index extends Component {
 
         this.setState({ coins: coins });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     getAddress() {
         const { base } = this.state;
         net.getAssetAddress({

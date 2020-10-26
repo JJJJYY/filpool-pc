@@ -26,7 +26,11 @@ class Account extends Component {
             }
         });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     bindGa() {
         const { history } = this.props;
         Modal.alert(intl.get('ACCOUNT_135'), '', [

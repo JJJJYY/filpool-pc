@@ -28,7 +28,11 @@ export default class App extends PureComponent {
             }
         }).catch(console.log);
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render() {
         return (
             <div className="help">

@@ -10,7 +10,7 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 
 let myChart;
-export default class BlockChart extends React.Component{
+export default class BlockChart extends React.Component {
     constructor(props) {
         super(props);
         this.chartData = [];
@@ -246,11 +246,14 @@ export default class BlockChart extends React.Component{
 
     componentWillUnmount() {
         window.removeEventListener("resize", myChart.resize);
+        this.setState = (state, callback) => {
+            return;
+        };
     }
 
     render() {
         return (
-            <div id="blockChart" style={{height: "546px",textAlign: "left", flex: "1"}}>
+            <div id="blockChart" style={{ height: "546px", textAlign: "left", flex: "1" }}>
 
             </div>
         )

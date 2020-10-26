@@ -48,7 +48,11 @@ export default class Index extends Component {
         }).catch(console.log);
 
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render() {
         const base = { ...this.props.coins[this.props.coin] };
         return (

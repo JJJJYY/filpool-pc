@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './actual.module.less';
 import net from '@/net';
 
-export default class Upload extends React.Component{
+export default class Upload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,14 +25,18 @@ export default class Upload extends React.Component{
             })
         })
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     uploadImg(file, token) {
         net.postUpload({
             file: file,
             token: token,
         }).then((res) => {
             if (res.status == 200) {
-                this.setState({loadImgUrl: res.data.key, file: file});
+                this.setState({ loadImgUrl: res.data.key, file: file });
                 this.props.onChange(res.data.key);
             }
         })
@@ -57,7 +61,7 @@ export default class Upload extends React.Component{
         const { file } = this.state;
         return (
             <div className={styles.uploadBox}>
-                <img src={file?URL.createObjectURL(file):this.props.bgImg} className={styles.bg} alt="" />
+                <img src={file ? URL.createObjectURL(file) : this.props.bgImg} className={styles.bg} alt="" />
                 <p className={styles.text}>{this.props.text}</p>
                 <div className={styles.uploadButtonBox}>
                     <button className={styles.uploadButton}>上传</button>

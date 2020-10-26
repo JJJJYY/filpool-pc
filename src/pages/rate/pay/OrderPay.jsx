@@ -44,7 +44,11 @@ class OrderPay extends Component {
         // this.getRatePrice();
         this.setState({ id: id, amount: Number(amount) })
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     getGoodDetail(id) {
         net.getGoodDetail(id).then(res => {
             if (res.ret === 200) {

@@ -42,6 +42,9 @@ class Index extends Component {
 
     componentWillUnmount() {
         this.timer && clearInterval(this.timer);
+        this.setState = (state, callback) => {
+            return;
+        };
     }
 
     get renderHeader() {

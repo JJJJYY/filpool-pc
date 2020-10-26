@@ -25,7 +25,11 @@ class AccountPassword extends Component {
         this.modify = this.modify.bind(this);
         this.comparePass = this.comparePass.bind(this);
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     changeState(key, v) {
         this.setState({ [key]: v }, this.comparePass);
     }

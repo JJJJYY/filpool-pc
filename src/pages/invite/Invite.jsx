@@ -103,6 +103,9 @@ class Invite extends Component {
     componentWillUnmount() {
         this.clipboard.destroy();
         this.clipboard2.destroy();
+        this.setState = (state, callback) => {
+            return;
+        };
     }
 
     render() {

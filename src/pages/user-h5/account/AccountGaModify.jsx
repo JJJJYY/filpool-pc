@@ -29,7 +29,11 @@ class AccountGa extends Component {
         this.bind = this.bind.bind(this);
         this.checkOld = this.checkOld.bind(this);
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     changeState(key, v) {
         this.setState({ [key]: v });
     }
@@ -168,37 +172,37 @@ class AccountGa extends Component {
 
     renderStep() {
         switch (this.state.step) {
-        case 0:
-            return this.renderStep1();
-        case 1:
-            return this.renderStep3();
-        case 2:
-            return this.renderStep4();
-        default:
-            return null;
+            case 0:
+                return this.renderStep1();
+            case 1:
+                return this.renderStep3();
+            case 2:
+                return this.renderStep4();
+            default:
+                return null;
         }
     }
 
     renderButton() {
         switch (this.state.step) {
-        case 0:
-            return (
-                <Button loading={this.state.loading} onClick={this.checkOld} type="mobile">
-                    {intl.get('ACCOUNT_68')}
-                </Button>
-            );
-        case 1:
-            return (
-                <Button type="mobile" onClick={this.next}>{intl.get('ACCOUNT_68')}</Button>
-            );
-        case 2:
-            return (
-                <Button type="mobile" loading={this.state.loading} onClick={this.bind}>
-                    {intl.get('ACCOUNT_146')}
-                </Button>
-            );
-        default:
-            return null;
+            case 0:
+                return (
+                    <Button loading={this.state.loading} onClick={this.checkOld} type="mobile">
+                        {intl.get('ACCOUNT_68')}
+                    </Button>
+                );
+            case 1:
+                return (
+                    <Button type="mobile" onClick={this.next}>{intl.get('ACCOUNT_68')}</Button>
+                );
+            case 2:
+                return (
+                    <Button type="mobile" loading={this.state.loading} onClick={this.bind}>
+                        {intl.get('ACCOUNT_146')}
+                    </Button>
+                );
+            default:
+                return null;
         }
     }
 

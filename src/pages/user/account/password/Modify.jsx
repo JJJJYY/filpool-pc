@@ -31,7 +31,11 @@ class AccountPassword extends Component {
     changeState(key, v) {
         this.setState({ [key]: v }, this.comparePass);
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     comparePass() {
         const { confirmPass, newPass } = this.state;
 
@@ -137,16 +141,16 @@ class AccountPassword extends Component {
                         value={imageCaptcha}
                         placeholder={intl.get('AUTH_IMG_CODE_PLACEHOLDER')}
                         imgURL='/public/ImageCode.php'
-                        onChange = {(val) => {this.changeState('imageCaptcha', val)}}
+                        onChange={(val) => { this.changeState('imageCaptcha', val) }}
                     />
 
                     <Input.Captcha
                         value={captcha}
                         /*label={intl.get('ACCOUNT_85', { phone: userInfo.phone })}
                         placeholder={intl.get('ACCOUNT_86')}*/
-                        label={userInfo.defaultAccount === 0?intl.get('AUTH_PHONE_CAPTCHA'):intl.get('AUTH_EMAIL_CODE')}
-                        placeholder={userInfo.defaultAccount === 0?intl.get('AUTH_DO_PHONE_CAPTCHA'):intl.get('AUTH_EMAIL_CODE_PLACEHOLDER')}
-                        pathType={userInfo.defaultAccount === 0?"phone":"email"}
+                        label={userInfo.defaultAccount === 0 ? intl.get('AUTH_PHONE_CAPTCHA') : intl.get('AUTH_EMAIL_CODE')}
+                        placeholder={userInfo.defaultAccount === 0 ? intl.get('AUTH_DO_PHONE_CAPTCHA') : intl.get('AUTH_EMAIL_CODE_PLACEHOLDER')}
+                        pathType={userInfo.defaultAccount === 0 ? "phone" : "email"}
                         path={type ? '/setting/modify/pay_pwd' : '/setting/modify/password'}
                         imageCaptcha={imageCaptcha}
                         onChange={v => this.changeState('captcha', v)}

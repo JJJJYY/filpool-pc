@@ -51,7 +51,11 @@ class AccountEmail extends Component {
             }
         });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render() {
         const {
             email, oldEmailCaptcha, newEmailCaptcha, imageCaptcha,
@@ -70,14 +74,14 @@ class AccountEmail extends Component {
                         value={imageCaptcha}
                         placeholder={intl.get('AUTH_IMG_CODE_PLACEHOLDER')}
                         imgURL='/public/ImageCode.php'
-                        onChange = {(val) => {this.changeState('imageCaptcha', val)}}
+                        onChange={(val) => { this.changeState('imageCaptcha', val) }}
                     />
 
                     <Input.Captcha
                         value={oldEmailCaptcha}
                         /*label={intl.get('ACCOUNT_29', {email: userInfo.email})}
                         placeholder={intl.get('ACCOUNT_30')}*/
-                        label={intl.get('ACCOUNT_29', {email: userInfo.email})}
+                        label={intl.get('ACCOUNT_29', { email: userInfo.email })}
                         placeholder={intl.get('AUTH_EMAIL_CODE_PLACEHOLDER')}
                         path="/setting/kyc2/modify_email"
                         purpose={2}

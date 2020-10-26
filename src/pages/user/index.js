@@ -82,6 +82,11 @@ class App extends Component {
             }
         })
     }
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     /*获取用户等级*/
     renderLevelItem(level) {
         let text = "";

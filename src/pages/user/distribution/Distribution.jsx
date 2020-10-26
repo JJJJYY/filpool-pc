@@ -57,31 +57,35 @@ class Distribution extends Component {
             }
         });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     renderLevelItem(data, type) {
         const { value1, value5, value6 } = data;
         let text = '';
         switch (value5) {
-        case '-1':
-            text = intl.get('ACCOUNT_152');
-            break;
-        case '1':
-            text = intl.get('ACCOUNT_104');
-            break;
-        case '2':
-            text = intl.get('ACCOUNT_105');
-            break;
-        case '3':
-            text = intl.get('ACCOUNT_106');
-            break;
-        case '4':
-            text = intl.get('ACCOUNT_107');
-            break;
-        case '5':
-            text = intl.get('ACCOUNT_153');
-            break;
-        default:
-            text = intl.get('ACCOUNT_108');
+            case '-1':
+                text = intl.get('ACCOUNT_152');
+                break;
+            case '1':
+                text = intl.get('ACCOUNT_104');
+                break;
+            case '2':
+                text = intl.get('ACCOUNT_105');
+                break;
+            case '3':
+                text = intl.get('ACCOUNT_106');
+                break;
+            case '4':
+                text = intl.get('ACCOUNT_107');
+                break;
+            case '5':
+                text = intl.get('ACCOUNT_153');
+                break;
+            default:
+                text = intl.get('ACCOUNT_108');
         }
         if (type === 2) text = intl.get('ACCOUNT_109');
         return (
@@ -132,7 +136,7 @@ class Distribution extends Component {
             <div className="flex-row-between">
                 {this.renderLevelItem(currentLevel, 0)}
                 {nextLevel && this.renderLevelItem(nextLevel, 1)}
-                {(nextLevel && nextLevel.value5 < maxLevel.value5) && this.renderLevelItem(maxLevel, 2) }
+                {(nextLevel && nextLevel.value5 < maxLevel.value5) && this.renderLevelItem(maxLevel, 2)}
             </div>
         );
     }

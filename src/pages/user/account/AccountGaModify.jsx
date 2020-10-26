@@ -34,7 +34,11 @@ class AccountGa extends Component {
         this.bind = this.bind.bind(this);
         this.checkOld = this.checkOld.bind(this);
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     onChange(v) {
         this.setState({ phone: v.target.value });
     }
@@ -107,7 +111,7 @@ class AccountGa extends Component {
     renderStep1() {
         return (
             <div>
-                <div className="mb-20" style={{fontSize: "16px", color: "#86929D"}}>{intl.get('ACCOUNT_145')}</div>
+                <div className="mb-20" style={{ fontSize: "16px", color: "#86929D" }}>{intl.get('ACCOUNT_145')}</div>
                 <div className="flex-column-center">
                     <div className="form">
                         <Input
@@ -131,7 +135,7 @@ class AccountGa extends Component {
 
         return (
             <div>
-                <div className="mb-20" style={{fontSize: "16px", color: "#86929D", marginBottom: "40px"}}>{intl.get('ACCOUNT_52')}</div>
+                <div className="mb-20" style={{ fontSize: "16px", color: "#86929D", marginBottom: "40px" }}>{intl.get('ACCOUNT_52')}</div>
                 <div className="flex-column-center">
 
 
@@ -141,7 +145,7 @@ class AccountGa extends Component {
                         <QRCode size={83} value={gaSecret.url || ''} />
                     </div>
                 </div>
-                <div className="ft-11 light-font-color" style={{margin: "60px auto 80px", fontSize: "16px", color: "#86929d"}}>
+                <div className="ft-11 light-font-color" style={{ margin: "60px auto 80px", fontSize: "16px", color: "#86929d" }}>
                     3、{intl.get('ACCOUNT_54')}
 
                     <Popover content={(
@@ -167,7 +171,7 @@ class AccountGa extends Component {
     renderStep4() {
         return (
             <div>
-                <div className="mb-20" style={{fontSize: "16px", color: "#86929D"}}>{intl.get('ACCOUNT_58')}</div>
+                <div className="mb-20" style={{ fontSize: "16px", color: "#86929D" }}>{intl.get('ACCOUNT_58')}</div>
                 <div className="flex-column-center">
                     <div className="form">
                         <Input
@@ -188,37 +192,37 @@ class AccountGa extends Component {
 
     renderStep() {
         switch (this.state.step) {
-        case 0:
-            return this.renderStep1();
-        case 1:
-            return this.renderStep3();
-        case 2:
-            return this.renderStep4();
-        default:
-            return null;
+            case 0:
+                return this.renderStep1();
+            case 1:
+                return this.renderStep3();
+            case 2:
+                return this.renderStep4();
+            default:
+                return null;
         }
     }
 
     renderButton() {
         switch (this.state.step) {
-        case 0:
-            return (
-                <Button loading={this.state.loading} onClick={this.checkOld} type="block" style={{width: "320px", height: "48px"}}>
-                    {intl.get('ACCOUNT_68')}
-                </Button>
-            );
-        case 1:
-            return (
-                <Button onClick={this.next} style={{width: "320px", height: "48px"}}>{intl.get('ACCOUNT_68')}</Button>
-            );
-        case 2:
-            return (
-                <Button loading={this.state.loading} onClick={this.bind} style={{width: "320px", height: "48px"}}>
-                    {intl.get('ACCOUNT_146')}
-                </Button>
-            );
-        default:
-            return null;
+            case 0:
+                return (
+                    <Button loading={this.state.loading} onClick={this.checkOld} type="block" style={{ width: "320px", height: "48px" }}>
+                        {intl.get('ACCOUNT_68')}
+                    </Button>
+                );
+            case 1:
+                return (
+                    <Button onClick={this.next} style={{ width: "320px", height: "48px" }}>{intl.get('ACCOUNT_68')}</Button>
+                );
+            case 2:
+                return (
+                    <Button loading={this.state.loading} onClick={this.bind} style={{ width: "320px", height: "48px" }}>
+                        {intl.get('ACCOUNT_146')}
+                    </Button>
+                );
+            default:
+                return null;
         }
     }
 
@@ -243,14 +247,14 @@ class AccountGa extends Component {
                             <Step title={intl.get('ACCOUNT_66')} />
                         </Steps>
 
-                        <div className="mt-40" style={{width: "100%"}}>
+                        <div className="mt-40" style={{ width: "100%" }}>
                             {this.renderStep()}
                         </div>
                     </div>
 
                     <div className="flex-row-between">
                         {
-                            step ? (<Button onClick={this.last} type="plant" style={{width: "320px", height: "48px", marginRight: "64px"}}>{intl.get('ACCOUNT_67')}</Button>) : null
+                            step ? (<Button onClick={this.last} type="plant" style={{ width: "320px", height: "48px", marginRight: "64px" }}>{intl.get('ACCOUNT_67')}</Button>) : null
                         }
                         {this.renderButton()}
                     </div>

@@ -23,7 +23,11 @@ class AccountPhone extends Component {
         this.changeState = this.changeState.bind(this);
         this.modify = this.modify.bind(this);
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     changeState(key, v) {
         this.setState({ [key]: v });
     }
@@ -73,9 +77,9 @@ class AccountPhone extends Component {
                         value={imageCaptcha}
                         placeholder={intl.get('AUTH_IMG_CODE_PLACEHOLDER')}
                         imgURL='/public/ImageCode.php'
-                        onChange = {(val) => {this.changeState('imageCaptcha', val)}}
+                        onChange={(val) => { this.changeState('imageCaptcha', val) }}
                     />
-                    
+
                     <Input.Captcha
                         value={oldPhoneCaptcha}
                         label={intl.get('ACCOUNT_21', { phone: userInfo.phone })}

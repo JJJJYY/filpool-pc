@@ -32,7 +32,11 @@ export default class Index extends Component {
             }
         })
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     getPipeline() {
         net.getAssetPipeline(this.state.coin).then(res => {
             if (res.responseCode == '00') {
@@ -92,7 +96,7 @@ export default class Index extends Component {
             1: intl.get('USER_35'),
             2: intl.get('USER_119')
         }
-        
+
         const types = {
             1: intl.get('USER_36'),
             3: intl.get('USER_37'),

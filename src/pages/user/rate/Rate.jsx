@@ -58,7 +58,11 @@ class Rate extends Component {
         }
       });
   }
-
+  componentWillUnmount = () => {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
   renderDetail() {
     if (this.state.details.length === 0) {
       return;

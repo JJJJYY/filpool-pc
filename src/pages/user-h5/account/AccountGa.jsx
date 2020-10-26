@@ -31,7 +31,11 @@ class AccountGa extends Component {
         this.last = this.last.bind(this);
         this.bind = this.bind.bind(this);
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     onChange(v) {
         this.setState({ phone: v.target.value });
     }
@@ -187,16 +191,16 @@ class AccountGa extends Component {
 
     renderStep() {
         switch (this.state.step) {
-        case 0:
-            return this.renderStep1();
-        case 1:
-            return this.renderStep2();
-        case 2:
-            return this.renderStep3();
-        case 3:
-            return this.renderStep4();
-        default:
-            return null;
+            case 0:
+                return this.renderStep1();
+            case 1:
+                return this.renderStep2();
+            case 2:
+                return this.renderStep3();
+            case 3:
+                return this.renderStep4();
+            default:
+                return null;
         }
     }
 
@@ -244,8 +248,8 @@ class AccountGa extends Component {
                                     {intl.get('ACCOUNT_69')}
                                 </Button>
                             ) : (
-                                <Button onClick={this.next} type="mobile">{intl.get('ACCOUNT_68')}</Button>
-                            )
+                                    <Button onClick={this.next} type="mobile">{intl.get('ACCOUNT_68')}</Button>
+                                )
                         }
                     </div>
                 </div>

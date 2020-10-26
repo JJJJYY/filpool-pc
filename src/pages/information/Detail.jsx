@@ -6,7 +6,7 @@ import intl from 'react-intl-universal';
 import net from '@/net';
 import { get as fetchGet } from '@/net/axios';
 
-class Detail extends Component{
+class Detail extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,51 +37,55 @@ class Detail extends Component{
             if (tabIndex === "0" || tabIndex === "1") {
                 net.getInforDetail(id).then((res) => {
                     if (res.ret == 200) {
-                        this.setState({title: res.data.title, content: res.data.content});
+                        this.setState({ title: res.data.title, content: res.data.content });
                     }
                 })
             } else if (tabIndex === "2") {
                 net.getHelpDetail(id).then((res) => {
                     if (res.ret == 200) {
-                        this.setState({title: res.data.title, content: res.data.content});
+                        this.setState({ title: res.data.title, content: res.data.content });
                     }
                 })
             } else {
-                net.getNoticeDetail({id: id}).then((res) => {
+                net.getNoticeDetail({ id: id }).then((res) => {
                     if (res.ret == 200) {
-                        this.setState({title: res.data.title, content: res.data.content});
+                        this.setState({ title: res.data.title, content: res.data.content });
                     }
                 })
             }
         }
     }
 
-    back () {
+    back() {
         let tabIndex = this.props.match.params.tab;
         if (tabIndex || tabIndex == '0') {
-            this.props.history.push({pathname: `/information/${tabIndex}`});
+            this.props.history.push({ pathname: `/information/${tabIndex}` });
         } else {
             this.props.history.goBack();
         }
     }
-
-    render () {
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
+    render() {
         return (
             <div className={styles.detail}>
                 <div className={styles.contentBox}>
                     <div className={styles.head}>
-                        <a className={`flex-row-start`} style={{color: "#86929D"}} onClick={() => {this.back()}}>
+                        <a className={`flex-row-start`} style={{ color: "#86929D" }} onClick={() => { this.back() }}>
                             <span className={`iconfont ${styles.icon}`}>&#xe679;</span>
                             <span>{intl.get("RATE_92")}</span>
                         </a>
                     </div>
-                    <div style={{width: "1200px", position: "relative", margin: "auto"}}>
-                        <img src={require('@/images/home/count_picture_1.png')} style={{position: "absolute",right: "-150px", top: "100px"}} alt="" />
-                        <img src={require('@/images/home/count_picture_2.png')} style={{position: "absolute",left: "-156px", top: "10px"}} alt="" />
+                    <div style={{ width: "1200px", position: "relative", margin: "auto" }}>
+                        <img src={require('@/images/home/count_picture_1.png')} style={{ position: "absolute", right: "-150px", top: "100px" }} alt="" />
+                        <img src={require('@/images/home/count_picture_2.png')} style={{ position: "absolute", left: "-156px", top: "10px" }} alt="" />
                     </div>
-                    <div className={styles.boxShow} style={{backgroundColor: "#fff"}}>
+                    <div className={styles.boxShow} style={{ backgroundColor: "#fff" }}>
                         <h3 className={styles.title}>{this.state.title}</h3>
-                        <div className={styles.content} dangerouslySetInnerHTML={{__html: this.state.content}}></div>
+                        <div className={styles.content} dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
                     </div>
                 </div>
                 <Foot></Foot>

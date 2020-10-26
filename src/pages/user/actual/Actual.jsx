@@ -28,7 +28,11 @@ class Actual extends React.Component {
             this.getActualInfo()
         }
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     getActualInfo() {
         net.getActualInfo().then((res) => {
             if (res.ret == 200) {

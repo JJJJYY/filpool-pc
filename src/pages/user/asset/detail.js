@@ -33,7 +33,11 @@ export default class Index extends Component {
             }
         })
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     getPipeline() {
         net.getAssetPipeline(this.state.coin).then(res => {
             if (res.responseCode == '00') {
@@ -85,7 +89,7 @@ export default class Index extends Component {
                 case 'exchange':
                     return String(item.type) === '1';
                 case 'reward':
-                    return String(item.type) === '17'|| String(item.type) === '18'|| String(item.type) === '19';
+                    return String(item.type) === '17' || String(item.type) === '18' || String(item.type) === '19';
                 default:
                     return true;
             }
@@ -111,9 +115,9 @@ export default class Index extends Component {
             14: intl.get('USER_46'),
             15: intl.get('USER_47'),
             16: "兑换",
-            17:"购买奖励",
-            18:"邀请奖励",
-            19:"注册奖励",
+            17: "购买奖励",
+            18: "邀请奖励",
+            19: "注册奖励",
         }
 
         const columns = [
