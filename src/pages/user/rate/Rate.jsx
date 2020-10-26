@@ -20,7 +20,7 @@ class Rate extends Component {
       tab: 0,
     };
     this.typeAry = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    this.incomeTypeAry = [1, 2];
+    this.incomeTypeAry = [1, 2, 3];
   }
 
   componentDidMount() {
