@@ -31,6 +31,9 @@ class Rate extends Component {
             clearInterval(this.refreshData);
             this.refreshData = null;
         }
+        this.setState = (state, callback) => {
+            return;
+        };
     }
 
     // getRatePrice(){

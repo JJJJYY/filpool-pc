@@ -31,21 +31,29 @@ class Storage extends React.Component {
             }, 0);
         })
     }
+    componentWillUnmount() {
+        clearTimeout(this.timerId);
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     done(num, count) {
         var newNum = parseInt(num * Math.pow(10, count)) / Math.pow(10, count);
         return newNum;
     }
     createDom() {
         const myComp = document.querySelector('.progressUi .ant-progress-outer .ant-progress-inner .ant-progress-bg');
-        const span = document.createElement("span");
-        span.innerHTML = `${this.state.progressData} %`;
-        // 判断数字左还是右
-        if (this.state.progressData >= 4) {
-            span.className = styles.progressSpanLeft;
-        } else {
-            span.className = styles.progressSpanRigth;
+        if (myComp) {
+            const span = document.createElement("span");
+            span.innerHTML = `${this.state.progressData} %`;
+            // 判断数字左还是右
+            if (this.state.progressData >= 4) {
+                span.className = styles.progressSpanLeft;
+            } else {
+                span.className = styles.progressSpanRigth;
+            }
+            myComp.appendChild(span);
         }
-        myComp.appendChild(span);
     }
     render() {
         return (

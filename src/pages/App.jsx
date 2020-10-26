@@ -76,7 +76,11 @@ class App extends Component {
             this.setState({ init: true });
         });
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render() {
         if (!this.state.init) {
             return (
@@ -99,13 +103,13 @@ class App extends Component {
 
         return (
             <div>
-                { this.state.mobile ? null : <Header /> }
+                { this.state.mobile ? null : <Header />}
                 <section style={this.state.mobile ? null : { paddingTop: '.44rem' }}>
                     <Router mobile={this.state.mobile} />
                 </section>
                 {/*<div className={this.state.mobile ? 'img-kefu-h5' : 'img-kefu'} onMouseOver={() => this.setState({ visible: true })} onMouseLeave={() => this.setState({ visible: false })}>*/}
                 <div className={[this.state.mobile ? 'img-kefu-h5' : 'img-kefu']} onMouseOver={() => this.setState({ visible: true })} onMouseLeave={() => this.setState({ visible: false })}>
-                    <span className="iconfont" style={{fontSize: "32px", color: "#fff"}}>&#xe6cd;</span>
+                    <span className="iconfont" style={{ fontSize: "32px", color: "#fff" }}>&#xe6cd;</span>
                     <div className={this.state.mobile ? 'wechat-text-h5' : 'wechat-text'}>{intl.get('RATE_84')}</div>
                 </div>
                 {
@@ -145,7 +149,7 @@ class App extends Component {
                         }}
                     />
                 </Modal>
-                {this.state.mobile?null:<BackTop visibilityHeight={1200} />}
+                {this.state.mobile ? null : <BackTop visibilityHeight={1200} />}
             </div>
         );
     }

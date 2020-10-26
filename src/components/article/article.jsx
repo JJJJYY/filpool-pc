@@ -8,7 +8,7 @@ import Footer from '../../pages/footer';
 
 class Article extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             content: '',
@@ -18,13 +18,13 @@ class Article extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let key = this.props.match.params.key;
         this.setState({ key: key })
         this.getGeneralBottom(key);
     }
 
-    getGeneralBottom(key){
+    getGeneralBottom(key) {
         // if(Number(key)){
         //     net.getGeneralNotice().then(res => {
         //         if(res.responseCode === '00'){
@@ -42,28 +42,32 @@ class Article extends Component {
         //     return;
         // } 
         net.getGeneralBottom(key).then(res => {
-            if(res.ret === 200){
+            if (res.ret === 200) {
                 this.setState(res.data)
             } else {
             }
         })
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render() {
         const {
-            key,content,notice,header
+            key, content, notice, header
         } = this.state;
         const isMobile = window.innerWidth <= 1080;
         const title = {
-            service : intl.get('RATE_58'),
-            coop : intl.get('RATE_57'),
+            service: intl.get('RATE_58'),
+            coop: intl.get('RATE_57'),
             about: intl.get('RATE_56'),
         }
         const tab = this.props.redux.tab;
         return (
             <div className={'article'}>
-                <Header 
-                    left={()=> { if(tab === 'mine'){ this.props.history.push('/'); }  else { this.props.history.goBack() }}}
+                <Header
+                    left={() => { if (tab === 'mine') { this.props.history.push('/'); } else { this.props.history.goBack() } }}
                     title={Number(key) ? header[key] : title[key]}
                 />
                 <div className={isMobile ? 'bg-h5' : 'bg'}></div>
@@ -73,10 +77,10 @@ class Article extends Component {
                         {notice[key]}
                     </div>
                     : */}
-                    <div className={isMobile ? null : 'cell'}>
-                        <div dangerouslySetInnerHTML={{__html: Number(key) ? notice[key] : content}} className={isMobile ? 'content-h5' : 'content'}>
+                <div className={isMobile ? null : 'cell'}>
+                    <div dangerouslySetInnerHTML={{ __html: Number(key) ? notice[key] : content }} className={isMobile ? 'content-h5' : 'content'}>
                     </div>
-                    </div>
+                </div>
                 {/* } */}
                 {
                     isMobile ? null : <Footer />

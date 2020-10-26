@@ -39,7 +39,11 @@ class Home extends Component {
         this.getGeneralPartner();
         // this.getRatePrice()
     }
-
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     // getRatePrice(){
     //     net.getRatePrice().then(res => {
     //         if(res.responseCode === '00'){

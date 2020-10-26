@@ -46,8 +46,10 @@ class Header extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('hashchange', () => this.onUrlChange());
+        this.setState = (state, callback) => {
+            return;
+        };
     }
-
     onUrlChange() {
         const tab = handlePath(window.location.hash);
         if (tab === 'home' || tab === 'rate' || tab === 'help' || tab === 'user' || tab === 'register' || tab === 'login') {

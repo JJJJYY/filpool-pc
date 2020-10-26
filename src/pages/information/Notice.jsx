@@ -4,7 +4,7 @@ import styles from './information.module.less';
 import intl from 'react-intl-universal';
 import net from "@/net";
 
-class Notice extends Component{
+class Notice extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,11 +14,15 @@ class Notice extends Component{
         }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.getDataList();
     }
-
-    getDataList () {
+    componentWillUnmount = () => {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
+    getDataList() {
         net.getGeneralNotice({
             page: this.state.pageNo,
             count: this.state.pageSize
@@ -41,21 +45,21 @@ class Notice extends Component{
         })
     }
 
-    showDetail (item) {
-        this.props.history.push({pathname: `/information_detail/${this.props.tabIndex}/${item.id}`, query: {title: item.title, content: item.content}});
+    showDetail(item) {
+        this.props.history.push({ pathname: `/information_detail/${this.props.tabIndex}/${item.id}`, query: { title: item.title, content: item.content } });
     }
 
-    render () {
+    render() {
         return (
             <div className={styles.project}>
                 <ul className={styles.list}>
                     {
                         this.state.listData.map((item) => {
                             return (
-                                <li className={styles.li} key={item.id} onClick={() => {this.showDetail(item)}}>
+                                <li className={styles.li} key={item.id} onClick={() => { this.showDetail(item) }}>
                                     <h3 className={styles.title}>{item.title}</h3>
-                                    <div style={{display: "flex", justifyContent: "space-between",alignItems: "baseline"}}>
-                                        <p className={styles.date} style={{width: "200px", marginTop: "34px"}}>{item.createTime}</p>
+                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                                        <p className={styles.date} style={{ width: "200px", marginTop: "34px" }}>{item.createTime}</p>
                                     </div>
                                 </li>
                             )
@@ -63,7 +67,7 @@ class Notice extends Component{
                     }
                 </ul>
                 <div className={styles.checkDetail}>
-                    <button className={styles.checkBtn} onClick={() => {this.getDataList()}}>{intl.get("RATE_91")}</button>
+                    <button className={styles.checkBtn} onClick={() => { this.getDataList() }}>{intl.get("RATE_91")}</button>
                 </div>
             </div>
         )
