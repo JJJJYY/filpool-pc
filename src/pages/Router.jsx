@@ -45,6 +45,7 @@ const Article = loadable(() => import(/* webpackChunkName: "rate" */'../componen
 
 // 个人中心
 const User = loadable(() => import(/* webpackChunkName: "user" */'./user'));
+const capitalDetails = loadable(() => import(/* webpackChunkName: "user" */'../components/capitalDetails/capitalDetails'));
 const UserH5 = loadable(() => import(/* webpackChunkName: "user" */'./user-h5'));
 //资迅中心
 const Information = loadable(() => import(/* webpackChunkName: "Information" */'@/pages/information/Information.jsx'));
@@ -106,6 +107,7 @@ class App extends Component {
                 <Route path="/rate_first_step/:id/:amount" component={RateOrderStep1} />
                 <Route path="/rate_second_step/:id" component={RateOrderStep2} />
                 <Route path="/user" component={User} />
+                <Route path="/capital_details" component={capitalDetails} />
                 <Route path="/article/:key" component={Article} />
                 <Route path="/information/:tab?" component={Information} />
                 <Route path="/information_detail/:tab/:id" component={Information_Detail} />
