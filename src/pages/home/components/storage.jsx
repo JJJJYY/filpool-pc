@@ -21,14 +21,16 @@ class Storage extends React.Component {
     componentDidMount() {
         // this.createDom();
         net.getPoolInfo().then(res => {
-            this.setState({
-                progressData: this.done(res.data.poolAdjPower / res.data.poolMaxAdjPower * 100, 1),
-                poolData: res.data || {},
-                loading: true,
-            })
-            setTimeout(() => {
-                this.createDom();
-            }, 0);
+            if(res.ret === 200) {
+                this.setState({
+                    progressData: this.done(res.data.poolAdjPower / res.data.poolMaxAdjPower * 100, 1),
+                    poolData: res.data || {},
+                    loading: true,
+                })
+                setTimeout(() => {
+                    this.createDom();
+                }, 0);
+            }
         })
     }
     componentWillUnmount() {
