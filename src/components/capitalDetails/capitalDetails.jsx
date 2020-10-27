@@ -149,7 +149,6 @@ export default class CapitalDetail extends React.Component {
         net.getAssetTokens().then((res) => {
             if (res.ret == 200) {
                 res.data.forEach((item) => {
-                    console.log(item)
                     if (item.asset === "FIL") {
                         this.setState({
                             myTokensData: item
