@@ -1,5 +1,5 @@
 export default {
-    ACCOUNT_1: '我的总算力',
+    ACCOUNT_1: '我的存储空间',
     ACCOUNT_2: '绑定手机',
     ACCOUNT_3: '登录、提现、修改安全设置时使用',
     ACCOUNT_4: '修改手机',
@@ -98,7 +98,7 @@ export default {
     ACCOUNT_97: '天',
     ACCOUNT_98: '算力明细',
     ACCOUNT_99: '算力收益',
-    ACCOUNT_100: '我的总算力: {weight} GB',
+    ACCOUNT_100: '我的存储空间: {weight} GB',
     ACCOUNT_101: '您所持有的算力收益，将从Filecoin主网上线后',
     ACCOUNT_102: '正式挖矿并发放收益之日开始计算。',
     ACCOUNT_103: '敬请期待',
@@ -155,7 +155,7 @@ export default {
     //2020-0418
     ACCOUNT_154: '1、在手机上下谷款验证器（Google Authenticator) APP，请用手机直接扫描下方二维码下载谷歌验证器',
     ACCOUNT_155: '2、如果您无法扫描二维码，请直接在各大应用商店或使用手机浏览器搜索谷歌验证器搜索“谷歌验证器”下载 App',
-    ACCOUNT_156: '总算力',
+    ACCOUNT_156: '存储空间',
     ACCOUNT_200: '有效算力',
     ACCOUNT_157: '直接',
     ACCOUNT_158: '间接',

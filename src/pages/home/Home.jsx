@@ -178,20 +178,15 @@ class Home extends Component {
 
                     {/* 存储空间 */}
                     <div>
-                        <p style={{ fontSize: '24px', color: '#333333', marginTop: '20px', textAlign: 'center' }}>存储空间</p>
+                        <p style={{ fontSize: '24px', color: '#333333', marginTop: '20px', textAlign: 'center' }}>FILPool矿池收益数据</p>
                     </div>
                     <Storage />
-                    <div className="shopContainer" style={{ minHeight: "3.24rem", position: "relative" }}>
+                    {/* <div className="shopContainer" style={{ minHeight: "3.24rem", position: "relative" }}>
                         <div className={styles.shopCellLabel}>
                             <div className={styles.item}>
-                                {/*<span className={`iconfont ${styles.icon}`}>&#xe6d4;</span>*/}
                                 <img src={require("@/images/home/home_icon_filecoin@2x.png")} className={`${styles.icon}`} alt="" />
                                 <span className={styles.iconText}>{intl.get("homeStatus50")}</span>
                             </div>
-                            {/*<div className={styles.item}>
-                                    <span className={styles.iconText}>{intl.get("homeStatus51")}</span>
-                                    <span className={`iconfont ${styles.icon}`}>&#xe62d;</span>
-                                </div>*/}
                             <Link to={{ pathname: "/rate" }} className={styles.item}>
                                 <span className={styles.iconText}>{intl.get("homeStatus51")}</span>
                                 <span className={`iconfont ${styles.icon}`}>&#xe62d;</span>
@@ -233,7 +228,7 @@ class Home extends Component {
                                 })
                             }
                         </div>
-                    </div>
+                    </div> */}
                     {/*<div className={'flex-row-end cell'} style={{marginTop: '.2rem', marginBottom: '.35rem'}}>
                             <div className={'flex-row'} onClick={() => this.props.history.push('/rate')} style={{cursor: 'pointer'}}>
                                 <p className={'grey-text'}>{intl.get('RATE_67')}</p>
