@@ -16,7 +16,7 @@ export default class CapitalDetail extends React.Component {
         this.state = {
             pagination: {
                 current: 1,
-                pageSize: 10,
+                pageSize: 5,
                 total: 0,
             },
             asset: 'FIL',
@@ -160,16 +160,17 @@ export default class CapitalDetail extends React.Component {
     }
     handleChange = (value) => {
         net.getRecordList({
-            page: this.state.pagination.current,
+            page: 1,
             asset: this.state.asset,
-            count: this.state.pagination.pageSize,
+            count: 5,
             type: value,
         }).then(res => {
             this.setState({
                 data: res.data.list,
+                type: value,
                 pagination: {
-                    current: this.state.pagination.current,
-                    pageSize: this.state.pagination.pageSize,
+                    current: 1,
+                    pageSize: 5,
                     total: res.data.total
                 }
             })
