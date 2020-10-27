@@ -1,4 +1,8 @@
-import { get, post, form } from '../axios';
+import {
+    get,
+    post,
+    form
+} from '../axios';
 
 const auth = '/auth';
 
@@ -77,10 +81,16 @@ export default {
     //项目动态和进阶小课堂
     getInfoList: (data) => post(`AdvertisementInfo.List`, data),
     //获取项目动态和进阶小课堂
-    getInforDetail: (id) => get(`AdvertisementInfo.Detail`, { id, id }),
+    getInforDetail: (id) => get(`AdvertisementInfo.Detail`, {
+        id,
+        id
+    }),
 
     //帮助中心
-    getHelpDetail: (id) => get(`HelpInfo.Detail`, { id, id }),
+    getHelpDetail: (id) => get(`HelpInfo.Detail`, {
+        id,
+        id
+    }),
     getHelpLists: (data) => post(`HelpInfo.List`, data),
 
     // 未登录验证码
@@ -119,4 +129,6 @@ export default {
 
     // 等级规则
     getLevelRule: () => get('/general/access/levelRule'),
+    // 等级规则
+    getRecordList: (data) => get('BalanceModify.RecordList', data),
 };
