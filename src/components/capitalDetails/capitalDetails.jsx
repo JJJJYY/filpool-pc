@@ -24,6 +24,7 @@ export default class CapitalDetail extends React.Component {
             data: [
             ],
             totalMoney: '',
+            myTokensData: '',
             columns: [
                 {
                     title: '序号',
@@ -33,25 +34,31 @@ export default class CapitalDetail extends React.Component {
                 {
                     title: '金额',
                     align: 'center',
-                    render: (text) => text.quantity + ' FIL'
+                    render: (text) => parseFloatData(text.quantity) + ' FIL'
                 },
                 {
                     title: '类型',
                     align: 'center',
-                    dataIndex: 'type',
+                    render: (text, record) => {
+                        return this.dataType().map(val => {
+                            if (val.type === text.type) {
+                                return val.status
+                            }
+                        })
+                    }
                 },
                 {
                     title: '时间',
                     align: 'center',
                     dataIndex: 'createTime',
                 },
-                {
-                    title: '总金额',
-                    align: 'center',
-                    render: (text, record, index) =>
-                        // 总金额
-                        this.DecimalData(this.state.totalMoney.available, this.state.totalMoney.frozen, this.state.totalMoney.pledged),
-                },
+                // {
+                //     title: '总金额',
+                //     align: 'center',
+                //     render: (text, record, index) =>
+                //         // 总金额
+                //         this.DecimalData(this.state.totalMoney.available, this.state.totalMoney.frozen, this.state.totalMoney.pledged),
+                // },
             ]
         }
     }
@@ -59,6 +66,7 @@ export default class CapitalDetail extends React.Component {
         this.totalMoney();
         // 表格
         this.tableData();
+        this.myTokens();
     }
     tableData() {
         net.getRecordList({
@@ -77,7 +85,7 @@ export default class CapitalDetail extends React.Component {
             })
         })
     }
-    handleTableChange = (pagination, filters, sorter) => {
+    handleTableChange = (pagination) => {
         net.getRecordList({
             page: pagination.current,
             asset: this.state.asset,
@@ -120,7 +128,8 @@ export default class CapitalDetail extends React.Component {
     }
     // 精度
     DecimalData(a, b, c) {
-        return parseFloatData(Decimal.add(a, b, c));
+        return parseFloatData(new Decimal(a).add(new Decimal(b).add(new Decimal(c))));
+        // return parseFloatData(Decimal.add(a, b, c));
     }
     totalMoney() {
         net.getAssetMy().then((res) => {
@@ -129,6 +138,21 @@ export default class CapitalDetail extends React.Component {
                     if (item.asset === "FIL") {
                         this.setState({
                             totalMoney: item
+                        });
+                    }
+                })
+            }
+        });
+    }
+
+    myTokens() {
+        net.getAssetTokens().then((res) => {
+            if (res.ret == 200) {
+                res.data.forEach((item) => {
+                    console.log(item)
+                    if (item.asset === "FIL") {
+                        this.setState({
+                            myTokensData: item
                         });
                     }
                 })
@@ -188,22 +212,24 @@ export default class CapitalDetail extends React.Component {
                             </div>
                             <div className={styles.recharge}>
                                 <p onClick={() => {
-                                    this.props.history.push(`/user/asset/ope?type=in&coin=FIL`)
+                                    this.state.myTokensData.deposit === 1 ?
+                                        this.props.history.push(`/user/asset/ope?type=in&coin=FIL`) : void 0
                                 }} style={{ cursor: 'pointer', color: '#E49B39' }}>充值</p>
                                 <p className={styles.xian}></p>
                                 <p onClick={() => {
-                                    Modal.confirm({
-                                        title: "提示",
-                                        content: (
-                                            <div>FILPool矿池每天12：00发放上一日挖矿收益，如用户选择不提币，则可用资产自动转入质押资产用于第二天算力增长所需的质押币。
+                                    this.state.myTokensData.withdraw === 1 ?
+                                        Modal.confirm({
+                                            title: "提示",
+                                            content: (
+                                                <div>FILPool矿池每天12：00发放上一日挖矿收益，如用户选择不提币，则可用资产自动转入质押资产用于第二天算力增长所需的质押币。
                                             由于目前需要质押币才能保持算力稳定增长，如用户提币导致账户质押币不足以质押将影响您的算力增长以及次日挖矿收益。</div>
-                                        ),
-                                        okText: "取消",
-                                        cancelText: "提现",
-                                        onCancel() {
-                                            self.props.history.push(`/user/asset/ope?type=out&coin=FIL`)
-                                        },
-                                    })
+                                            ),
+                                            okText: "取消",
+                                            cancelText: "提现",
+                                            onCancel() {
+                                                self.props.history.push(`/user/asset/ope?type=out&coin=FIL`)
+                                            },
+                                        }) : void 0
                                 }} style={{ cursor: 'pointer' }}>提现</p>
                             </div>
                         </div>
@@ -244,10 +270,6 @@ export default class CapitalDetail extends React.Component {
                                                 return <Select.Option value={item.type}>{item.status}</Select.Option>
                                             })
                                         }
-                                        {/* <Select.Option value="充值">充值</Select.Option>
-                                        <Select.Option value="提现">提现</Select.Option>
-                                        <Select.Option value="挖矿收益">挖矿收益</Select.Option>
-                                        <Select.Option value="算力增长消耗">算力增长消耗</Select.Option> */}
                                     </Select>
                                 </div>
                             </div>
