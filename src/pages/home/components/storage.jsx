@@ -106,12 +106,12 @@ class Storage extends React.Component {
                         <div className={styles.contentDataBox}>
                             <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[2]} /></p>
                             <p className={styles.contentDataText1}>{this.state.poolData.poolEfficiency}</p>
-                            <p className={styles.contentDataText}>单T累计收益  (FIL/T)</p>
+                            <p className={styles.contentDataText}>累计单T收益  (FIL/T)</p>
                         </div>
                         <div className={styles.contentDataBox}>
                             <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[3]} /></p>
                             <p className={styles.contentDataText1}>{this.state.poolData.yesterdaySpaceEfficiency}</p>
-                            <p className={styles.contentDataText}>单T昨日收益  (FIL/T)</p>
+                            <p className={styles.contentDataText}>昨日单T收益  (FIL/T)</p>
                         </div>
                     </div>
                 </div>
