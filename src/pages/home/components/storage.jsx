@@ -21,7 +21,7 @@ class Storage extends React.Component {
     componentDidMount() {
         // this.createDom();
         net.getPoolInfo().then(res => {
-            if(res.ret === 200) {
+            if (res.ret === 200) {
                 this.setState({
                     progressData: this.done(res.data.poolAdjPower / res.data.poolMaxAdjPower * 100, 1),
                     poolData: res.data || {},
@@ -104,14 +104,14 @@ class Storage extends React.Component {
                             <p className={styles.contentDataText}>昨日收益  (FIL)</p>
                         </div>
                         <div className={styles.contentDataBox}>
-                            <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[2]} /></p>
-                            <p className={styles.contentDataText1}>{this.state.poolData.efficiency}</p>
-                            <p className={styles.contentDataText}>累计单T收益  (FIL/T)</p>
-                        </div>
-                        <div className={styles.contentDataBox}>
                             <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[3]} /></p>
                             <p className={styles.contentDataText1}>{this.state.poolData.yesterdayEfficiency}</p>
-                            <p className={styles.contentDataText}>昨日单T收益  (FIL/T)</p>
+                            <p className={styles.contentDataText}>昨日有效算力单T收益  (FIL/T)</p>
+                        </div>
+                        <div className={styles.contentDataBox}>
+                            <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[2]} /></p>
+                            <p className={styles.contentDataText1}>{this.state.poolData.efficiency}</p>
+                            <p className={styles.contentDataText}>全网24H单T收益  (FIL/T)</p>
                         </div>
                     </div>
                 </div>
