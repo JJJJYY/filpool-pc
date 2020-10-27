@@ -335,7 +335,11 @@ class Index extends Component {
                         <div className="warning" style={{ marginLeft: '18px' }}>
                             <p style={{ color: "#575C62" }}>{intl.get('USER_64')}：</p>
                             <p>
-                                <span>{intl.get('USER_87')}</span>
+                                {coin == 'FIL' && <span>
+                                    FILPool矿池每天12：00发放上一日挖矿收益，如用户选择不提币，则可用资产自动转入质押资产用于第二天算力增长所需的质押币。
+                                    由于目前需要质押币才能保持算力稳定增长，如用户提币导致账户质押币不足以质押将影响您的算力增长以及次日挖矿收益。
+                                </span>}
+                                <span style={{ marginTop: "30px" }}>{intl.get('USER_87')}</span>
                                 <span style={{ marginTop: "30px" }}>{intl.get('USER_88')}</span>
                                 <span style={{ marginTop: "30px" }}>{intl.get('USER_89')}：{parseFloat(base.minWithdraw) || 0} {coin}</span>
                                 <span>{intl.get('USER_48')}：{parseFloat(base.minFee) || 0} {coin}</span>

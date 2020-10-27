@@ -74,7 +74,7 @@ class App extends Component {
     render() {
 
         const { userInfo } = this.props.redux;
-
+        const self = this;
         return (
             <ul className="assets">
                 {this.state.coins.map(item => (
@@ -83,9 +83,10 @@ class App extends Component {
                         <div className="asset-detail">
                             <h5>{item.asset}{item.type ? '（' + item.type + '）' : ''}</h5>
                             {/*<span>{intl.get('USER_27')}：</span><span style={{color: "#E49C3A"}}>{item.available}  {item.asset}</span>*/}
-                            <span>{intl.get('USER_27')}：</span><span>{this.DecimalData(item.available, item.frozen)}  {item.asset}</span>
-                            <span style={{ marginLeft: 40, }}>{intl.get('USER_1027')}：</span><span>{parseFloatData(item.available)}  {item.asset}</span>
-                            <span style={{ marginLeft: 40, }}>{intl.get('USER_1028')}：</span><span>{parseFloatData(item.frozen)}  {item.asset}</span>
+                            <span>{intl.get('USER_27')}：</span><span>{this.DecimalData(item.available, item.frozen)}</span>
+                            <span style={{ marginLeft: 40, }}>{intl.get('USER_1027')}：</span><span>{parseFloatData(item.available)}</span>
+                            <span style={{ marginLeft: 40, }}>{intl.get('USER_1028')}：</span><span>{parseFloatData(item.frozen)}</span>
+                            {item.asset == 'FIL' && <span><span style={{ marginLeft: 40, }}>{intl.get('USER_1029')}：</span><span>{parseFloatData(item.pledged)}</span></span>}
                         </div>
                         <span className="asset-ope">
                             {/*{item.asset === 'FILP' && (<span onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=exchange&coin=${item.asset}`) : this.bindPwd()
@@ -95,7 +96,21 @@ class App extends Component {
                                     : this.bindPwd()
                             }}>{intl.get('USER_29')}</button>}
                             {<button disabled={item.withdraw !== 1} onClick={() => {
-                                userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=out&coin=${item.asset}`)
+                                userInfo.payPwd ?
+                                    item.asset == 'FIL' ?
+                                        Modal.confirm({
+                                            title: "提示",
+                                            content: (
+                                                <div>FILPool矿池每天12：00发放上一日挖矿收益，如用户选择不提币，则可用资产自动转入质押资产用于第二天算力增长所需的质押币。
+                                            由于目前需要质押币才能保持算力稳定增长，如用户提币导致账户质押币不足以质押将影响您的算力增长以及次日挖矿收益。</div>
+                                            ),
+                                            okText: "取消",
+                                            cancelText: "提现",
+                                            onCancel() {
+                                                self.props.history.push(`/user/asset/ope?type=out&coin=${item.asset}`)
+                                            },
+                                        })
+                                        : this.props.history.push(`/user/asset/ope?type=out&coin=${item.asset}`)
                                     : this.bindPwd()
                             }}>{intl.get('USER_30')}</button>}
                             {/*{item.asset === "FIL" ? <span>{intl.get('USER_29')}</span> : <span onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=in&coin=${item.asset}`)
