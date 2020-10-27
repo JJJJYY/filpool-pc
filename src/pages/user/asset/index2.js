@@ -85,7 +85,7 @@ class App extends Component {
                         <div className="asset-detail" style={{ cursor: 'pointer' }} onClick={item.asset === 'FIL' ? this.handleClick : null}>
                             <h5>{item.asset}{item.type ? '（' + item.type + '）' : ''}</h5>
                             {/*<span>{intl.get('USER_27')}：</span><span style={{color: "#E49C3A"}}>{item.available}  {item.asset}</span>*/}
-                            <span>{intl.get('USER_27')}：</span><span>{this.DecimalData(item.available, item.frozen)}</span>
+                            <span>{intl.get('USER_27')}：</span><span>{this.DecimalData(item.available, this.DecimalData(item.frozen, item.pledged))}</span>
                             <span style={{ marginLeft: 40, }}>{intl.get('USER_1027')}：</span><span>{parseFloatData(item.available)}</span>
                             <span style={{ marginLeft: 40, }}>{intl.get('USER_1028')}：</span><span>{parseFloatData(item.frozen)}</span>
                             {item.asset == 'FIL' && <span><span style={{ marginLeft: 40, }}>{intl.get('USER_1029')}：</span><span>{parseFloatData(item.pledged)}</span></span>}
