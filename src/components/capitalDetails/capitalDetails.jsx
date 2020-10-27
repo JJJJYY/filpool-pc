@@ -160,14 +160,6 @@ export default class CapitalDetail extends React.Component {
         });
     }
     handleChange = (value) => {
-        // this.setState({
-        //     // pagination: {
-        //     //     pageSize: this.state.pagination.pageSize,
-        //     //     current: this.state.pagination.current,
-        //     //     total: this.state.pagination.total,
-        //     // },
-        //     type: Number(value)
-        // })
         net.getRecordList({
             page: this.state.pagination.current,
             asset: this.state.asset,
@@ -214,7 +206,7 @@ export default class CapitalDetail extends React.Component {
                                 <p onClick={() => {
                                     this.state.myTokensData.deposit === 1 ?
                                         this.props.history.push(`/user/asset/ope?type=in&coin=FIL`) : void 0
-                                }} style={{ cursor: 'pointer', color: '#E49B39' }}>充值</p>
+                                }} style={this.state.myTokensData.deposit === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>充值</p>
                                 <p className={styles.xian}></p>
                                 <p onClick={() => {
                                     this.state.myTokensData.withdraw === 1 ?
@@ -230,7 +222,7 @@ export default class CapitalDetail extends React.Component {
                                                 self.props.history.push(`/user/asset/ope?type=out&coin=FIL`)
                                             },
                                         }) : void 0
-                                }} style={{ cursor: 'pointer' }}>提现</p>
+                                }} style={this.state.myTokensData.withdraw === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>提现</p>
                             </div>
                         </div>
                         <div className={styles.avail}>
