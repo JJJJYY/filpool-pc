@@ -79,13 +79,20 @@ export default class CapitalDetail extends React.Component {
         }).then(res => {
             this.setState({
                 loading: false,
-                data: res.data.list,
+                data: this.getId(res.data.list),
                 pagination: {
                     current: this.state.pagination.current,
                     pageSize: this.state.pagination.pageSize,
                     total: res.data.total
-                }
+                },
             })
+        })
+    }
+
+    getId(item) {
+        return item.map((val, index) => {
+            val.id = index
+            return val
         })
     }
     handleTableChange = (pagination) => {
@@ -98,7 +105,7 @@ export default class CapitalDetail extends React.Component {
         }).then(res => {
             this.setState({
                 loading: false,
-                data: res.data.list,
+                data: this.getId(res.data.list),
                 pagination: {
                     current: pagination.current,
                     pageSize: pagination.pageSize,
@@ -174,7 +181,7 @@ export default class CapitalDetail extends React.Component {
         }).then(res => {
             this.setState({
                 loading: false,
-                data: res.data.list,
+                data: this.getId(res.data.list),
                 type: value,
                 pagination: {
                     current: 1,
@@ -265,15 +272,15 @@ export default class CapitalDetail extends React.Component {
                                     <p>类型</p>
                                     <Select className={styles.selectBody} defaultValue="全部" style={{ width: 120, marginLeft: '20px' }} onChange={this.handleChange}>
                                         {
-                                            this.dataType().map((item) => {
-                                                return <Select.Option value={item.type}>{item.status}</Select.Option>
+                                            this.dataType().map((item, index) => {
+                                                return <Select.Option key={index} value={item.type}>{item.status}</Select.Option>
                                             })
                                         }
                                     </Select>
                                 </div>
                             </div>
                             {/* 表格 */}
-                            <Table style={{ marginTop: '10px' }} columns={this.state.columns} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
+                            <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
                         </Card> : null
                     }
                 </div>
