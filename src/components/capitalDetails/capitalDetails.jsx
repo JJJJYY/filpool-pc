@@ -16,13 +16,14 @@ export default class CapitalDetail extends React.Component {
         this.state = {
             pagination: {
                 current: 1,
-                pageSize: 5,
+                pageSize: 10,
                 total: 0,
             },
             asset: 'FIL',
             type: 0,
             data: [
             ],
+            loading: false,
             totalMoney: '',
             myTokensData: '',
             columns: [
@@ -69,6 +70,7 @@ export default class CapitalDetail extends React.Component {
         this.myTokens();
     }
     tableData() {
+        this.setState({ loading: true });
         net.getRecordList({
             page: this.state.pagination.current,
             asset: this.state.asset,
@@ -76,6 +78,7 @@ export default class CapitalDetail extends React.Component {
             type: this.state.type,
         }).then(res => {
             this.setState({
+                loading: false,
                 data: res.data.list,
                 pagination: {
                     current: this.state.pagination.current,
@@ -86,6 +89,7 @@ export default class CapitalDetail extends React.Component {
         })
     }
     handleTableChange = (pagination) => {
+        this.setState({ loading: true });
         net.getRecordList({
             page: pagination.current,
             asset: this.state.asset,
@@ -93,6 +97,7 @@ export default class CapitalDetail extends React.Component {
             type: this.state.type,
         }).then(res => {
             this.setState({
+                loading: false,
                 data: res.data.list,
                 pagination: {
                     current: pagination.current,
@@ -160,6 +165,7 @@ export default class CapitalDetail extends React.Component {
         });
     }
     handleChange = (value) => {
+        this.setState({ loading: true });
         net.getRecordList({
             page: 1,
             asset: this.state.asset,
@@ -167,18 +173,19 @@ export default class CapitalDetail extends React.Component {
             type: value,
         }).then(res => {
             this.setState({
+                loading: false,
                 data: res.data.list,
                 type: value,
                 pagination: {
                     current: 1,
-                    pageSize: 5,
+                    pageSize: 10,
                     total: res.data.total
                 }
             })
         })
     }
     render() {
-        const { pagination } = this.state;
+        const { pagination, loading } = this.state;
         const self = this;
         return (
             <div className={styles.centent}>
@@ -266,7 +273,7 @@ export default class CapitalDetail extends React.Component {
                                 </div>
                             </div>
                             {/* 表格 */}
-                            <Table style={{ marginTop: '10px' }} columns={this.state.columns} pagination={pagination} onChange={this.handleTableChange} dataSource={this.state.data} />
+                            <Table style={{ marginTop: '10px' }} columns={this.state.columns} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
                         </Card> : null
                     }
                 </div>
