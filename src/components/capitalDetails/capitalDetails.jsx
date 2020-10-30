@@ -137,6 +137,7 @@ export default class CapitalDetail extends React.Component {
             { type: 23, status: '可用金额返还' },
             { type: 24, status: '挖矿收益' },
             { type: 25, status: 'SR质押币发放' },
+            { type: 26, status: '扣除质押币' },
         ]
     }
     // 精度
