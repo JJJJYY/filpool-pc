@@ -62,6 +62,7 @@ export default {
     RATE_59: "Copyright © 2019 FILPool  云算力科技有限公司版权所有",
     RATE_60: "首页",
     RATE_61: "云算力",
+    RATE_601: "行情",
     RATE_62: "帮助中心",
     RATE_63: "个人中心",
     RATE_64: "登录",

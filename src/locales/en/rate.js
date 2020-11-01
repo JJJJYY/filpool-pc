@@ -62,6 +62,7 @@ export default {
     RATE_59: "Copyright © 2019 FILPool Cloud Computing Technology Co., Ltd. All rights reserved",
     RATE_60: "Home",
     RATE_61: "Cloud computing power",
+    RATE_601: "market",
     RATE_62: "Help Center",
     RATE_63: "Personal Center",
     RATE_64: "Login",

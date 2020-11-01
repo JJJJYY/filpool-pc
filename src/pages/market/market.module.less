@@ -1,0 +1,76 @@
+.centent{
+    background-color: #f6f6f6;
+    width: 100%;
+    overflow: auto; // 作用子元素影响父元素问题
+    .marketCentent{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        .marketCententFIL{
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 16px;
+            width: 1200px;
+            height: 148px;
+            display: flex;
+            align-items: center;
+            .marketFlex{
+                display: flex;
+                align-items: center;
+                margin-left: 47px;
+            }
+            .marketCharts{
+                margin-left: 100px;
+                .marketChartsSize{
+                    font-size: 14px;
+                    color: #333333FF;
+                }
+                .marketChartsNum{
+                    font-size: 22px;
+                    font-weight: 500;
+                    color: #333333;
+                    margin-top: 15px;
+                }
+            }
+            .marketDecline{
+                margin-left: 100px;
+                .marketDeclineH{
+                    font-size: 18px;
+                    color: #333333;
+                }
+                .marketDeclineNum{
+                    color: #D32525;
+                    font-size: 25px;    
+                    font-weight: 500;
+                    margin-top: 15px;
+                }
+            }
+            .marketBox{
+                img{
+                    width: 41px;
+                    height: 42px;
+                }
+                .marketTitle{
+                    color: #333333FF;
+                    font-size: 32px;
+                    font-weight: 500;
+                    margin-left: 15px;
+                }
+            }
+        }
+        .tableCentent{
+            width: 1200px;
+            margin: 20px auto 0;
+            border-radius: 16px;
+            .tableCententThis{
+                border-radius: 16px;
+
+            }
+            :global {
+                .ant-select-selector{
+                    border-radius: 8px;
+                    background-color: #F6F6F6;
+                }
+            }
+        }
+    }
+}

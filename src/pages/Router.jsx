@@ -42,6 +42,7 @@ const RateDetailH5 = loadable(() => import(/* webpackChunkName: "rate5" */'./rat
 const RateOrderStep1H5 = loadable(() => import(/* webpackChunkName: "rate5" */'./rate/order/H5/OrderStep1'));
 const RateOrderStep2H5 = loadable(() => import(/* webpackChunkName: "rate5" */'./rate/order/H5/OrderStep2'));
 const Article = loadable(() => import(/* webpackChunkName: "rate" */'../components/article'));
+const market = loadable(() => import(/* webpackChunkName: "rate" */'../pages/market/market'));
 
 // 个人中心
 const User = loadable(() => import(/* webpackChunkName: "user" */'./user'));
@@ -115,6 +116,7 @@ class App extends Component {
                 <Route path="/orderPay" component={OrderPay} />
                 <Route path="/common/airticle/:id?" component={Airticle} />
                 <Route path="/download" component={Download} />
+                <Route path="/market" component={market} />
             </Router>
         );
     }

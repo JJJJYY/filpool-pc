@@ -129,6 +129,6 @@ export default {
 
     // 等级规则
     getLevelRule: () => get('/general/access/levelRule'),
-    // 等级规则
+    // 
     getRecordList: (data) => get('BalanceModify.RecordList', data),
 };

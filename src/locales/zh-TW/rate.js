@@ -62,6 +62,7 @@ export default {
     RATE_59: "Copyright © 2019 FILPool  雲算力科技有限公司版權所有",
     RATE_60: "首頁",
     RATE_61: "雲算力",
+    RATE_601: "行情",
     RATE_62: "幫助中心",
     RATE_63: "個人中心",
     RATE_64: "登錄",

@@ -8,7 +8,7 @@ import setLanguage from '../../locales/setLanguage';
 import intl from 'react-intl-universal';
 import net from '../../net';
 
-const keys = ['home', 'rate', 'help', 'user', 'login', 'register', 'information', 'invite'];
+const keys = ['home', 'rate', 'help', 'user', 'login', 'register', 'information', 'invite', 'market'];
 
 const lang = {
     zh: '中文',
@@ -144,6 +144,9 @@ class Header extends Component {
                                 </Menu.Item>
                                 <Menu.Item key={keys[1]}>
                                     {intl.get('RATE_61')}
+                                </Menu.Item>
+                                <Menu.Item key={keys[8]}>
+                                    {intl.get('RATE_601')}
                                 </Menu.Item>
                                 <Menu.Item key={keys[6]}>
                                     {intl.get('RATE_86')}
