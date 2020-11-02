@@ -17,6 +17,7 @@ class Market extends React.Component {
                     width: 400,
                     align: 'left',
                     render: text => <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <meta name="referrer" content="never" />
                         <img src={text.logo} style={{ width: '24px', height: '24px', marginRight: '5px' }} alt="" />
                         {text.sign}
                     </div>,
