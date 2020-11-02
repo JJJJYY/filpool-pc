@@ -178,7 +178,7 @@ class Home extends Component {
 
                     {/* 存储空间 */}
                     <div>
-                        <p style={{ fontSize: '24px', color: '#333333', marginTop: '20px', textAlign: 'center' }}>FILPool矿池收益数据</p>
+                        <p style={{ fontSize: '24px', color: '#333333', marginTop: '20px', textAlign: 'center' }}>FILPool矿池运营数据</p>
                     </div>
                     <Storage />
                     {/* <div className="shopContainer" style={{ minHeight: "3.24rem", position: "relative" }}>

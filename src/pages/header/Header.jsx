@@ -142,9 +142,9 @@ class Header extends Component {
                                 <Menu.Item key={keys[0]}>
                                     {intl.get('RATE_60')}
                                 </Menu.Item>
-                                <Menu.Item key={keys[1]}>
+                                {/* <Menu.Item key={keys[1]}>
                                     {intl.get('RATE_61')}
-                                </Menu.Item>
+                                </Menu.Item> */}
                                 <Menu.Item key={keys[8]}>
                                     {intl.get('RATE_601')}
                                 </Menu.Item>

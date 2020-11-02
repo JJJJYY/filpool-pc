@@ -14,6 +14,8 @@ class Market extends React.Component {
             columns: [
                 {
                     title: '币种',
+                    width: 400,
+                    align: 'left',
                     render: text => <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img src={text.logo} style={{ width: '24px', height: '24px', marginRight: '5px' }} alt="" />
                         {text.sign}
@@ -21,18 +23,21 @@ class Market extends React.Component {
                 },
                 {
                     title: '市值',
+                    align: 'center',
                     render: (text) => {
                         return <div style={{ fontSize: '16px' }}>{this.numUnit(text.marketValue)}</div>
                     },
                 },
                 {
                     title: '最新价（￥）',
+                    align: 'center',
                     render: (text) => {
                         return <div style={{ fontSize: '16px' }}>{text.currentPrice}</div>
                     },
                 },
                 {
                     title: '24H涨跌幅',
+                    align: 'center',
                     render: (text) => {
                         return this.fontColor(text)
                     },
