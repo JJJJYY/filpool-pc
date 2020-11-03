@@ -115,32 +115,32 @@ export default class Index extends Component {
                     }
                 }
             },
-            {
-                th: intl.get('USER_19'),
-                style: { width: "90px" },
-                textAlign: "center",
-                render: (key, row) => {
-                    if (String(row.status) === '0') {
-                        return (
-                            /*<a
-                                onClick={() => this.props.history.push(`/rate_second_step/${row.id}`)}
-                                style={{ display: 'inline-block', color: '#E49C3A', lineHeight: '.2rem', padding: '0 .18rem', borderRadius: '.1rem', border: '1px solid #E49C3A' }}
-                            >{intl.get('USER_20')}</a>*/
-                            <a
-                                onClick={() => this.props.history.push(`/orderPay?stepIndex=1&orderId=${row.id}`)}
-                                className={styles.handleBtn}
-                            >{intl.get('USER_20')}</a>
-                        )
-                    } else {
-                        return (
-                            <a
-                                onClick={() => this.props.history.push(`/rate`)}
-                                className={styles.handleBtn}
-                            >{intl.get('USER_123')}</a>
-                        )
-                    }
-                }
-            }
+            // {
+            //     th: intl.get('USER_19'),
+            //     style: { width: "90px" },
+            //     textAlign: "center",
+            //     render: (key, row) => {
+            //         if (String(row.status) === '0') {
+            //             return (
+            //                 /*<a
+            //                     onClick={() => this.props.history.push(`/rate_second_step/${row.id}`)}
+            //                     style={{ display: 'inline-block', color: '#E49C3A', lineHeight: '.2rem', padding: '0 .18rem', borderRadius: '.1rem', border: '1px solid #E49C3A' }}
+            //                 >{intl.get('USER_20')}</a>*/
+            //                 <a
+            //                     onClick={() => this.props.history.push(`/orderPay?stepIndex=1&orderId=${row.id}`)}
+            //                     className={styles.handleBtn}
+            //                 >{intl.get('USER_20')}</a>
+            //             )
+            //         } else {
+            //             return (
+            //                 <a
+            //                     onClick={() => this.props.history.push(`/rate`)}
+            //                     className={styles.handleBtn}
+            //                 >{intl.get('USER_123')}</a>
+            //             )
+            //         }
+            //     }
+            // }
         ];
 
         return (
