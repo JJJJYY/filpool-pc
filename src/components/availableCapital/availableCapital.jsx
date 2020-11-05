@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './capitalDetails.module.less';
-import { Card, Tooltip, Table, Tag, Space, Select, Modal } from 'antd';
+import styles from './availableCapital.module.less';
+import { Card, Tooltip, Table, Tag, Space, Select, Modal, Tabs, Button } from 'antd';
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
@@ -9,7 +9,7 @@ import net from '../../net'
 import Footer from '../../pages/footer'
 import parseFloatData from '../../util/parseFloatData';
 import { Decimal } from "decimal.js";
-
+const { TabPane } = Tabs;
 export default class CapitalDetail extends React.Component {
     constructor(props) {
         super(props)
@@ -20,7 +20,7 @@ export default class CapitalDetail extends React.Component {
                 total: 0,
             },
             asset: 'FIL',
-            type: 0,
+            type: 3,
             data: [
             ],
             loading: false,
@@ -68,6 +68,39 @@ export default class CapitalDetail extends React.Component {
         // 表格
         this.tableData();
         this.myTokens();
+    }
+
+    // tabs
+    handleCallback = (key) => {
+        let thisType = null;
+        if (Number(key)) {
+            console.log(Number(key))
+            thisType = key
+        } else {
+            console.log(key.split(","))
+            thisType = key.split(",").map(function (item) {
+                return +item;
+            });
+        }
+        console.log(`${thisType}`)
+        this.setState({ loading: true });
+        net.getRecordList({
+            page: this.state.pagination.current,
+            asset: this.state.asset,
+            count: this.state.pagination.pageSize,
+            type: `${thisType}`,
+        }).then(res => {
+            this.setState({
+                loading: false,
+                data: this.getId(res.data.list),
+                pagination: {
+                    current: this.state.pagination.current,
+                    pageSize: this.state.pagination.pageSize,
+                    total: res.data.total,
+                },
+                type: thisType
+            })
+        })
     }
     tableData() {
         this.setState({ loading: true });
@@ -144,15 +177,10 @@ export default class CapitalDetail extends React.Component {
         ]
     }
     // 精度
-    DecimalData(a, b, c, d) {
-        return parseFloatData(new Decimal(a).add(new Decimal(b).add(new Decimal(c).add(new Decimal(d)))));
+    DecimalData(a, b, c) {
+        return parseFloatData(new Decimal(a).add(new Decimal(b)));
         // return parseFloatData(Decimal.add(a, b, c));
     }
-
-    availableCapitalGo() {
-        window.location.href = `/#/available_capital`;
-    }
-
     totalMoney() {
         net.getAssetMy().then((res) => {
             if (res.ret == 200) {
@@ -180,36 +208,18 @@ export default class CapitalDetail extends React.Component {
             }
         });
     }
-    handleChange = (value) => {
-        this.setState({ loading: true });
-        net.getRecordList({
-            page: 1,
-            asset: this.state.asset,
-            count: 5,
-            type: value,
-        }).then(res => {
-            this.setState({
-                loading: false,
-                data: this.getId(res.data.list),
-                type: value,
-                pagination: {
-                    current: 1,
-                    pageSize: 10,
-                    total: res.data.total
-                }
-            })
-        })
-    }
+
     render() {
         const { pagination, loading } = this.state;
         const self = this;
+        console.log(this.state.totalMoney)
         return (
             <div className={styles.centent}>
                 <div className={styles.return}>
                     <div className={styles.returnIcon} >&#60;</div>
-                    <div className={styles.return1} style={{ marginLeft: '10px' }}><a href="/#/user/asset/index2">返回</a> </div>
+                    <div className={styles.return1} style={{ marginLeft: '10px' }}><a onClick={() => { this.props.history.goBack() }}>返回</a> </div>
                     <div className={styles.marginXian} style={{ marginLeft: '20px' }}></div>
-                    <div className={styles.marginSize} style={{ marginLeft: '20px' }}>资产管理</div>
+                    <div className={styles.marginSize} style={{ marginLeft: '20px' }}>可用资产</div>
                 </div>
                 <div className={styles.myAssetsCentent}>
                     {this.state.totalMoney ? <Card style={{
@@ -221,13 +231,14 @@ export default class CapitalDetail extends React.Component {
                                 <img style={{ width: '47px', height: '47px' }} src={require('../../images/coin-fil.png')} alt="" />
                             </div>
                             <div style={{ marginLeft: '30px', }}>
-                                <p style={{ fontSize: '16px', fontWeight: 600 }}>总资产</p>
+                                <p style={{ fontSize: '16px', fontWeight: 600 }}>可用资产</p>
                                 <p style={{ marginTop: '6px', fontSize: '18px', color: '#E49B39', fontWeight: 600 }}>
-                                    {this.DecimalData(this.state.totalMoney.available, this.state.totalMoney.frozen, this.state.totalMoney.pledged, this.state.totalMoney.recharge)}
+                                    {this.DecimalData(this.state.totalMoney.available, this.state.totalMoney.recharge)}
                                 </p>
                             </div>
                             <div className={styles.recharge}>
-                                <p onClick={() => {
+                                <Button shape="round" style={{ background: '#F49536FF', color: '#fff' }}>划转</Button>
+                                {/* <p onClick={() => {
                                     this.state.myTokensData.deposit === 1 ?
                                         this.props.history.push(`/user/asset/ope?type=in&coin=FIL`) : void 0
                                 }} style={this.state.myTokensData.deposit === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>充值</p>
@@ -245,28 +256,33 @@ export default class CapitalDetail extends React.Component {
                                                 self.props.history.push(`/user/asset/ope?type=out&coin=FIL`)
                                             },
                                         }) : void 0
-                                }} style={this.state.myTokensData.withdraw === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>提现</p>
+                                }} style={this.state.myTokensData.withdraw === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>提现</p> */}
                             </div>
                         </div>
                         <div className={styles.avail}>
-                            <div className={styles.theAvail} style={{ textAlign: 'left' }}>
-                                <p className={styles.availText}>可用资产</p>
-                                <p onClick={this.availableCapitalGo} style={{ display: 'flex', cursor: 'pointer', alignItems: 'center' }} className={styles.availSize}><span>{parseFloatData(new Decimal(this.state.totalMoney.available).add(new Decimal(this.state.totalMoney.recharge)))}</span><span style={{ margin: '-2px 0 0 5px', color: '#666666FF' }}>{'>>'}</span></p>
+                            <div className={styles.theAvail} style={{ textAlign: 'cneter' }}>
+                                <p className={styles.availText}>充值余额</p>
+                                <p style={{ display: 'flex', cursor: 'pointer', alignItems: 'center' }} className={styles.availSize}>
+                                    <span>{parseFloatData(this.state.totalMoney.recharge)}</span>
+                                    <Tooltip placement="top" title={'充值余额才能进行抢购算力加速、提币等操作'}>
+                                        <QuestionCircleOutlined className={styles.doubt}></QuestionCircleOutlined>
+                                    </Tooltip>
+                                </p>
                             </div>
                             <div className={styles.theAvail}>
-                                <Tooltip placement="top" title={'每天线性释放，释放周期180天'}>
+                                <Tooltip placement="top" title={'每日12点发放上一日挖矿收益，当日18点前不划转至充值余额，余额将自动划转至质押金额'}>
                                     <QuestionCircleOutlined className={styles.doubt}></QuestionCircleOutlined>
                                 </Tooltip>
-                                <p className={styles.availText}>冻结资产</p>
-                                <p className={styles.availSize}>{parseFloatData(this.state.totalMoney.frozen)}</p>
+                                <p className={styles.availText}>收益余额</p>
+                                <p className={styles.availSize}>{parseFloatData(this.state.totalMoney.available)}</p>
                             </div>
-                            <div className={styles.theAvail}>
+                            {/* <div className={styles.theAvail}>
                                 <Tooltip placement="top" title={'质押金额用于有效算力增长'}>
                                     <QuestionCircleOutlined className={styles.doubt}></QuestionCircleOutlined>
                                 </Tooltip>
                                 <p className={styles.availText}>质押资产</p>
                                 <p className={styles.availSize}>{parseFloatData(this.state.totalMoney.pledged)}</p>
-                            </div>
+                            </div> */}
                         </div>
                     </Card> : null}
 
@@ -275,21 +291,16 @@ export default class CapitalDetail extends React.Component {
                             width: 1200, margin: '15px auto 0', border: '0',
                             borderRadius: '16px'
                         }}>
-                            <div className={styles.selectCentent}>
-                                <p style={{ fontSize: '14px', fontWeight: '600' }}>资金明细</p>
-                                <div className={styles.select}>
-                                    <p>类型</p>
-                                    <Select className={styles.selectBody} defaultValue="全部" style={{ width: 120, marginLeft: '20px' }} onChange={this.handleChange}>
-                                        {
-                                            this.dataType().map((item, index) => {
-                                                return <Select.Option key={index} value={item.type}>{item.status}</Select.Option>
-                                            })
-                                        }
-                                    </Select>
-                                </div>
-                            </div>
-                            {/* 表格 */}
-                            <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
+                            <Tabs defaultActiveKey="1" onChange={this.handleCallback}>
+                                <TabPane tab="充值明细" key={24}>
+                                    {/* 表格 */}
+                                    <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
+                                </TabPane>
+                                <TabPane tab="收益明细" key={[17, 24]}>
+                                    {/* 表格 */}
+                                    <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
+                                </TabPane>
+                            </Tabs>
                         </Card> : null
                     }
                 </div>

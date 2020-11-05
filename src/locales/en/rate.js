@@ -114,7 +114,7 @@ export default {
     RATE_109: "Hashing Power",
     RATE_110: "Time",
     RATE_111: "Remarks",
-    RATE_112: "Exceeded the maximum purchase volume: 100,000",
+    RATE_112: "Exceeded the maximum purchase volume: {maxItem}",
     RATE_113: "Download",
     RATE_114: "APP Download"
 }

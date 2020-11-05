@@ -13,6 +13,7 @@ import intl from 'react-intl-universal';
 import HomeStatic from './HomeStatic';
 import LazyLoad from 'react-lazyload';
 import Storage from './components/storage';
+import Expedite from '../../components/expedite/expedite';
 
 const pre = 'home';
 
@@ -140,7 +141,7 @@ class Home extends Component {
                         })}
                     </Carousel>
                 </div>
-                <div className={'content'}>
+                <div className={'content'} style={{ margin: 0 }}>
                     <div className={`${styles.noticeContainer}`} style={{ height: "56px" }}>
                         {/*<span className="iconfont">&#xe6d2;</span>*/}
                         <Carousel style={{ minWidth: "68%" }} className="ddd"
@@ -175,12 +176,20 @@ class Home extends Component {
                             <span className={`iconfont ${styles.icon}`} style={{ verticalAlign: "top", color: "#575C62" }}>&#xe62d;</span>
                         </Link>
                     </div>
-
-                    {/* 存储空间 */}
-                    <div>
-                        <p style={{ fontSize: '24px', color: '#333333', marginTop: '20px', textAlign: 'center' }}>FILPool矿池运营数据</p>
+                    {/* 算力加速 */}
+                    <div style={{ width: '100%', paddingBottom: '60px', overflow: 'auto' }}>
+                        <div style={{ textAlign: 'center', fontSize: '24px', fontWeight: '500', color: '#333333FF', marginTop: '55px' }}>30天算力加速计划</div>
+                        <div style={{ marginTop: '40px', overflow: 'auto' }}>
+                            <Expedite stats={'111'} />
+                        </div>
                     </div>
-                    <Storage />
+                    {/* 存储空间 */}
+                    <div style={{ background: '#F5F5F5FF', padding: '46px 0', overflow: 'auto' }}>
+                        <div>
+                            <p style={{ fontSize: '24px', color: '#333333', marginBottom: '46px', textAlign: 'center' }}>FILPool矿池运营数据</p>
+                        </div>
+                        <Storage />
+                    </div>
                     {/* <div className="shopContainer" style={{ minHeight: "3.24rem", position: "relative" }}>
                         <div className={styles.shopCellLabel}>
                             <div className={styles.item}>

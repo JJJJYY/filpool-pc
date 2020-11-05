@@ -72,6 +72,10 @@ export default {
     getBlockWon: (data) => get('/api/v1/info/block_won', data),
     //获取矿工排行
     getMinerTop: () => get('/api/v1/miner/top'),
-    //获取矿工排行
+    //
     getPoolInfo: () => get('PoolInfo.Info'),
+    // 抢购
+    getPurchaseInfo: () => get('FlashSale.ShowPurchaseInfo'),
+    // 首页抢购列表页
+    getHomePageSaleLatestInfo: () => get('FlashSale.showHomePageSaleLatestInfo'),
 };

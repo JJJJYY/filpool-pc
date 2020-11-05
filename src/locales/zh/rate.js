@@ -114,7 +114,7 @@ export default {
     RATE_109: "算力",
     RATE_110: "时间",
     RATE_111: "备注",
-    RATE_112: "超过最大买入量：100000",
+    RATE_112: "超过最大买入量：{maxItem}",
     RATE_113: "扫码下载",
     RATE_114: "下载APP",
 }

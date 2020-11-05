@@ -1,6 +1,6 @@
-import React, { Component }  from 'react';
-import styles  from './inputNumber.module.less';
-import {message} from "antd";
+import React, { Component } from 'react';
+import styles from './inputNumber.module.less';
+import { message } from "antd";
 import intl from "react-intl-universal";
 
 export default class InputNumber extends Component {
@@ -10,41 +10,41 @@ export default class InputNumber extends Component {
             value: props.value
         };
         this.defalutStyle = {
-            height: "40px"
+            height: "40px",
+            width: '240px'
         }
     }
 
-    onchange (event) {
-        if (event.target.value > 100000) {
-            message.info(intl.get("RATE_112"));
+    onchange(event) {
+        if (event.target.value > 1000) {
+            message.info(intl.get("RATE_112", { maxItem: 1000 }));
             return;
         }
         this.props.onChange(event, event.target.value);
     }
-
-    add () {
-        if (this.props.value >= 100000) {
-            message.info(intl.get("RATE_112"));
+    add() {
+        if (this.props.value >= 1000) {
+            message.info(intl.get("RATE_112", { maxItem: 1000 }));
             return;
         }
         this.props.onAdd();
     }
 
-    sub () {
+    sub() {
         this.props.onSub();
     }
     render() {
-        const {value} = this.state;
+        const { value } = this.state;
         let style = Object.assign(this.defalutStyle, this.props.style);
 
         return (
             <div className={styles.container} style={style}>
-                <button className={styles.button} onClick={() => {this.sub()}}>
+                <button className={styles.button} onClick={() => { this.sub() }}>
                     <span>-</span>
                 </button>
                 <input type="text" className={styles.input} min={0} value={this.props.value}
-                       onChange={(event) => {this.onchange(event)}}/>
-                <button className={styles.button} onClick={() => {this.add()}}>+</button>
+                    onChange={(event) => { this.onchange(event) }} />
+                <button className={styles.button} onClick={() => { this.add() }}>+</button>
             </div>
         )
     }

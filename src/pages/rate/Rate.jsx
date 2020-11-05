@@ -57,7 +57,7 @@ class Rate extends Component {
         net.getGoodList().then(res => {
             if (res.ret === 200) {
                 if (res.data.length === 1) {
-                    this.props.history.push(`/rate_detail/${res.data[0].id}/${res.data[0].minLimit}`)
+                    // this.props.history.push(`/rate_detail/${res.data[0].id}/${res.data[0].minLimit}`)
                 }
                 this.setState({ data: res.data })
             }
