@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { HashRouter as Router, Route, Redirect, Link } from 'react-router-dom';
+import { Progress } from 'antd';
 import connect from '../../store/connect';
 import intl from 'react-intl-universal';
 import Foot from '@/pages/footer/index';
 import net from "@/net/index";
 import './index.less';
 import styles from './index.module.less';
+
+import parseFloatData from '../../util/parseFloatData';
 
 //import Animate from './animate';
 
@@ -133,8 +136,15 @@ class App extends Component {
         );
     }
 
+    doneNum(num, count) {
+        var newNum = parseInt(num * Math.pow(10, count)) / Math.pow(10, count);
+        return newNum;
+    }
+
     render() {
         let { myWeight } = this.state;
+        console.log(myWeight)
+        let progress = this.doneNum((myWeight.validWeight / myWeight.maxAdj) * 100, 4)
         return (
             <div className="user">
                 <div>
@@ -161,10 +171,18 @@ class App extends Component {
                     </div>*/}
                         <div className={`${styles.userHeader}`}>
                             <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight.totalWeight} TB</span>
-                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{myWeight.validWeight} TB</span>
+                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight.maxAdj)} TB</span>
                             {/* <Link className={styles.label} to={{ pathname: '/rate' }}>
                                 <span className={styles.label}>{intl.get("USER_122")}</span>
                             </Link> */}
+                        </div>
+                        <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <span className={styles.bold}> 目前有效算力：{myWeight.validWeight}TB</span>
+                                <Progress strokeColor='#EF8C21' style={{ width: '300px' }} percent={progress} status="active" />
+                                <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '50px' }}>去加速算力 &gt;&gt;</span></a>
+                            </div>
+                            <div onClick={() => { window.location.href = '/#/power_details' }} style={{ cursor: 'pointer' }}>算力增长明细 &gt;&gt; </div>
                         </div>
                     </div>
                     <div style={{ width: "1200px", margin: '0 auto 60px' }}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './availableCapital.module.less';
-import { Card, Tooltip, Table, Tag, Space, Select, Modal, Tabs, Button } from 'antd';
+import { Card, Tooltip, Table, Tag, Space, Select, Modal, Tabs, Button, Input } from 'antd';
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
@@ -10,7 +10,7 @@ import Footer from '../../pages/footer'
 import parseFloatData from '../../util/parseFloatData';
 import { Decimal } from "decimal.js";
 const { TabPane } = Tabs;
-export default class CapitalDetail extends React.Component {
+export default class AvailableCapital extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,13 +19,17 @@ export default class CapitalDetail extends React.Component {
                 pageSize: 10,
                 total: 0,
             },
+            visible: false,
             asset: 'FIL',
-            type: 3,
+            // 划转类型
+            transferType: 1,
+            type: [3, 13],
             data: [
             ],
             loading: false,
             totalMoney: '',
             myTokensData: '',
+            buyNum: '',
             columns: [
                 {
                     title: '序号',
@@ -208,13 +212,100 @@ export default class CapitalDetail extends React.Component {
             }
         });
     }
+    handleOk = e => {
+        net.getTransfer({
+            type: this.state.transferType,
+            asset_id: this.state.myTokensData.id,
+            amount: this.state.buyNum
+        }).then(res => {
+            if (res.ret == 200) {
+                Modal.success({
+                    content: '划转成功',
+                });
+                this.totalMoney();
+            }
+        })
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        this.setState({
+            visible: false,
+        });
+    };
+
+    transformation() {
+        if (this.state.transferType == 1) {
+            this.setState({
+                transferType: 2
+            })
+        }
+        if (this.state.transferType == 2) {
+            this.setState({
+                transferType: 1
+            })
+        }
+    }
+
+    onChangeNum(e) {
+        if (!isNaN(e.target.value)) {
+            this.setState({
+                buyNum: e.target.value
+            })
+        }
+    }
+
+
 
     render() {
         const { pagination, loading } = this.state;
         const self = this;
-        console.log(this.state.totalMoney)
         return (
             <div className={styles.centent}>
+                <Modal
+                    title="资金划转"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                >
+                    <div style={{ width: '400px', display: "block", margin: '0 auto' }} >
+                        <p>币种</p>
+                        <Select style={{ width: 400 }} defaultValue="FIL" disabled>
+                            <Select.Option value='FIL' >FIL</Select.Option>
+                        </Select>
+                    </div>
+                    <div style={{ width: '400px', display: 'flex', margin: '20px auto 0', justifyContent: 'space-between' }}>
+                        <div>
+                            <p>从</p>
+                            <Select defaultValue="transferType" style={{ width: 170 }} disabled>
+                                <Select.Option value='transferType' >{this.state.transferType == 1 ? '收益余额' : '充值余额'}</Select.Option>
+                            </Select>
+                        </div>
+                        <div>
+                            <img onClick={() => { this.transformation() }} src={require('../../images/exchange.png')} style={{ width: '18px', height: '10px', marginTop: '32px', cursor: 'pointer' }} alt="" />
+                        </div>
+                        <div >
+                            <p>到</p>
+                            <Select defaultValue="transferType" style={{ width: 170 }} disabled>
+                                <Select.Option value='transferType' >{this.state.transferType == 1 ? '充值余额' : '收益余额'}</Select.Option>
+                            </Select>
+                        </div>
+                    </div>
+
+                    <div style={{ width: '400px', margin: '20px auto 0' }}>
+                        <p>数量</p>
+                        <Input style={{ width: 400 }} placeholder="请输入划转数量" value={this.state.buyNum} onChange={(e) => { this.onChangeNum(e) }} suffix={
+                            <span>FIL</span>
+                        } />
+                    </div>
+
+                    <div style={{ width: '400px', margin: '10px auto 0' }}>
+                        <span>{this.state.transferType == 1 ? `收益余额${parseFloatData(this.state.totalMoney.available)}` : `充值余额${parseFloatData(this.state.totalMoney.recharge)}`} FIL</span>
+                        <span onClick={() => { this.setState({ buyNum: this.state.transferType == 1 ? parseFloatData(this.state.totalMoney.available) : parseFloatData(this.state.totalMoney.recharge) }) }} style={{ marginLeft: '10px', color: '#F1A02C', cursor: 'pointer' }}>全部划转</span>
+                    </div>
+                </Modal>
                 <div className={styles.return}>
                     <div className={styles.returnIcon} >&#60;</div>
                     <div className={styles.return1} style={{ marginLeft: '10px' }}><a onClick={() => { this.props.history.goBack() }}>返回</a> </div>
@@ -237,26 +328,7 @@ export default class CapitalDetail extends React.Component {
                                 </p>
                             </div>
                             <div className={styles.recharge}>
-                                <Button shape="round" style={{ background: '#F49536FF', color: '#fff' }}>划转</Button>
-                                {/* <p onClick={() => {
-                                    this.state.myTokensData.deposit === 1 ?
-                                        this.props.history.push(`/user/asset/ope?type=in&coin=FIL`) : void 0
-                                }} style={this.state.myTokensData.deposit === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>充值</p>
-                                <p className={styles.xian}></p>
-                                <p onClick={() => {
-                                    this.state.myTokensData.withdraw === 1 ?
-                                        Modal.confirm({
-                                            title: "提示",
-                                            content: (
-                                                <div>FILPool矿池每天12：00发放上一日挖矿收益，如用户选择不提币，则可用资产将用于FILPool矿池第二天算力增长所需的质押币。 由于目前需要质押币才能保持算力稳定增长，如用户提币导致账户质押币不足将影响您的算力增长以及次日挖矿收益。</div>
-                                            ),
-                                            okText: "取消",
-                                            cancelText: "提现",
-                                            onCancel() {
-                                                self.props.history.push(`/user/asset/ope?type=out&coin=FIL`)
-                                            },
-                                        }) : void 0
-                                }} style={this.state.myTokensData.withdraw === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>提现</p> */}
+                                <Button onClick={() => { this.setState({ visible: true }) }} shape="round" style={{ background: '#F49536FF', color: '#fff' }}>划转</Button>
                             </div>
                         </div>
                         <div className={styles.avail}>
@@ -292,11 +364,11 @@ export default class CapitalDetail extends React.Component {
                             borderRadius: '16px'
                         }}>
                             <Tabs defaultActiveKey="1" onChange={this.handleCallback}>
-                                <TabPane tab="充值明细" key={24}>
+                                <TabPane tab="充值明细" key={[3, 13]}>
                                     {/* 表格 */}
                                     <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
                                 </TabPane>
-                                <TabPane tab="收益明细" key={[17, 24]}>
+                                <TabPane tab="收益明细" key={[17, 21]}>
                                     {/* 表格 */}
                                     <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
                                 </TabPane>

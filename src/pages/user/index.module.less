@@ -1,84 +1,97 @@
 @titleColor: #24375E;
 @font2: #24375E;
 @textColor: #575C62;
-.bannerBox{
+
+.bannerBox {
     display: flex;
     height: 240px;
     background-image: url("~@/images/user/user_center_bg_1.png");
     background-size: 100% 100%;
-    .middleBox{
+
+    .middleBox {
         display: flex;
         align-items: center;
         margin: auto 66px;
         font-size: 16px;
         color: @titleColor;
-        .icon{
+
+        .icon {
             font-size: 56px;
             margin-right: 22px;
         }
-        .bold{
+
+        .bold {
             font-size: 24px;
             font-weight: bold;
         }
-        .label{
+
+        .label {
             display: inline-block;
-            width:72px;
-            height:24px;
+            width: 72px;
+            height: 24px;
             line-height: 24px;
             margin-left: 8px;
             vertical-align: top;
             font-size: 12px;
             color: #fff;
             text-align: center;
-            background:rgba(128,136,225,1);
-            border-radius:12px;
+            background: rgba(128, 136, 225, 1);
+            border-radius: 12px;
         }
     }
 }
-.userHeader{
+
+.userHeader {
     display: flex;
     align-items: center;
-    height: 110px;
-    .bold{
+    height: 50px;
+
+    .bold {
         font-size: 22px;
         color: @titleColor;
         margin-right: 22px;
         margin-left: 32px;
     }
-    .label{
-        width:114px;
-        height:30px;
+
+    .label {
+        width: 114px;
+        height: 30px;
         line-height: 30px;
         text-align: center;
-        background:linear-gradient(90deg,rgba(241,138,45,1) 0%,rgba(252,177,80,1) 100%);
-        border-radius:15px;
+        background: linear-gradient(90deg, rgba(241, 138, 45, 1) 0%, rgba(252, 177, 80, 1) 100%);
+        border-radius: 15px;
         font-size: 14px;
         color: #fff;
     }
 }
 
-.handleBtn{
-    width:104px;
-    height:32px;
-    background:linear-gradient(90deg,rgba(241,138,45,1) 0%,rgba(252,177,80,1) 100%);
-    border-radius:16px;
+.handleBtn {
+    width: 104px;
+    height: 32px;
+    background: linear-gradient(90deg, rgba(241, 138, 45, 1) 0%, rgba(252, 177, 80, 1) 100%);
+    border-radius: 16px;
     color: #fff;
 }
-.mTable{
+
+.mTable {
     width: 100%;
     font-size: 16px;
-    .tr{
+
+    .tr {
         border-bottom: 1px solid #ddd;
     }
-    .td{
+
+    .td {
         color: #575C62;
         height: 80px;
         vertical-align: middle;
-        &:nth-child(1){
+
+        &:nth-child(1) {
             width: 30%;
             padding-left: 18px;
         }
-        &:nth-child(2){
+
+        &:nth-child(2) {
             width: 30%;
         }
     }

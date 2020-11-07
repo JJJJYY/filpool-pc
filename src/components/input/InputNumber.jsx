@@ -16,15 +16,15 @@ export default class InputNumber extends Component {
     }
 
     onchange(event) {
-        if (event.target.value > 1000) {
-            message.info(intl.get("RATE_112", { maxItem: 1000 }));
+        if (event.target.value > this.props.maxLimit) {
+            message.info(intl.get("RATE_112", { maxItem: this.props.maxLimit }));
             return;
         }
         this.props.onChange(event, event.target.value);
     }
     add() {
-        if (this.props.value >= 1000) {
-            message.info(intl.get("RATE_112", { maxItem: 1000 }));
+        if (this.props.value >= this.props.maxLimit) {
+            message.info(intl.get("RATE_112", { maxItem: this.props.maxLimit }));
             return;
         }
         this.props.onAdd();

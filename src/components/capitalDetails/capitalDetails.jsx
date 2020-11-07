@@ -185,7 +185,7 @@ export default class CapitalDetail extends React.Component {
         net.getRecordList({
             page: 1,
             asset: this.state.asset,
-            count: 5,
+            count: 10,
             type: value,
         }).then(res => {
             this.setState({

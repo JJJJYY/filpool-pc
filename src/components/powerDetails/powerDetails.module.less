@@ -1,0 +1,109 @@
+.centent {
+    background-color: #f6f6f6;
+    width: 100%;
+    overflow: auto; // 作用子元素影响父元素问题
+
+    .myAssetsCentent {
+        margin-bottom: 20px;
+
+        .myAssets {
+            margin-top: 25px;
+            margin-left: 30px;
+            display: flex;
+            align-items: center;
+
+            .recharge {
+                margin-left: 120px;
+                margin-top: 20px;
+                display: flex;
+                align-items: center;
+
+                .xian {
+                    width: 1px;
+                    height: 11px;
+                    background-color: #D4D4D4;
+                    margin: 0 10px
+                }
+            }
+        }
+
+        .avail {
+            margin-top: 36px;
+            display: flex;
+
+            .theAvail {
+                margin-left: 120px;
+                text-align: center;
+                position: relative;
+
+                .doubt {
+                    position: absolute;
+                    top: 5px;
+                    right: -20px;
+                }
+
+                .availText {
+                    font-size: 16px;
+                    color: #666666;
+                }
+
+                .availSize {
+                    margin-top: 10px;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+}
+
+.selectCentent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .select {
+        display: flex;
+        align-items: center;
+
+        .selectBody {
+            :global {
+                .ant-select-selector {
+                    border-radius: 8px;
+                    background-color: #F6F6F6;
+                }
+            }
+        }
+    }
+}
+
+.return {
+    width: 1200px;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+
+    .returnIcon {
+        font-size: 20px;
+    }
+
+    .return1 {
+        a {
+            color: #000;
+        }
+    }
+
+    .marginXian {
+        width: 1px;
+        height: 14px;
+        background-color: #D4D4D4;
+    }
+
+    .marginSize {
+        font-weight: 600;
+        font-size: 16px;
+        color: #333333;
+    }
+}

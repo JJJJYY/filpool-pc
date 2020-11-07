@@ -75,7 +75,17 @@ export default {
     //
     getPoolInfo: () => get('PoolInfo.Info'),
     // 抢购
-    getPurchaseInfo: () => get('FlashSale.ShowPurchaseInfo'),
+    getPurchaseInfo: (data) => get('FlashSale.ShowPurchaseInfo',data),
     // 首页抢购列表页
     getHomePageSaleLatestInfo: () => get('FlashSale.showHomePageSaleLatestInfo'),
+    // 开始抢购
+    getPurchase: (data) => get('FlashSale.Purchase',data),
+    // 刷新状态
+    getCheckOrderStatus: (data) => get('FlashSale.CheckOrderStatus',data),
+    // 划转
+    getTransfer: (data) => get('Balance.Transfer',data),
+    // 抢购列表
+    getFlashSaleOrderList: (data) => get('FlashSale.GetFlashSaleOrderList',data),
+    // 算力记录
+    getUserAdjPowerList: (data) => get('UserAdjPower.List',data),
 };

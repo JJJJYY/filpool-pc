@@ -5,6 +5,7 @@ import styles from '../table.module.less';
 import intl from 'react-intl-universal';
 import parseFloatData from '@/util/parseFloatData'
 import net from '../../../net';
+import { Tabs } from 'antd';
 
 export default class Index extends Component {
 
@@ -12,11 +13,13 @@ export default class Index extends Component {
         super(props);
         this.state = {
             status: '',
-            orders: []
+            orders: [],
+            thisOrders: [],
         }
     }
 
     componentDidMount() {
+        console.log(this.props)
         this.getMyOrderList();
     }
     componentWillUnmount = () => {
@@ -38,6 +41,17 @@ export default class Index extends Component {
                 onClick={() => this.setState({ status: key })}
                 className={this.state.status === key ? 'active' : ''}>{value}</li>
         )
+    }
+
+
+
+    callback = (key) => {
+        console.log(key)
+        net.getFlashSaleOrderList({
+
+        }).then(res => {
+            this.setState({ thisOrders: res.data.list instanceof Array ? res.data.list : [] });
+        })
     }
 
     render() {
@@ -115,6 +129,7 @@ export default class Index extends Component {
                     }
                 }
             },
+
             // {
             //     th: intl.get('USER_19'),
             //     style: { width: "90px" },
@@ -143,20 +158,77 @@ export default class Index extends Component {
             // }
         ];
 
+
+        const thisClumns = [
+            {
+                th: intl.get('USER_11'),
+                style: { width: '210' },
+                td: 'tittle',
+            },
+            {
+                th: intl.get('USER_12'),
+                textAlign: 'center',
+                style: { width: "300px" },
+                td: 'pid',
+            },
+            {
+                th: intl.get('USER_13'),
+                // style: { width: "180px" },
+                td: 'create_time',
+                render: (v) => v
+            },
+            {
+                th: intl.get('USER_14'),
+                td: 'price',
+                render: (v, row) => `${parseFloatData(v)} ${row.pay_coin}/TB`,
+            },
+            {
+                th: intl.get('USER_15'),
+                textAlign: "center",
+                td: 'power',
+                render: (v, row) => `${parseFloatData(v)}TB`,
+            },
+            {
+                th: intl.get('USER_16'),
+                textAlign: "center",
+                td: 'pay_coin_amount',
+                render: (v, row) => `${parseFloatData(v)} ${row.pay_coin === 'FIL' ? row.pay_coin : 'USDT'}`,
+            },
+            {
+                th: intl.get('USER_17'),
+                textAlign: "center",
+                td: 'pay_coin',
+                render: (v) => v === 'FIL' ? v : 'USDT',
+            },
+            {
+                th: intl.get('USER_18'),
+                textAlign: "center",
+                td: 'description',
+                render: (v) => v
+            },
+        ]
+
         return (
-            <div className="order">
-                <div className="order-filter">
-                    <label>{intl.get('USER_21')}：</label>
-                    <ul>
-                        {this.renderLi('', intl.get('USER_22'))}
-                        {this.renderLi('0', intl.get('USER_23'))}
-                        {this.renderLi('1', intl.get('USER_24'))}
-                        {this.renderLi('2', intl.get('USER_25'))}
-                        {/*{this.renderLi('3', intl.get('USER_26'))}*/}
-                    </ul>
-                </div>
-                <Table {...this.props} data={orders} columns={columns} />
-            </div>
+            < div className="order" >
+                <Tabs defaultActiveKey="1" onChange={this.callback}>
+                    <Tabs.TabPane tab="算力订单" key="1">
+                        <div className="order-filter">
+                            <label>{intl.get('USER_21')}：</label>
+                            <ul>
+                                {this.renderLi('', intl.get('USER_22'))}
+                                {this.renderLi('0', intl.get('USER_23'))}
+                                {this.renderLi('1', intl.get('USER_24'))}
+                                {this.renderLi('2', intl.get('USER_25'))}
+                                {/*{this.renderLi('3', intl.get('USER_26'))}*/}
+                            </ul>
+                        </div>
+                        <Table {...this.props} data={orders} columns={columns} />
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab="算力加速订单" key="2">
+                        <Table data={this.state.thisOrders} columns={thisClumns} />
+                    </Tabs.TabPane>
+                </Tabs>
+            </div >
         )
     }
 }
