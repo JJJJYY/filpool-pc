@@ -32,8 +32,8 @@ class Index extends Component {
     }
 
     componentDidMount() {
-
         let coins = this.props.coins;
+        console.log(this.props)
 
         // delete coins.FIL;
 
@@ -116,7 +116,7 @@ class Index extends Component {
             return message.error("提币数量需要大于0");
         }
 
-        if (amount > (base.available)) {
+        if (amount > (base.recharge)) {
             return message.error("余额不足");
         }
 
@@ -196,7 +196,7 @@ class Index extends Component {
             return message.error("不能小于最小提币数量");
         }
 
-        if (amount > (base2.available)) {
+        if (amount > (base2.recharge)) {
             return message.error("余额不足");
         }
 
@@ -306,8 +306,9 @@ class Index extends Component {
                                     }
                                 }} autoComplete="new-password" />
                                 <p style={{ margin: 0, paddingTop: '.06rem', display: 'flex', justifyContent: 'space-between', color: '#959FA9', fontSize: '.11rem' }}>
-                                    <span>{intl.get('USER_83')}：{parseFloatData(base.available) || 0} {coin}</span>
-                                    <a onClick={() => this.setState({ amount: String(parseFloatData(base.available) || 0) })}>{intl.get('USER_84')}</a>
+                                    <span>{intl.get('USER_83')}：{parseFloatData(base.recharge) || 0} {coin}</span>
+                                    {console.log(base)}
+                                    <a onClick={() => this.setState({ amount: String(parseFloatData(base.recharge) || 0) })}>{intl.get('USER_84')}</a>
                                 </p>
                             </div>
                         </div>
@@ -376,8 +377,8 @@ class Index extends Component {
                                     }
                                 }} />
                                 <p style={{ margin: 0, paddingTop: '.06rem', display: 'flex', justifyContent: 'space-between', color: '#959FA9', fontSize: '.11rem' }}>
-                                    <span>{intl.get('USER_121')}：{parseFloatData(base.available) || 0} {coin}</span>
-                                    <a onClick={() => this.setState({ amount: String(parseFloatData(base.available) || 0) })}>{intl.get('USER_120')}</a>
+                                    <span>{intl.get('USER_121')}：{parseFloatData(base.recharge) || 0} {coin}</span>
+                                    <a onClick={() => this.setState({ amount: String(parseFloatData(base.recharge) || 0) })}>{intl.get('USER_120')}</a>
                                 </p>
                             </div>
                         </div>

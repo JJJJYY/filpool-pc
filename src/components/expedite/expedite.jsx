@@ -189,7 +189,10 @@ class Expedite extends React.Component {
             visible: false,
         });
     };
-
+    doneNum(num, count) {
+        var newNum = parseInt(num * Math.pow(10, count)) / Math.pow(10, count);
+        return newNum;
+    }
 
     render() {
         const { isHome, confirmLoading, remainPower, product, amount, avlFil, progress, loading } = this.state
@@ -268,7 +271,8 @@ class Expedite extends React.Component {
                                 </div> : null
                             }
                         </div>
-                        <div style={{ marginTop: '10px', marginLeft: '50px' }}>时间：{product.start_time}</div>
+                        <div style={{ marginTop: '10px', marginLeft: '50px' }}>开始时间：{product.start_time}</div>
+                        <div style={{ marginTop: '10px', marginLeft: '50px' }}>结束时间：{product.finish_time}</div>
                         <div className={styles.numCentent}>
                             <div className={styles.centent}>
                                 <div className={styles.buy}>
@@ -320,7 +324,7 @@ class Expedite extends React.Component {
                             <div style={{ width: '542px' }}>
                                 <div style={{ fontSize: '18px', color: '#333333FF', marginLeft: '5px' }}>进度</div>
                                 <Progress className={styles.expediteProgress} strokeColor='linear-gradient(90deg, #F9A03E 0%, #FF4504 100%)' style={{ marginTop: '10px' }} percent={progress} showInfo={false} />
-                                <div style={{ fontSize: '14px', color: '#666666FF', marginLeft: '8px', marginTop: '10px' }}>已出售{progress}%</div>
+                                <div style={{ fontSize: '14px', color: '#666666FF', marginLeft: '8px', marginTop: '10px' }}>已出售{this.doneNum(progress, 2)}%</div>
                             </div>
                             <div style={{ width: '300px', marginRight: '40px' }}>
                                 <p onClick={() => { this.appleFor() }} style={{ padding: '12px 0', textAlign: 'center', width: '240px', background: '#F89C19FF', borderRadius: '16px', cursor: 'pointer' }}><span style={{ fontSize: '18px', color: '#fff' }}>申请加速包</span></p>

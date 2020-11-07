@@ -27,6 +27,7 @@ export default class Index extends Component {
                 res1.data.map(item => {
                     if (coins[item.asset]) {
                         coins[item.asset].available = parseFloat(item.available);
+                        coins[item.asset].recharge = parseFloat(item.recharge);
                         coins[item.asset].frozen = parseFloat(item.frozen);
                         coins[item.asset].todayWithdrawAmount = item.todayWithdrawAmount;
                     }
