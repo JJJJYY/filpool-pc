@@ -97,8 +97,8 @@ export default class powerDetails extends React.Component {
     dataType() {
         return [
             { type: 0, status: '全部' },
-            { type: 1, status: '算力加速' },
-            { type: 2, status: '算力增长' },
+            { type: 1, status: '算力增长' },
+            { type: 2, status: '算力加速' },
         ]
     }
     // 精度
