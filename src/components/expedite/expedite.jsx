@@ -8,55 +8,57 @@ import net from '@/net';
 import md5 from "md5";
 import parseFloatData from '@/util/parseFloatData';
 class Expedite extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isHome: window.location.hash.includes('home'),
-            amount: 1,
-            minLimit: 1,
-            visible: false,
-            confirmLoading: false,
-            lineUpVisible: false,
-            password: '',
-            // 抢购信息
-            product: '',
-            // 最大可购买算力
-            remainPower: '',
-            avlFil: '',
-            // 进度条
-            progress: 0,
-            loading: false,
-            protuctId: '',
-            pid: ''
-        }
+    state = {
+        isHome: false,
+        amount: 1,
+        minLimit: 1,
+        visible: false,
+        confirmLoading: false,
+        lineUpVisible: false,
+        password: '',
+        // 抢购信息
+        product: '',
+        // 最大可购买算力
+        remainPower: '',
+        avlFil: '',
+        // 进度条
+        progress: 0,
+        loading: false,
+        protuctId: '',
+        pid: ''
     }
-    async componentDidMount() {
+
+    componentDidMount() {
+        this.state.isHome = window.location.hash.includes('home');
         if (this.state.isHome) {
             net.getHomePageSaleLatestInfo().then(res => {
-                console.log(res)
-                this.setState({
-                    product: res.data,
-                    progress: parseFloatData(((res.data.total_power - res.data.remain_power) / res.data.total_power) * 100),
-                    loading: true
-                })
+                if (res.ret == 200) {
+                    this.setState({
+                        product: res.data,
+                        progress: parseFloatData(((res.data.total_power - res.data.remain_power) / res.data.total_power) * 100),
+                        loading: true
+                    })
+                }
             })
         } else {
             // 获取id
-            await net.getHomePageSaleLatestInfo().then(res => {
-                this.setState({
-                    protuctId: res.data.id,
-                }, () => {
-                })
-            })
-            await net.getPurchaseInfo({ product_id: this.state.protuctId }).then(res => {
-                console.log(res)
-                this.setState({
-                    product: res.data.product,
-                    remainPower: res.data.avl_buy_power,
-                    avlFil: res.data.avl_fil,
-                    progress: parseFloatData(((res.data.product.total_power - res.data.product.remain_power) / res.data.product.total_power) * 100),
-                    loading: true
-                })
+            net.getHomePageSaleLatestInfo().then(res => {
+                if (res.ret == 200) {
+                    this.setState({
+                        protuctId: res.data.id,
+                    })
+                    net.getPurchaseInfo({ product_id: this.state.protuctId }).then(res => {
+                        if (res.ret == 200) {
+                            this.setState({
+                                product: res.data.product,
+                                remainPower: res.data.avl_buy_power,
+                                avlFil: res.data.avl_fil,
+                                progress: parseFloatData(((res.data.product.total_power - res.data.product.remain_power) / res.data.product.total_power) * 100),
+                                loading: true
+                            })
+                        }
+                    })
+                }
             })
         }
     }
@@ -88,8 +90,13 @@ class Expedite extends React.Component {
             this.setState({ amount: Number(val) });
         }
     }
+    checkMaxNum = () => {
+        this.setState({
+            amount: this.state.remainPower
+        })
+    }
     // 申请加速
-    appleFor() {
+    appleFor = () => {
         if (!sessionStorage.getItem("login")) {
             window.location.href = `/#/login`;
             return;
@@ -97,14 +104,20 @@ class Expedite extends React.Component {
         if (this.state.isHome) {
             window.location.href = '/#/expedite_details';
         } else {
-            this.setState({
-                visible: true
-            })
-        }
+            if (this.state.amount == 0 || this.state.remainPower == 0) {
+                Modal.warning({
+                    content: '您可增长的有效算力不足1T',
+                });
 
+            } else {
+                this.setState({
+                    visible: true
+                })
+            }
+        }
     }
     // 查看详情跳转
-    onDetails() {
+    onDetails = () => {
         if (!sessionStorage.getItem("login")) {
             window.location.href = `/#/login`;
             return;
@@ -116,32 +129,39 @@ class Expedite extends React.Component {
     // 弹框 
     // 确认支付开始抢购
     handleOk = () => {
-        this.setState({
-            confirmLoading: true,
-        });
-        net.getPurchase({
-            buy_power: this.state.amount,
-            capital_pwd: md5(this.state.password),
-            product_id: this.state.protuctId
-        }).then(res => {
-            if (res.ret === 200) {
-                this.setState({
-                    visible: false,
-                    confirmLoading: false,
-                    lineUpVisible: true,
-                    pid: res.data
-                }, () => {
-                    this.purchaseStatus(this.state.pid)
-                });
-            } else {
-                this.setState({
-                    visible: false,
-                    confirmLoading: false,
-                });
-            }
-        })
-    };
+        const { amount, product, protuctId, avlFil, password } = this.state;
+        if ((product.price * amount) > avlFil) {
+            Modal.warning({
+                content: '余额不足，请先充值',
+            });
 
+        } else {
+            this.setState({
+                confirmLoading: true,
+            });
+            net.getPurchase({
+                buy_power: amount,
+                capital_pwd: md5(password),
+                product_id: protuctId
+            }).then(res => {
+                if (res.ret === 200) {
+                    this.setState({
+                        visible: false,
+                        confirmLoading: false,
+                        lineUpVisible: true,
+                        pid: res.data
+                    }, () => {
+                        this.purchaseStatus(this.state.pid)
+                    });
+                } else {
+                    this.setState({
+                        visible: false,
+                        confirmLoading: false,
+                    });
+                }
+            })
+        }
+    };
 
 
     // 定时刷新抢购状态
@@ -155,7 +175,6 @@ class Expedite extends React.Component {
                     this.setState({
                         lineUpVisible: false
                     })
-                    console.log(res.data)
                     // 提示
                     if (res.data.payment_status) {
                         Modal.success({
@@ -184,7 +203,6 @@ class Expedite extends React.Component {
 
     // 取消
     handleCancel = e => {
-        console.log(e);
         this.setState({
             visible: false,
         });
@@ -195,7 +213,7 @@ class Expedite extends React.Component {
     }
 
     render() {
-        const { isHome, confirmLoading, remainPower, product, amount, avlFil, progress, loading } = this.state
+        const { isHome, confirmLoading, remainPower, product, amount, minLimit, avlFil, progress, loading } = this.state
         return (
             <div className={styles.title}>
                 {
@@ -265,7 +283,7 @@ class Expedite extends React.Component {
                                 <div style={{ padding: '6px 30px', background: '#F89C19FF', borderRadius: '8px', marginLeft: '30px', color: '#fff' }} >限量</div>
                             </div>
                             {
-                                isHome ? <div className={styles.textAlign} onClick={() => { this.onDetails() }}>
+                                isHome ? <div className={styles.textAlign} onClick={this.onDetails}>
                                     <div style={{ fontSize: '18px', fontWeight: '500', color: '#666666FF' }}>产品详情</div>
                                     <img style={{ width: '15px', height: '15px', marginLeft: '10px' }} src={require('../../images/expedite-fuhao.png')} alt="" />
                                 </div> : null
@@ -289,29 +307,30 @@ class Expedite extends React.Component {
                                 <div style={{ display: 'flex', alignItems: 'center', marginTop: '-60px', }}>
                                     <p style={{ fontSize: '18px', color: '#33333FF' }}>金额：</p>
                                     <p style={{ fontSize: '30px', fontWeight: '500', color: '#33333FF' }}>{parseFloatData(product.price * amount)}FIL</p>
-
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'center', marginTop: '40px' }}>
-                                    <Input.Number
-                                        value={this.state.amount}
-                                        maxLimit={remainPower}
-                                        onChange={(e) => {
-                                            this.checkInput(e);
-                                        }}
-                                        onAdd={() => {
-                                            this.extarClick("add");
-                                        }}
-                                        onSub={() => {
-                                            this.extarClick("sub");
-                                        }}
-                                    />
-                                    <div style={{ marginLeft: '10px', fontSize: '18px', }}>TB</div>
-
-                                </div>
+                                {!isHome &&
+                                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '40px' }}>
+                                        <Input.Number
+                                            value={this.state.amount}
+                                            maxLimit={remainPower}
+                                            minLimit={minLimit}
+                                            onChange={(e) => {
+                                                this.checkInput(e);
+                                            }}
+                                            onAdd={() => {
+                                                this.extarClick("add");
+                                            }}
+                                            onSub={() => {
+                                                this.extarClick("sub");
+                                            }}
+                                        />
+                                        <div style={{ marginLeft: '10px', fontSize: '18px', }}>TB</div>
+                                    </div>
+                                }
                                 {
                                     !isHome ? <div style={{ marginLeft: '10px', position: 'relative', display: 'flex', alignItems: 'center', marginTop: '10px' }}>
                                         <div >可申请的最大值  {remainPower}TB</div>
-                                        <div style={{ margin: '0 5px 0 20px', color: '#E58F15FF' }}>全部</div>
+                                        <a style={{ margin: '0 5px 0 20px', color: '#E58F15FF', pointerEvents: remainPower == 0 ? 'none' : 'auto' }} disable={remainPower == 0} onClick={this.checkMaxNum}>全部</a>
                                         <Tooltip placement="bottomRight" title={product.description}>
                                             <div style={{ fontSize: '12px', fontWeight: '500', color: '#474747', border: '1px solid  #474747', borderRadius: '50%', textAlign: 'center', width: '14px', height: '14px' }}>?</div>
                                         </Tooltip>
@@ -327,7 +346,7 @@ class Expedite extends React.Component {
                                 <div style={{ fontSize: '14px', color: '#666666FF', marginLeft: '8px', marginTop: '10px' }}>已出售{this.doneNum(progress, 2)}%</div>
                             </div>
                             <div style={{ width: '300px', marginRight: '40px' }}>
-                                <p onClick={() => { this.appleFor() }} style={{ padding: '12px 0', textAlign: 'center', width: '240px', background: '#F89C19FF', borderRadius: '16px', cursor: 'pointer' }}><span style={{ fontSize: '18px', color: '#fff' }}>申请加速包</span></p>
+                                <p onClick={this.appleFor} style={{ padding: '12px 0', textAlign: 'center', width: '240px', background: '#F89C19FF', borderRadius: '16px', cursor: 'pointer' }}><span style={{ fontSize: '18px', color: '#fff' }}>申请加速包</span></p>
                             </div>
                         </div>
                     </div> : null
