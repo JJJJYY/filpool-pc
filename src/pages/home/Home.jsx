@@ -178,7 +178,7 @@ class Home extends Component {
                     </div>
                     {/* 算力加速 */}
                     <div style={{ width: '100%', paddingBottom: '60px', overflow: 'auto' }}>
-                        <div style={{ textAlign: 'center', fontSize: '24px', fontWeight: '500', color: '#333333FF', marginTop: '55px' }}>算力加速计划</div>
+                        <div style={{ textAlign: 'center', fontSize: '24px', fontWeight: '500', color: '#333333FF', marginTop: '55px' }}>FILPool矿池算力加速计划</div>
                         <div style={{ marginTop: '40px', overflow: 'auto' }}>
                             <Expedite />
                         </div>
