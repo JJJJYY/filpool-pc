@@ -46,9 +46,9 @@ export default class Index extends Component {
 
 
     callback = (key) => {
-        console.log(key)
         net.getFlashSaleOrderList({
-
+            page: 1,
+            count: 1000
         }).then(res => {
             this.setState({ thisOrders: res.data.list instanceof Array ? res.data.list : [] });
         })
