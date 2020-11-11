@@ -48,6 +48,9 @@ class Expedite extends React.Component {
                 title: '申请数量/TiB',
                 dataIndex: 'power',
                 align: 'center',
+                render: (text) => (
+                    parseFloatData(text)
+                )
             }, {
                 title: '申请时间',
                 dataIndex: 'create_time',
@@ -210,9 +213,6 @@ class Expedite extends React.Component {
                         visible: false,
                         confirmLoading: false,
                     });
-                    Modal.error({
-                        content: res.msg,
-                    })
                 }
             })
         }
