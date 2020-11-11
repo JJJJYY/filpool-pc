@@ -111,7 +111,7 @@ class App extends Component {
                 <Route path="/rate_first_step/:id/:amount" component={RateOrderStep1} />
                 <Route path="/rate_second_step/:id" component={RateOrderStep2} />
                 <Route path="/user" component={User} />
-                <Route path="/capital_details" component={capitalDetails} />
+                <Route path="/capital_details/:asset" component={capitalDetails} />
                 <Route path="/power_details" component={powerDetails} />
                 <Route path="/expedite_details" component={expediteDetails} />
                 <Route path="/available_capital" component={availableCapital} />

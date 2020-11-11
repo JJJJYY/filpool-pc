@@ -13,13 +13,14 @@ import { Decimal } from "decimal.js";
 export default class CapitalDetail extends React.Component {
     constructor(props) {
         super(props)
+        // console.log(props)
         this.state = {
             pagination: {
                 current: 1,
                 pageSize: 10,
                 total: 0,
             },
-            asset: 'FIL',
+            asset: props.match.params.asset,
             type: 0,
             data: [
             ],
@@ -35,7 +36,7 @@ export default class CapitalDetail extends React.Component {
                 {
                     title: '金额',
                     align: 'center',
-                    render: (text) => parseFloatData(text.quantity) + ' FIL'
+                    render: (text) => parseFloatData(text.quantity) + text.asset
                 },
                 {
                     title: '类型',
@@ -64,6 +65,7 @@ export default class CapitalDetail extends React.Component {
         }
     }
     componentDidMount() {
+        console.log(this.props)
         this.totalMoney();
         // 表格
         this.tableData();
@@ -157,7 +159,7 @@ export default class CapitalDetail extends React.Component {
         net.getAssetMy().then((res) => {
             if (res.ret == 200) {
                 res.data.forEach((item) => {
-                    if (item.asset === "FIL") {
+                    if (item.asset === this.state.asset) {
                         this.setState({
                             totalMoney: item
                         });
@@ -171,7 +173,7 @@ export default class CapitalDetail extends React.Component {
         net.getAssetTokens().then((res) => {
             if (res.ret == 200) {
                 res.data.forEach((item) => {
-                    if (item.asset === "FIL") {
+                    if (item.asset === this.state.asset) {
                         this.setState({
                             myTokensData: item
                         });
@@ -229,7 +231,7 @@ export default class CapitalDetail extends React.Component {
                             <div className={styles.recharge}>
                                 <p onClick={() => {
                                     this.state.myTokensData.deposit === 1 ?
-                                        this.props.history.push(`/user/asset/ope?type=in&coin=FIL`) : void 0
+                                        this.props.history.push(`/user/asset/ope?type=in&coin=${this.state.asset}`) : void 0
                                 }} style={this.state.myTokensData.deposit === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>充值</p>
                                 <p className={styles.xian}></p>
                                 <p onClick={() => {
@@ -241,8 +243,8 @@ export default class CapitalDetail extends React.Component {
                                             ),
                                             okText: "取消",
                                             cancelText: "提现",
-                                            onCancel() {
-                                                self.props.history.push(`/user/asset/ope?type=out&coin=FIL`)
+                                            onCancel: () => {
+                                                self.props.history.push(`/user/asset/ope?type=out&coin=${this.state.asset}`)
                                             },
                                         }) : void 0
                                 }} style={this.state.myTokensData.withdraw === 1 ? { cursor: 'pointer', color: '#E49B39' } : null}>提现</p>
