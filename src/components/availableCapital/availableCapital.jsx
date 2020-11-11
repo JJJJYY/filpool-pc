@@ -280,7 +280,7 @@ export default class AvailableCapital extends React.Component {
                         <div>
                             <p>从</p>
                             <Select defaultValue="transferType" style={{ width: 170 }} disabled>
-                                <Select.Option value='transferType' >{this.state.transferType == 1 ? '收益余额' : '充值余额'}</Select.Option>
+                                <Select.Option value='transferType' >{this.state.transferType == 1 ? '收益账户' : '充提账户'}</Select.Option>
                             </Select>
                         </div>
                         <div>
@@ -289,7 +289,7 @@ export default class AvailableCapital extends React.Component {
                         <div >
                             <p>到</p>
                             <Select defaultValue="transferType" style={{ width: 170 }} disabled>
-                                <Select.Option value='transferType' >{this.state.transferType == 1 ? '充值余额' : '收益余额'}</Select.Option>
+                                <Select.Option value='transferType' >{this.state.transferType == 1 ? '充提账户' : '收益账户'}</Select.Option>
                             </Select>
                         </div>
                     </div>
@@ -302,7 +302,7 @@ export default class AvailableCapital extends React.Component {
                     </div>
 
                     <div style={{ width: '400px', margin: '10px auto 0' }}>
-                        <span>{this.state.transferType == 1 ? `收益余额${parseFloatData(this.state.totalMoney.available)}` : `充值余额${parseFloatData(this.state.totalMoney.recharge)}`} FIL</span>
+                        <span>{this.state.transferType == 1 ? `收益账户${parseFloatData(this.state.totalMoney.available)}` : `充提账户${parseFloatData(this.state.totalMoney.recharge)}`} FIL</span>
                         <span onClick={() => { this.setState({ buyNum: this.state.transferType == 1 ? parseFloatData(this.state.totalMoney.available) : parseFloatData(this.state.totalMoney.recharge) }) }} style={{ marginLeft: '10px', color: '#F1A02C', cursor: 'pointer' }}>全部划转</span>
                     </div>
                 </Modal>
@@ -333,19 +333,19 @@ export default class AvailableCapital extends React.Component {
                         </div>
                         <div className={styles.avail}>
                             <div className={styles.theAvail} style={{ textAlign: 'cneter' }}>
-                                <p className={styles.availText}>充值余额</p>
+                                <p className={styles.availText}>充提账户</p>
                                 <p style={{ display: 'flex', cursor: 'pointer', alignItems: 'center' }} className={styles.availSize}>
                                     <span>{parseFloatData(this.state.totalMoney.recharge)}</span>
-                                    <Tooltip placement="top" title={'充值余额才能进行抢购算力加速、提币等操作'}>
+                                    <Tooltip placement="top" title={'仅充值账户可用于提币，参与算力加速计划等操作'}>
                                         <QuestionCircleOutlined className={styles.doubt}></QuestionCircleOutlined>
                                     </Tooltip>
                                 </p>
                             </div>
                             <div className={styles.theAvail}>
-                                <Tooltip placement="top" title={'每日12点发放上一日挖矿收益，当日18点前不划转至充值余额，余额将自动划转至质押金额'}>
+                                <Tooltip placement="top" title={'每日12点发放上一日挖矿收益，当日18点前未划转至充提账户，余额将自动划转至质押账户'}>
                                     <QuestionCircleOutlined className={styles.doubt}></QuestionCircleOutlined>
                                 </Tooltip>
-                                <p className={styles.availText}>收益余额</p>
+                                <p className={styles.availText}>收益账户</p>
                                 <p className={styles.availSize}>{parseFloatData(this.state.totalMoney.available)}</p>
                             </div>
                             {/* <div className={styles.theAvail}>
@@ -364,7 +364,7 @@ export default class AvailableCapital extends React.Component {
                             borderRadius: '16px'
                         }}>
                             <Tabs defaultActiveKey="1" onChange={this.handleCallback}>
-                                <TabPane tab="充值明细" key={[3, 13]}>
+                                <TabPane tab="充提明细" key={[3, 13]}>
                                     {/* 表格 */}
                                     <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
                                 </TabPane>

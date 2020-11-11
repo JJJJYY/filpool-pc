@@ -83,14 +83,14 @@ class App extends Component {
             <ul className="assets">
                 {this.state.coins.map(item => (
                     <li key={String(item.asset)}>
-                        <img src={images[item.asset]} alt="" style={{ width: "40px", height: "40px", cursor: 'pointer' }} onClick={item.asset === 'FIL' ? this.handleClick : null} />
+                        <img src={images[item.asset]} alt="" style={{ width: "40px", height: "40px", cursor: 'pointer' }} />
                         <div className="asset-detail" style={{ cursor: 'pointer' }} onClick={() => { this.handleClick(item.asset) }}>
                             <h5>{item.asset}{item.type ? '（' + item.type + '）' : ''}</h5>
                             {/*<span>{intl.get('USER_27')}：</span><span style={{color: "#E49C3A"}}>{item.available}  {item.asset}</span>*/}
-                            <span>{intl.get('USER_27')}：</span><span>{this.DecimalData(item.available, this.DecimalData(item.frozen, item.pledged))}</span>
-                            <span style={{ marginLeft: 40, }}>{intl.get('USER_1027')}：</span><span>{this.DecimalData(item.available, item.recharge)}</span>
-                            <span style={{ marginLeft: 40, }}>{intl.get('USER_1028')}：</span><span>{parseFloatData(item.frozen)}</span>
-                            {<span><span style={{ marginLeft: 40, }}>{intl.get('USER_1029')}：</span><span>{parseFloatData(item.pledged)}</span></span>}
+                            <span>{intl.get('USER_27')}：</span><span>{this.DecimalData(Decimal.add(item.available, item.recharge), Decimal.add(item.frozen, item.pledged))}</span>
+                            <span style={{ marginLeft: 40 }}>{intl.get('USER_1027')}：</span><span>{this.DecimalData(item.available, item.recharge)}</span>
+                            <span style={{ marginLeft: 40 }}>{intl.get('USER_1028')}：</span><span>{parseFloatData(item.frozen)}</span>
+                            <span style={{ marginLeft: 40 }}>{intl.get('USER_1029')}：</span><span>{parseFloatData(item.pledged)}</span>
                         </div>
                         <span className="asset-ope">
                             {/*{item.asset === 'FILP' && (<span onClick={() => {userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=exchange&coin=${item.asset}`) : this.bindPwd()

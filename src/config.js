@@ -7,7 +7,7 @@ export const domin = 'https://filpool.io/';
 
 export const ios = 'https://testflight.apple.com/join/4ooaLADg';
 
-export const android = 'https://filpool.oss-cn-hongkong.aliyuncs.com/app/filpool001.apk';
+export const android = 'https://m.filpool.io/#/download';
 
 // export const h5Origin = 'http://m.filpool.c28e9d7b637474c3a98b2ed559c29434c.cn-hongkong.alicontainer.com/';
 export const h5Origin = 'https://m.filpool.io/';

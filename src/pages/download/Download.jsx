@@ -6,19 +6,15 @@ import { Header, Button } from '../../components';
 import download1 from '../../images/common/download1.png';
 import download2 from '../../images/common/download2.png';
 
-import { ios, android } from '../../config';
+import { android } from '../../config';
 import { isIOS } from '../../util/brower';
 import net from "../../net";
 import md5 from "md5";
-import {message} from "antd";
+import { message } from "antd";
 
 function download() {
 
-    if (isIOS()) {
-        window.location.href = ios;
-    } else {
-        window.open(android);
-    }
+    window.location.href = android;
 
     // alert(window.location.search);
 
@@ -78,8 +74,8 @@ function download() {
 export default class Download extends Component {
     render() {
         return (
-            <div className="download" style={{margin: "auto"}}>
-                <Header style={{margin: "60px auto"}} title={intl.get('ACCOUNT_132')} left={() => this.props.history.push('/home')} />
+            <div className="download" style={{ margin: "auto" }}>
+                <Header style={{ margin: "60px auto" }} title={intl.get('ACCOUNT_132')} left={() => this.props.history.push('/home')} />
 
                 <div className="back">
                     <img className="img1" src={download1} alt="" />
