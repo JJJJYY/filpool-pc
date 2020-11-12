@@ -50,6 +50,11 @@ export default class CapitalDetail extends React.Component {
                     }
                 },
                 {
+                    title: '状态',
+                    align: 'center',
+                    render: (text, record) => this.statusText(text.status)
+                },
+                {
                     title: '时间',
                     align: 'center',
                     dataIndex: 'createTime',
@@ -115,7 +120,20 @@ export default class CapitalDetail extends React.Component {
             })
         })
     };
-
+    statusText(x) {
+        const statusData = [
+            { type: 0, name: "提现中" },
+            { type: 1, name: "成功" },
+            { type: 2, name: "拒绝" },
+        ]
+        let thisName = null
+        statusData.forEach((val) => {
+            if (val.type === x) {
+                thisName = val.name;
+            }
+        });
+        return thisName
+    }
     // 类型
     dataType() {
         return [
