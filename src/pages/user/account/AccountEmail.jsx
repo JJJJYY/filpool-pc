@@ -39,7 +39,6 @@ class AccountEmail extends Component {
             message.error(intl.get('ACCOUNT_18'));
             return;
         }
-
         net.postSettingKyc1Email({
             email, oldEmailCaptcha,
             emailCaptcha: newEmailCaptcha
@@ -81,12 +80,12 @@ class AccountEmail extends Component {
                         value={oldEmailCaptcha}
                         /*label={intl.get('ACCOUNT_29', {email: userInfo.email})}
                         placeholder={intl.get('ACCOUNT_30')}*/
-                        label={intl.get('ACCOUNT_29', { email: userInfo.email })}
-                        placeholder={intl.get('AUTH_EMAIL_CODE_PLACEHOLDER')}
+                        label={userInfo.defaultAccount === 0 ? intl.get('ACCOUNT_159', { phone: userInfo.phone }) : intl.get('ACCOUNT_160', { email: userInfo.email })}
+                        placeholder={userInfo.defaultAccount === 0 ? intl.get('AUTH_DO_PHONE_CAPTCHA') : intl.get('AUTH_EMAIL_CODE_PLACEHOLDER')}
                         path="/setting/kyc2/modify_email"
                         purpose={2}
                         imageCaptcha={imageCaptcha}
-                        pathType={"email"}
+                        pathType={userInfo.defaultAccount === 0 ? "phone" : "email"}
                         onChange={v => this.changeState('oldEmailCaptcha', v)}
                         onError={v => this.changeState('oldError', v)}
                         error={this.state.oldError}

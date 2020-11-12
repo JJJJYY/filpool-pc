@@ -1,14 +1,10 @@
 import React from 'react';
 import styles from './powerDetails.module.less';
 import { Card, Tooltip, Table, Tag, Space, Select, Modal } from 'antd';
-import {
-    QuestionCircleOutlined
-} from '@ant-design/icons';
 import net from '../../net'
 // footer底部
 import Footer from '../../pages/footer'
 import parseFloatData from '../../util/parseFloatData';
-import { Decimal } from "decimal.js";
 
 export default class powerDetails extends React.Component {
     constructor(props) {
@@ -100,15 +96,6 @@ export default class powerDetails extends React.Component {
             { type: 1, status: '算力增长' },
             { type: 2, status: '算力加速' },
         ]
-    }
-    // 精度
-    DecimalData(a, b, c, d) {
-        return parseFloatData(new Decimal(a).add(new Decimal(b).add(new Decimal(c).add(new Decimal(d)))));
-        // return parseFloatData(Decimal.add(a, b, c));
-    }
-
-    availableCapitalGo() {
-        window.location.href = `/#/available_capital`;
     }
 
     handleChange = (value) => {

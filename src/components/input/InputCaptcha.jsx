@@ -35,7 +35,7 @@ class InputCaptcha extends Component {
 
         this.setState({ loading: true });
         const {
-            path, phone, areaCode, email, pathType,imageCaptcha
+            path, phone, areaCode, email, pathType, imageCaptcha
         } = this.props;
         let pms = null;
         const type = phone ? 'phone' : 'email';
@@ -92,7 +92,7 @@ class InputCaptcha extends Component {
                         onChange={this.onChange}
                         placeholder={placeholder}
                         maxLength={6}
-                        style={{height: "100%"}}
+                        style={{ height: "100%" }}
                     />
 
                     <div style={{ marginRight: h5 ? '-2.93vw' : '-0.15rem' }}>
@@ -101,7 +101,7 @@ class InputCaptcha extends Component {
                             type="square"
                             loading={loading}
                             disabled={count < 60}
-                            style={h5 ? { width: '30.9vw', height: '9.6vw', fontSize: '4vw', padding: '0 2vw' } : { width: '.9rem',height: '0.4rem' }}
+                            style={h5 ? { width: '30.9vw', height: '9.6vw', fontSize: '4vw', padding: '0 2vw' } : { width: '.9rem', height: '0.4rem' }}
                         >
                             {
                                 count > 59
