@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import moment from 'moment';
-import Table from '../table';
 import styles from '../table.module.less';
 import intl from 'react-intl-universal';
 import parseFloatData from '@/util/parseFloatData'
 import net from '../../../net';
-import { Tabs } from 'antd';
+import { Tabs, Table } from 'antd';
 
 export default class Index extends Component {
 
@@ -19,7 +18,6 @@ export default class Index extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         this.getMyOrderList();
     }
     componentWillUnmount = () => {
@@ -44,7 +42,14 @@ export default class Index extends Component {
     }
 
 
-
+    // 类型
+    dataType() {
+        return [
+            { status: 0, name: '排队中' },
+            { status: 1, name: '加速中' },
+            { status: 2, name: '已加速' },
+        ]
+    }
     callback = (key) => {
         net.getFlashSaleOrderList({
             page: 1,
@@ -69,7 +74,6 @@ export default class Index extends Component {
                     return true;
             }
         });
-
         const status = {
             0: intl.get('USER_7'),
             1: intl.get('USER_8'),
@@ -79,48 +83,41 @@ export default class Index extends Component {
 
         const columns = [
             {
-                th: intl.get('USER_11'),
-                style: { width: "210px" },
-                td: 'relatedName',
+                title: intl.get('USER_11'),
+                dataIndex: 'relatedName',
             },
             {
-                th: intl.get('USER_12'),
-                style: { width: "230px" },
-                td: 'pid',
+                title: intl.get('USER_12'),
+                dataIndex: 'pid',
             },
             {
-                th: intl.get('USER_13'),
-                style: { width: "180px" },
-                td: 'createTime',
+                title: intl.get('USER_13'),
+                dataIndex: 'createTime',
                 render: (v) => v
             },
             {
-                th: intl.get('USER_14'),
-                td: 'price',
+                title: intl.get('USER_14'),
+                dataIndex: 'price',
                 render: (v, row) => `${parseFloatData(v)} ${row.asset === 'UNKNOWN' ? 'USDT' : row.asset}/${row.unit}`,
             },
             {
-                th: intl.get('USER_15'),
-                textAlign: "center",
-                td: 'quantity',
+                title: intl.get('USER_15'),
+                dataIndex: 'quantity',
                 render: (v, row) => `${parseFloatData(v)} ${row.unit}`,
             },
             {
-                th: intl.get('USER_16'),
-                textAlign: "center",
-                td: 'paymentQuantity',
+                title: intl.get('USER_16'),
+                dataIndex: 'paymentQuantity',
                 render: (v, row) => `${parseFloatData(v)} ${row.asset === 'UNKNOWN' ? 'USDT' : row.asset}`,
             },
             {
-                th: intl.get('USER_17'),
-                textAlign: "center",
-                td: 'asset',
+                title: intl.get('USER_17'),
+                dataIndex: 'asset',
                 render: (v) => v === 'UNKNOWN' ? 'USDT' : v,
             },
             {
-                th: intl.get('USER_18'),
-                textAlign: "center",
-                td: 'status',
+                title: intl.get('USER_18'),
+                dataIndex: 'status',
                 render: (v) => {
                     if (String(v) === '0') {
                         return (<span style={{ color: '#E49C3A' }}>{status[v]}</span>)
@@ -129,82 +126,59 @@ export default class Index extends Component {
                     }
                 }
             },
-
-            // {
-            //     th: intl.get('USER_19'),
-            //     style: { width: "90px" },
-            //     textAlign: "center",
-            //     render: (key, row) => {
-            //         if (String(row.status) === '0') {
-            //             return (
-            //                 /*<a
-            //                     onClick={() => this.props.history.push(`/rate_second_step/${row.id}`)}
-            //                     style={{ display: 'inline-block', color: '#E49C3A', lineHeight: '.2rem', padding: '0 .18rem', borderRadius: '.1rem', border: '1px solid #E49C3A' }}
-            //                 >{intl.get('USER_20')}</a>*/
-            //                 <a
-            //                     onClick={() => this.props.history.push(`/orderPay?stepIndex=1&orderId=${row.id}`)}
-            //                     className={styles.handleBtn}
-            //                 >{intl.get('USER_20')}</a>
-            //             )
-            //         } else {
-            //             return (
-            //                 <a
-            //                     onClick={() => this.props.history.push(`/rate`)}
-            //                     className={styles.handleBtn}
-            //                 >{intl.get('USER_123')}</a>
-            //             )
-            //         }
-            //     }
-            // }
         ];
-
 
         const thisClumns = [
             {
-                th: intl.get('USER_11'),
-                style: { width: '210' },
-                td: 'tittle',
+                title: '排队等待人数',
+                align: "center",
+                dataIndex: 'wait_num',
             },
             {
-                th: intl.get('USER_12'),
-                textAlign: 'center',
+                title: '已经填充的算力',
+                align: "center",
+                dataIndex: 'fill_power',
+                render: (v, row) => `${parseFloatData(v)}`,
+            },
+            {
+                title: intl.get('USER_12'),
                 style: { width: "300px" },
-                td: 'pid',
+                dataIndex: 'pid',
             },
             {
-                th: intl.get('USER_13'),
-                // style: { width: "180px" },
-                td: 'create_time',
+                title: intl.get('USER_13'),
+                dataIndex: 'create_time',
                 render: (v) => v
             },
             {
-                th: intl.get('USER_14'),
-                td: 'price',
+                title: intl.get('USER_14'),
+                dataIndex: 'price',
                 render: (v, row) => `${parseFloatData(v)} ${row.pay_coin}/TB`,
             },
             {
-                th: intl.get('USER_15'),
-                textAlign: "center",
-                td: 'power',
+                title: intl.get('USER_15'),
+                dataIndex: 'power',
                 render: (v, row) => `${parseFloatData(v)}TB`,
             },
             {
-                th: intl.get('USER_16'),
-                textAlign: "center",
-                td: 'pay_coin_amount',
-                render: (v, row) => `${parseFloatData(v)} ${row.pay_coin === 'FIL' ? row.pay_coin : 'USDT'}`,
+                title: intl.get('USER_16'),
+                dataIndex: 'pay_coin_amount',
+                render: (v, row) => `${parseFloatData(v)} ${row.pay_coin}`,
             },
             {
-                th: intl.get('USER_17'),
-                textAlign: "center",
-                td: 'pay_coin',
+                title: intl.get('USER_17'),
+                dataIndex: 'pay_coin',
                 render: (v) => v === 'FIL' ? v : 'USDT',
             },
             {
-                th: intl.get('USER_18'),
-                textAlign: "center",
-                td: 'description',
-                render: (v) => v
+                title: intl.get('USER_18'),
+                fixed: 'right',
+                dataIndex: 'status',
+                render: (v) => this.dataType().map(val => {
+                    if (val.status === v) {
+                        return val.name
+                    }
+                })
             },
         ]
 
@@ -219,15 +193,14 @@ export default class Index extends Component {
                                 {this.renderLi('0', intl.get('USER_23'))}
                                 {this.renderLi('1', intl.get('USER_24'))}
                                 {this.renderLi('2', intl.get('USER_25'))}
-                                {/*{this.renderLi('3', intl.get('USER_26'))}*/}
                             </ul>
-                        </div>
-                        <Table {...this.props} data={orders} columns={columns} />
-                    </Tabs.TabPane>
+                        </div >
+                        <Table dataSource={orders} columns={columns} rowKey={(record) => record.id} />
+                    </Tabs.TabPane >
                     <Tabs.TabPane tab="算力加速订单" key="2">
-                        <Table data={this.state.thisOrders} columns={thisClumns} />
+                        <Table dataSource={this.state.thisOrders} rowKey={(record) => record.id} columns={thisClumns} />
                     </Tabs.TabPane>
-                </Tabs>
+                </Tabs >
             </div >
         )
     }
