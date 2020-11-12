@@ -65,7 +65,6 @@ export default class CapitalDetail extends React.Component {
         }
     }
     componentDidMount() {
-        console.log(this.props)
         this.totalMoney();
         // 表格
         this.tableData();
@@ -151,8 +150,10 @@ export default class CapitalDetail extends React.Component {
         // return parseFloatData(Decimal.add(a, b, c));
     }
 
-    availableCapitalGo() {
-        window.location.href = `/#/available_capital`;
+    availableCapitalGo = () => {
+        // console.log(this.state.asset)
+        // console.log(this.props)
+        this.props.history.push(`/available_capital/${this.state.asset}`);
     }
 
     totalMoney() {
@@ -254,6 +255,7 @@ export default class CapitalDetail extends React.Component {
                             <div className={styles.theAvail} style={{ textAlign: 'left' }}>
                                 <p className={styles.availText}>可用资产</p>
                                 <p onClick={this.availableCapitalGo} style={{ display: 'flex', cursor: 'pointer', alignItems: 'center' }} className={styles.availSize}><span>{parseFloatData(new Decimal(this.state.totalMoney.available).add(new Decimal(this.state.totalMoney.recharge)))}</span><span style={{ margin: '-2px 0 0 5px', color: '#666666FF' }}>{'>>'}</span></p>
+
                             </div>
                             <div className={styles.theAvail}>
                                 <Tooltip placement="top" title={'每天线性释放，释放周期180天'}>

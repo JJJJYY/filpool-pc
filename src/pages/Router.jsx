@@ -114,7 +114,7 @@ class App extends Component {
                 <Route path="/capital_details/:asset" component={capitalDetails} />
                 <Route path="/power_details" component={powerDetails} />
                 <Route path="/expedite_details" component={expediteDetails} />
-                <Route path="/available_capital" component={availableCapital} />
+                <Route path="/available_capital/:asset" component={availableCapital} />
                 <Route path="/article/:key" component={Article} />
                 <Route path="/information/:tab?" component={Information} />
                 <Route path="/information_detail/:tab/:id" component={Information_Detail} />

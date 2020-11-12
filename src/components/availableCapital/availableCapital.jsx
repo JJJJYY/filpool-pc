@@ -13,6 +13,7 @@ const { TabPane } = Tabs;
 export default class AvailableCapital extends React.Component {
     constructor(props) {
         super(props)
+        console.log(props.match.params.asset)
         this.state = {
             pagination: {
                 current: 1,
@@ -20,7 +21,7 @@ export default class AvailableCapital extends React.Component {
                 total: 0,
             },
             visible: false,
-            asset: 'FIL',
+            asset: props.match.params.asset,
             // 划转类型
             transferType: 1,
             type: [3, 13],
@@ -39,7 +40,7 @@ export default class AvailableCapital extends React.Component {
                 {
                     title: '金额',
                     align: 'center',
-                    render: (text) => parseFloatData(text.quantity) + ' FIL'
+                    render: (text) => parseFloatData(text.quantity) + text.asset
                 },
                 {
                     title: '类型',
@@ -189,7 +190,7 @@ export default class AvailableCapital extends React.Component {
         net.getAssetMy().then((res) => {
             if (res.ret == 200) {
                 res.data.forEach((item) => {
-                    if (item.asset === "FIL") {
+                    if (item.asset === this.state.asset) {
                         this.setState({
                             totalMoney: item
                         });
@@ -203,7 +204,7 @@ export default class AvailableCapital extends React.Component {
         net.getAssetTokens().then((res) => {
             if (res.ret == 200) {
                 res.data.forEach((item) => {
-                    if (item.asset === "FIL") {
+                    if (item.asset === this.state.asset) {
                         this.setState({
                             myTokensData: item
                         });
@@ -272,8 +273,8 @@ export default class AvailableCapital extends React.Component {
                 >
                     <div style={{ width: '400px', display: "block", margin: '0 auto' }} >
                         <p>币种</p>
-                        <Select style={{ width: 400 }} defaultValue="FIL" disabled>
-                            <Select.Option value='FIL' >FIL</Select.Option>
+                        <Select style={{ width: 400 }} defaultValue={this.state.asset} disabled>
+                            <Select.Option value={this.state.asset} >{this.state.asset}</Select.Option>
                         </Select>
                     </div>
                     <div style={{ width: '400px', display: 'flex', margin: '20px auto 0', justifyContent: 'space-between' }}>
@@ -297,12 +298,12 @@ export default class AvailableCapital extends React.Component {
                     <div style={{ width: '400px', margin: '20px auto 0' }}>
                         <p>数量</p>
                         <Input style={{ width: 400 }} placeholder="请输入划转数量" value={this.state.buyNum} onChange={(e) => { this.onChangeNum(e) }} suffix={
-                            <span>FIL</span>
+                            <span>{this.state.asset}</span>
                         } />
                     </div>
 
                     <div style={{ width: '400px', margin: '10px auto 0' }}>
-                        <span>{this.state.transferType == 1 ? `收益账户${parseFloatData(this.state.totalMoney.available)}` : `充提账户${parseFloatData(this.state.totalMoney.recharge)}`} FIL</span>
+                        <span>{this.state.transferType == 1 ? `收益账户${parseFloatData(this.state.totalMoney.available)}` : `充提账户${parseFloatData(this.state.totalMoney.recharge)}`} {this.state.asset}</span>
                         <span onClick={() => { this.setState({ buyNum: this.state.transferType == 1 ? parseFloatData(this.state.totalMoney.available) : parseFloatData(this.state.totalMoney.recharge) }) }} style={{ marginLeft: '10px', color: '#F1A02C', cursor: 'pointer' }}>全部划转</span>
                     </div>
                 </Modal>
