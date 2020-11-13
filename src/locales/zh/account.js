@@ -1,5 +1,5 @@
 export default {
-    ACCOUNT_1: '我的存储空间',
+    ACCOUNT_1: '存储空间',
     ACCOUNT_2: '绑定手机',
     ACCOUNT_3: '登录、提现、修改安全设置时使用',
     ACCOUNT_4: '修改手机',

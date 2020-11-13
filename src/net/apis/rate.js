@@ -90,4 +90,8 @@ export default {
     getFlashSaleOrderList: (data) => get('FlashSale.GetFlashSaleOrderList', data),
     // 算力记录
     getUserAdjPowerList: (data) => get('UserAdjPower.List', data),
+    // 1 , 2 期
+    getMyPowert: (data) => get('App.Weight.MyPower', data),
+    // 划转质押
+    getTransferPledged: (data) => get('App.Balance.TransferPledged', data),
 };

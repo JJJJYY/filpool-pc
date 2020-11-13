@@ -70,20 +70,30 @@ class App extends Component {
         }
 
         this.state = {
-            myWeight: {}
+            myWeight1: {},
+            myWeight2: {}
         };
     }
 
     componentDidMount() {
-        net.getMyWeight({
-            type: 0,
+        net.getMyPowert({
+            number: 1,
         }).then((res) => {
-            if (res.ret == 200) {
+            if (res.ret === 200) {
                 this.setState({
-                    myWeight: res.data
+                    myWeight1: res.data,
                 });
             }
-        })
+        });
+        net.getMyPowert({
+            number: 2,
+        }).then((res) => {
+            if (res.ret === 200) {
+                this.setState({
+                    myWeight2: res.data,
+                });
+            }
+        });
     }
     componentWillUnmount = () => {
         this.setState = (state, callback) => {
@@ -142,9 +152,11 @@ class App extends Component {
     }
 
     render() {
-        let { myWeight } = this.state;
-        console.log(myWeight)
-        let progress = this.doneNum((myWeight.validWeight / myWeight.maxAdj) * 100, 4)
+        let { myWeight1, myWeight2 } = this.state;
+        console.log(myWeight1)
+        console.log(myWeight2)
+        let progress1 = this.doneNum((myWeight1.adj / myWeight1.maxAdj) * 100, 4)
+        let progress2 = this.doneNum((myWeight2.adj / myWeight2.maxAdj) * 100, 4)
         return (
             <div className="user">
                 <div>
@@ -162,27 +174,37 @@ class App extends Component {
                                 </div>
                             </div>
                         </div>
-                        {/*<div className="user-header">
-                        <div className="user-header-icon"></div>
-                        <h5 className="user-header-account">{this.props.redux.userInfo.nickname}</h5>
-                        {this.props.location.pathname.includes('/user/asset') ? (
-                            <a className="user-more" onClick={() => this.props.history.push(`/user/asset/detail`)}>{intl.get('USER_6')}</a>
-                        ) : null}
-                    </div>*/}
-                        <div className={`${styles.userHeader}`}>
-                            <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight.totalWeight} TB</span>
-                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight.maxAdj)} TB</span>
-                            {/* <Link className={styles.label} to={{ pathname: '/rate' }}>
-                                <span className={styles.label}>{intl.get("USER_122")}</span>
-                            </Link> */}
+                        <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
+                            <span className={styles.bold}>一期:</span>
+                            <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight1.totalPower} TB</span>
+                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight1.maxAdj)} TB</span>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <span className={styles.bold}> 目前有效算力：{myWeight1.adj}TB</span>
+                                <Progress strokeColor='#EF8C21' style={{ width: '250px', margin: '0 20px' }} percent={progress1} status="active" />
+                                {/* <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '50px' }}>去加速算力 &gt;&gt;</span></a> */}
+                            </div>
                         </div>
                         <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
+                            <span className={styles.bold}>二期:</span>
+                            <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight2.totalPower} TB</span>
+                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight2.maxAdj)} TB</span>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <span className={styles.bold}> 目前有效算力：{myWeight2.adj}TB</span>
+                                <Progress strokeColor='#EF8C21' style={{ width: '250px', margin: '0 20px' }} percent={progress2} status="active" />
+                                {/* <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '50px' }}>去加速算力 &gt;&gt;</span></a> */}
+                            </div>
+                            {/* <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <span className={styles.bold}> 目前有效算力：{myWeight.validWeight}TB</span>
                                 <Progress strokeColor='#EF8C21' style={{ width: '300px' }} percent={progress} status="active" />
                                 <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '50px' }}>去加速算力 &gt;&gt;</span></a>
+                            </div> */}
+                        </div>
+                        <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
+                            <div></div>
+                            <div style={{ display: 'flex' }}>
+                                <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', }}>去加速算力 &gt;&gt;</span></a>
+                                <div onClick={() => { console.log('抵押') }} style={{ cursor: 'pointer', marginLeft: '30px' }}>去质押 &gt;&gt; </div>
                             </div>
-                            <div onClick={() => { window.location.href = '/#/power_details' }} style={{ cursor: 'pointer' }}>算力增长明细 &gt;&gt; </div>
                         </div>
                     </div>
                     <div style={{ width: "1200px", margin: '0 auto 60px' }}>

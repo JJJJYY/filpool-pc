@@ -7,6 +7,7 @@ import net from "../../../net";
 import Table from "../table";
 import connect from "@/store/connect";
 import parseFloatData from '@/util/parseFloatData'
+import { Tabs, Progress, Modal, Select, Input, message } from 'antd'
 
 class Rate extends Component {
   constructor(props) {
@@ -18,16 +19,28 @@ class Rate extends Component {
       details: [],
       incomes: [],
       tab: 0,
+      visible: false,
+      asset: "FIL",
+      myAsset: {},
+      buyNum: ''
     };
     this.typeAry = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.incomeTypeAry = [1, 2, 3];
   }
 
   componentDidMount() {
-
+    net.getAssetMy().then(res => {
+      res.data.forEach(val => {
+        if (val.asset = this.state.asset) {
+          this.setState({
+            myAsset: val
+          })
+        }
+      });
+    })
     net
-      .getMyWeight({
-        type: 0,
+      .getMyPowert({
+        number: 1,
       })
       .then((res) => {
         if (res.ret === 200) {
@@ -57,11 +70,6 @@ class Rate extends Component {
           });
         }
       });
-  }
-  componentWillUnmount = () => {
-    this.setState = (state, callback) => {
-      return;
-    };
   }
   renderDetail() {
     if (this.state.details.length === 0) {
@@ -257,14 +265,114 @@ class Rate extends Component {
       });
   }
 
+  doneNum(num, count) {
+    var newNum = parseInt(num * Math.pow(10, count)) / Math.pow(10, count);
+    return newNum;
+  }
+
+  callback = (key) => {
+    console.log(key)
+    net
+      .getMyPowert({
+        number: key,
+      })
+      .then((res) => {
+        console.log(res)
+        if (res.ret === 200) {
+          this.setState({
+            myWeight: res.data,
+          });
+        }
+      });
+  }
+
+  onChangeNum(e) {
+    if (!isNaN(e.target.value)) {
+      this.setState({
+        buyNum: e.target.value
+      })
+    }
+  }
+  handleOk = () => {
+    net.getTransferPledged({
+      amount: this.state.buyNum
+    }).then(res => {
+      console.log(res)
+      if (res.ret === 200) {
+        this.setState({
+          visible: false
+        })
+        message.success('划转成功');
+      }
+    }).catch(() => {
+      this.setState({
+        visible: false
+      })
+    })
+  }
+
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    })
+  }
   render() {
-    const { tab, myWeight, details, weights, incomes } = this.state;
+    const { tab, myWeight, details, weights, incomes, myAsset, buyNum } = this.state;
+    console.log(myAsset)
+    let progress = this.doneNum((myWeight.adj / myWeight.maxAdj) * 100, 4)
     return (
       <div className="account">
-        <div className="item" style={{ marginBottom: ".1rem" }}>
-          <div>{intl.get("ACCOUNT_1")}</div>
-          <div>{myWeight.totalWeight} TB</div>
-        </div>
+        <Tabs defaultActiveKey="1" type='card' onChange={this.callback}>
+          <Tabs.TabPane tab="算力一期" key="1">
+            <div className="item-power">
+              <div className="item-d">
+                <p>{intl.get("ACCOUNT_1")}</p>
+                <p>{parseFloatData(myWeight.totalPower)} TB</p>
+              </div>
+              <div className="item-d item-left">
+                <p>上线有效算力</p>
+                <p>{parseFloatData(myWeight.maxAdj)} TB</p>
+              </div>
+            </div>
+            <div className="item-power item-t">
+              <div className="item-d">
+                <p>有效算力</p>
+                <p>{parseFloatData(myWeight.adj)} TB</p>
+                <Progress style={{ margin: '0 30px', width: '300px' }} percent={progress} strokeColor='#EF8C21FF' status="active" />
+                <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '40px' }}>去加速算力 &gt;&gt;</span></a>
+              </div>
+              <div onClick={() => { window.location.href = '/#/power_details' }} style={{ marginLeft: '80px', cursor: 'pointer' }}>算力增长明细 &gt;&gt; </div>
+            </div>
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="算力二期" key="2">
+            <div className="item-power">
+              <div className="item-d">
+                <p>{intl.get("ACCOUNT_1")}</p>
+                <p>{parseFloatData(myWeight.totalPower)} TB</p>
+              </div>
+              <div className="item-d item-left">
+                <p>上线有效算力</p>
+                <p>{parseFloatData(myWeight.maxAdj)} TB</p>
+              </div>
+              <div className="item-d item-left">
+                <p>所需质押量</p>
+                <p>{parseFloatData(myWeight.maxPledged)} TB</p>
+              </div>
+              <div className="item-d item-left">
+                <p>当前质押量</p>
+                <p>{parseFloatData(myWeight.currentPledged)} TB</p>
+              </div>
+            </div>
+            <div className="item-power item-t">
+              <div className="item-d">
+                <p>有效算力</p>
+                <p>{parseFloatData(myWeight.adj)} TB</p>
+                <Progress style={{ margin: '0 30px', width: '300px' }} percent={progress} strokeColor='#EF8C21FF' status="active" />
+                <div onClick={() => { this.setState({ visible: true }) }} style={{ cursor: 'pointer', fontSize: '16px', color: '#F49536', marginLeft: '40px' }}>去质押 &gt;&gt; </div>
+              </div>
+            </div>
+          </Tabs.TabPane>
+        </Tabs>
 
         <div className="order" style={{ padding: 0 }}>
           <div className="order-filter">
@@ -344,7 +452,59 @@ class Rate extends Component {
           )}
           {tab === 2 && this.renderDetail()}
         </div>
-      </div>
+        <Modal
+          title="资金划转"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <div style={{ width: '400px', display: "block", margin: '0 auto' }} >
+            <p>币种</p>
+            <Select style={{ width: 400 }} defaultValue={this.state.asset} disabled>
+              <Select.Option value={this.state.asset} >{this.state.asset}</Select.Option>
+            </Select>
+          </div>
+          <div style={{ width: '400px', display: 'flex', margin: '20px auto 0', justifyContent: 'space-between' }}>
+            <div>
+              <p>从</p>
+              <Select defaultValue="transferType" style={{ width: 170 }} disabled>
+                <Select.Option value='transferType' >充提账户</Select.Option>
+              </Select>
+            </div>
+            <div>
+              <img src={require('@/images/exchange.png')} style={{ width: '18px', height: '10px', marginTop: '32px', cursor: 'pointer' }} alt="" />
+            </div>
+            <div >
+              <p>到</p>
+              <Select defaultValue="transferType" style={{ width: 170 }} disabled>
+                <Select.Option value='transferType' >质押</Select.Option>
+              </Select>
+            </div>
+          </div>
+
+          <div style={{ width: '400px', margin: '20px auto 0' }}>
+            <p>数量</p>
+            <Input style={{ width: 400 }} placeholder="请输入划转数量" value={buyNum} onChange={(e) => { this.onChangeNum(e) }} suffix={
+              <span>{this.state.asset}</span>
+            } />
+          </div>
+
+          <div style={{ width: '400px', margin: '10px auto 0' }}>
+            <span>{Math.min(
+              parseFloatData(myWeight.maxPledged) - parseFloatData(myWeight.currentPledged),
+              parseFloatData(myAsset.recharge)
+            )}</span>
+            <span onClick={() => {
+              this.setState({
+                buyNum: Math.min(
+                  parseFloatData(myWeight.maxPledged) - parseFloatData(myWeight.currentPledged),
+                  parseFloatData(myAsset.recharge)
+                )
+              })
+            }} style={{ marginLeft: '10px', color: '#F1A02C', cursor: 'pointer' }}>全部划转</span>
+          </div>
+        </Modal>
+      </div >
     );
   }
 }
