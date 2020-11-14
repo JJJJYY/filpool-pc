@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { HashRouter as Router, Route, Redirect, Link } from 'react-router-dom';
-import { Progress } from 'antd';
+import { Progress, Modal, Select, Input, message } from 'antd';
 import connect from '../../store/connect';
 import intl from 'react-intl-universal';
 import Foot from '@/pages/footer/index';
@@ -71,11 +71,24 @@ class App extends Component {
 
         this.state = {
             myWeight1: {},
-            myWeight2: {}
+            myWeight2: {},
+            visible: false,
+            asset: "FIL",
+            myAsset: {},
+            buyNum: ''
         };
     }
 
     componentDidMount() {
+        net.getAssetMy().then(res => {
+            res.data.forEach(val => {
+                if (val.asset = this.state.asset) {
+                    this.setState({
+                        myAsset: val
+                    })
+                }
+            });
+        })
         net.getMyPowert({
             number: 1,
         }).then((res) => {
@@ -150,9 +163,37 @@ class App extends Component {
         var newNum = parseInt(num * Math.pow(10, count)) / Math.pow(10, count);
         return newNum;
     }
-
+    onChangeNum(e) {
+        if (!isNaN(e.target.value)) {
+            this.setState({
+                buyNum: e.target.value
+            })
+        }
+    }
+    handleOk = () => {
+        net.getTransferPledged({
+            amount: this.state.buyNum
+        }).then(res => {
+            console.log(res)
+            if (res.ret === 200) {
+                this.setState({
+                    visible: false
+                })
+                message.success('划转成功');
+            }
+        }).catch(() => {
+            this.setState({
+                visible: false
+            })
+        })
+    }
+    handleCancel = () => {
+        this.setState({
+            visible: false
+        })
+    }
     render() {
-        let { myWeight1, myWeight2 } = this.state;
+        let { myWeight1, myWeight2, myAsset, buyNum } = this.state;
         console.log(myWeight1)
         console.log(myWeight2)
         let progress1 = this.doneNum((myWeight1.adj / myWeight1.maxAdj) * 100, 4)
@@ -160,6 +201,58 @@ class App extends Component {
         return (
             <div className="user">
                 <div>
+                    <Modal
+                        title="资金划转"
+                        visible={this.state.visible}
+                        onOk={this.handleOk}
+                        onCancel={this.handleCancel}
+                    >
+                        <div style={{ width: '400px', display: "block", margin: '0 auto' }} >
+                            <p>币种</p>
+                            <Select style={{ width: 400 }} defaultValue={this.state.asset} disabled>
+                                <Select.Option value={this.state.asset} >{this.state.asset}</Select.Option>
+                            </Select>
+                        </div>
+                        <div style={{ width: '400px', display: 'flex', margin: '20px auto 0', justifyContent: 'space-between' }}>
+                            <div>
+                                <p>从</p>
+                                <Select defaultValue="transferType" style={{ width: 170 }} disabled>
+                                    <Select.Option value='transferType' >充提账户</Select.Option>
+                                </Select>
+                            </div>
+                            <div>
+                                <img src={require('@/images/exchange.png')} style={{ width: '18px', height: '10px', marginTop: '32px', cursor: 'pointer' }} alt="" />
+                            </div>
+                            <div >
+                                <p>到</p>
+                                <Select defaultValue="transferType" style={{ width: 170 }} disabled>
+                                    <Select.Option value='transferType' >质押</Select.Option>
+                                </Select>
+                            </div>
+                        </div>
+
+                        <div style={{ width: '400px', margin: '20px auto 0' }}>
+                            <p>数量</p>
+                            <Input style={{ width: 400 }} placeholder="请输入划转数量" value={buyNum} onChange={(e) => { this.onChangeNum(e) }} suffix={
+                                <span>{this.state.asset}</span>
+                            } />
+                        </div>
+
+                        <div style={{ width: '400px', margin: '10px auto 0' }}>
+                            <span>{Math.min(
+                                parseFloatData(myWeight2.maxPledged) - parseFloatData(myWeight2.currentPledged),
+                                parseFloatData(myAsset.recharge)
+                            )}</span>
+                            <span onClick={() => {
+                                this.setState({
+                                    buyNum: Math.min(
+                                        parseFloatData(myWeight2.maxPledged) - parseFloatData(myWeight2.currentPledged),
+                                        parseFloatData(myAsset.recharge)
+                                    )
+                                })
+                            }} style={{ marginLeft: '10px', color: '#F1A02C', cursor: 'pointer' }}>全部划转</span>
+                        </div>
+                    </Modal>
                     <div className="user-content" style={{ minHeight: "auto", paddingBottom: "0" }}>
                         <div className={styles.bannerBox}>
                             <div className={styles.middleBox}>
@@ -193,17 +286,12 @@ class App extends Component {
                                 <Progress strokeColor='#EF8C21' style={{ width: '250px', margin: '0 20px' }} percent={progress2} status="active" />
                                 {/* <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '50px' }}>去加速算力 &gt;&gt;</span></a> */}
                             </div>
-                            {/* <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <span className={styles.bold}> 目前有效算力：{myWeight.validWeight}TB</span>
-                                <Progress strokeColor='#EF8C21' style={{ width: '300px' }} percent={progress} status="active" />
-                                <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '50px' }}>去加速算力 &gt;&gt;</span></a>
-                            </div> */}
                         </div>
                         <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
                             <div></div>
                             <div style={{ display: 'flex' }}>
                                 <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', }}>去加速算力 &gt;&gt;</span></a>
-                                <div onClick={() => { console.log('抵押') }} style={{ cursor: 'pointer', marginLeft: '30px' }}>去质押 &gt;&gt; </div>
+                                <div onClick={() => { this.setState({ visible: true }) }} style={{ cursor: 'pointer', marginLeft: '30px' }}>去质押 &gt;&gt; </div>
                             </div>
                         </div>
                     </div>
