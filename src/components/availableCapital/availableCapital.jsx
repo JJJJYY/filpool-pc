@@ -158,12 +158,12 @@ export default class AvailableCapital extends React.Component {
         return [
             { type: 0, status: '全部' },
             { type: 1, status: '购买算力' },
-            { type: 2, status: '购买加速算力' },
+            { type: 2, status: '申请加速算力' },
             { type: 3, status: '充值' },
             { type: 4, status: '提现' },
             { type: 5, status: '提现中' },
-            { type: 6, status: '收益金额划转' },
-            { type: 7, status: '充值金额划转' },
+            { type: 6, status: '收益金额划转至充值' },
+            { type: 7, status: '充值金额划转至收益' },
             { type: 8, status: '内部转出' },
             { type: 9, status: '内部转入' },
             { type: 12, status: '返佣' },
@@ -174,11 +174,13 @@ export default class AvailableCapital extends React.Component {
             { type: 18, status: '系统扣除' },
             { type: 20, status: '冻结金额扣除' },
             { type: 21, status: '25%收益直接释放' },
-            { type: 22, status: '可用金额划转至抵押' },
-            { type: 23, status: '可用金额返还' },
+            { type: 22, status: '收益金额划转至抵押' },
+            { type: 23, status: '质押金额返还至收益' },
             { type: 24, status: '挖矿收益' },
             { type: 25, status: 'SR质押币发放' },
             { type: 26, status: '扣除质押币' },
+            { type: 27, status: '充值划转质押' },
+            { type: 28, status: '收益释放至质押' },
         ]
     }
     // 精度

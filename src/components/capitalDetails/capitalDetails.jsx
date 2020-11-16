@@ -161,6 +161,7 @@ export default class CapitalDetail extends React.Component {
             { type: 25, status: "SR质押币发放" },
             { type: 26, status: "扣除质押币" },
             { type: 27, status: "充值划转质押" },
+            { type: 28, status: '收益释放至质押' },
         ]
     }
     // 精度
