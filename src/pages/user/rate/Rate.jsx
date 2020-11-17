@@ -351,16 +351,16 @@ class Rate extends Component {
                 <p>{parseFloatData(myWeight.totalPower)} TB</p>
               </div>
               <div className="item-d item-left">
-                <p>上线有效算力</p>
+                <p>上限有效算力</p>
                 <p>{parseFloatData(myWeight.maxAdj)} TB</p>
               </div>
               <div className="item-d item-left">
                 <p>所需质押量</p>
-                <p>{parseFloatData(myWeight.maxPledged)} TB</p>
+                <p>{parseFloatData(myWeight.maxPledged)} FIL</p>
               </div>
               <div className="item-d item-left">
                 <p>当前质押量</p>
-                <p>{parseFloatData(myWeight.currentPledged)} TB</p>
+                <p>{parseFloatData(myWeight.currentPledged)} FIL</p>
               </div>
             </div>
             <div className="item-power item-t">
