@@ -204,7 +204,7 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className={'partner'}>
-                    <div className={'partner-title'}>{intl.get('RATE_68')}</div>
+                    <div className={'partner-title'}>{intl.get('合作伙伴')}</div>
                     <div className={'flex-row-between'} style={{ flexWrap: 'wrap' }}>
                         {
                             this.state.partner.map((item, index) => {

@@ -13,7 +13,7 @@ export default () => {
                 <div className={`${styles.groupItem1}`}>
                     <div className={`${styles.imgBox}`}>
                         <LazyLoad height={75}>
-                            <img src={require('@/images/home/home_icon_ipfs@2x.png')} className={`${styles.img}`} style={{width: "80px"}} alt="" />
+                            <img src={require('@/images/home/home_icon_ipfs@2x.png')} className={`${styles.img}`} style={{ width: "80px" }} alt="" />
                         </LazyLoad>
                     </div>
                     <div className={`${styles.title}`}>IPFS</div>
@@ -27,7 +27,7 @@ export default () => {
                 <div className={`${styles.groupItem1}`}>
                     <div className={`${styles.imgBox}`}>
                         <LazyLoad height={75}>
-                            <img src={require('@/images/home/home_icon_filecoin@2x.png')} className={`${styles.img}`} style={{width: "80px"}} alt="" />
+                            <img src={require('@/images/home/home_icon_filecoin@2x.png')} className={`${styles.img}`} style={{ width: "80px" }} alt="" />
                         </LazyLoad>
                     </div>
                     <div className={`${styles.title}`}>Filecoin</div>
@@ -43,7 +43,7 @@ export default () => {
                 <div className={`${styles.groupItem1}`}>
                     <div className={`${styles.imgBox}`}>
                         <LazyLoad height={75}>
-                            <img src={require('@/images/home/home_icon_percentage@2x.png')} className={`${styles.img}`} style={{width: "80px"}} alt="" />
+                            <img src={require('@/images/home/home_icon_percentage@2x.png')} className={`${styles.img}`} style={{ width: "80px" }} alt="" />
                         </LazyLoad>
                     </div>
                     <div className={`${styles.title}`}>{intl.get("homeStatus53")}</div>
@@ -159,13 +159,13 @@ export default () => {
                 </LazyLoad>
             </div> */}
             {/*算力排行下的版块*/}
-            <div className={`${styles.group} ${styles.group4}`} style={{marginTop: "90px"}}>
+            <div className={`${styles.group} ${styles.group4}`} style={{ marginTop: "90px" }}>
                 <div className={styles.groupItem}>
                     <LazyLoad height={75}>
-                        <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_picture_dig.png" className={styles.img4} alt=""/>
+                        <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_picture_dig.png" className={styles.img4} alt="" />
                     </LazyLoad>
                     <div className={styles.modalBox}>
-                        <div className={styles.textItem} style={{marginTop: "30px"}}>
+                        <div className={styles.textItem} style={{ marginTop: "30px" }}>
                             <p className={styles.normalText}>{intl.get("homeStatus21")}</p>
                             <p className={styles.boldText}>{intl.get("homeStatus22")}</p>
                         </div>
@@ -181,10 +181,10 @@ export default () => {
                 </div>
                 <div className={styles.groupItem}>
                     <LazyLoad height={75}>
-                        <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_picture_maintenance.png" className={styles.img4} alt=""/>
+                        <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_picture_maintenance.png" className={styles.img4} alt="" />
                     </LazyLoad>
                     <div className={styles.modalBox}>
-                        <div className={styles.textItem}  style={{marginTop: "84px"}}>
+                        <div className={styles.textItem} style={{ marginTop: "84px" }}>
                             <p className={styles.normalText}>{intl.get("homeStatus25")}</p>
                             <p className={styles.boldText}>{intl.get("homeStatus26")}</p>
                         </div>
@@ -196,10 +196,10 @@ export default () => {
                 </div>
                 <div className={styles.groupItem}>
                     <LazyLoad height={75}>
-                        <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_picture_smart.png" className={styles.img4} alt=""/>
+                        <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_picture_smart.png" className={styles.img4} alt="" />
                     </LazyLoad>
                     <div className={styles.modalBox}>
-                        <div className={styles.textItem}  style={{marginTop: "84px"}}>
+                        <div className={styles.textItem} style={{ marginTop: "84px" }}>
                             <p className={styles.normalText}>{intl.get("homeStatus29")}</p>
                             <p className={styles.boldText}>{intl.get("homeStatus30")}</p>
                         </div>
@@ -212,7 +212,7 @@ export default () => {
             </div>
             {/*{云算力优势}*/}
             <div className={`${styles.group} ${styles.group5}`}>
-                <div className={styles.titleBox} style={{marginBottom: "100px"}}>
+                <div className={styles.titleBox} style={{ marginBottom: "100px" }}>
                     <span>{intl.get("homeStatus74")}</span>
                     {/*<p className={styles.explain}>{intl.get("homeStatus58")}</p>*/}
                 </div>
@@ -267,45 +267,45 @@ export default () => {
                     <ul className={styles.list6}>
                         <li className={styles.li6}>
                             <div className={styles.contentBox}>
-                                <img src={require('@/images/home/home_icon_dig_setting@2x.png')} className={styles.listImg} alt=""/>
+                                <img src={require('@/images/home/home_icon_dig_setting@2x.png')} className={styles.listImg} alt="" />
                                 <p className={styles.listText}>{intl.get("homeStatus62")}</p>
                             </div>
                             <div className={styles.contentBox}>
-                                <img src={require('@/images/home/home_icon_custom@2x.png')} className={styles.listImg} alt=""/>
+                                <img src={require('@/images/home/home_icon_custom@2x.png')} className={styles.listImg} alt="" />
                                 <p className={styles.listText}>{intl.get("homeStatus63")}</p>
                             </div>
                             <div className={styles.contentBox}>
-                                <img src={require('@/images/home/home_icon_cpu@2x.png')} className={styles.listImg} alt=""/>
+                                <img src={require('@/images/home/home_icon_cpu@2x.png')} className={styles.listImg} alt="" />
                                 <p className={styles.listText}>{intl.get("homeStatus64")}</p>
                             </div>
                         </li>
                         <li className={styles.li6}>
                             <div className={styles.contentBox}>
-                                <img src={require('@/images/home/home_icon_hard_disk@2x.png')} className={styles.listImg} alt=""/>
+                                <img src={require('@/images/home/home_icon_hard_disk@2x.png')} className={styles.listImg} alt="" />
                                 <p className={styles.listText}>{intl.get("homeStatus65")}</p>
                             </div>
                             <div className={styles.contentBox}>
-                                <img src={require('@/images/home/home_icon_smart@2x.png')} className={styles.listImg} alt=""/>
+                                <img src={require('@/images/home/home_icon_smart@2x.png')} className={styles.listImg} alt="" />
                                 <p className={styles.listText}>{intl.get("homeStatus66")}</p>
                             </div>
                             <div className={styles.contentBox}>
                                 <div className={styles.listImgBox}>
-                                    <img src={require('@/images/home/home_icon_gpu@2x.png')} className={styles.listImg} style={{marginBottom: "0"}} alt=""/>
+                                    <img src={require('@/images/home/home_icon_gpu@2x.png')} className={styles.listImg} style={{ marginBottom: "0" }} alt="" />
                                 </div>
                                 <p className={styles.listText}>{intl.get("homeStatus67")}</p>
                             </div>
                         </li>
                         <li className={styles.li6}>
                             <div className={styles.contentBox}>
-                                <img src={require('@/images/home/home_icon_idc@2x.png')} className={styles.listImg} alt=""/>
+                                <img src={require('@/images/home/home_icon_idc@2x.png')} className={styles.listImg} alt="" />
                                 <p className={styles.listText}>{intl.get("homeStatus68")}</p>
                             </div>
                             <div className={styles.contentBox}>
-                                <img src={require('@/images/home/home_icon_safety@2x.png')} className={styles.listImg} alt=""/>
+                                <img src={require('@/images/home/home_icon_safety@2x.png')} className={styles.listImg} alt="" />
                                 <p className={styles.listText}>{intl.get("homeStatus69")}</p>
                             </div>
                             <div className={styles.contentBox}>
-                                <img src={require('@/images/home/home_icon_time@2x.png')} className={styles.listImg} alt=""/>
+                                <img src={require('@/images/home/home_icon_time@2x.png')} className={styles.listImg} alt="" />
                                 <p className={styles.listText}>{intl.get("homeStatus70")}</p>
                             </div>
                         </li>
@@ -347,7 +347,7 @@ export default () => {
                 <img src={require('@/images/home/home_picture_2.png')} className={`${styles.bgImg}`} style={{right: "", top: "710px"}} alt="" />
             </LazyLoad>*/}
             <LazyLoad height={75}>
-                <img src={require('@/images/home/home_picture_1.png')} className={`${styles.bgImg}`} style={{left: "-170px", bottom: "1000px"}} alt="" />
+                <img src={require('@/images/home/home_picture_1.png')} className={`${styles.bgImg}`} style={{ left: "-170px", bottom: "1000px" }} alt="" />
             </LazyLoad>
             {/*<LazyLoad height={75}>
                 <img src={require('@/images/home/home_picture_2.png')} className={`${styles.bgImg}`} style={{right: "-210px", bottom: "-180px"}} alt="" />
