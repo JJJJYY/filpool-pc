@@ -73,7 +73,7 @@ export default {
     //获取矿工排行
     getMinerTop: () => get('/api/v1/miner/top'),
     //
-    getPoolInfo: () => get('PoolInfo.Info'),
+    getPoolInfo: (data) => get('PoolInfo.Info', data),
     // 抢购
     getPurchaseInfo: (data) => get('FlashSale.ShowPurchaseInfo', data),
     // 首页抢购列表页
