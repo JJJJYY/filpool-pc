@@ -178,4 +178,5 @@ export default {
     ACCOUNT_INCOME_1: 'SR1奖励',
     ACCOUNT_INCOME_2: '挖矿收益',
     ACCOUNT_INCOME_3: '赠送收益',
+    ACCOUNT_INCOME_4: '加速收益',
 };

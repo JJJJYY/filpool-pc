@@ -178,4 +178,5 @@
     ACCOUNT_INCOME_1: 'SR1獎勵',
     ACCOUNT_INCOME_2: '挖礦收益',
     ACCOUNT_INCOME_3: '贈送收益',
+    ACCOUNT_INCOME_4: '加速收益',
 };

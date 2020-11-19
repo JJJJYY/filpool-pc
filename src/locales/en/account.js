@@ -177,4 +177,5 @@
     ACCOUNT_INCOME_1: 'SR1Reward',
     ACCOUNT_INCOME_2: 'Income',
     ACCOUNT_INCOME_3: 'Gift income',
+    ACCOUNT_INCOME_4: 'Speed income',
 };
