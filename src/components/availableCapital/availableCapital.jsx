@@ -374,7 +374,7 @@ export default class AvailableCapital extends React.Component {
                                     {/* 表格 */}
                                     <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
                                 </TabPane>
-                                <TabPane tab="收益明细" key={[17, 21]}>
+                                <TabPane tab="收益明细" key={[17, 21, 30, 31]}>
                                     {/* 表格 */}
                                     <Table style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
                                 </TabPane>
