@@ -159,7 +159,7 @@ export default () => {
                 </LazyLoad>
             </div> */}
             {/*算力排行下的版块*/}
-            <div className={`${styles.group} ${styles.group4}`} style={{ marginTop: "90px" }}>
+            {/* <div className={`${styles.group} ${styles.group4}`} style={{ marginTop: "90px" }}>
                 <div className={styles.groupItem}>
                     <LazyLoad height={75}>
                         <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_picture_dig.png" className={styles.img4} alt="" />
@@ -209,7 +209,7 @@ export default () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/*{云算力优势}*/}
             <div className={`${styles.group} ${styles.group5}`}>
                 <div className={styles.titleBox} style={{ marginBottom: "100px" }}>
