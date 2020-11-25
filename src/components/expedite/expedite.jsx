@@ -411,23 +411,24 @@ class Expedite extends React.Component {
                             </div>
                         </div> : <div style={{ fontSize: '18px', color: '#000', textAlign: 'center' }}>暂无数据</div>
                 }
-                <Table
-                    // showHeader={false}
-                    size='small'
-                    style={{ marginTop: '10px' }}
-                    columns={this.columns()}
-                    rowKey={(record) => record.id}
-                    loading={flashUsersLoading}
-                    pagination={{
-                        total: flashUsers ? flashUsers.total : 0,
-                        current: flashUsers ? flashUsers.current : 0
-                    }}
-                    onChange={(pagination) => {
-                        this.state.page = pagination.current;
-                        this.state.count = pagination.pageSize;
-                        this.loadPage()
-                    }}
-                    dataSource={flashUsers && flashUsers.list} />
+                {!isHome &&
+                    <Table
+                        size='small'
+                        style={{ marginTop: '22px' }}
+                        columns={this.columns()}
+                        rowKey={(record) => record.id}
+                        loading={flashUsersLoading}
+                        pagination={{
+                            total: flashUsers ? flashUsers.total : 0,
+                            current: flashUsers ? flashUsers.current : 0
+                        }}
+                        onChange={(pagination) => {
+                            this.state.page = pagination.current;
+                            this.state.count = pagination.pageSize;
+                            this.loadPage()
+                        }}
+                        dataSource={flashUsers && flashUsers.list} />
+                }
             </div>
         )
     }

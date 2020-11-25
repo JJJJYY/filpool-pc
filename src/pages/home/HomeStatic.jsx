@@ -211,10 +211,9 @@ export default () => {
                 </div>
             </div> */}
             {/*{云算力优势}*/}
-            <div className={`${styles.group} ${styles.group5}`}>
+            {/* <div className={`${styles.group} ${styles.group5}`}>
                 <div className={styles.titleBox} style={{ marginBottom: "100px" }}>
                     <span>{intl.get("homeStatus74")}</span>
-                    {/*<p className={styles.explain}>{intl.get("homeStatus58")}</p>*/}
                 </div>
                 <div className={styles.list5}>
                     <div className={`${styles.groupItem5}`}>
@@ -248,14 +247,14 @@ export default () => {
                         <div className={styles.content5}>{intl.get("homeStatus39")}</div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/*蜘蛛矿机*/}
             {/*<div className={`${styles.group} ${styles.group6} `}>
                 <LazyLoad height={75}>
                     <img src={require("@/images/home/homeStatus6.png")} style={{width: "100%"}} alt="" />
                 </LazyLoad>
             </div>*/}
-            <div className={`${styles.group} ${styles.group6} `}>
+            {/* <div className={`${styles.group} ${styles.group6} `}>
                 <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_bg_2.png" className={styles.img6} alt="" />
                 <img src="https://filpool.oss-cn-hongkong.aliyuncs.com/image/home_picture_prouduct.png" className={styles.imgMiddle6} alt="" />
                 <div className={styles.rightBox}>
@@ -309,7 +308,7 @@ export default () => {
                                 <p className={styles.listText}>{intl.get("homeStatus70")}</p>
                             </div>
                         </li>
-                        {/*<li className={styles.li6}>
+                        <li className={styles.li6}>
                             <img src={require('@/images/home/home_icon_custom.png')} className={styles.listImg} alt=""/>
                             <p className={styles.listText}>{intl.get("homeStatus44")}</p>
                         </li>
@@ -322,10 +321,10 @@ export default () => {
                             <img src={require('@/images/home/home_icon_hard_disk.png')} className={styles.listImg} alt=""/>
                             <p className={styles.listText}>{intl.get("homeStatus47")}</p>
                             <p className={styles.listText}>{intl.get("homeStatus48")}</p>
-                        </li>*/}
+                        </li>
                     </ul>
                 </div>
-            </div>
+            </div> */}
             {/*合作伙伴*/}
             {/*<div className={styles.group7}>
                 <h3 className={styles.title}>{intl.get("homeStatus49")}</h3>

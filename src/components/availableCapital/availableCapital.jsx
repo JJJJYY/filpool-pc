@@ -166,6 +166,8 @@ export default class AvailableCapital extends React.Component {
             { type: 7, status: '充值金额划转至收益' },
             { type: 8, status: '内部转出' },
             { type: 9, status: '内部转入' },
+            { type: 10, status: '借贷' },
+            { type: 11, status: '还贷' },
             { type: 12, status: '返佣' },
             { type: 13, status: '系统充币' },
             { type: 14, status: '活动奖励' },
