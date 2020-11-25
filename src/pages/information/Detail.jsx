@@ -34,13 +34,13 @@ class Detail extends Component {
                 this.setState({title: res.content.title, content: res.content.pcContent});
             });*/
 
-            if (tabIndex === "0" || tabIndex === "1") {
+            if (tabIndex === "1" || tabIndex === "2") {
                 net.getInforDetail(id).then((res) => {
                     if (res.ret == 200) {
                         this.setState({ title: res.data.title, content: res.data.content });
                     }
                 })
-            } else if (tabIndex === "2") {
+            } else if (tabIndex === "3") {
                 net.getHelpDetail(id).then((res) => {
                     if (res.ret == 200) {
                         this.setState({ title: res.data.title, content: res.data.content });
