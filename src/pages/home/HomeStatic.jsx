@@ -9,7 +9,7 @@ export default () => {
     return (
         <div className={`${styles.container}`}>
             {/*视频底部那个*/}
-            <div className={`${styles.group} ${styles.group1}`}>
+            {/* <div className={`${styles.group} ${styles.group1}`}>
                 <div className={`${styles.groupItem1}`}>
                     <div className={`${styles.imgBox}`}>
                         <LazyLoad height={75}>
@@ -68,7 +68,7 @@ export default () => {
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> */}
             {/*买币不如挖矿*/}
             <div className={`${styles.group} ${styles.group2}`}>
                 <div className={styles.titleBox}>
