@@ -88,18 +88,29 @@ class Storage extends React.Component {
                 render: text => <div>{text}</div>,
             },
             {
-                title: '有效算力',
+                title: '有效算力 (PiB)',
                 dataIndex: 'adj',
                 align: 'center',
                 key: 'adj',
                 render: text => <div>{parseFloatData(text)}</div>,
             },
             {
-                title: '24小时挖矿收益',
+                title: '24小时挖矿收益 (FIL)',
                 dataIndex: 'rewards',
                 align: 'center',
                 key: 'rewards',
                 render: text => <div>{parseFloatData(text)}</div>,
+            },
+            {
+                title: '',
+                align: 'center',
+                render: (text, record) => {
+                    console.log(text)
+                    return <a href={`https://filfox.info/zh/address/${text.miner}`} target="_blank">
+                        <img src={require("@/images/webPageIcon/jiantou.png")} style={{ width: '10px', height: '10px', cursor: 'pointer' }} alt="" />
+                    </a>
+                }
+
             },
         ];
         return (
@@ -121,15 +132,15 @@ class Storage extends React.Component {
                                 <div className={styles.contentData}>
                                     <div className={styles.contentDataBox}>
                                         <p className={styles.contentDataText}>总储存空间</p>
-                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolPower) || 0}T</p>
+                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolPower) || 0} <span style={{ fontSize: '20px' }}>TiB</span></p>
                                     </div>
                                     <div className={styles.contentDataBox}>
                                         <p className={styles.contentDataText}>总有效算力</p>
-                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolAdjPower) || 0}P</p>
+                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolAdjPower) || 0} <span style={{ fontSize: '20px' }}>PiB</span></p>
                                     </div>
                                     <div className={styles.contentDataBox}>
                                         <p className={styles.contentDataText}>全网有效算力</p>
-                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.netAdjPower) || 0}P</p>
+                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.netAdjPower) || 0} <span style={{ fontSize: '20px' }}>PiB</span></p>
                                     </div>
                                 </div>
                             </div >
@@ -139,7 +150,7 @@ class Storage extends React.Component {
                                     <p className={styles.chuck}></p>
                                     <p className={styles.test}>矿池数据信息</p>
                                 </div>
-                                <div className={styles.dataMessageCentent}>
+                                <div className={styles.dataMessageCentent} style={{ marginBottom: '30px' }}>
                                     <div className={styles.contentDataBox}>
                                         <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[0]} /></p>
                                         <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.totalReward) || 0}</p>
@@ -148,28 +159,28 @@ class Storage extends React.Component {
                                     <div className={styles.contentDataBox}>
                                         <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[1]} /></p>
                                         <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.yesterdayReward) || 0}</p>
-                                        <p className={styles.contentDataText}>矿池昨日收益  (FIL)</p>
+                                        <p className={styles.contentDataText}>矿池昨日GAS费用 (FIL)</p>
                                     </div>
                                     <div className={styles.contentDataBox}>
-                                        <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[2]} /></p>
+                                        <p style={{ textAlign: 'center', marginTop: '5px' }}><img style={{ width: '80px', height: '80px' }} src={this.state.iconImg[2]} /></p>
                                         <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolEfficiency) || 0}</p>
-                                        <p className={styles.contentDataText}>累计单T收益  (FIL/T)</p>
+                                        <p className={styles.contentDataText}>GAS消耗费用  (FIL/TiB)</p>
                                     </div>
                                     <div className={styles.contentDataBox}>
                                         <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[3]} /></p>
                                         <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.yesterdayEfficiency) || 0}</p>
-                                        <p className={styles.contentDataText}>昨日有效单T收益  (FIL/T)</p>
+                                        <p className={styles.contentDataText}>有效算力单T收益  (FIL/TiB)</p>
                                     </div>
                                 </div>
                             </div>
                             {/* 节点信息 */}
-                            <div className={styles.dataMessage}>
+                            <div className={styles.dataMessage} >
                                 <div className={styles.progressContentFlex}>
                                     <p className={styles.chuck}></p>
                                     <p className={styles.test}>节点信息</p>
                                 </div>
                                 <div className={styles.dataTable}>
-                                    <Table columns={columns} dataSource={data} pagination={false} />
+                                    <Table className={styles.myDataTable} columns={columns} dataSource={data} pagination={false} />
                                 </div>
                             </div>
                         </div>

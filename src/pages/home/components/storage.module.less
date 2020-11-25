@@ -72,8 +72,6 @@
 // 矿池数据信息
 .dataMessage{
     width: 1200px;
-    // height: 347px;
-    padding-bottom: 30px;
     border: 1px solid rgba(213, 213, 213, 0.26);
     margin: 20px auto 0;
     box-shadow: 0px 9px 20px 1px rgba(179, 179, 179, 0.11);
@@ -138,6 +136,13 @@
     position: absolute;
     right: -38px;
     top: 2px;
+}
+.myDataTable{
+    :global {
+        .ant-table-thead > tr > th{
+            background: #FFEDD9FF
+        }
+    }
 }
 :global {
     .progressUi{
