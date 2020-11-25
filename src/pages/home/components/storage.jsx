@@ -105,7 +105,6 @@ class Storage extends React.Component {
                 title: '',
                 align: 'center',
                 render: (text, record) => {
-                    console.log(text)
                     return <a href={`https://filfox.info/zh/address/${text.miner}`} target="_blank">
                         <img src={require("@/images/webPageIcon/jiantou.png")} style={{ width: '10px', height: '10px', cursor: 'pointer' }} alt="" />
                     </a>
