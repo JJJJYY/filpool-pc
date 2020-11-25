@@ -156,14 +156,14 @@ class Storage extends React.Component {
                                         <p className={styles.contentDataText}>矿池总收益 (FIL)</p>
                                     </div>
                                     <div className={styles.contentDataBox}>
-                                        <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[1]} /></p>
+                                        <p style={{ textAlign: 'center', marginTop: '5px' }}><img style={{ width: '80px', height: '80px' }} src={this.state.iconImg[1]} /></p>
                                         <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.yesterdayReward) || 0}</p>
-                                        <p className={styles.contentDataText}>矿池昨日GAS费用 (FIL)</p>
+                                        <p className={styles.contentDataText}>昨日收益 (FIL)</p>
                                     </div>
                                     <div className={styles.contentDataBox}>
                                         <p style={{ textAlign: 'center', marginTop: '5px' }}><img style={{ width: '80px', height: '80px' }} src={this.state.iconImg[2]} /></p>
                                         <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolEfficiency) || 0}</p>
-                                        <p className={styles.contentDataText}>GAS消耗费用  (FIL/TiB)</p>
+                                        <p className={styles.contentDataText}>累计单T收益  (FIL/TiB)</p>
                                     </div>
                                     <div className={styles.contentDataBox}>
                                         <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[3]} /></p>
