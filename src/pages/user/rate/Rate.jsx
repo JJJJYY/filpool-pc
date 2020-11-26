@@ -355,12 +355,26 @@ class Rate extends Component {
                 <p>{parseFloatData(myWeight.maxAdj)} TB</p>
               </div>
               <div className="item-d item-left">
-                <p>所需质押量</p>
+                <p>预估所需质押量</p>
                 <p>{parseFloatData(myWeight.maxPledged)} FIL</p>
               </div>
-              <div className="item-d item-left">
-                <p>当前质押量</p>
+            </div>
+            <div className="item-power">
+              <div className="item-d">
+                <p>待质押</p>
                 <p>{parseFloatData(myWeight.currentPledged)} FIL</p>
+              </div>
+              <div className="item-d item-left">
+                <p>已质押</p>
+                <p>{parseFloatData(myWeight.pledged)} FIL</p>
+              </div>
+              <div className="item-d item-left">
+                <p>借贷总额</p>
+                <p>{parseFloatData(myWeight.totalLoan)} FIL</p>
+              </div>
+              <div className="item-d item-left">
+                <p>待还款总额</p>
+                <p>{parseFloatData(myWeight.surplusLoan)} FIL</p>
               </div>
             </div>
             <div className="item-power item-t">

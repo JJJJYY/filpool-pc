@@ -166,7 +166,7 @@ export default class AvailableCapital extends React.Component {
             { type: 7, status: '充值金额划转至收益' },
             { type: 8, status: '内部转出' },
             { type: 9, status: '内部转入' },
-            { type: 10, status: '借贷' },
+            { type: 10, status: '预估借币本息' },
             { type: 11, status: '还贷' },
             { type: 12, status: '返佣' },
             { type: 13, status: '系统充币' },
@@ -186,6 +186,7 @@ export default class AvailableCapital extends React.Component {
             { type: 29, status: "加速收益" },
             { type: 30, status: "25%加速收益释放" },
             { type: 31, status: "加速收益释放" },
+            { type: 32, status: "借币质押" },
         ]
     }
     // 精度
