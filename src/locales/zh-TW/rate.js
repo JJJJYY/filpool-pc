@@ -80,6 +80,7 @@ export default {
     RATE_76: '幫助中心',
     RATE_77: '我的',
     RATE_78: '客服微信',
+    'DeFIL借贷平台': 'DeFIL借贷平台',
     RATE_781: '商务合作',
     RATE_79: '公众号',
     RATE_80: 'QQ群',

@@ -163,45 +163,45 @@ class App extends Component {
         var newNum = parseInt(num * Math.pow(10, count)) / Math.pow(10, count);
         return newNum;
     }
-    onChangeNum(e) {
-        if (!isNaN(e.target.value)) {
-            this.setState({
-                buyNum: e.target.value
-            })
-        }
-    }
-    handleOk = () => {
-        net.getTransferPledged({
-            amount: this.state.buyNum
-        }).then(res => {
-            console.log(res)
-            if (res.ret === 200) {
-                this.setState({
-                    visible: false
-                })
-                message.success('划转成功');
-            }
-        }).catch(() => {
-            this.setState({
-                visible: false
-            })
-        })
-    }
-    handleCancel = () => {
-        this.setState({
-            visible: false
-        })
-    }
+    // onChangeNum(e) {
+    //     if (!isNaN(e.target.value)) {
+    //         this.setState({
+    //             buyNum: e.target.value
+    //         })
+    //     }
+    // }
+    // handleOk = () => {
+    //     net.getTransferPledged({
+    //         amount: this.state.buyNum
+    //     }).then(res => {
+    //         console.log(res)
+    //         if (res.ret === 200) {
+    //             this.setState({
+    //                 visible: false
+    //             })
+    //             message.success('划转成功');
+    //         }
+    //     }).catch(() => {
+    //         this.setState({
+    //             visible: false
+    //         })
+    //     })
+    // }
+    // handleCancel = () => {
+    //     this.setState({
+    //         visible: false
+    //     })
+    // }
     render() {
         let { myWeight1, myWeight2, myAsset, buyNum } = this.state;
         console.log(myWeight1)
         console.log(myWeight2)
-        let progress1 = this.doneNum((myWeight1.adj / myWeight1.maxAdj) * 100, 4)
-        let progress2 = this.doneNum((myWeight2.adj / myWeight2.maxAdj) * 100, 4)
+        // let progress1 = this.doneNum((myWeight1.adj / myWeight1.maxAdj) * 100, 4)
+        // let progress2 = this.doneNum((myWeight2.adj / myWeight2.maxAdj) * 100, 4)
         return (
             <div className="user">
                 <div>
-                    <Modal
+                    {/* <Modal
                         title="资金划转"
                         visible={this.state.visible}
                         onOk={this.handleOk}
@@ -252,7 +252,7 @@ class App extends Component {
                                 })
                             }} style={{ marginLeft: '10px', color: '#F1A02C', cursor: 'pointer' }}>全部划转</span>
                         </div>
-                    </Modal>
+                    </Modal> */}
                     <div className="user-content" style={{ minHeight: "auto", paddingBottom: "0" }}>
                         <div className={styles.bannerBox}>
                             <div className={styles.middleBox}>
@@ -268,32 +268,33 @@ class App extends Component {
                             </div>
                         </div>
                         <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
-                            <span className={styles.bold}>一期:</span>
-                            <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight1.totalPower} TB</span>
-                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight1.maxAdj)} TB</span>
+                            <div>
+                                <span className={styles.bold} style={{ marginRight: '40px' }}>一期{intl.get('ACCOUNT_156')}：{myWeight1.totalPower} TB</span>
+                                <span className={styles.bold} style={{ marginRight: '20px' }}>二期{intl.get('ACCOUNT_156')}：{myWeight2.totalPower} TB</span>
+                            </div>
+                            <a href="/#/power_details">详情&gt;&gt;</a>
+                            {/* <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight1.maxAdj)} TB</span>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <span className={styles.bold}> 目前有效算力：{myWeight1.adj}TB</span>
                                 <Progress strokeColor='#EF8C21' style={{ width: '250px', margin: '0 20px' }} percent={progress1} status="active" />
-                                {/* <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '50px' }}>去加速算力 &gt;&gt;</span></a> */}
-                            </div>
+                            </div> */}
                         </div>
-                        <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
+                        {/* <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
                             <span className={styles.bold}>二期:</span>
                             <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight2.totalPower} TB</span>
                             <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight2.maxAdj)} TB</span>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <span className={styles.bold}> 目前有效算力：{myWeight2.adj}TB</span>
                                 <Progress strokeColor='#EF8C21' style={{ width: '250px', margin: '0 20px' }} percent={progress2} status="active" />
-                                {/* <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '50px' }}>去加速算力 &gt;&gt;</span></a> */}
                             </div>
-                        </div>
-                        <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
+                        </div> */}
+                        {/* <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
                             <div></div>
                             <div style={{ display: 'flex' }}>
                                 <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', }}>去加速算力 &gt;&gt;</span></a>
                                 <div onClick={() => { this.setState({ visible: true }) }} style={{ cursor: 'pointer', marginLeft: '30px' }}>去质押 &gt;&gt; </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div style={{ width: "1200px", margin: '0 auto 60px' }}>
                         <div className="user-main" style={{ width: "calc(100% + 158px)", transform: "translateX(-158px)" }}>

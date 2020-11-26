@@ -80,6 +80,7 @@ export default {
     RATE_76: 'Help',
     RATE_77: 'Mine',
     RATE_78: 'Service WeChat',
+    'DeFIL借贷平台': 'DeFIL Lending platform',
     RATE_781: 'Business',
     RATE_79: 'Public Wechat',
     RATE_80: 'QQ group',
