@@ -13,11 +13,7 @@ export default class powerDetails extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            pagination: {
-                current: 1,
-                pageSize: 10,
-                total: 0,
-            },
+            pagination: this.paginationPage(),
             type: 0,
             data: [
             ],
@@ -65,12 +61,17 @@ export default class powerDetails extends React.Component {
             });
         })
     }
-
+    paginationPage() {
+        return {
+            current: 1,
+            pageSize: 2,
+            total: 0,
+        }
+    }
     getSumMyPowert() {
         net.getMyPowert({
             number: this.state.mode,
         }).then((res) => {
-            console.log(res)
             if (res.ret === 200) {
                 this.setState({
                     myWeight: res.data,
@@ -85,6 +86,7 @@ export default class powerDetails extends React.Component {
             page: this.state.pagination.current,
             count: this.state.pagination.pageSize,
             type: this.state.type,
+            number: this.state.mode
         }).then(res => {
             this.setState({
                 loading: false,
@@ -105,21 +107,10 @@ export default class powerDetails extends React.Component {
         })
     }
     handleTableChange = (pagination) => {
-        this.setState({ loading: true });
-        net.getUserAdjPowerList({
-            page: pagination.current,
-            count: pagination.pageSize,
-            type: this.state.type,
-        }).then(res => {
-            this.setState({
-                loading: false,
-                data: this.getId(res.data.list),
-                pagination: {
-                    current: pagination.current,
-                    pageSize: pagination.pageSize,
-                    total: res.data.total,
-                },
-            })
+        this.setState({
+            pagination
+        }, () => {
+            this.tableData()
         })
     };
 
@@ -132,23 +123,13 @@ export default class powerDetails extends React.Component {
         ]
     }
 
+    // 类型
     handleChange = (value) => {
-        this.setState({ loading: true });
-        net.getUserAdjPowerList({
-            page: 1,
-            count: 10,
+        this.setState({
             type: value,
-        }).then(res => {
-            this.setState({
-                loading: false,
-                data: this.getId(res.data.list),
-                type: value,
-                pagination: {
-                    current: 1,
-                    pageSize: 10,
-                    total: res.data.total
-                }
-            })
+            pagination: this.paginationPage()
+        }, () => {
+            this.tableData()
         })
     }
 
@@ -160,9 +141,11 @@ export default class powerDetails extends React.Component {
 
     handleModeChange = (e) => {
         this.setState({
-            mode: e.target.value
+            mode: e.target.value,
+            pagination: this.paginationPage()
         }, () => {
             this.getSumMyPowert();
+            this.tableData()
         })
     }
     onChangeNum(e) {
@@ -245,12 +228,13 @@ export default class powerDetails extends React.Component {
                                         </div>
                                         <div style={{ display: 'flex', marginTop: '30px' }}>
                                             <p style={{ width: '300px' }}>借贷总额：{parseFloatData(myWeight.totalLoan)} FIL</p>
-                                            <div style={{ display: 'flex' }}>
+                                            <div style={{ display: 'flex', width: '300px' }}>
                                                 <p >待还款总额：{parseFloatData(myWeight.surplusLoan)} FIL</p>
                                                 <Tooltip placement="top" title={'每日释放收益的80%用于还款'}>
                                                     <QuestionCircleOutlined style={{ marginTop: '3px', marginLeft: '5px' }}></QuestionCircleOutlined>
                                                 </Tooltip>
                                             </div>
+                                            <p style={{}}>预估所需质押量：{parseFloatData(myWeight.maxPledged)} FIL</p>
                                         </div>
                                     </div>
                                 </div> : null
@@ -258,11 +242,10 @@ export default class powerDetails extends React.Component {
                         </Card>
                     }
                 </div>
-                <div className={styles.myAssetsCentent}>
+                <div className={styles.myAssetsCentent} style={{ height: '50vh' }}>
                     {
-                        mode === 1 ? <Card style={{
-                            width: 1200, margin: '15px auto 0', border: '0',
-                            borderRadius: '16px'
+                        <Card style={{
+                            width: 1200, margin: '15px auto 0', border: '0', borderRadius: '16px'
                         }}>
                             <div className={styles.selectCentent}>
                                 <p style={{ fontSize: '14px', fontWeight: '600' }}>算力增长明细</p>
@@ -279,7 +262,7 @@ export default class powerDetails extends React.Component {
                             </div>
                             {/* 表格 */}
                             <Table showHeader={false} style={{ marginTop: '10px' }} columns={this.state.columns} rowKey={(record) => record.id} pagination={pagination} loading={loading} onChange={this.handleTableChange} dataSource={this.state.data} />
-                        </Card> : <div style={{ height: '40vh' }}></div>
+                        </Card>
                     }
                 </div>
                 <Modal

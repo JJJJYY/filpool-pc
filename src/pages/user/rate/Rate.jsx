@@ -161,14 +161,6 @@ class Rate extends Component {
           `${intl.get("ACCOUNT_RATE_" + text)} ${obj.serviceChargeRate == 0.2 ? "N" : "B"
           }`,
       },
-      // {
-      //     th: intl.get('RATE_111'),
-      //     td: 'remark',
-      //     style: {
-      //         width: "150px"
-      //     },
-      //     render: text => text?text:intl.get("ACCOUNT_164")
-      // }
     ];
   }
   getTable3() {
@@ -188,14 +180,6 @@ class Rate extends Component {
         td: "type",
         render: (text) => `${intl.get("ACCOUNT_RATE_" + text)}`,
       },
-      // {
-      //     th: intl.get('RATE_111'),
-      //     td: 'remark',
-      //     style: {
-      //         width: "150px"
-      //     },
-      //     render: text => text?text:intl.get("ACCOUNT_164")
-      // }
     ];
   }
   getTable4() {
@@ -239,14 +223,6 @@ class Rate extends Component {
             : intl.get("ACCOUNT_RATE_9")
           }`,
       },
-      // {
-      //     th: intl.get('RATE_111'),
-      //     td: 'remark',
-      //     style: {
-      //         width: "150px"
-      //     },
-      //     render: text => text?text:intl.get("ACCOUNT_164")
-      // }
     ];
   }
   /*获取详情*/
@@ -322,7 +298,7 @@ class Rate extends Component {
     let progress = this.doneNum((myWeight.adj / myWeight.maxAdj) * 100, 4)
     return (
       <div className="account">
-        <Tabs defaultActiveKey="1" type='card' onChange={this.callback}>
+        {/* <Tabs defaultActiveKey="1" type='card' onChange={this.callback}>
           <Tabs.TabPane tab="算力一期" key="1">
             <div className="item-power">
               <div className="item-d">
@@ -386,7 +362,7 @@ class Rate extends Component {
               </div>
             </div>
           </Tabs.TabPane>
-        </Tabs>
+        </Tabs> */}
 
         <div className="order" style={{ padding: 0 }}>
           <div className="order-filter">
