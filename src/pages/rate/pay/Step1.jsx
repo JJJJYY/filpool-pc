@@ -97,7 +97,7 @@ export default class Step1 extends Component {
                         <span className={styles.fieldValue}>{detailInfo.settlementPeriod}</span>
                     </div>
                     <div>
-                        <span className={styles.fieldLabel}>{intl.get('RATE_15')}:</span>
+                        <span className={styles.fieldLabel}>{intl.get('单价')}:</span>
                         <span className={styles.fieldValue}>{parseFloat(detailInfo.price)} USDT</span>
                     </div>
                     <div className={`flex-row-start`}>

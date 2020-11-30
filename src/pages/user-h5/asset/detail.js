@@ -62,7 +62,7 @@ export default class Index extends Component {
     get renderType() {
         return (
             <div className="form">
-                <label>{intl.get('USER_32')}</label>
+                <label>{intl.get('类型')}</label>
                 <Select value={this.state.type} onChange={(type) => this.setState({ type })} style={{ width: '100%' }}>
                     <Option value="in">{intl.get('USER_29')}</Option>
                     <Option value="out">{intl.get('USER_30')}</Option>
@@ -114,7 +114,7 @@ export default class Index extends Component {
 
         const columns = [
             {
-                th: intl.get('USER_32'),
+                th: intl.get('类型'),
                 td: 'type',
                 render: (v) => types[v]
             },

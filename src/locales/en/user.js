@@ -33,7 +33,7 @@ export default {
     USER_29: "Recharge",
     USER_30: "Withdrawal",
     USER_31: "currency name",
-    USER_32: "type",
+    '类型': "type",
     USER_33: "Internal Transfer",
     USER_34: "in operation",
     USER_35: "Completed",

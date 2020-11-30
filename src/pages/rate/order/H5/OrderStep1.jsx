@@ -193,7 +193,7 @@ class Index extends Component {
                     <Progress step={this.state.step} />
                     <div className={'p1'}>{intl.get('RATE_10')}</div>
                     {this.renderText(intl.get('RATE_11'), this.state.name, false, false)}
-                    {this.renderText(intl.get('RATE_15'), this.state.price, false, false)}
+                    {this.renderText(intl.get('单价'), this.state.price, false, false)}
                     {this.renderText(intl.get('RATE_12'), '', false, true)}
                     {this.renderText(intl.get('RATE_16'), this.state.contractDuration + intl.get('RATE_23'), false, false)}
                     {this.renderText(intl.get('RATE_13'), (this.state.serviceChargeRate * 100).toFixed(2) + '%', true, false)}

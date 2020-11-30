@@ -152,7 +152,7 @@ class Step2 extends Component {
                     <span className={styles.fieldValue}>{detailInfo.relatedName}</span>
                 </div>
                 <div>
-                    <span className={styles.fieldLabel}>{intl.get('RATE_15')}:</span>
+                    <span className={styles.fieldLabel}>{intl.get('单价')}:</span>
                     <span className={styles.fieldValue}>{parseFloat(detailInfo.price)}/USDT</span>
                 </div>
                 <div>

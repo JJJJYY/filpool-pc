@@ -195,7 +195,7 @@ class Index extends Component {
                             <div className={'rateStep-line'}></div>
                             <div style={{ width: '47%' }}>
                                 <div className={'flex-row-between'}>
-                                    <p className={'rateStep-p3'}>{intl.get('RATE_15')}</p>
+                                    <p className={'rateStep-p3'}>{intl.get('单价')}</p>
                                     <p className={'rateStep-p2'}>${this.state.price}/{this.state.unit}</p>
                                 </div>
                                 <div className={'flex-row-between mt-25'}>

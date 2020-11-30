@@ -34,7 +34,7 @@ class Rate extends Component {
                 render: text => moment(text).format('YYYY-MM-DD'),
             },
             {
-                th: intl.get('ACCOUNT_90'),
+                th: intl.get('云算力名称'),
                 td: 'relatedName',
             },
             {
@@ -42,14 +42,14 @@ class Rate extends Component {
                 td: 'type',
                 render: (text) => {
                     switch (text) {
-                    case 1:
-                        return intl.get('ACCOUNT_92');
-                    case 2:
-                        return intl.get('ACCOUNT_93');
-                    case 3:
-                        return intl.get('ACCOUNT_94');
-                    default:
-                        return '';
+                        case 1:
+                            return intl.get('ACCOUNT_92');
+                        case 2:
+                            return intl.get('ACCOUNT_93');
+                        case 3:
+                            return intl.get('ACCOUNT_94');
+                        default:
+                            return '';
                     }
                 },
             },
@@ -81,7 +81,7 @@ class Rate extends Component {
                             className={tab === 1 ? 'active' : ''}
                             onClick={() => this.setState({ tab: 1 })}
                         >
-                            {intl.get('ACCOUNT_99')}
+                            {intl.get('算力收益')}
                         </a>
                     </div>
                     {tab === 0 && (

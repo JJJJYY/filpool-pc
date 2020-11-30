@@ -121,20 +121,20 @@ class Rate extends Component {
   getTable1() {
     return [
       {
-        th: intl.get("ACCOUNT_90"),
+        th: intl.get("云算力名称"),
         style: {
           width: "208px",
         },
         td: "relatedName",
       },
       {
-        th: intl.get("RATE_15"),
+        th: intl.get("单价"),
         td: "price",
         render: (text, obj) =>
           text ? `${parseFloatData(text)} ${obj.asset}/${obj.unit}` : "",
       },
       {
-        th: intl.get("RATE_109"),
+        th: intl.get("算力"),
         td: "quantity",
         style: {
           width: "120px",
@@ -147,7 +147,7 @@ class Rate extends Component {
         render: (text, obj) => (text ? `${parseFloatData(text)} ${obj.asset}` : ""),
       },
       {
-        th: intl.get("RATE_110"),
+        th: intl.get("时间"),
         td: "createTime",
         style: {
           width: "188px",
@@ -155,7 +155,7 @@ class Rate extends Component {
         render: (text) => text,
       },
       {
-        th: intl.get("USER_32"),
+        th: intl.get("类型"),
         td: "type",
         render: (text, obj) =>
           `${intl.get("ACCOUNT_RATE_" + text)} ${obj.serviceChargeRate == 0.2 ? "N" : "B"
@@ -166,17 +166,17 @@ class Rate extends Component {
   getTable3() {
     return [
       {
-        th: intl.get("RATE_109"),
+        th: intl.get("算力"),
         td: "quantity",
         render: (text, obj) => (text ? `${parseFloatData(text)} ${obj.unit}` : ""),
       },
       {
-        th: intl.get("RATE_110"),
+        th: intl.get("时间"),
         td: "createTime",
         render: (text) => text,
       },
       {
-        th: intl.get("USER_32"),
+        th: intl.get("类型"),
         td: "type",
         render: (text) => `${intl.get("ACCOUNT_RATE_" + text)}`,
       },
@@ -185,18 +185,18 @@ class Rate extends Component {
   getTable4() {
     return [
       {
-        th: intl.get("ACCOUNT_90"),
+        th: intl.get("云算力名称"),
         td: "relatedName",
         style: {
           width: "284px",
         },
       },
       {
-        th: intl.get("ACCOUNT_163"),
+        th: intl.get("购买人"),
         td: "nickname",
       },
       {
-        th: intl.get("RATE_109"),
+        th: intl.get("算力"),
         td: "quantity",
         style: {
           width: "120px",
@@ -204,7 +204,7 @@ class Rate extends Component {
         render: (text, obj) => (text ? `${parseFloatData(text)} ${obj.unit}` : ""),
       },
       {
-        th: intl.get("RATE_110"),
+        th: intl.get("时间"),
         td: "createTime",
         style: {
           width: "220px",
@@ -212,7 +212,7 @@ class Rate extends Component {
         render: (text) => text,
       },
       {
-        th: intl.get("USER_32"),
+        th: intl.get("类型"),
         td: "type",
         style: {
           width: "140px",
@@ -220,7 +220,7 @@ class Rate extends Component {
         render: (text) =>
           `${this.typeAry.includes(text)
             ? intl.get("ACCOUNT_RATE_" + text)
-            : intl.get("ACCOUNT_RATE_9")
+            : intl.get("其他")
           }`,
       },
     ];
@@ -294,8 +294,7 @@ class Rate extends Component {
   }
   render() {
     const { tab, myWeight, details, weights, incomes, myAsset, buyNum } = this.state;
-    console.log(myAsset)
-    let progress = this.doneNum((myWeight.adj / myWeight.maxAdj) * 100, 4)
+    // let progress = this.doneNum((myWeight.adj / myWeight.maxAdj) * 100, 4)
     return (
       <div className="account">
         {/* <Tabs defaultActiveKey="1" type='card' onChange={this.callback}>
@@ -371,13 +370,13 @@ class Rate extends Component {
                 className={tab === 0 ? "active" : ""}
                 onClick={() => this.setState({ tab: 0 })}
               >
-                {intl.get("RATE_103")}
+                {intl.get("算力管理")}
               </li>
               <li
                 className={tab === 1 ? "active" : ""}
                 onClick={() => this.setState({ tab: 1 })}
               >
-                {intl.get("ACCOUNT_99")}
+                {intl.get("算力收益")}
               </li>
             </ul>
           </div>
@@ -392,7 +391,7 @@ class Rate extends Component {
                         <td className={styles.td}>
                           {this.typeAry.includes(item.type)
                             ? intl.get(`ACCOUNT_RATE_${item.type}`)
-                            : intl.get("ACCOUNT_RATE_9")}
+                            : intl.get("其他")}
                         </td>
                         <td className={styles.td}>
                           {parseFloatData(item.quantity)}
@@ -422,8 +421,8 @@ class Rate extends Component {
                       <tr className={styles.tr}>
                         <td className={styles.td}>
                           {this.incomeTypeAry.includes(item.type)
-                            ? intl.get(`ACCOUNT_INCOME_${item.type}`)
-                            : intl.get("ACCOUNT_RATE_9")}
+                            ? item.number + " 期--" + intl.get(`ACCOUNT_INCOME_${item.type}`)
+                            : item.number + " 期--" + intl.get("其他")}
                         </td>
                         <td className={styles.td}>
                           {parseFloatData(item.quantity)} {item.asset} <span style={{ color: '#e17055', fontSize: '12px' }}>(已扣除服务费)</span>
