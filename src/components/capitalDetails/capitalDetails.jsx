@@ -158,7 +158,7 @@ export default class CapitalDetail extends React.Component {
             { type: 20, status: "冻结金额扣除" },
             { type: 21, status: "25%收益直接释放" },
             { type: 22, status: "收益金额划转至质押" },
-            { type: 23, status: "质押金额返还至收益" },
+            { type: 23, status: "质押金额返还" },
             { type: 24, status: "挖矿收益" },
             { type: 25, status: "SR质押币发放" },
             { type: 26, status: "扣除质押币" },

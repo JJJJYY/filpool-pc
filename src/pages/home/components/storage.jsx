@@ -102,6 +102,13 @@ class Storage extends React.Component {
                 render: text => <div>{parseFloatData(text)}</div>,
             },
             {
+                title: '24小时消耗GAS (FIL)',
+                dataIndex: 'gas',
+                align: 'center',
+                key: 'gas',
+                render: text => <div>{parseFloatData(text)}</div>,
+            },
+            {
                 title: '',
                 align: 'center',
                 render: (text, record) => {
@@ -162,8 +169,8 @@ class Storage extends React.Component {
                                     </div>
                                     <div className={styles.contentDataBox}>
                                         <p style={{ textAlign: 'center', marginTop: '5px' }}><img style={{ width: '80px', height: '80px' }} src={this.state.iconImg[2]} /></p>
-                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolEfficiency) || 0}</p>
-                                        <p className={styles.contentDataText}>累计单T收益  (FIL/TiB)</p>
+                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.yesterdayGas) || 0}</p>
+                                        <p className={styles.contentDataText}>昨日消耗GAS  (FIL)</p>
                                     </div>
                                     <div className={styles.contentDataBox}>
                                         <p style={{ textAlign: 'center', marginTop: '5px' }}><img src={this.state.iconImg[3]} /></p>
