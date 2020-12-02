@@ -138,7 +138,7 @@ class Storage extends React.Component {
                                 <div className={styles.contentData}>
                                     <div className={styles.contentDataBox}>
                                         <p className={styles.contentDataText}>总储存空间</p>
-                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolPower) || 0} <span style={{ fontSize: '20px' }}>TiB</span></p>
+                                        <p className={styles.contentDataText1}>{parseFloatData(this.state.poolData.poolPower) || 0} <span style={{ fontSize: '20px' }}>TB</span></p>
                                     </div>
                                     <div className={styles.contentDataBox}>
                                         <p className={styles.contentDataText}>总有效算力</p>

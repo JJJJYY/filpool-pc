@@ -64,7 +64,7 @@ export default class powerDetails extends React.Component {
     paginationPage() {
         return {
             current: 1,
-            pageSize: 2,
+            pageSize: 10,
             total: 0,
         }
     }
