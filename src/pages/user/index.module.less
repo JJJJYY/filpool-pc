@@ -4,64 +4,124 @@
 
 .bannerBox {
     display: flex;
-    height: 240px;
     background-image: url("~@/images/user/user_center_bg_1.png");
     background-size: 100% 100%;
-
+    height: 292px;
     .middleBox {
+        width: 1200px;
+        margin: 0 auto;
         display: flex;
         align-items: center;
-        margin: auto 66px;
+        justify-content: space-between;
         font-size: 16px;
         color: @titleColor;
-
-        .icon {
-            font-size: 56px;
-            margin-right: 22px;
+        .thisBox{
+            width: 590px;
+            // height: 214px;
+            background: linear-gradient(91deg, #FFFFFF, #ECECEC);
+            border-radius: 16px;
+            padding: 22px 30px;
+            .myAssetTitle{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .myAssetAlign{
+                    display: flex;
+                    align-items: center;
+                    .myAssetImage{
+                        width: 30px;
+                        height: 30px;
+                        margin-right: 12px;
+                    }
+                    .myAssetTitleText{
+                        font-size: 24px;
+                        font-weight: 500;
+                        color: #333333;
+                    }
+                    .myAssetImgSize{
+                        width: 22px;
+                        height: 18px;
+                        margin-right: 15px;
+                    }
+                    .xian{
+                        color: #DADADAFF;
+                        margin: 0 15px;
+                    }
+                    .myAssetText{
+                        font-size: 16px;
+                        color: #333333;
+                    }
+                    .myAssetTextImage{
+                        width: 13px;
+                        height: 13px;
+                        margin-left: 6px;
+                    }
+                }
+            }
+            .myAssetNum{
+                margin-top: 30px;
+                .myAssetNumBole{
+                    font-size: 24px;
+                    font-weight: 400;
+                }
+            }
+            .myAssetDetail{
+                margin-top: 40px;
+                display: flex;
+                justify-content: space-between;
+                .myAssetDetailNum{
+                    margin-top: 15px;
+                }
+                .myAssetDetailFlex{
+                    display: flex;
+                    align-items: center;
+                    .doubt{
+                        margin-left: 6px;
+                        margin-top: -16px;
+                    }
+                    .myAssetTextImage{
+                        width: 13px;
+                        height: 13px;
+                        margin-left: 5px;
+                    }
+                }
+            }
         }
+    }
+}
 
-        .bold {
-            font-size: 18px;
-            font-weight: 400;
-        }
-
-        .label {
-            display: inline-block;
-            width: 72px;
-            height: 24px;
-            line-height: 24px;
-            margin-left: 8px;
-            vertical-align: top;
-            font-size: 12px;
-            color: #fff;
-            text-align: center;
-            background: rgba(128, 136, 225, 1);
-            border-radius: 12px;
-        }
+.userCententBackground{
+    background-color: #f6f6f6;
+    .userCententWidth{
+        width: 1200px;
+        margin:  0 auto;
     }
 }
 
 .userHeader {
     display: flex;
     align-items: center;
-    height: 50px;
-
-    .bold {
-        font-size: 18px;
-        color: @titleColor;
-    }
-
-    .label {
-        width: 114px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        background: linear-gradient(90deg, rgba(241, 138, 45, 1) 0%, rgba(252, 177, 80, 1) 100%);
-        border-radius: 15px;
-        font-size: 14px;
-        color: #fff;
+    justify-content: center;
+    height: 75px;
+    .powerText{
+        display: flex;
+        align-items: center;
+        .bold {
+            font-size: 18px;
+            color: #666666FF;
+            .boldColor{
+                color: #333333FF;
+                font-weight: 500;
+            }
+        }
+        .xian{
+            margin: 0 26px;
+            color: #D9D9D9FF;
+        }
     }
 }
+
+    
 
 .handleBtn {
     width: 104px;

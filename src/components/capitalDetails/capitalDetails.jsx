@@ -236,7 +236,7 @@ export default class CapitalDetail extends React.Component {
             <div className={styles.centent}>
                 <div className={styles.return}>
                     <div className={styles.returnIcon} >&#60;</div>
-                    <div className={styles.return1} style={{ marginLeft: '10px' }}><a href="/#/user/asset/index2">返回</a> </div>
+                    <div className={styles.return1} style={{ marginLeft: '10px' }}><a onClick={() => { this.props.history.goBack() }}>返回</a> </div>
                     <div className={styles.marginXian} style={{ marginLeft: '20px' }}></div>
                     <div className={styles.marginSize} style={{ marginLeft: '20px' }}>资产管理</div>
                 </div>

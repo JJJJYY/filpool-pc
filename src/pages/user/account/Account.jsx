@@ -28,11 +28,6 @@ class Account extends Component {
             }
         });
     }
-    componentWillUnmount = () => {
-        this.setState = (state, callback) => {
-            return;
-        };
-    }
     bindGa() {
         const { history } = this.props;
         Modal.confirm({
@@ -67,14 +62,10 @@ class Account extends Component {
 
         return (
             <div className="account">
-                {/*<div className="item">
-                    <div>{intl.get('ACCOUNT_1')}</div>
-                    <div>
-                        {`${this.state.totalWeight} GB`}
-                    </div>
-                </div>*/}
+                <div className="account-userInfo">
 
-                <div className="item">
+                </div>
+                {/* <div className="item">
                     <div>{intl.get('ACCOUNT_2')}</div>
                     <div>{intl.get('ACCOUNT_3')}</div>
                     <div className="primary-font-color">
@@ -149,6 +140,7 @@ class Account extends Component {
                         </button>
                     </div>
                 </div>
+                 */}
             </div>
         );
     }

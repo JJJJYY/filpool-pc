@@ -1,28 +1,44 @@
+
+
+.actualCentent{
+    background-color: #fff;
+    border-radius: 8px 16px 16px 16px;
+    overflow: hidden;
+    height: 100%;
+}
 .actual{
-    padding: 26px 36px;
+    // padding: 26px 36px;
+    height: 100%;
     color: #333333;
+    
     .title{
         font-size: 18px;
         color: #24375E;
+        text-align: center;
+        margin-top: 40px;
     }
     .normalText{
         font-size: 12px;
         color: #999;
+        text-align: center;
         margin-top: 4px;
         margin-bottom: 40px;
     }
     .inputItem{
-        width: 390px;
+        width: 500px;
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
         margin-top: 20px;
         .inputLabel{
             font-size: 14px;
             margin-bottom: 6px;
         }
+        .inputWidth{
+            width: 363px;
+        }
     }
     .uploadContainer{
-        width: 390px;
         margin-top: 40px;
         .uploadBox{
             width: 160px;
@@ -57,7 +73,6 @@
         }
     }
     .submitBox{
-        width: 390px;
         text-align: center;
         margin-top: 44px;
         margin-bottom: 60px;
@@ -70,6 +85,9 @@
         }
     }
     .waitingBox{
+        height: 100%;
+        background-color: #fff;
+        overflow: auto;
         text-align: center;
     }
     .waiting{
@@ -78,6 +96,9 @@
     }
     .notPassBox{
         text-align: center;
+        height: 100%;
+        background-color: #fff;
+        overflow: auto;
         .reSubmit{
             height: 40px;
             line-height: 40px;

@@ -1,14 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { HashRouter as Router, Route, Redirect, Link } from 'react-router-dom';
-import { Progress, Modal, Select, Input, message } from 'antd';
+import { Progress, Modal, Select, Input, Menu, Tooltip } from 'antd';
+import {
+    FileSearchOutlined,
+    FundOutlined,
+    IdcardOutlined,
+    UserSwitchOutlined
+} from '@ant-design/icons';
 import connect from '../../store/connect';
 import intl from 'react-intl-universal';
 import Foot from '@/pages/footer/index';
 import net from "@/net/index";
 import './index.less';
 import styles from './index.module.less';
-
+import {
+    QuestionCircleOutlined
+} from '@ant-design/icons';
+import { Decimal } from "decimal.js";
 import parseFloatData from '../../util/parseFloatData';
 
 //import Animate from './animate';
@@ -61,6 +70,17 @@ const RedirectHome = () => (
     <Redirect to="/user/account" />
 );
 
+const keys = ['order', 'rate', 'account', 'actual'];
+
+function thisHandlePath(key) {
+    let result = '';
+    keys.forEach((item) => {
+        if (key.includes(item)) result = item;
+    });
+    return result;
+}
+
+
 class App extends Component {
 
     constructor(props) {
@@ -73,22 +93,35 @@ class App extends Component {
             myWeight1: {},
             myWeight2: {},
             visible: false,
-            asset: "FIL",
-            myAsset: {},
+            // asset: "FIL",
+            myAsset: null,
             buyNum: ''
         };
     }
 
     componentDidMount() {
-        net.getAssetMy().then(res => {
-            res.data.forEach(val => {
-                if (val.asset = this.state.asset) {
-                    this.setState({
-                        myAsset: val
-                    })
-                }
-            });
-        })
+        Promise.all([net.getAssetTokens(), net.getAssetMy()]).then((res) => {
+            let res0 = res[0];
+            let res1 = res[1];
+            if (res0.ret == 200 && res1.ret == 200) {
+                let myAsset = res1.data || [];
+
+                let assetList = myAsset.map((item) => {
+                    res0.data.forEach((item1) => {
+                        if (item.asset === item1.asset) {
+                            item.withdraw = item1.withdraw;
+                            item.deposit = item1.deposit;
+                            item.type = item1.type;
+                        }
+                    });
+                    return item;
+                });
+
+                this.setState({ myAsset: assetList });
+            }
+        });
+
+        // 一二期算力
         net.getMyPowert({
             number: 1,
         }).then((res) => {
@@ -108,11 +141,11 @@ class App extends Component {
             }
         });
     }
-    componentWillUnmount = () => {
-        this.setState = (state, callback) => {
-            return;
-        };
+
+    DecimalData(a, b) {
+        return parseFloatData(Decimal.add(a, b));
     }
+
     /*获取用户等级*/
     renderLevelItem(level) {
         let text = "";
@@ -163,170 +196,186 @@ class App extends Component {
         var newNum = parseInt(num * Math.pow(10, count)) / Math.pow(10, count);
         return newNum;
     }
-    // onChangeNum(e) {
-    //     if (!isNaN(e.target.value)) {
-    //         this.setState({
-    //             buyNum: e.target.value
-    //         })
-    //     }
-    // }
-    // handleOk = () => {
-    //     net.getTransferPledged({
-    //         amount: this.state.buyNum
-    //     }).then(res => {
-    //         console.log(res)
-    //         if (res.ret === 200) {
-    //             this.setState({
-    //                 visible: false
-    //             })
-    //             message.success('划转成功');
-    //         }
-    //     }).catch(() => {
-    //         this.setState({
-    //             visible: false
-    //         })
-    //     })
-    // }
-    // handleCancel = () => {
-    //     this.setState({
-    //         visible: false
-    //     })
-    // }
+
+    bindPwd() {
+        const { history } = this.props;
+        Modal.warning({
+            title: "请先绑定资金密码",
+            okText: "去设置",
+            cancelText: "取消",
+            onOk() {
+                history.push('/user/account');
+            },
+        });
+    }
+    onChange(v) {
+    }
+
     render() {
-        let { myWeight1, myWeight2, myAsset, buyNum } = this.state;
-        console.log(myWeight1)
-        console.log(myWeight2)
-        // let progress1 = this.doneNum((myWeight1.adj / myWeight1.maxAdj) * 100, 4)
-        // let progress2 = this.doneNum((myWeight2.adj / myWeight2.maxAdj) * 100, 4)
+        const { myWeight1, myWeight2, myAsset, buyNum } = this.state;
+        const { userInfo } = this.props.redux;
+        const self = this;
         return (
             <div className="user">
                 <div>
-                    {/* <Modal
-                        title="资金划转"
-                        visible={this.state.visible}
-                        onOk={this.handleOk}
-                        onCancel={this.handleCancel}
-                    >
-                        <div style={{ width: '400px', display: "block", margin: '0 auto' }} >
-                            <p>币种</p>
-                            <Select style={{ width: 400 }} defaultValue={this.state.asset} disabled>
-                                <Select.Option value={this.state.asset} >{this.state.asset}</Select.Option>
-                            </Select>
-                        </div>
-                        <div style={{ width: '400px', display: 'flex', margin: '20px auto 0', justifyContent: 'space-between' }}>
-                            <div>
-                                <p>从</p>
-                                <Select defaultValue="transferType" style={{ width: 170 }} disabled>
-                                    <Select.Option value='transferType' >充提账户</Select.Option>
-                                </Select>
-                            </div>
-                            <div>
-                                <img src={require('@/images/exchange.png')} style={{ width: '18px', height: '10px', marginTop: '32px', cursor: 'pointer' }} alt="" />
-                            </div>
-                            <div >
-                                <p>到</p>
-                                <Select defaultValue="transferType" style={{ width: 170 }} disabled>
-                                    <Select.Option value='transferType' >质押</Select.Option>
-                                </Select>
-                            </div>
-                        </div>
-
-                        <div style={{ width: '400px', margin: '20px auto 0' }}>
-                            <p>数量</p>
-                            <Input style={{ width: 400 }} placeholder="请输入划转数量" value={buyNum} onChange={(e) => { this.onChangeNum(e) }} suffix={
-                                <span>{this.state.asset}</span>
-                            } />
-                        </div>
-
-                        <div style={{ width: '400px', margin: '10px auto 0' }}>
-                            <span>{Math.min(
-                                parseFloatData(myWeight2.maxPledged) - parseFloatData(myWeight2.currentPledged),
-                                parseFloatData(myAsset.recharge)
-                            )}</span>
-                            <span onClick={() => {
-                                this.setState({
-                                    buyNum: Math.min(
-                                        parseFloatData(myWeight2.maxPledged) - parseFloatData(myWeight2.currentPledged),
-                                        parseFloatData(myAsset.recharge)
-                                    )
-                                })
-                            }} style={{ marginLeft: '10px', color: '#F1A02C', cursor: 'pointer' }}>全部划转</span>
-                        </div>
-                    </Modal> */}
                     <div className="user-content" style={{ minHeight: "auto", paddingBottom: "0" }}>
                         <div className={styles.bannerBox}>
                             <div className={styles.middleBox}>
-                                {/*<span className={`iconfont ${styles.icon}`}>&#xe62c;</span>*/}
+                                {
+                                    myAsset ? myAsset.map((item, index) => {
+                                        return (
+                                            <div className={styles.thisBox} key={index}>
+                                                <div className={styles.myAssetTitle}>
+                                                    <div className={styles.myAssetAlign}>
+                                                        <img className={styles.myAssetImage} src={item.asset === "USDT" ? require('../../images/myasset/USDT.png') : require('../../images/myasset/Fil.png')} alt="" />
+                                                        <p className={styles.myAssetTitleText}> {item.asset}{item.type ? '（' + item.type + '）' : ''}</p>
+                                                    </div>
+                                                    <div className={styles.myAssetAlign}>
+                                                        <img className={styles.myAssetImgSize} src={require('../../images/myasset/myassetO.png')} alt="" />
+                                                        <button disabled={item.deposit !== 1} onClick={() => {
+                                                            userInfo.payPwd ? this.props.history.push(`/user/asset/ope?type=in&coin=${item.asset}`)
+                                                                : this.bindPwd()
+                                                        }}>充币</button>
+                                                        <p className={styles.xian}>|</p>
+                                                        <img className={styles.myAssetImgSize} src={require('../../images/myasset/myassetG.png')} alt="" />
+                                                        <button disabled={item.withdraw !== 1} onClick={() => {
+                                                            userInfo.payPwd ?
+                                                                item.asset == 'FIL' ?
+                                                                    Modal.confirm({
+                                                                        title: "提示",
+                                                                        content: (
+                                                                            <div>FILPool矿池每天12：00发放上一日挖矿收益，如用户选择不提币，则可用资产将用于FILPool矿池第二天算力增长所需的质押币。 由于目前需要质押币才能保持算力稳定增长，如用户提币导致账户质押币不足将影响您的算力增长以及次日挖矿收益。</div>
+                                                                        ),
+                                                                        okText: "取消",
+                                                                        cancelText: "提现",
+                                                                        onCancel() {
+                                                                            self.props.history.push(`/user/asset/ope?type=out&coin=${item.asset}`)
+                                                                        },
+                                                                    })
+                                                                    : this.props.history.push(`/user/asset/ope?type=out&coin=${item.asset}`)
+                                                                : this.bindPwd()
+                                                        }}>提币</button>
+                                                    </div>
+                                                    <button onClick={() => { this.props.history.push(`/capital_details/${item.asset}`) }} className={styles.myAssetAlign}>
+                                                        <p className={styles.myAssetText}>资金明细</p>
+                                                        <img className={styles.myAssetTextImage} src={require('../../images/jiantou.png')} alt="" />
+                                                    </button>
+                                                </div>
+                                                <div className={styles.myAssetNum}>
+                                                    <span>总资产：</span>
+                                                    <span className={styles.myAssetNumBole}>{this.DecimalData(Decimal.add(item.available, item.recharge), Decimal.add(item.frozen, item.pledged))} {item.asset}</span>
+                                                </div>
+                                                <div className={styles.myAssetDetail}>
+                                                    <div>
+                                                        <button onClick={() => { this.props.history.push(`/available_capital/${item.asset}`) }} className={styles.myAssetDetailFlex}>
+                                                            <p>可用资产</p>
+                                                            <img className={styles.myAssetTextImage} src={require('../../images/jiantou.png')} alt="" />
+                                                        </button>
+                                                        <p className={styles.myAssetDetailNum}>{this.DecimalData(item.available, item.recharge)}</p>
+                                                    </div>
+                                                    <div>
+                                                        <div className={styles.myAssetDetailFlex}>
+                                                            <p>冻结资产</p>
+                                                            <Tooltip placement="top" className={styles.doubt} title={'每天线性释放，释放周期180天'}>
+                                                                <QuestionCircleOutlined></QuestionCircleOutlined>
+                                                            </Tooltip>
+                                                        </div>
+                                                        <p className={styles.myAssetDetailNum}>{parseFloatData(item.frozen)}</p>
+                                                    </div>
+                                                    <div>
+                                                        <div className={styles.myAssetDetailFlex}>
+                                                            <p>质押资产</p>
+                                                            <Tooltip placement="top" className={styles.doubt} title={'质押金额用于有效算力增长'}>
+                                                                <QuestionCircleOutlined ></QuestionCircleOutlined>
+                                                            </Tooltip>
+                                                        </div>
+                                                        <p className={styles.myAssetDetailNum}>{parseFloatData(item.pledged)}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }) : null
+                                }
+                            </div>
+                            {/* <div className={styles.middleBox}>
                                 <img src={require("@/images/common/logo.png")} style={{ width: "56px", marginRight: "22px" }} alt="" />
-                                <div>
+                                <div>   
                                     <div style={{ marginBottom: "8px" }}>
                                         <span className={styles.bold}>{this.props.redux.userInfo.nickname}</span>
                                         <span className={styles.label}>{this.renderLevelItem(this.props.redux.userInfo.level)}</span>
                                     </div>
                                     <span>UID:{this.props.redux.userInfo.id}</span>
                                 </div>
-                            </div>
-                        </div>
-                        <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
-                            <div>
-                                <span className={styles.bold} style={{ marginRight: '40px' }}>一期{intl.get('ACCOUNT_156')}：{myWeight1.totalPower} TB</span>
-                                <span className={styles.bold} style={{ marginRight: '20px' }}>二期{intl.get('ACCOUNT_156')}：{myWeight2.totalPower} TB</span>
-                            </div>
-                            <a href="/#/power_details">详情&gt;&gt;</a>
-                            {/* <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight1.maxAdj)} TB</span>
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <span className={styles.bold}> 目前有效算力：{myWeight1.adj}TB</span>
-                                <Progress strokeColor='#EF8C21' style={{ width: '250px', margin: '0 20px' }} percent={progress1} status="active" />
                             </div> */}
                         </div>
-                        {/* <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
-                            <span className={styles.bold}>二期:</span>
-                            <span className={styles.bold}>{intl.get('ACCOUNT_156')}：{myWeight2.totalPower} TB</span>
-                            <span className={styles.bold}>{intl.get('ACCOUNT_200')}：{parseFloatData(myWeight2.maxAdj)} TB</span>
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <span className={styles.bold}> 目前有效算力：{myWeight2.adj}TB</span>
-                                <Progress strokeColor='#EF8C21' style={{ width: '250px', margin: '0 20px' }} percent={progress2} status="active" />
+                        <div className={`${styles.userHeader}`} >
+                            <div className={`${styles.powerText}`} >
+                                <span className={styles.bold}>一期{intl.get('ACCOUNT_156')}：<span className={styles.boldColor}>{myWeight1.totalPower}</span> TB</span>
+                                <span className={styles.xian}>|</span>
+                                <span className={styles.bold}>二期{intl.get('ACCOUNT_156')}：<span className={styles.boldColor}>{myWeight2.totalPower}</span> TB</span>
                             </div>
-                        </div> */}
-                        {/* <div className={`${styles.userHeader}`} style={{ justifyContent: 'space-between' }}>
-                            <div></div>
-                            <div style={{ display: 'flex' }}>
-                                <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', }}>去加速算力 &gt;&gt;</span></a>
-                                <div onClick={() => { this.setState({ visible: true }) }} style={{ cursor: 'pointer', marginLeft: '30px' }}>去质押 &gt;&gt; </div>
-                            </div>
-                        </div> */}
+                        </div>
                     </div>
-                    <div style={{ width: "1200px", margin: '0 auto 60px' }}>
-                        <div className="user-main" style={{ width: "calc(100% + 158px)", transform: "translateX(-158px)" }}>
-                            <div className="user-side-tab">
+                    <div className={styles.userCententBackground}>
+                        <div className={styles.userCententWidth}>
+                            <div className="user-main" >
+                                {/* <div className="user-side-tab">
                                 <ul>
                                     {this.renderItem('/user/asset/index2', intl.get('USER_5'), 'tab5')}
                                     {this.renderItem('/user/order', intl.get('USER_2'), 'tab2')}
                                     {this.renderItem('/user/rate', intl.get('USER_3'), 'tab3')}
-                                    {/* {this.renderItem('/user/distribution', intl.get('USER_4'), 'tab4')} */}
-                                    {this.renderItem('/user/account', intl.get('USER_1'), 'tab1')}
-                                    {this.renderItem('/user/actual', intl.get('USER_124'), 'tab6')}
+                                    {this.renderItem('/user/account', intl.get('账户管理'), 'tab1')}
+                                    {this.renderItem('/user/actual', intl.get('实名认证'), 'tab6')}
                                 </ul>
-                            </div>
-                            <div className="user-body">
-                                <Router>
-                                    <Route exact path="/user" component={RedirectHome} />
-                                    <Route path="/user/asset" component={Asset} />
-                                    <Route path="/user/order" component={Order} />
-                                    <Route exact path="/user/account" component={Account} />
-                                    <Route path="/user/account/phone" component={AccountPhone} />
-                                    <Route path="/user/account/email" component={AccountEmail} />
-                                    <Route path="/user/account/bind_email" component={BindEmail} />
-                                    <Route path="/user/account/password" component={AccountPassword} />
-                                    <Route path="/user/account/pay_pass" component={AccountPay} />
-                                    <Route path="/user/account/set_pay" component={SetPay} />
-                                    <Route path="/user/account/ga" component={AccountGa} />
-                                    <Route path="/user/account/modify_ga" component={AccountGaModify} />
-                                    <Route path="/user/rate" component={Rate} />
-                                    <Route exact path="/user/distribution" component={Distribution} />
-                                    <Route path="/user/distribution/detail" component={DistributionDetail} />
-                                    <Route path="/user/actual" component={ActualIndex} />
-                                </Router>
+                            </div> */}
+                                <Menu
+                                    style={{ width: 194, minHeight: 715, marginRight: '10px' }}
+                                    mode={'inline'}
+                                    theme={'light'}
+                                    selectedKeys={thisHandlePath(window.location.hash)}
+                                    onClick={this.onChange}
+                                >
+                                    <Menu.Item key={keys[0]} icon={<FileSearchOutlined />}>
+                                        <Link to='/user/order'>
+                                            {intl.get('订单管理')}
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key={keys[1]} icon={<FundOutlined />}>
+                                        <Link to='/user/rate'>
+                                            {intl.get('算力管理')}
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key={keys[2]} icon={<IdcardOutlined />}>
+                                        <Link to='/user/account'>
+                                            {intl.get('账户管理')}
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key={keys[3]} icon={<UserSwitchOutlined />}>
+                                        <Link to='/user/actual'>
+                                            {intl.get('实名认证')}
+                                        </Link>
+                                    </Menu.Item>
+                                </Menu>
+                                <div className="user-body">
+                                    <Router>
+                                        <Route exact path="/user" component={RedirectHome} />
+                                        <Route path="/user/asset" component={Asset} />
+                                        <Route path="/user/order" component={Order} />
+                                        <Route exact path="/user/account" component={Account} />
+                                        <Route path="/user/account/phone" component={AccountPhone} />
+                                        <Route path="/user/account/email" component={AccountEmail} />
+                                        <Route path="/user/account/bind_email" component={BindEmail} />
+                                        <Route path="/user/account/password" component={AccountPassword} />
+                                        <Route path="/user/account/pay_pass" component={AccountPay} />
+                                        <Route path="/user/account/set_pay" component={SetPay} />
+                                        <Route path="/user/account/ga" component={AccountGa} />
+                                        <Route path="/user/account/modify_ga" component={AccountGaModify} />
+                                        <Route path="/user/rate" component={Rate} />
+                                        <Route exact path="/user/distribution" component={Distribution} />
+                                        <Route path="/user/distribution/detail" component={DistributionDetail} />
+                                        <Route path="/user/actual" component={ActualIndex} />
+                                    </Router>
+                                </div>
                             </div>
                         </div>
                     </div>
