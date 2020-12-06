@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from 'moment';
-import styles from '../table.module.less';
+import styles from './index.module.css';
 import intl from 'react-intl-universal';
 import parseFloatData from '@/util/parseFloatData'
 import net from '../../../net';
@@ -37,7 +37,7 @@ export default class Index extends Component {
         return (
             <li
                 onClick={() => this.setState({ status: key })}
-                className={this.state.status === key ? 'active' : ''}>{value}</li>
+                className={this.state.status === key ? styles.active : ''}>{value}</li>
         )
     }
 
@@ -183,10 +183,10 @@ export default class Index extends Component {
         ]
 
         return (
-            < div className="order" >
-                <Tabs defaultActiveKey="1" onChange={this.callback}>
-                    <Tabs.TabPane tab="算力订单" key="1">
-                        <div className="order-filter">
+            < div className={styles.order} >
+                <Tabs  style={{height: '100%',overflow: 'auto'}} defaultActiveKey="1" onChange={this.callback}>
+                    <Tabs.TabPane style={{height: '100%'}} tab="算力订单" key="1">
+                        <div className={styles.orderFilter}>
                             <label>{intl.get('USER_21')}：</label>
                             <ul>
                                 {this.renderLi('', intl.get('USER_22'))}
@@ -195,7 +195,7 @@ export default class Index extends Component {
                                 {this.renderLi('2', intl.get('USER_25'))}
                             </ul>
                         </div >
-                        <Table dataSource={orders} columns={columns} rowKey={(record) => record.id} />
+                        <Table scroll={{ y: 350 }} dataSource={orders} columns={columns} rowKey={(record) => record.id} />
                     </Tabs.TabPane >
                     <Tabs.TabPane tab="算力加速订单" key="2">
                         <Table dataSource={this.state.thisOrders} rowKey={(record) => record.id} columns={thisClumns} />

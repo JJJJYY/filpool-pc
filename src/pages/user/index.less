@@ -17,6 +17,7 @@ div {
     padding: 0;
     box-sizing: border-box;
 }
+
 .user {
     font-size: .14rem;
     // margin-top: -0.44rem;
@@ -107,7 +108,8 @@ div {
         height: 100%;
         height: 715px;
         flex: 1;
-        overflow: auto;
+        // overflow: auto;
+        // position: relative;
         // background-color: #fff;
         // border: 1px solid #ddd;
         // border-radius: 8px 16px 16px 16px;
@@ -122,9 +124,11 @@ div {
         display: flex;
         align-items: center;
         padding: .4rem .16rem;
-        &:not(:last-child){
+
+        &:not(:last-child) {
             border-bottom: 1px solid #ddd;
         }
+
         img {
             width: .52rem;
             height: .52rem;
@@ -164,11 +168,13 @@ div {
                 margin-left: .45rem;
                 text-align: center;
                 box-sizing: border-box;
-                &:hover{
+
+                &:hover {
                     border: 1px solid #E49C3A;
                     color: #E49C3A;
                 }
             }
+
             button {
                 border-radius: .2rem;
                 border: 1px solid #ddd;
@@ -181,13 +187,15 @@ div {
                 margin-left: .45rem;
                 text-align: center;
                 box-sizing: border-box;
-                &:not(:disabled){
-                    &:hover{
+
+                &:not(:disabled) {
+                    &:hover {
                         border: 1px solid #E49C3A;
                         color: #E49C3A;
                     }
                 }
-                &:disabled{
+
+                &:disabled {
                     cursor: not-allowed;
                 }
             }
@@ -213,6 +221,7 @@ div {
             display: flex;
             align-items: center;
             margin: 30px 0 0;
+
             /*padding: 0 .07rem;*/
             li {
                 min-width: 100px;
@@ -224,17 +233,20 @@ div {
                 cursor: pointer;
                 border: 1px solid #ddd;
                 border-right: none;
-                &:first-child{
-                    border-radius:4px 0 0 4px;
+
+                &:first-child {
+                    border-radius: 4px 0 0 4px;
                 }
-                &:last-child{
+
+                &:last-child {
                     border-right: 1px solid #ddd;
-                    border-radius:0 4px 4px 0;
+                    border-radius: 0 4px 4px 0;
                 }
+
                 &.active {
                     position: relative;
                     color: #fff;
-                    background:linear-gradient(90deg,rgba(241,138,45,1) 0%,rgba(252,177,80,1) 100%);
+                    background: linear-gradient(90deg, rgba(241, 138, 45, 1) 0%, rgba(252, 177, 80, 1) 100%);
                     border-color: transparent;
                     /*&::after {
                         content: '';
@@ -255,11 +267,13 @@ div {
 
 .common-table {
     width: 100%;
-    thead{
-        tr{
+
+    thead {
+        tr {
             border: none;
         }
     }
+
     th {
         /*color: #C0C9D2;
         font-size: .11rem;*/
@@ -268,9 +282,11 @@ div {
         font-weight: 400;
         padding: .06rem 0;
     }
-    tr{
+
+    tr {
         border-bottom: 1px solid #ddd;
     }
+
     td {
         /*color: #959FA9;
         font-size: .12rem;*/
@@ -325,13 +341,16 @@ div {
 
     .input-group {
         align-items: flex-start;
+
         label {
             line-height: 32px;
         }
-        > div {
+
+        >div {
             width: 100%;
             display: flex;
             align-items: center;
+
             a {
                 z-index: 2;
                 margin-left: -.06rem;
@@ -349,16 +368,19 @@ div {
 
     .ope-details {
         padding-bottom: .2rem;
+
         .form {
             label {
                 color: #24375E;
                 font-size: .12rem;
             }
+
             span {
                 flex: 1;
                 color: #24375E;
                 font-size: .12rem;
             }
+
             a {
                 display: flex;
                 align-items: center;
@@ -376,25 +398,31 @@ div {
         margin-top: .24rem;
         font-size: 0.16rem;
         line-height: 0.26rem;
-        .title{
+
+        .title {
             color: #575C62;
         }
+
         p {
             margin-bottom: .14rem;
             color: #959FA9;
             line-height: .24rem;
+
             span {
                 display: block;
             }
         }
     }
-    .ant-input{
+
+    .ant-input {
         height: 40px;
     }
+
     .submit {
         text-align: center;
         padding-top: .45rem;
         margin-bottom: 20px;
+
         a {
             display: inline-block;
             width: 2.6rem;
@@ -414,6 +442,7 @@ div {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     p {
         width: 2.3rem;
         display: flex;
@@ -422,6 +451,7 @@ div {
         font-size: .12rem;
         margin: 0;
         margin-top: .3rem;
+
         a {
             color: #E49C3A;
             border: 1px solid #E49C3A;

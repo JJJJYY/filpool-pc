@@ -22,7 +22,8 @@ class Rate extends Component {
       visible: false,
       asset: "FIL",
       myAsset: {},
-      buyNum: ''
+      buyNum: '',
+      number: 1
     };
     this.typeAry = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.incomeTypeAry = [1, 2, 3];
@@ -294,10 +295,22 @@ class Rate extends Component {
   }
   render() {
     const { tab, myWeight, details, weights, incomes, myAsset, buyNum } = this.state;
-    // let progress = this.doneNum((myWeight.adj / myWeight.maxAdj) * 100, 4)
+    let progress = this.doneNum((myWeight.adj / myWeight.maxAdj) * 100, 4)
     return (
       <div className="account">
-        {/* <Tabs defaultActiveKey="1" type='card' onChange={this.callback}>
+
+        <div className="rateCentent">
+          <div className="rateCententPowerSelect">
+            <div onClick={() => { this.setState({ number: 1 }) }} className={this.state.number === 1 ? `rateCententPowerTitle rateCententPowerActive` : 'rateCententPowerTitle'}>算力一期</div>
+            <div onClick={() => { this.setState({ number: 2 }) }} className={this.state.number === 2 ? `rateCententPowerTitle rateCententPowerActive` : 'rateCententPowerTitle'}>算力二期</div>
+          </div>
+          <div className="rateCententFlex">
+            <div onClick={() => { window.location.href = '/#/power_details' }} style={{ cursor: 'pointer' }}>算力增长明细 &gt;&gt; </div>
+            <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '40px' }}>去加速算力 &gt;&gt;</span></a>
+
+          </div>
+        </div>
+        <Tabs defaultActiveKey="1" type='card' onChange={this.callback}>
           <Tabs.TabPane tab="算力一期" key="1">
             <div className="item-power">
               <div className="item-d">
@@ -361,7 +374,7 @@ class Rate extends Component {
               </div>
             </div>
           </Tabs.TabPane>
-        </Tabs> */}
+        </Tabs>
 
         <div className="order" style={{ padding: 0 }}>
           <div className="order-filter">

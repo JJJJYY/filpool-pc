@@ -1,0 +1,299 @@
+.primary-font-color {
+  color: #24375E;
+}
+.sub-font-color {
+  color: #959FA9;
+}
+.light-font-color {
+  color: #C0C9D2;
+}
+.primary-color {
+  color: #E49C3A;
+}
+.flex {
+  display: flex;
+}
+.flex1 {
+  flex: 1;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.flex-row-start {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.flex-row-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-column-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.flex-column-between {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flex-row-end {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.flex-column-end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.mt-3 {
+  margin-top: 0.03rem;
+}
+.mt-5 {
+  margin-top: 0.05rem;
+}
+.mt-7 {
+  margin-top: 0.07rem;
+}
+.mt-10 {
+  margin-top: 0.1rem;
+}
+.mt-13 {
+  margin-top: 0.13rem;
+}
+.mt-15 {
+  margin-top: 0.15rem;
+}
+.mt-17 {
+  margin-top: 0.17rem;
+}
+.mt-20 {
+  margin-top: 0.2rem;
+}
+.mt-25 {
+  margin-top: 0.25rem;
+}
+.mt-30 {
+  margin-top: 0.28rem;
+}
+.mt-35 {
+  margin-top: 0.35rem;
+}
+.mt-40 {
+  margin-top: 0.4rem;
+}
+.mt-45 {
+  margin-top: 0.45rem;
+}
+.mt-50 {
+  margin-top: 0.5rem;
+}
+.mt-55 {
+  margin-top: 0.55rem;
+}
+.mb-5 {
+  margin-bottom: 0.05rem;
+}
+.mb-7 {
+  margin-bottom: 0.07rem;
+}
+.mb-10 {
+  margin-bottom: 0.1rem;
+}
+.mb-13 {
+  margin-bottom: 0.13rem;
+}
+.mb-15 {
+  margin-bottom: 0.15rem;
+}
+.mb-18 {
+  margin-bottom: 0.16rem;
+}
+.mb-20 {
+  margin-bottom: 0.2rem;
+}
+.mb-25 {
+  margin-bottom: 0.25rem;
+}
+.mb-30 {
+  margin-bottom: 0.3rem;
+}
+.mb-35 {
+  margin-bottom: 0.35rem;
+}
+.mb-40 {
+  margin-bottom: 0.4rem;
+}
+.mr-5 {
+  margin-right: 0.05rem;
+}
+.mr-10 {
+  margin-right: 0.1rem;
+}
+.mr-15 {
+  margin-right: 0.15rem;
+}
+.mr-20 {
+  margin-right: 0.2rem;
+}
+.mr-25 {
+  margin-right: 0.25rem;
+}
+.mr-30 {
+  margin-right: 0.3rem;
+}
+.mr-35 {
+  margin-right: 0.35rem;
+}
+.mr-40 {
+  margin-right: 0.4rem;
+}
+.mr-60 {
+  margin-right: 0.6rem;
+}
+.ml-5 {
+  margin-left: 0.05rem;
+}
+.ml-10 {
+  margin-left: 0.1rem;
+}
+.ml-15 {
+  margin-left: 0.15rem;
+}
+.ml-20 {
+  margin-left: 0.2rem;
+}
+.ml-25 {
+  margin-left: 0.25rem;
+}
+.ml-50 {
+  margin-left: 0.5rem;
+}
+.ft-8 {
+  font-size: 0.08rem;
+}
+.ft-9 {
+  font-size: 0.09rem;
+}
+.ft-11 {
+  font-size: 0.11rem;
+}
+.ft-12 {
+  font-size: 0.12rem;
+}
+.ft-16 {
+  font-size: 0.16rem;
+}
+.ft-18 {
+  font-size: 0.18rem;
+}
+.ft-c {
+  text-align: center;
+}
+/*iconfont样式配置*/
+@font-face {
+  font-family: 'iconfont';
+  src: url('~@/font/iconfont.eot');
+  src: url('~@/font/iconfont.eot?#iefix') format('embedded-opentype'), url('~@/font/iconfont.woff2') format('woff2'), url('~@/font/iconfont.woff') format('woff'), url('~@/font/iconfont.ttf') format('truetype'), url('~@/font/iconfont.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  outline: none;
+}
+.accountR {
+  position: relative;
+}
+.accountR .imageAbsolute {
+  position: absolute;
+  top: 42px;
+  right: -100px;
+}
+.accountR .imageAbsolute img {
+  display: block;
+  width: 72px;
+  height: 82px;
+}
+.account {
+  height: 100%;
+}
+.account .account-userInfo {
+  display: flex;
+}
+.account .rateCentent {
+  flex: 1;
+  height: 123px;
+  background-color: #fff;
+  border-radius: 8px 16px 16px 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.account .rateCentent .rateCententPowerSelect {
+  width: 178px;
+  height: 25px;
+  background: #E5E4E4;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+}
+.account .rateCentent .rateCententPowerSelect .rateCententPowerTitle {
+  width: 89px;
+  height: 100%;
+  border-radius: 13px;
+  text-align: center;
+  line-height: 25px;
+  cursor: pointer;
+}
+.account .rateCentent .rateCententPowerSelect .rateCententPowerActive {
+  background: #F19921;
+}
+.account .rateCentent .rateCententFlex {
+  display: flex;
+}
+.reset-ant .ant-radio-wrapper {
+  color: #959FA9;
+  font-size: 0.12rem;
+}
+.reset-ant .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+  color: #E49C3A;
+  font-weight: normal;
+}
+.reset-ant .ant-steps-item-title {
+  font-size: 0.12rem;
+  color: #959FA9;
+}

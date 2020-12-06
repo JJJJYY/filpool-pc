@@ -1,0 +1,45 @@
+.order {
+  background-color: #fff;
+  height: 100%;
+  padding: 20px;
+}
+.order .orderFilter {
+  /*display: flex;
+        align-items: center;*/
+  padding: 0.1rem 0 0.2rem;
+}
+.order .orderFilter label {
+  color: #24375E;
+  font-size: 0.18rem;
+}
+.order .orderFilter ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 30px 0 0;
+  /*padding: 0 .07rem;*/
+}
+.order .orderFilter ul li {
+  min-width: 100px;
+  line-height: 40px;
+  text-align: center;
+  /*margin-right: .07rem;*/
+  color: #575C62;
+  font-size: 0.16rem;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-right: none;
+}
+.order .orderFilter ul li:first-child {
+  border-radius: 4px 0 0 4px;
+}
+.order .orderFilter ul li:last-child {
+  border-right: 1px solid #ddd;
+  border-radius: 0 4px 4px 0;
+}
+.order .orderFilter ul li.active {
+  position: relative;
+  color: #fff;
+  background: linear-gradient(90deg, #f18a2d 0%, #fcb150 100%);
+  border-color: transparent;
+}

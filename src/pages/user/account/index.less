@@ -1,16 +1,65 @@
 @import "../../../styles/index";
 
+.accountR {
+  position: relative;
+
+  .imageAbsolute {
+    position: absolute;
+    top: 42px;
+    right: -100px;
+
+    img {
+      display: block;
+      width: 72px;
+      height: 82px;
+    }
+  }
+
+}
+
 .account {
   // padding: .3rem .38rem;
   height: 100%;
-  .account-userInfo{
-    width: 660px;
-    height: 177px;
-    background-color: #fff;
-    border-radius: 16px;
-  }
-  
 
+  .account-userInfo {
+    display: flex;
+  }
+
+  .rateCentent {
+    flex: 1;
+    height: 123px;
+    background-color: #fff;
+    border-radius: 8px 16px 16px 16px;
+    display: flex;
+    justify-content: space-between;
+
+    .rateCententPowerSelect {
+      width: 178px;
+      height: 25px;
+      background: #E5E4E4;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+
+
+      .rateCententPowerTitle {
+        width: 89px;
+        height: 100%;
+        border-radius: 13px;
+        text-align: center;
+        line-height: 25px;
+        cursor: pointer;
+      }
+
+      .rateCententPowerActive {
+        background: #F19921;
+      }
+    }
+
+    .rateCententFlex {
+      display: flex;
+    }
+  }
 
 
 
@@ -105,10 +154,11 @@
     font-size: .12rem;
   }
 
-  .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+  .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title {
     color: @primary-color;
     font-weight: normal;
   }
+
   .ant-steps-item-title {
     font-size: .12rem;
     color: @sub-font-color;

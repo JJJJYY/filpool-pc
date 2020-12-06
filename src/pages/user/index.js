@@ -146,36 +146,7 @@ class App extends Component {
         return parseFloatData(Decimal.add(a, b));
     }
 
-    /*获取用户等级*/
-    renderLevelItem(level) {
-        let text = "";
-        switch (level) {
-            case -1:
-                text = intl.get('ACCOUNT_152');
-                break;
-            case 0:
-                text = intl.get('ACCOUNT_108');
-                break;
-            case 1:
-                text = intl.get('ACCOUNT_104');
-                break;
-            case 2:
-                text = intl.get('ACCOUNT_105');
-                break;
-            case 3:
-                text = intl.get('ACCOUNT_106');
-                break;
-            case 4:
-                text = intl.get('ACCOUNT_107');
-                break;
-            case 5:
-                text = intl.get('ACCOUNT_153');
-                break;
-            default:
-                text = intl.get('ACCOUNT_152');
-        }
-        return text;
-    }
+  
 
     renderItem(path, text, tab) {
         const pathname = this.props.location.pathname;
