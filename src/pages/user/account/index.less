@@ -20,47 +20,112 @@
 .account {
   // padding: .3rem .38rem;
   height: 100%;
-
   .account-userInfo {
     display: flex;
   }
 
-  .rateCentent {
-    flex: 1;
-    height: 123px;
-    background-color: #fff;
-    border-radius: 8px 16px 16px 16px;
+  .accountPage{
+    height: 100%;
     display: flex;
-    justify-content: space-between;
-
-    .rateCententPowerSelect {
-      width: 178px;
-      height: 25px;
-      background: #E5E4E4;
-      border-radius: 13px;
-      display: flex;
-      align-items: center;
-
-
-      .rateCententPowerTitle {
-        width: 89px;
-        height: 100%;
-        border-radius: 13px;
-        text-align: center;
-        line-height: 25px;
-        cursor: pointer;
+    flex-direction: column;
+    .rateCentent {
+      // flex: 1;
+      // height: 123px;
+      background-color: #fff;
+      border-radius: 8px 16px 16px 16px;
+      padding: 20px;
+      .powerProfit{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
-
-      .rateCententPowerActive {
-        background: #F19921;
+      .xian{
+        height: 1px;
+        width: 100%;
+        background-color: #f0f0f0;
+        margin: 10px 0;
+      }
+      .rateCententGrid{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-row-gap: 20px;
+        grid-column-gap: 20px;
+        .rateCententDetail{
+          // width: 275px;
+          // height: 117px;
+          background: #FFFFFF;
+          border: 1px solid #E0E0E0;
+          border-radius: 8px;
+          padding: 20px;
+          .rateCententFlex{
+            display: flex;
+            justify-content: space-between;
+          }
+          .rateCententFlexText{
+              font-size: 18px;
+              color: #F19921;
+              margin-top: 20px;
+          }
+        }
+      }
+      
+      .rateCententTop{
+        display: flex;
+        justify-content: space-between;
+        .rateCententPowerSelect {
+          width: 178px;
+          height: 25px;
+          background: #E5E4E4;
+          border-radius: 13px;
+          display: flex;
+          align-items: center;
+  
+  
+          .rateCententPowerTitle {
+            width: 89px;
+            height: 100%;
+            border-radius: 13px;
+            text-align: center;
+            line-height: 25px;
+            cursor: pointer;
+          }
+  
+          .rateCententPowerActive {
+            background: #F19921;
+          }
+        }
+  
+          .rateCententFlex {
+            display: flex;
+          }
+        }
+      .ratePowerData{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 30px;
+        .item-d{
+          display: flex;
+          align-items: center;
+          font-size: 16px;
+          color: #333333;
+        }
+      }
+      .item-power{
+        display: flex;
+        justify-content: space-between;
+        .item-d{
+          font-size: 16px;
+          color: #333333;
+          .item-num{
+            margin-top: 20px;
+          }
+        }
       }
     }
-
-    .rateCententFlex {
-      display: flex;
-    }
+  
   }
-
+ 
 
 
   // .flex-column;

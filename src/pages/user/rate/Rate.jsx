@@ -7,7 +7,7 @@ import net from "../../../net";
 import Table from "../table";
 import connect from "@/store/connect";
 import parseFloatData from '@/util/parseFloatData'
-import { Tabs, Progress, Modal, Select, Input, message } from 'antd'
+import { Tabs, Progress, Modal, Select, Input, message, Divider } from 'antd'
 
 class Rate extends Component {
   constructor(props) {
@@ -89,8 +89,20 @@ class Rate extends Component {
       default:
         columns = this.getTable3();
     }
-
-    return <Table columns={columns} data={this.state.details} />;
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+          <button onClick={() => { this.setState({ tab: 0 }) }}>&#60;返回上一级</button>
+          <p style={{ margin: '0 10px' }}>|</p>
+          <p>赠送</p>
+        </div>
+        <div style={{
+          flex: '1', background: '#fff', padding: '20px', borderRadius: '8px 16px 16px 16px', marginTop: '20px'
+        }}>
+          <Table columns={columns} data={this.state.details} />
+        </div>
+      </div>
+    );
   }
 
   dateFtt(fmt, date) {
@@ -247,14 +259,12 @@ class Rate extends Component {
     return newNum;
   }
 
-  callback = (key) => {
-    console.log(key)
+  callback = () => {
     net
       .getMyPowert({
-        number: key,
+        number: this.state.number,
       })
       .then((res) => {
-        console.log(res)
         if (res.ret === 200) {
           this.setState({
             myWeight: res.data,
@@ -274,7 +284,6 @@ class Rate extends Component {
     net.getTransferPledged({
       amount: this.state.buyNum
     }).then(res => {
-      console.log(res)
       if (res.ret === 200) {
         this.setState({
           visible: false
@@ -293,90 +302,137 @@ class Rate extends Component {
       visible: false
     })
   }
+
   render() {
     const { tab, myWeight, details, weights, incomes, myAsset, buyNum } = this.state;
     let progress = this.doneNum((myWeight.adj / myWeight.maxAdj) * 100, 4)
     return (
       <div className="account">
+        {tab === 2 ? this.renderDetail() :
+          <div className='accountPage'>
 
-        <div className="rateCentent">
-          <div className="rateCententPowerSelect">
-            <div onClick={() => { this.setState({ number: 1 }) }} className={this.state.number === 1 ? `rateCententPowerTitle rateCententPowerActive` : 'rateCententPowerTitle'}>算力一期</div>
-            <div onClick={() => { this.setState({ number: 2 }) }} className={this.state.number === 2 ? `rateCententPowerTitle rateCententPowerActive` : 'rateCententPowerTitle'}>算力二期</div>
+            <div className="rateCentent">
+              <div className="rateCententTop">
+                <div className="rateCententPowerSelect">
+                  <div onClick={() => { this.setState({ number: 1 }, () => { this.callback() }) }} className={this.state.number === 1 ? `rateCententPowerTitle rateCententPowerActive` : 'rateCententPowerTitle'}>算力一期</div>
+                  <div onClick={() => { this.setState({ number: 2 }, () => { this.callback() }) }} className={this.state.number === 2 ? `rateCententPowerTitle rateCententPowerActive` : 'rateCententPowerTitle'}>算力二期</div>
+                </div>
+                <div className="rateCententFlex">
+                  <div onClick={() => { window.location.href = '/#/power_details' }} style={{ cursor: 'pointer' }}>详情 &gt;&gt; </div>
+                  {
+                    this.state.number === 1 ? <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '40px' }}>去加速算力 &gt;&gt;</span></a>
+                      : <div onClick={() => { this.setState({ visible: true }) }} style={{ cursor: 'pointer', fontSize: '16px', color: '#F49536', marginLeft: '40px' }}>去质押 &gt;&gt; </div>
+                  }
+
+                </div>
+              </div>
+              <div className="ratePowerData">
+                <div className="item-d">
+                  <p>{intl.get("ACCOUNT_1")}:</p>
+                  <p>{parseFloatData(myWeight.totalPower)} TB</p>
+                </div>
+                <div className="item-d item-left">
+                  <p>上线有效算力:</p>
+                  <p>{parseFloatData(myWeight.maxAdj)} TB</p>
+                </div>
+                <div className="item-d">
+                  <p>有效算力:</p>
+                  <p>{parseFloatData(myWeight.adj)} TB</p>
+                  <Progress style={{ margin: '0 30px', width: '300px' }} percent={progress} strokeColor='#EF8C21FF' status="active" />
+                </div>
+              </div>
+              {
+                this.state.number === 2 ? <div>
+                  <Divider />
+                  <div className="item-power">
+                    <div className="item-d">
+                      <p>预估所需质押量:</p>
+                      <p className="item-num">{parseFloatData(myWeight.maxPledged)} FIL</p>
+                    </div>
+                    <div className="item-d">
+                      <p>待质押:</p>
+                      <p className="item-num">{parseFloatData(myWeight.currentPledged)} FIL</p>
+                    </div>
+                    <div className="item-d item-left">
+                      <p>已质押:</p>
+                      <p className="item-num">{parseFloatData(myWeight.pledged)} FIL</p>
+                    </div>
+                    <div className="item-d item-left">
+                      <p>借贷总额:</p>
+                      <p className="item-num">{parseFloatData(myWeight.totalLoan)} FIL</p>
+                    </div>
+                    <div className="item-d item-left">
+                      <p>待还款总额:</p>
+                      <p className="item-num">{parseFloatData(myWeight.surplusLoan)} FIL</p>
+                    </div>
+                  </div>
+                </div> : null
+              }
+
+            </div>
+
+            <div className="rateCentent" style={{ marginTop: '10px', flex: '1', overflow: 'auto' }}>
+              <Tabs defaultActiveKey="0" onChange={this.callbackList}>
+                <Tabs.TabPane tab="算力管理" key="0">
+                  <div className="rateCententGrid" >
+                    {
+                      tab === 0 ? weights.map((item, index) => {
+                        return (
+                          <div key={index} className="rateCententDetail">
+                            <div className="rateCententFlex">
+                              <div>
+                                {this.typeAry.includes(item.type)
+                                  ? intl.get(`ACCOUNT_RATE_${item.type}`)
+                                  : intl.get("其他")}
+                              </div>
+                              <button
+                                onClick={() => {
+                                  this.getDetailList(item);
+                                }}
+                              >{intl.get("明细")}&gt;&gt;</button>
+                            </div>
+                            <div className="rateCententFlexText">{parseFloatData(item.quantity)}</div>
+                          </div>
+                        )
+                      }) : null
+                    }
+                  </div>
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="算力收益" key="1">
+                  {
+                    incomes.map((item, index) => {
+                      return (
+                        <div key={index}>
+                          <div className='powerProfit'>
+                            <div>
+                              {this.incomeTypeAry.includes(item.type)
+                                ? item.number + " 期--" + intl.get(`ACCOUNT_INCOME_${item.type}`)
+                                : item.number + " 期--" + intl.get("其他")}
+                            </div>
+                            <div>
+                              {parseFloatData(item.quantity)} {item.asset}
+                              <span style={{ color: '#F26464FF' }}>（已扣除服务费）</span>
+                            </div>
+                            <div>
+                              {this.dateFtt(
+                                "yyyy-MM-dd",
+                                new Date(item.createTime)
+                              )}
+                            </div>
+                          </div>
+                          <div className='xian'></div>
+                        </div>
+                      )
+                    })
+                  }
+                </Tabs.TabPane>
+              </Tabs>
+            </div>
+
           </div>
-          <div className="rateCententFlex">
-            <div onClick={() => { window.location.href = '/#/power_details' }} style={{ cursor: 'pointer' }}>算力增长明细 &gt;&gt; </div>
-            <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '40px' }}>去加速算力 &gt;&gt;</span></a>
+        }
 
-          </div>
-        </div>
-        <Tabs defaultActiveKey="1" type='card' onChange={this.callback}>
-          <Tabs.TabPane tab="算力一期" key="1">
-            <div className="item-power">
-              <div className="item-d">
-                <p>{intl.get("ACCOUNT_1")}</p>
-                <p>{parseFloatData(myWeight.totalPower)} TB</p>
-              </div>
-              <div className="item-d item-left">
-                <p>上线有效算力</p>
-                <p>{parseFloatData(myWeight.maxAdj)} TB</p>
-              </div>
-            </div>
-            <div className="item-power item-t">
-              <div className="item-d">
-                <p>有效算力</p>
-                <p>{parseFloatData(myWeight.adj)} TB</p>
-                <Progress style={{ margin: '0 30px', width: '300px' }} percent={progress} strokeColor='#EF8C21FF' status="active" />
-                <a href="/#/expedite_details"><span style={{ fontSize: '16px', color: '#F49536', marginLeft: '40px' }}>去加速算力 &gt;&gt;</span></a>
-              </div>
-              <div onClick={() => { window.location.href = '/#/power_details' }} style={{ marginLeft: '80px', cursor: 'pointer' }}>算力增长明细 &gt;&gt; </div>
-            </div>
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="算力二期" key="2">
-            <div className="item-power">
-              <div className="item-d">
-                <p>{intl.get("ACCOUNT_1")}</p>
-                <p>{parseFloatData(myWeight.totalPower)} TB</p>
-              </div>
-              <div className="item-d item-left">
-                <p>上限有效算力</p>
-                <p>{parseFloatData(myWeight.maxAdj)} TB</p>
-              </div>
-              <div className="item-d item-left">
-                <p>预估所需质押量</p>
-                <p>{parseFloatData(myWeight.maxPledged)} FIL</p>
-              </div>
-            </div>
-            <div className="item-power">
-              <div className="item-d">
-                <p>待质押</p>
-                <p>{parseFloatData(myWeight.currentPledged)} FIL</p>
-              </div>
-              <div className="item-d item-left">
-                <p>已质押</p>
-                <p>{parseFloatData(myWeight.pledged)} FIL</p>
-              </div>
-              <div className="item-d item-left">
-                <p>借贷总额</p>
-                <p>{parseFloatData(myWeight.totalLoan)} FIL</p>
-              </div>
-              <div className="item-d item-left">
-                <p>待还款总额</p>
-                <p>{parseFloatData(myWeight.surplusLoan)} FIL</p>
-              </div>
-            </div>
-            <div className="item-power item-t">
-              <div className="item-d">
-                <p>有效算力</p>
-                <p>{parseFloatData(myWeight.adj)} TB</p>
-                <Progress style={{ margin: '0 30px', width: '300px' }} percent={progress} strokeColor='#EF8C21FF' status="active" />
-                <div onClick={() => { this.setState({ visible: true }) }} style={{ cursor: 'pointer', fontSize: '16px', color: '#F49536', marginLeft: '40px' }}>去质押 &gt;&gt; </div>
-              </div>
-            </div>
-          </Tabs.TabPane>
-        </Tabs>
-
-        <div className="order" style={{ padding: 0 }}>
+        {/* <div className="order" style={{ padding: 0 }}>
           <div className="order-filter">
             <ul style={{ padding: 0 }}>
               <li
@@ -393,7 +449,6 @@ class Rate extends Component {
               </li>
             </ul>
           </div>
-          {/*{tab === 0 && this.renderDetail()}*/}
           {tab === 0 && (
             <table className={styles.mTable}>
               <tbody>
@@ -416,7 +471,7 @@ class Rate extends Component {
                               this.getDetailList(item);
                             }}
                           >
-                            {intl.get("RATE_108")}
+                            {intl.get("明细")}
                           </button>
                         </td>
                       </tr>
@@ -453,7 +508,7 @@ class Rate extends Component {
             </table>
           )}
           {tab === 2 && this.renderDetail()}
-        </div>
+        </div> */}
         <Modal
           title="资金划转"
           visible={this.state.visible}

@@ -111,7 +111,7 @@ export default {
     RATE_105: "Event Reward",
     RATE_106: "Mining Machine Hosting",
     RATE_107: "Promotion Reward",
-    RATE_108: "Details",
+    '明细': "Details",
     '算力': "Hashing Power",
     '时间': "Time",
     RATE_111: "Remarks",
